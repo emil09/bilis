@@ -1,4 +1,4 @@
-<?php $this->load->view('admin/dispatcher_sidebar'); ?>
+<?php $this->load->view('dispatcher/dispatcher_sidebar'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
