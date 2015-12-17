@@ -14,11 +14,15 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/font-awesome-4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+    <!-- FooTable CSS -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/FooTable-2/css/footable.core.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +33,7 @@
   </head>
   <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
   <!-- the fixed layout is not compatible with sidebar-mini -->
-  <body class="hold-transition skin-blue fixed sidebar-mini">
+  <body class="<?php echo($this->uri->segment(1)); ?> hold-transition skin-blue fixed sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 		<header class="main-header">

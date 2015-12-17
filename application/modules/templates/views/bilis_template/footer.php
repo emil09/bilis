@@ -15,10 +15,19 @@
     <script src="<?php echo base_url() ?>assets/libs/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url() ?>assets/libs/fastclick/fastclick.min.js"></script> 
+    <!-- FooTable -->
+    <script src="<?php echo base_url() ?>assets/libs/FooTable-2/js/footable.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/libs/theme/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() ?>assets/libs/theme/js/demo.js"></script>
-    <!-- FooTable -->
+
+    <script type="text/javascript">
+        jQuery(function () {
+
+            jQuery('.footable').footable();
+
+        });
+    </script>
   </body>
 </html>
