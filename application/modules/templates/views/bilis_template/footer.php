@@ -19,5 +19,6 @@
     <script src="<?php echo base_url() ?>assets/libs/theme/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() ?>assets/libs/theme/js/demo.js"></script>
+    <!-- FooTable -->
   </body>
 </html>

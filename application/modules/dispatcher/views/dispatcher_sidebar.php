@@ -26,25 +26,10 @@
         <ul class="sidebar-menu">
           <li class="header">MAIN NAVIGATION</li>
           <li class="active"><a href="welcome.php"><i class="fa fa-home"></i><span>Home</span></a></li>
-          <li><a href="attendance.php"><i class="fa fa-check-square-o"></i><span>Available for Dispatch</span></a></li>
-          <li><a href="dispatch.php"><i class="fa fa-truck"></i> <span>Scheduling</span></a></li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-money"></i> <span>Sales</span>
-              <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="sales_by_driver.php"><i class="fa fa-users"></i> Sales by Driver</a></li>
-              <li><a href="sales_by_unit.php"><i class="fa fa-car"></i> Sales by Unit</a></li>
-              <li>
-                <a href="sales_by_time_period.php"><i class="fa fa-clock-o"></i> Sales Time Period <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu" style="display: none;">
-                  <li><a href="sales_tp_by_driver.php"><i class="fa fa-users"></i> By Driver</a></li>
-                  <li><a href="sales_tp_by_unit.php"><i class="fa fa-car"></i> By Unit</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+          <li><a href="attendance.php"><i class="fa fa-pause"></i><span>Available for Dispatch</span></a></li>
+          <li><a href="dispatch.php"><i class="fa fa-play"></i> <span>Active Trips</span></a></li>
+          <li><a href="dispatch.php"><i class="fa fa-calendar"></i> <span>Scheduling</span></a></li>
+          <li><a href="dispatch.php"><i class="fa fa-clone"></i> <span>Dispatch Report</span></a></li>
           <!-- <li class="header">LABELS</li>
           <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
           <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
