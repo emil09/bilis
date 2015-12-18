@@ -21,6 +21,8 @@
     <script src="<?php echo base_url() ?>assets/libs/theme/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url() ?>assets/libs/theme/js/demo.js"></script>
+    
+    <script src="<?php echo base_url() ?>assets/js/admin/register.js"></script>
 
     <script type="text/javascript">
         jQuery(function () {
