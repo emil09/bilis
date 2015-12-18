@@ -21,8 +21,14 @@
     <script src="<?php echo base_url() ?>assets/libs/dataTables/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/dataTables/js/dataTables.bootstrap.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/dataTables/js/dataTables.responsive.js"></script>  
+
     <script src="<?php echo base_url() ?>assets/libs/sweetalert2/sweetalert2.min.js"></script>  
     <script src="<?php echo base_url() ?>assets/libs/datepicker/bootstrap-datepicker.js"></script> 
+
+
+    
+    <!-- Select2 -->
+    <script src="<?php echo base_url(); ?>assets/libs/select2/js/select2.full.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/libs/theme/js/app.min.js"></script>
@@ -38,7 +44,13 @@
             paging:         false,
             responsive:     true
         });
-        jQuery
+        jQuery(".editModal").click(function(){
+            jQuery("#editModalWindow").modal({backdrop: 'static'});
+        });
+        jQuery(".select2").select2({
+            placeholder: "Select a vehicle",
+            allowClear: true
+        });
     </script>
     <script type="text/javascript">
       $(function () {
