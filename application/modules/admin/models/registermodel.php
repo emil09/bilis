@@ -3,7 +3,8 @@
 Class RegisterModel extends CI_Model {
 
 	protected $tables = array(
-		'0'=> 'employee'
+		'0' => 'employee',
+        '1' => 'driver'
 	);
 	
 	public function select_where($key = '', $select = '', $where = array()) {

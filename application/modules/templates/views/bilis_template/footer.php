@@ -21,6 +21,8 @@
     <script src="<?php echo base_url() ?>assets/libs/dataTables/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/dataTables/js/dataTables.bootstrap.js"></script>
     <script src="<?php echo base_url() ?>assets/libs/dataTables/js/dataTables.responsive.js"></script>  
+    <script src="<?php echo base_url() ?>assets/libs/sweetalert2/sweetalert2.min.js"></script>  
+    <script src="<?php echo base_url() ?>assets/libs/datepicker/bootstrap-datepicker.js"></script> 
 
     <!-- AdminLTE App -->
     <script src="<?php echo base_url() ?>assets/libs/theme/js/app.min.js"></script>
@@ -38,5 +40,11 @@
         });
         jQuery
     </script>
+    <script type="text/javascript">
+      $(function () {
+        var currentDate = new Date();  
+        $('#pickdate').datepicker();
+      });
+  </script>
   </body>
 </html>

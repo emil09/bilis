@@ -22,6 +22,10 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/sweetalert2/sweetalert2.css">
+
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/datepicker/datepicker3.css">
+
 
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css">
 
