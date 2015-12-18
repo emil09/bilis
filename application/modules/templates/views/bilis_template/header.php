@@ -17,6 +17,8 @@
     <!-- dataTables CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/dataTables/css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/dataTables/css/dataTables.responsive.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/select2/css/select2.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins

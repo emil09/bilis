@@ -39,113 +39,97 @@
           <tbody>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
+              <td>Bridget Jones (1)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
+              <td>Bridget Jones (2)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
+              <td>Tom Cruise (3)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
+              <td>Bridget Jones (4)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
+              <td>Bridget Jones (5)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
+              <td>Tom Cruise (6)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
+              <td>Bridget Jones (7)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
             <tr>
               <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
+              <td>Bridget Jones (8)</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>Tom Cruise (9)</td>
+              <td></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>Bridget Jones (10)</td>
+              <td></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>Tom Cruise (11)</td>
+              <td></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>Bridget Jones(12)</td>
+              <td></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -153,7 +137,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -161,7 +145,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -169,7 +153,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -177,7 +161,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -185,7 +169,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -193,7 +177,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -201,7 +185,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -209,7 +193,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -217,7 +201,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -225,7 +209,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -233,7 +217,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -241,7 +225,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -249,7 +233,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -257,7 +241,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -265,7 +249,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -273,7 +257,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -281,7 +265,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -289,7 +273,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -297,7 +281,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -305,7 +289,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -313,7 +297,7 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -321,7 +305,7 @@
               <td><input type="checkbox"></td>
               <td>Bridget Jones</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -329,7 +313,23 @@
               <td><input type="checkbox"></td>
               <td>Tom Cruise</td>
               <td></td>
-              <td><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit</button></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>Bridget Jones</td>
+              <td></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox"></td>
+              <td>Tom Cruise</td>
+              <td></td>
+              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
             </tr>
@@ -339,4 +339,49 @@
     </div> <!-- /.box-default -->
   </div>
 </section><!-- /.content -->
+<div class="modal modal-default fade" id="editModalWindow" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for Jones (1)</h4>
+        <div class="pull-right">
+          <p class="pull-left">Route:</p>
+          <select class="form-control route-dropdown">
+            <option selected="selected">All Route</option>
+            <option>Lagro - Cubao</option>
+          </select>
+        </div>
+        <input type="text" class="form-control" id="emp_no_d" style="display:none;">
+      </div>
+      <div class="modal-body">
+        <div class="text-center" style="margin-bottom: 20px;" id="notif_update"></div>
+        <form role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <p>Dec 18 2015</p>
+              <select class="form-control select2">
+                <option value="" selected></option>
+                <option value="abc-123">ABC-123</option>
+                <option value="abc-123">ABC-123</option>
+                <option value="abc-123">ABC-123</option>
+                <!-- <option>ABC-123</option>
+                <option>ABC-123</option>
+                <option>ABC-123</option>
+                <option>ABC-123</option> -->
+              </select>
+              <select class="form-control day-night">
+                <option selected="selected">Day</option>
+                <option>Night</option>
+              </select>
+            </div> <!-- /.form-group -->
+          </div>
+        </form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="update_employee" onclick="update_employee()">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </div><!-- /.content-wrapper -->
