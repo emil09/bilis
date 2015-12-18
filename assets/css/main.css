@@ -1,3 +1,4 @@
+/* DEFAULTS */
 .table>thead>tr>th, 
 .table>tbody>tr>th, 
 .table>tfoot>tr>th, 
@@ -10,6 +11,7 @@ table.dataTable td { white-space: nowrap }
 .dataTables_scrollBody table.dataTable thead .sorting:after, 
 .dataTables_scrollBody table.dataTable thead .sorting_asc:after,
 .dataTables_scrollBody table.dataTable thead .sorting_desc:after { display: none }
+.modal-dialog { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important }
 
 /* editModalWindow */
 #editModalWindow .select2-container, #editModalWindow .day-night, #editModalWindow p { float: left; margin-right: 15px }
@@ -17,3 +19,9 @@ table.dataTable td { white-space: nowrap }
 #editModalWindow .day-night { width: auto }
 #editModalWindow p { line-height: 2.5; margin-bottom: 0 }
 .route-dropdown { width: auto }
+
+/* CSS for Dispatcher Page */
+.page-dispatcher .content-header .pull-right p, .page-dispatcher .content-header .pull-right select { float: left; width: auto; margin-right: 10px }
+.page-dispatcher .content-header .pull-right p { margin-top: 2px; margin-bottom: 2px }
+.page-dispatcher .content-header .pull-right select { height: 28px; padding: 3px 12px }
+.page-dispatcher .content-header .pull-right button { padding: 4px 10px }

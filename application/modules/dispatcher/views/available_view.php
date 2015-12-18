@@ -2,16 +2,16 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
-<section class="content-header">
-  <h1 style="color:#3C8DBC; width: 82%; float: left">
+<section class="content-header clearfix">
+  <h1 style="color:#3C8DBC; float: left">
     <i class="fa fa-pause"> Available for Dispatch</i>
   </h1>
-  <div style=";">
-  Action: <select>
-  <option value="volvo">Dispatch</option>
-  <option value="saab">Clear Scheduled</option>
-</select><button type="Submit" value="Submit">Submit</button>
-</div>
+  <div class="pull-right">
+      <p>Action:</p> <select class="form-control">
+      <option value="volvo">Dispatch</option>
+      <option value="saab">Clear Scheduled</option>
+    </select><button class="btn btn-info btn-sm" >Submit</button>
+  </div>
 </section>
 <!-- Main content -->
 <section class="content clearfix">
@@ -25,7 +25,7 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table class="table table-bordered table-hover dt-responsive table-res">
+        <table class="table table-hover dt-responsive table-res">
           <thead>
             <tr>
               <th>Select</th>
