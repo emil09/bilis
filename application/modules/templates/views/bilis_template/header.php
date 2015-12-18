@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/font-awesome-4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
-    <!-- FooTable CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/FooTable-2/css/footable.core.css">
+    <!-- dataTables CSS -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/dataTables/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/dataTables/css/dataTables.responsive.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -33,7 +34,7 @@
   </head>
   <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
   <!-- the fixed layout is not compatible with sidebar-mini -->
-  <body class="<?php echo($this->uri->segment(1)); ?> hold-transition skin-blue fixed sidebar-mini">
+  <body class="page-<?php echo($this->uri->segment(1)); ?> hold-transition skin-blue fixed sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
 		<header class="main-header">
