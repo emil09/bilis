@@ -36,7 +36,8 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="driver_data">
+            <!-- 
             <tr>
               <td><input type="checkbox"></td>
               <td>Bridget Jones (1)</td>
@@ -332,7 +333,7 @@
               <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
               <td></td>
               <td></td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div> <!-- /.box-body -->

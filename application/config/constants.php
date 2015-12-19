@@ -39,3 +39,78 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
+
+
+/*
+|--------------------------------------------------------------------------
+| Asset Libraries
+|--------------------------------------------------------------------------
+|
+| These are libraries of javascript and stylesheet used in the project
+|
+*/
+
+//JQuery
+define('JQuery', 'assets/libs/jQuery/jquery-1.11.2.min.js');
+define('JQueryMigrate', 'assets/libs/jQuery/jquery-migrate-1.2.1.min.js');
+
+// Bootstrap
+define('BootstrapCSS', 'assets/libs/bootstrap/css/bootstrap.min.css');
+define('BootstrapJS', 'assets/libs/bootstrap/js/bootstrap.min.js');
+
+// SlimScroll
+define('SlimScroll', 'assets/libs/slimScroll/jquery.slimscroll.min.js');
+
+
+// Font-Awesome
+define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css');
+
+// Data Tables
+define('dataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.css');
+define('dataTablesResCSS', 'assets/libs/dataTables/css/dataTables.responsive.css');
+define('dataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
+define('dataTablesJSBoot', 'assets/libs/dataTables/js/dataTables.bootstrap.js');
+define('dataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.js');
+
+// Select2
+define('Select2CSS', 'assets/libs/select2/css/select2.min.css');
+define('Select2JS', 'assets/libs/select2/js/select2.full.min.js');
+// AdminLTE
+define('AdminLTE', 'assets/libs/theme/css/AdminLTE.min.css');
+
+// Skins
+define('Skins', 'assets/libs/theme/css/skins/_all-skins.min.css');
+
+// DatePicker3
+define('DatePicker3', 'assets/libs/datepicker/datepicker3.css');
+
+// FastClick 
+define('FastClick', 'assets/libs/fastclick/fastclick.min.js');
+
+// Sweet Alert2
+define('Sweetalert2', 'assets/libs/sweetalert2/sweetalert2.min.js');
+
+// Bootstrap DatePicker
+define('BootstrapDate', 'assets/libs/datepicker/bootstrap-datepicker.js');
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Custom Constants
+|--------------------------------------------------------------------------
+|
+| These are libraries of javascript and stylesheet used in the project
+|
+*/
+
+// CSS
+define('Main', 'assets/css/main.css');
+
+// JS
+define('Demo', 'assets/libs/theme/js/demo.js');
+define('App', 'assets/libs/theme/js/app.min.js');
+define('RegisterJS', 'assets/js/admin/register.js');
+define('AvailableJS', 'assets/js/dispatcher/available.js');

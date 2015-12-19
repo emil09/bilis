@@ -18,7 +18,9 @@ Class Register extends MY_Controller {
 
 	public function employee()
 	{
-		
+		$data['css'] = $this->add_css(array(DatePicker3));
+    $data['js'] = $this->add_js(array(BootstrapDate , RegisterJS));    
+    
 		$data['module'] = 'admin';
 		$data['view_file'] = 'register_employee';	
 		echo Modules::run('templates/bilis_template', $data);
