@@ -23,6 +23,7 @@ Class Register extends MY_Controller {
     
 		$data['module'] = 'admin';
 		$data['view_file'] = 'register_employee';	
+    $data['sidebar'] = 'admin/admin_sidebar';
 		echo Modules::run('templates/bilis_template', $data);
 		
 	}

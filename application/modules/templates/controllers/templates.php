@@ -4,6 +4,7 @@ Class Templates extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		
+		$this->load->model('TemplateModel','',TRUE);
 		
 	}
 	public function blank_template($data = ' '){
@@ -23,6 +24,14 @@ Class Templates extends MY_Controller {
 			$js = $js . $data['js'];
 		}
 		
+		$select = 'emp_fname, emp_lname, name as "position" ';
+		$where = array('emp_no' => $this->session->userdata('emp_no'));
+		$results = $this->TemplateModel->emp_data($select, $where);
+		foreach ($results as $result) {
+			$data['fname'] = $result->emp_fname;
+			$data['lname'] = $result->emp_lname;
+			$data['position'] = $result->position;
+		}
 
 		$data['css'] = $css;
 		$data['js'] = $js;

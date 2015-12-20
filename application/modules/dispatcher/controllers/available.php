@@ -12,8 +12,11 @@ Class Available extends MY_Controller {
 	{
 		$data['module'] = 'dispatcher';
 		$data['view_file'] = 'available_view';
+		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
+
 		$data['css'] = $this->add_css(array(dataTablesCSS, dataTablesResCSS, Select2CSS));
 		$data['js'] = $this->add_js(array(dataTablesJS, dataTablesJSBoot, dataTablesResJS, Select2JS, AvailableJS));		
+		
 		echo Modules::run('templates/bilis_template', $data);
 	}
 

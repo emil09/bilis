@@ -10,6 +10,7 @@ Class Dashboard extends MY_Controller {
 	{
 		$data['module'] = 'dispatcher';
 		$data['view_file'] = 'dashboard_view';	
+		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 		echo Modules::run('templates/bilis_template', $data);
 	}
 }

@@ -4,8 +4,6 @@
 	  color:red;
 	}
 </style>
-
-<?php $this->load->view('admin/admin_sidebar'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
