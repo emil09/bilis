@@ -29,7 +29,7 @@ function getDriver(coo_no){
 				var table_data = '';
 				for (var i = 0; i < data.driver.length; i++) {
 					table_data += '<tr><td><input type="checkbox"></td><td>' + 
-					data.driver[i].fname + ' ' + data.driver[i].lname + 
+					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
 					'</td><td></td><td><button class="btn btn-warning editModal" '+
 					' id="editModal" onclick="setSched('+data.driver[i].emp_no+')">' + 
@@ -54,8 +54,7 @@ function setSched(emp_no) {
 		data: {emp_no: emp_no},
 		success: function(data, status) {
 			console.log(data);
-			var driver_info = data.driver[0].fname + ' ' + data.driver[0].fname +
-			' (' + data.driver[0].emp_no + ')' ;
+			var driver_info = data.driver[0].lname + ' (' + data.driver[0].emp_no + ')' ;
 			$('#driver_name').html(driver_info);
 			$('.server-time').html(data.date);
 
@@ -86,7 +85,6 @@ function getUnit(route_no){
 		type: 'post',
 		data: {route_no: route_no},
 		success: function(data, status) {
-			console.log(data);
 			$.each(data, function() {
 			    $('#unit').append($("<option />").val(this.unt_no).text(this.unt_lic));
 			});
@@ -96,4 +94,5 @@ function getUnit(route_no){
 			console.log("Details: " + desc + "\nError:" + err);
 		}
 	});
+
 }
