@@ -1,4 +1,9 @@
-/* DEFAULTS */
+/*@import url(https://fonts.googleapis.com/css?family=Roboto:700,400);
+html, body { font-family: 'Roboto', sans-serif; }*/
+
+/* GLOBAL */
+.table>thead>tr>th { text-transform: uppercase }
+.table>tbody>tr>td, .table-features .feat p { line-height: 30px }
 .table>thead>tr>th, 
 .table>tbody>tr>th, 
 .table>tfoot>tr>th, 
@@ -6,12 +11,14 @@
 .table>tbody>tr>td, 
 .table>tfoot>tr>td { border-top: 1px solid #aaa }
 .table>thead>tr>th { border-bottom: 2px solid #aaa }
-table.dataTable th,
-table.dataTable td { white-space: nowrap }
-.dataTables_scrollBody table.dataTable thead .sorting:after, 
-.dataTables_scrollBody table.dataTable thead .sorting_asc:after,
-.dataTables_scrollBody table.dataTable thead .sorting_desc:after { display: none }
 .modal-dialog { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important }
+.unit-plate { background-image: url('../img/plate_number.png'); background-size: contain; background-repeat: no-repeat; background-position: 50% 50%; text-align: center; font-weight: 600 }
+.table-features .feat { display: inline-flex; display: -webkit-inline-flex }
+.table-features .feat .form-control { height: 30px; padding: 4px 12px; margin-right: 10px }
+.table-features .feat p { margin-right: 10px }
+.table-features .feat button { height: 30px }
+.day, .night { height: 30px }
+.day-text { color: #19BAEC }
 
 /* editModalWindow */
 #editModalWindow .select2-container, #editModalWindow .day-night, #editModalWindow p { float: left; margin-right: 15px }
