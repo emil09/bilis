@@ -54,5 +54,9 @@ $(document).ready(function(){
 			}
 		}); 
 	});
+
+	
+	var currentDate = new Date();  
+    $('#pickdate').datepicker();
 });
 	

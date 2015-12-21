@@ -8,11 +8,6 @@
     </footer>
 
 <?php echo $js; ?>
-    <script type="text/javascript">
-      $(function () {
-        var currentDate = new Date();  
-        $('#pickdate').datepicker();
-      });
-  </script>
+
   </body>
 </html>

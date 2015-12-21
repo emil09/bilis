@@ -7,10 +7,13 @@
     <i class="fa fa-pause"> Available for Dispatch</i>
   </h1>
   <div class="pull-right">
-      <p>Action:</p> <select class="form-control">
-      <option value="volvo">Dispatch</option>
-      <option value="saab">Clear Scheduled</option>
-    </select><button class="btn btn-info btn-sm" >Submit</button>
+      <p>Cooperative:</p> 
+      <select class="form-control" id="coo_select">
+        <?php foreach ($cooperatives as $cooperative ): ?>
+          <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+        <?php endforeach ?>
+      </select>
+      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
   </div>
 </section>
 <!-- Main content -->
@@ -18,14 +21,23 @@
   <div class="col-md-12">
     <div class="box box-default box-solid">
       <div class="box-header">
-        <h3 class="box-title">Dispatching by Driver (409 drivers)</h3>
+        <h3 class="box-title">Dispatching by Driver (<span id="driver_dispatching"></span> drivers)</h3>
+
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <p>Search: <input id="filter" type="text"></p>
+        <div class="pull-left">
+          <p>Search: <input id="filter" type="text"></p>`
+        </div>
+        <div class="pull-right">
+            <p>Action:</p> <select class="form-control">
+            <option value="volvo">Dispatch</option>
+            <option value="saab">Clear Scheduled</option>
+          </select><button class="btn btn-info btn-sm" >Submit</button>
+        </div>
         <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
           <thead>
             <tr>
@@ -38,7 +50,7 @@
             </tr>
           </thead>
           <tbody id="driver_data">
-            
+      
           </tbody>
         </table>
       </div> <!-- /.box-body -->
@@ -49,27 +61,23 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for Jones (1)</h4>
+        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for <span id="driver_name"></span></h4>
         <div class="pull-right">
           <p class="pull-left">Route:</p>
-          <select class="form-control route-dropdown">
-            <option selected="selected">All Route</option>
-            <option>Lagro - Cubao</option>
+          <select id="route" class="form-control route-dropdown">
+            <!-- <option selected="selected">All Route</option> -->
+            <!-- <option>Lagro - Cubao</option> -->
           </select>
         </div>
-        <input type="text" class="form-control" id="emp_no_d" style="display:none;">
       </div>
       <div class="modal-body">
         <div class="text-center" style="margin-bottom: 20px;" id="notif_update"></div>
         <form role="form">
           <div class="box-body">
             <div class="form-group">
-              <p>Dec 18 2015</p>
-              <select class="form-control select2">
+              <p class="server-time"></p>
+              <select class="form-control select2" id="unit">
                 <option value="" selected></option>
-                <option value="abc-123">ABC-123</option>
-                <option value="abc-123">ABC-123</option>
-                <option value="abc-123">ABC-123</option>
                 <!-- <option>ABC-123</option>
                 <option>ABC-123</option>
                 <option>ABC-123</option>
