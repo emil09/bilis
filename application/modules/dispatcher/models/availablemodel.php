@@ -20,10 +20,11 @@ Class AvailableModel extends CI_Model {
     }
 
     public function get_driver($select = '', $where = array()){
-    	$this->db->select($select);
+        $this->db->select($select);
         $this->db->from($this->tables[0]);
         $this->db->join($this->tables[1], 'emp_no_fk = emp_no', 'left');
         $this->db->where($where);
+        $this->db->order_by('emp_lname');
         $query = $this->db->get();
         return $query->result();
     }

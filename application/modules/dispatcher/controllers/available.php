@@ -14,8 +14,8 @@ Class Available extends MY_Controller {
 		$data['view_file'] = 'available_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
-		$data['css'] = $this->add_css(array(dataTablesCSS, dataTablesResCSS, Select2CSS));
-		$data['js'] = $this->add_js(array(dataTablesJS, dataTablesJSBoot, dataTablesResJS, Select2JS, AvailableJS));		
+		$data['css'] = $this->add_css(array(FooTableCSS, Select2CSS));
+		$data['js'] = $this->add_js(array(FooTableJS, FooTableSortJS, FooTableFilterJS, Select2JS, AvailableJS));		
 		
 		echo Modules::run('templates/bilis_template', $data);
 	}
@@ -30,7 +30,7 @@ Class Available extends MY_Controller {
 			echo '
 			<tr>
 				<td><input type="checkbox"></td>
-				<td>' . $result->emp_fname . ' ' . $result->emp_lname . '</td>
+				<td>' . $result->emp_lname . ', ' . $result->emp_fname . ' ('. $result->emp_no .')' . '</td>
 				<td></td>
 				<td>
 					<button class="btn btn-warning editModal" id="editModal">
