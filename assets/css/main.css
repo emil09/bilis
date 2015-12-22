@@ -54,3 +54,4 @@ html, body { font-family: 'Roboto', sans-serif; }*/
 .page-dispatcher .content-header .pull-right button { padding: 4px 10px }
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
 #driver_data #dispatch-button.btn-warning { border: 2px solid #e08e0b; color: #000; font-weight: 600; background-color: #D4C621; opacity: 1 }
+.wrapper-dispatcher { height: 520px; overflow: auto }
