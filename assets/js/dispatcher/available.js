@@ -1,8 +1,21 @@
 $(document).ready(function(){
 
-    $('#table-dispatcher').footable();
-    $('#table-dispatcher tbody').on('click', 'button', function () {
+    $('#table-dispatcher tbody').on('click', 'button#editModal', function () {
         $("#editModalWindow").modal({backdrop: 'static'});
+    });
+    $('#table-dispatcher tbody').on('click', 'button#dispatch-button', function () {
+        swal({   
+        	title: 'Are you sure?',
+        	text: 'You will not be able to dispatch it again!',
+        	type: 'warning',
+        	showCancelButton: true,
+        	confirmButtonColor: '#3085d6',
+        	cancelButtonColor: '#d33',
+        	confirmButtonText: 'Yes, dispatch unit.',
+        	closeOnConfirm: false
+        }, function() {   
+        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
+        });
     });
     $(".select2").select2({
         placeholder: "Select a vehicle",
@@ -17,7 +30,7 @@ $(document).ready(function(){
 		getDriver(this.value);
 	});
 	
-	 
+
 });
 
 function getDriver(coo_no){
@@ -33,10 +46,11 @@ function getDriver(coo_no){
 					' (' + data.driver[i].emp_no + ')' +
 					'</td><td></td><td><button class="btn btn-warning editModal" '+
 					' id="editModal" onclick="setSched('+data.driver[i].emp_no+')">' + 
-					'<i class="fa fa-edit"></i> Edit</button></td><td></td><td></td></tr>';
+					'<i class="fa fa-edit"></i> Edit</button></td><td><button id="dispatch-button" class="btn btn-warning col-xs-11">DISPATCH</button></td><td><span class="dispatch-status">Dispatch in Day Shift</span></td></tr>';
 				};
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
+				$('#table-dispatcher').footable();
 
 			},
 			error: function(xhr, desc, err) {
