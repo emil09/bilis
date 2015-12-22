@@ -23,7 +23,7 @@ $(document).ready(function(){
         	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
         });
     });
-    
+
     $(".select2").select2({
         placeholder: "Select a vehicle",
         allowClear: true
@@ -36,34 +36,14 @@ $(document).ready(function(){
 	$('#coo_select').on('change', function() {
 		getDriver(this.value);
 	});
-<<<<<<< HEAD
 
 	var driver_no;
-=======
-	
 
->>>>>>> 4ea037cec0b3a30d9fdc81e5032dd0d235d6ec8d
 });
 
 function getDriver(coo_no){
 	$.ajax({
-<<<<<<< HEAD
-		url: 'available/get_driver',
-		type: 'post',
-		data: {coo_no: coo_no},
-		success: function(data, status) {
-			var table_data = '';
-			for (var i = 0; i < data.driver.length; i++) {
-				table_data += '<tr><td><input type="checkbox"></td><td>' + 
-				data.driver[i].lname + ', ' + data.driver[i].fname + 
-				' (' + data.driver[i].emp_no + ')' +
-				'</td><td></td><td><button class="btn btn-warning editModal" '+
-				' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')">' + 
-				'<i class="fa fa-edit"></i> Edit</button></td><td></td><td></td></tr>';
-			};
-			$("#driver_data").html(table_data);
-			$("#driver_dispatching").html(data.total);
-=======
+
 			url: 'available/get_driver',
 			type: 'post',
 			data: {coo_no: coo_no},
@@ -74,13 +54,12 @@ function getDriver(coo_no){
 					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
 					'</td><td></td><td><button class="btn btn-warning editModal" '+
-					' id="editModal" onclick="setSched('+data.driver[i].emp_no+')">' + 
+					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')">' + 
 					'<i class="fa fa-edit"></i> Edit</button></td><td><button id="dispatch-button" class="btn btn-warning col-xs-11">DISPATCH</button></td><td><span class="dispatch-status">Dispatch in Day Shift</span></td></tr>';
 				};
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
 				$('#table-dispatcher').footable();
->>>>>>> 4ea037cec0b3a30d9fdc81e5032dd0d235d6ec8d
 
 		},
 		error: function(xhr, desc, err) {
