@@ -18,9 +18,12 @@ Class Register extends MY_Controller {
 
 	public function employee()
 	{
-		
+		$data['css'] = $this->add_css(array(DatePicker3));
+    $data['js'] = $this->add_js(array(BootstrapDate , RegisterJS));    
+    
 		$data['module'] = 'admin';
 		$data['view_file'] = 'register_employee';	
+    $data['sidebar'] = 'admin/admin_sidebar';
 		echo Modules::run('templates/bilis_template', $data);
 		
 	}
@@ -42,7 +45,7 @@ Class Register extends MY_Controller {
 
 			$this->form_validation->set_rules('unit', 'Unit Number', 'required|xss_clean');
 			$this->form_validation->set_rules('cooperative', 'Cooperative', 'required|xss_clean');
-			$this->form_validation->set_rules('emp_lic', 'License Number', 'required|xss_clean');
+			$this->form_validation->set_rules('emp_lis', 'License Number', 'required|xss_clean');
 			$this->form_validation->set_rules('emp_ltp', 'License Type', 'required|xss_clean');
 			$this->form_validation->set_rules('emp_lis', 'License Issue Date', 'required|xss_clean');
 		}
@@ -60,17 +63,22 @@ Class Register extends MY_Controller {
 				'emp_pwd'	=> $_POST['password']
 			);
 
-			if($_POST['position'] == 'D'){
-				$data2['unit'] = $_POST['unit_no'];
-				$data2['coo_no_fk'] = $_POST['cooperative'];
-				$data2['emp_lic'] = $_POST['emp_lic'];
-				$data2['emp_ltp'] = $_POST['emp_ltp'];
-				$data2['emp_lis'] = $_POST['emp_lis'];
-				$data2['emp_lix'] = $_POST['emp_lix'];
-			}
+		
 
 			$this->RegisterModel->insert(0, $data);
-			$msg = array('status'=>'success', 'msg' => $_POST);
+      $insert_id = $this->db->insert_id();
+      if($_POST['position'] == 'D'){
+        $data2['emp_no_fk'] = $insert_id;
+        $data2['unit_no'] = $_POST['unit'];
+        $data2['coo_no_fk'] = $_POST['cooperative'];
+        $data2['emp_lic'] = $_POST['emp_lic'];
+        $data2['emp_ltp'] = $_POST['emp_ltp'];
+        $data2['emp_lis'] = $_POST['emp_lis'];
+        $data2['emp_lix'] = $_POST['emp_lix'];
+        $this->RegisterModel->insert(1, $data2);
+      $msg = array('status'=>'success', 'msg' => $insert_id);
+      }
+      
 		}
 		echo json_encode($msg);
 	}
@@ -164,7 +172,7 @@ Class Register extends MY_Controller {
                       <div class="input-group-addon">
                         <i class="fa fa-hashtag"></i>
                       </div>
-                      <input type="text" class="form-control" name="emp_lis" placeholder="License Number">
+                      <input type="text" class="form-control" name="emp_lic" placeholder="License Number">
                     </div>
                   </div>
                 </div>

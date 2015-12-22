@@ -11,11 +11,11 @@ Class Dashboard extends MY_Controller {
 		if($this->session->userdata('is_logged_in') == TRUE){
 			$data['module'] = 'admin';
 			$data['view_file'] = 'dashboard_view';	
+			$data['sidebar'] = 'admin/admin_sidebar';
 			echo Modules::run('templates/bilis_template', $data);
 		}else{
 			redirect('login');
 		}
 		
 	}
-	
 }

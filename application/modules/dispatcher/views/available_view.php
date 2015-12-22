@@ -1,4 +1,6 @@
-<?php $this->load->view('dispatcher/dispatcher_sidebar'); ?>
+<style type="text/css">
+
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -7,10 +9,13 @@
     <i class="fa fa-pause"> Available for Dispatch</i>
   </h1>
   <div class="pull-right">
-      <p>Action:</p> <select class="form-control">
-      <option value="volvo">Dispatch</option>
-      <option value="saab">Clear Scheduled</option>
-    </select><button class="btn btn-info btn-sm" >Submit</button>
+      <p>Cooperative:</p> 
+      <select class="form-control" id="coo_select">
+        <?php foreach ($cooperatives as $cooperative ): ?>
+          <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+        <?php endforeach ?>
+      </select>
+      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
   </div>
 </section>
 <!-- Main content -->
@@ -18,321 +23,39 @@
   <div class="col-md-12">
     <div class="box box-default box-solid">
       <div class="box-header">
-        <h3 class="box-title">Dispatching by Driver (409 drivers)</h3>
+        <h3 class="box-title">Dispatching by Driver (<span id="driver_dispatching"></span> drivers)</h3>
+
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table class="table table-hover dt-responsive table-res">
+        <div class="table-features clearfix">
+          <div class="pull-left feat left-feat">
+            <p>Search: </p><input id="filter" class="form-control" type="text">
+          </div>
+          <div class="pull-right feat right-feat">
+              <p>Action: </p>
+              <select class="form-control">
+                <option value="endday">End Day Selected</option>
+              </select>
+              <button class="btn btn-info btn-xs">Submit</button>
+          </div>
+        </div>
+        <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
           <thead>
             <tr>
-              <th>Select</th>
-              <th>Driver</th>
-              <th>Scheduled Unit</th>
-              <th>Action</th>
-              <th>Dispatch</th>
+              <th data-sort-ignore="true">Select</th>
+              <th data-sort-initial="true">Driver</th>
+              <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
+              <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
+              <th data-hide="phone,tablet" data-sort-ignore="true">Dispatch</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (1)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (2)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise (3)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (4)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (5)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise (6)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (7)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (8)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise (9)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones (10)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise (11)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones(12)</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Bridget Jones</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>Tom Cruise</td>
-              <td></td>
-              <td><button class="btn btn-warning editModal" id="editModal"><i class="fa fa-edit"></i> Edit</button></td>
-              <td></td>
-              <td></td>
-            </tr>
+          <tbody id="driver_data">
+      
           </tbody>
         </table>
       </div> <!-- /.box-body -->
@@ -343,27 +66,23 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for Jones (1)</h4>
+        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for <span id="driver_name"></span></h4>
         <div class="pull-right">
           <p class="pull-left">Route:</p>
-          <select class="form-control route-dropdown">
-            <option selected="selected">All Route</option>
-            <option>Lagro - Cubao</option>
+          <select id="route" class="form-control route-dropdown">
+            <!-- <option selected="selected">All Route</option> -->
+            <!-- <option>Lagro - Cubao</option> -->
           </select>
         </div>
-        <input type="text" class="form-control" id="emp_no_d" style="display:none;">
       </div>
       <div class="modal-body">
         <div class="text-center" style="margin-bottom: 20px;" id="notif_update"></div>
         <form role="form">
           <div class="box-body">
             <div class="form-group">
-              <p>Dec 18 2015</p>
-              <select class="form-control select2">
+              <p class="server-time"></p>
+              <select class="form-control select2" id="unit">
                 <option value="" selected></option>
-                <option value="abc-123">ABC-123</option>
-                <option value="abc-123">ABC-123</option>
-                <option value="abc-123">ABC-123</option>
                 <!-- <option>ABC-123</option>
                 <option>ABC-123</option>
                 <option>ABC-123</option>

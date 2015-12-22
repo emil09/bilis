@@ -8,35 +8,7 @@
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/libs/theme/img/favicon.ico">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/font-awesome-4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
-    <!-- dataTables CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/dataTables/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/dataTables/css/dataTables.responsive.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/select2/css/select2.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/theme/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/sweetalert2/sweetalert2.css">
-
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/libs/datepicker/datepicker3.css">
-
-
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<?php echo $css; ?>
   </head>
   <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
   <!-- the fixed layout is not compatible with sidebar-mini -->
@@ -66,15 +38,15 @@
 	              <li class="dropdown user user-menu">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	                  <img src="<?php echo base_url() ?>assets/libs/theme/img/user.jpg" class="user-image" alt="User Image">
-	                  <span class="hidden-xs">test<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</span></span>
+	                  <span class="hidden-xs"><?php echo $fname . ' ' . $lname; ?><span></span></span>
 	                </a>
 	                <ul class="dropdown-menu">
 	                  <!-- User image -->
 	                  <li class="user-header">
 	                    <img src="<?php echo base_url() ?>assets/libs/theme/img/user.jpg" class="img-circle" alt="User Image">
 	                    <p>
-	                      test
-	                      <small>test</small>
+	                      <?php echo $fname . ' ' . $lname; ?><span></span>
+	                      <small><?php echo $position ?></small>
 	                    </p>
 	                  </li>
 	                  <!-- Menu Footer-->
@@ -92,6 +64,32 @@
 	          </div>
 	        </nav>
       	</header>
-
-
-      
+      	<aside class="main-sidebar">
+		  <!-- sidebar: style can be found in sidebar.less -->
+		  <section class="sidebar">
+		    <!-- Sidebar user panel -->
+		    <div class="user-panel">
+		      <div class="pull-left image">
+		        <img src="<?php echo base_url() ?>assets/libs/theme/img/user.jpg" class="img-circle" alt="User Image">
+		      </div>
+		      <div class="pull-left info">
+		        <p><?php echo $fname . ' ' . $lname ?></p>
+		        <a href="#"><i class="fa fa-circle text-success"></i><?php echo $position ?></a>
+		      </div>
+		    </div>
+		    <!-- search form -->
+		    <form action="#" method="get" class="sidebar-form">
+		      <div class="input-group">
+		        <input type="text" name="q" class="form-control" placeholder="Search...">
+		        <span class="input-group-btn">
+		          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+		        </span>
+		      </div>
+		    </form>
+		    <!-- /.search form -->
+		    <!-- sidebar menu: : style can be found in sidebar.less -->
+		    
+		    <?php isset($sidebar) ? $this->load->view($sidebar): ''; ?>
+		  </section>
+		  <!-- /.sidebar -->
+		</aside>
