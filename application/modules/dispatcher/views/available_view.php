@@ -1,4 +1,6 @@
+<style type="text/css">
 
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->

@@ -70,10 +70,9 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_unit(){
-		
+
 		header('Content-Type: application/json');
 		$day =  date('N');
-		// $_POST['route_no'] = 8;
 		$select = 'unt_lic, unt_no';
 
 		switch ($day) {
