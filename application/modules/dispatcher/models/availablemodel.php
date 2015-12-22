@@ -36,6 +36,9 @@ Class AvailableModel extends CI_Model {
         $this->db->from($this->tables[0]);
         $this->db->join($this->tables[1], 'emp_no_fk = emp_no', 'left');
         $this->db->join($this->tables[3], 'coo_no = coo_no_fk', 'left');
+        $this->db->join($this->tables[7], 'driver_no_fk = driver_no', 'left');
+        $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
+        $this->db->join($this->tables[6], 'shift_code = shift_code_fk', 'left');
         $this->db->where($where);
         $this->db->order_by('emp_lname');
         $query = $this->db->get();
@@ -51,5 +54,7 @@ Class AvailableModel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+
 }
 

@@ -24,8 +24,11 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
+		$_POST['coo_no'] = 6;
+
 		header('Content-Type: application/json');
-		$select = 'emp_no, emp_fname, emp_lname, coo_no_fk, driver_no';
+		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no, 
+		sched_dt, dsp_sched_no, shift_code_fk, unit_no_fk, unt_lic, shift_name,sched_dt';
 		$where = array('coo_no_fk' => $_POST['coo_no']);
 		$results = $this->AvailableModel->get_driver($select, $where);
 		$data = '';
@@ -38,18 +41,30 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['fname'] = $result->emp_fname;
 			$data['driver'][$i]['emp_no'] = $result->emp_no;
 			$data['driver'][$i]['driver_no'] = $result->driver_no;
+			$data['driver'][$i]['dsp_sched_no'] = $result->dsp_sched_no;
+			$data['driver'][$i]['unit_no'] = $result->unt_lic;
+			$data['driver'][$i]['shift_name'] = $result->shift_name;
+			if($result->sched_dt == date('Y-m-d')){
+				$data['driver'][$i]['is_today'] = true;
+			}
 			$i++;
 		}
 		echo json_encode($data);
 	}
 
-	public function get_driver_by_empno(){
+	public function get_driver_detail(){
+
 		header('Content-Type: application/json');
-		// $_POST['coo_no'] = 1;
-		$select = 'emp_no, emp_fname, emp_lname, coo_no_fk, coo_name';
-		$where = array('emp_no' => $_POST['emp_no']);
-		$results = $this->AvailableModel->get_driver($select, $where);
 		$data = '';
+		$where = array('driver_no_fk' => $_POST['dvr_no'], 'sched_dt' =>date('Y-m-d') );
+		// $this->db->limit(1);
+		$this->db->join('vehicle', 'unt_no = unit_no_fk', 'left');
+		$results = $this->AvailableModel->select_where(7,'driver_no_fk, unt_lic, unt_no, shift_code_fk, rte_no_fk', $where);
+		$data['sched_exist'] = $results;
+		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, coo_name';
+		$where2 = array('employee.emp_no' => $_POST['emp_no']);
+		$results = $this->AvailableModel->get_driver($select, $where2);
+		
 
 		$date =  date('M j, Y');
 		$data['date']= $date;
@@ -60,6 +75,7 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['emp_no'] = $result->emp_no;
 			$data['driver'][$i]['coo_name'] = $result->coo_name;
 			$data['driver'][$i]['coo_no_fk'] = $result->coo_no_fk;
+
 			$select2 = 'rte_nam, rte_no';
 			$where2 = array('coo_no_fk' => $result->coo_no_fk);
 			$data['driver'][$i]['route'] = $this->AvailableModel->select_where(4, $select2, $where2);
@@ -70,6 +86,7 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_unit(){
+		$_POST['route_no'] = 8;
 		header('Content-Type: application/json');
 		$day =  date('N');
 		$select = 'unt_lic, unt_no';
@@ -99,15 +116,29 @@ Class Available extends MY_Controller {
 			default:
 				break;
 		}
+		$unt_scheds = $this->AvailableModel->select_where(7, 'unit_no_fk', array('sched_dt' =>date('Y-m-d')));
+		$x = 0;
+		$unt_sched = array();
+		foreach ($unt_scheds as $id)
+	    {
+	        $unt_sched[$x] = $id->unit_no_fk;
+	        $x++;
+	    }
+
 		if(isset($d1, $d2)){
 			$this->db->not_like('unt_lic', $d1, 'before');
 			$this->db->not_like('unt_lic', $d2, 'before');
 		}
+
+		if(!empty($unt_sched)){
+			$this->db->where_not_in('unt_no', $unt_sched);
+		}
 		$where = array('rte_no' => $_POST['route_no']);
 		$results['unit'] = $this->AvailableModel->select_where(5, $select, $where);
 		$results['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');
-		echo json_encode($results);
-	
+
+
+		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 
 	public function save_sched(){
