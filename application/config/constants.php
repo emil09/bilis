@@ -87,6 +87,7 @@ define('DatePicker3', 'assets/libs/datepicker/datepicker3.css');
 define('FastClick', 'assets/libs/fastclick/fastclick.min.js');
 
 // Sweet Alert2
+define('Sweetalert2CSS', 'assets/libs/sweetalert2/sweetalert2.css');
 define('Sweetalert2', 'assets/libs/sweetalert2/sweetalert2.min.js');
 
 // Bootstrap DatePicker

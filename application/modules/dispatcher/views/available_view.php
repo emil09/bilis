@@ -33,14 +33,14 @@
       <div class="box-body">
         <div class="table-features clearfix">
           <div class="pull-left feat left-feat">
-            <p>Search: </p><input id="filter" class="form-control" type="text">
+            <p>Search: </p><input id="filter" class="form-control" type="text" placeholder="Driver's Name">
           </div>
           <div class="pull-right feat right-feat">
               <p>Action: </p>
               <select class="form-control">
                 <option value="endday">End Day Selected</option>
               </select>
-              <button class="btn btn-info btn-xs">Submit</button>
+              <button class="btn btn-primary btn-xs">Submit</button>
           </div>
         </div>
         <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
@@ -62,7 +62,7 @@
     </div> <!-- /.box-default -->
   </div>
 </section><!-- /.content -->
-<div class="modal modal-default fade" id="editModalWindow" role="dialog">
+<div id="editModalWindow" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="schedForm">
@@ -88,8 +88,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-success">Save changes</button>
+          <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-left: 5px">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </form> 
     </div><!-- /.modal-content -->
