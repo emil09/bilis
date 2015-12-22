@@ -43,21 +43,33 @@
               <button class="btn btn-primary btn-xs">Submit</button>
           </div>
         </div>
-        <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
-          <thead>
-            <tr>
-              <th data-sort-ignore="true">Select</th>
-              <th data-sort-initial="true">Driver</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Dispatch</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="driver_data">
-      
-          </tbody>
-        </table>
+        <div class="wrapper-<?php echo($this->uri->segment(1)); ?>">
+          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
+            <thead>
+              <tr>
+                <th data-sort-ignore="true">Select</th>
+                <th data-sort-initial="true">Driver</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Dispatch</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="driver_data">
+        
+            </tbody>
+            <tfoot>
+              <tr>
+                <th data-sort-ignore="true">Select</th>
+                <th data-sort-initial="true">Driver</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
+                <th data-hide="phone,tablet" data-sort-ignore="true">Dispatch</th>
+                <th>Status</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div> <!-- /.box-body -->
     </div> <!-- /.box-default -->
   </div>

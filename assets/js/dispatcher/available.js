@@ -1,13 +1,12 @@
 $(document).ready(function(){
 
+	$('#editModalWindow').on('hidden', function () {
+	    document.getElementById("schedForm").reset();
+	});
+
     $('#table-dispatcher tbody').on('click', 'button#editModal', function () {
         $("#editModalWindow").modal({backdrop: 'static'});
     });
-
-    $('#editModalWindow').on('hidden', function () {
-		
-	    document.getElementById("schedForm").reset();
-	});
 
     $('#table-dispatcher tbody').on('click', 'button#dispatch-button', function () {
         swal({   
@@ -25,12 +24,14 @@ $(document).ready(function(){
     });
 
     $(".select2").select2({
-        placeholder: "Select a vehicle",
-        allowClear: true
+        placeholder: "Select a vehicle"
+    });
+    var $eventSelect = $(".select2");
+    $eventSelect.on("select2:select", function () { 
+    	$('#select2-unit-container').addClass('unit-plate');
     });
 
 	$('#coo_select').each(function() {
-		 
 		getDriver(this.value);
 	});
 	$('#coo_select').on('change', function() {
@@ -103,6 +104,7 @@ function getUnit(route_no){
 
 	$('#unit').empty();
 	$("#unit").select2("val", "");
+	$('#select2-unit-container').removeClass('unit-plate');
 	$.ajax({
 		url: 'available/get_unit',
 		type: 'post',
