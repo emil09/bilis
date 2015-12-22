@@ -40,7 +40,7 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['emp_no'] = $result->emp_no;
 			$i++;
 		}
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function get_driver_by_empno(){
@@ -66,7 +66,7 @@ Class Available extends MY_Controller {
 			$i++;
 		}
 		
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function get_unit(){
