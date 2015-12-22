@@ -25,8 +25,7 @@ Class Available extends MY_Controller {
 
 	public function get_driver(){
 		header('Content-Type: application/json');
-		// $_POST['coo_no'] = 1;
-		$select = 'emp_no, emp_fname, emp_lname, coo_no_fk';
+		$select = 'emp_no, emp_fname, emp_lname, coo_no_fk, driver_no';
 		$where = array('coo_no_fk' => $_POST['coo_no']);
 		$results = $this->AvailableModel->get_driver($select, $where);
 		$data = '';
@@ -38,6 +37,7 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['lname'] = $result->emp_lname;
 			$data['driver'][$i]['fname'] = $result->emp_fname;
 			$data['driver'][$i]['emp_no'] = $result->emp_no;
+			$data['driver'][$i]['driver_no'] = $result->driver_no;
 			$i++;
 		}
 		echo json_encode($data);
@@ -70,11 +70,10 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_unit(){
-
 		header('Content-Type: application/json');
 		$day =  date('N');
 		$select = 'unt_lic, unt_no';
-
+		
 		switch ($day) {
 			case '1':
 				$d1 = 1; 
@@ -98,16 +97,61 @@ Class Available extends MY_Controller {
 				break;
 			
 			default:
-				# code...
 				break;
 		}
-		$this->db->not_like('unt_lic', $d1, 'before');
-		$this->db->not_like('unt_lic', $d2, 'before');
+		if(isset($d1, $d2)){
+			$this->db->not_like('unt_lic', $d1, 'before');
+			$this->db->not_like('unt_lic', $d2, 'before');
+		}
 		$where = array('rte_no' => $_POST['route_no']);
-		$results = $this->AvailableModel->select_where(5, $select, $where);
-	
+		$results['unit'] = $this->AvailableModel->select_where(5, $select, $where);
+		$results['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');
 		echo json_encode($results);
 	
+	}
+
+	public function save_sched(){
+
+		header('Content-Type: application/json');
+		if(isset($_POST['route']) && isset($_POST['unit']) && isset($_POST['driver_no'])){
+
+
+			$this->form_validation->set_rules('driver_no', 'Driver Number', 'required');
+			$this->form_validation->set_rules('unit', 'Unit Number', 'required');
+			$this->form_validation->set_rules('shift', 'Shift', 'required');
+			$this->form_validation->set_rules('route', 'Route', 'required');
+			
+
+			if ($this->form_validation->run($this) == FALSE){
+
+				$data = array(
+					'msg' => validation_errors(' ', ' '), 
+					'status' => 'error'
+				);
+
+			}
+			else{
+
+				$insert_data = array(
+					'sched_dt' => date('Y-m-d'),
+					'sched_time' => date('H:i:s'),
+					'driver_no_fk' => $_POST['driver_no'],
+					'unit_no_fk' => $_POST['unit'],
+					'rte_no_fk' => $_POST['route'],
+					'shift_code_fk' => $_POST['shift'],
+					'emp_cby' => $this->session->userdata('emp_no')
+				);
+				$this->AvailableModel->insert(7, $insert_data);
+				$data = array('msg' => $_POST, 'status' => 'success');
+			}
+
+		}
+		else{
+
+			$data = array('msg' => $_POST, 'status' => 'error');
+
+		}
+		echo json_encode($data);
 	}
 
 }

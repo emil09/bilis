@@ -8,7 +8,9 @@ Class AvailableModel extends CI_Model {
         '2' => 'dispatcher',
         '3' => 'cooperative',
         '4' => 'route',
-        '5' => 'vehicle'
+        '5' => 'vehicle',
+        '6' => 'shift',
+        '7' => 'dispatch_sched'
 	);
 	
 	public function select_where($key = '', $select = '', $where = array()) {
