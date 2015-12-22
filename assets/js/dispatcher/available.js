@@ -3,12 +3,12 @@ $(document).ready(function(){
     $('#table-dispatcher tbody').on('click', 'button#editModal', function () {
         $("#editModalWindow").modal({backdrop: 'static'});
     });
-<<<<<<< HEAD
+
     $('#editModalWindow').on('hidden', function () {
 		
 	    document.getElementById("schedForm").reset();
 	});
-=======
+
     $('#table-dispatcher tbody').on('click', 'button#dispatch-button', function () {
         swal({   
         	title: 'Are you sure?',
@@ -23,7 +23,7 @@ $(document).ready(function(){
         	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
         });
     });
->>>>>>> 4ea037cec0b3a30d9fdc81e5032dd0d235d6ec8d
+    
     $(".select2").select2({
         placeholder: "Select a vehicle",
         allowClear: true
