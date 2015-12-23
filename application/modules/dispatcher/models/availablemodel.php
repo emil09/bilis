@@ -55,6 +55,11 @@ Class AvailableModel extends CI_Model {
         return $query->result();
     }
 
+    public function update($key = '', $data = array(), $id = array()){
+        $this->db->where($id);
+        $this->db->update($this->tables[$key], $data);
+    }
+
 
 }
 
