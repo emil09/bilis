@@ -79,7 +79,7 @@ function getDriver(coo_no){
 
 					}
 					
-					table_data += '<tr><td><input type="checkbox"></td><td>' + 
+					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td><input type="checkbox"></td><td>' + 
 					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
 					'</td><td>'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
