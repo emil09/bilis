@@ -24,7 +24,7 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
-		$_POST['coo_no'] = 6;
+		// $_POST['coo_no'] = 6;
 
 		header('Content-Type: application/json');
 		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no, 
@@ -44,9 +44,15 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['dsp_sched_no'] = $result->dsp_sched_no;
 			$data['driver'][$i]['unit_no'] = $result->unt_lic;
 			$data['driver'][$i]['shift_name'] = $result->shift_name;
+			$data['driver'][$i]['coo_no'] = $result->coo_no_fk;
 			if($result->sched_dt == date('Y-m-d')){
 				$data['driver'][$i]['is_today'] = true;
 			}
+
+			$select2 = 'rte_nam, rte_no';
+			$where2 = array('coo_no_fk' => $result->coo_no_fk);
+			$data['driver'][$i]['route'] = $this->AvailableModel->select_where(4, $select2, $where2);
+			
 			$i++;
 		}
 		echo json_encode($data);
@@ -76,11 +82,11 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['coo_name'] = $result->coo_name;
 			$data['driver'][$i]['coo_no_fk'] = $result->coo_no_fk;
 
-			$select2 = 'rte_nam, rte_no';
-			$where2 = array('coo_no_fk' => $result->coo_no_fk);
-			$data['driver'][$i]['route'] = $this->AvailableModel->select_where(4, $select2, $where2);
+			
 			$i++;
 		}
+		$data['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');
+
 		
 		echo json_encode($data);
 	}
@@ -162,17 +168,38 @@ Class Available extends MY_Controller {
 
 			}
 			else{
-
-				$insert_data = array(
-					'sched_dt' => date('Y-m-d'),
-					'sched_time' => date('H:i:s'),
+				$select = 'dsp_sched_no';
+				$where = array(
 					'driver_no_fk' => $_POST['driver_no'],
-					'unit_no_fk' => $_POST['unit'],
-					'rte_no_fk' => $_POST['route'],
-					'shift_code_fk' => $_POST['shift'],
-					'emp_cby' => $this->session->userdata('emp_no')
+					'sched_dt' => date('Y-m-d')
 				);
-				$this->AvailableModel->insert(7, $insert_data);
+				$results = $this->AvailableModel->select_where(7, $select, $where);
+				if(count($results)>0){
+					$update_data = array(
+						'sched_dt' => date('Y-m-d'),
+						'sched_time' => date('H:i:s'),
+						'driver_no_fk' => $_POST['driver_no'],
+						'unit_no_fk' => $_POST['unit'],
+						'rte_no_fk' => $_POST['route'],
+						'shift_code_fk' => $_POST['shift'],
+						'emp_upb' => $this->session->userdata('emp_no')
+					);
+					$this->db->set('emp_udt', 'NOW()', FALSE);
+					$id = array('dsp_sched_no'=> $results[0]->dsp_sched_no);
+					$this->AvailableModel->update(7, $update_data, $id);
+				}else{
+
+					$insert_data = array(
+						'sched_dt' => date('Y-m-d'),
+						'sched_time' => date('H:i:s'),
+						'driver_no_fk' => $_POST['driver_no'],
+						'unit_no_fk' => $_POST['unit'],
+						'rte_no_fk' => $_POST['route'],
+						'shift_code_fk' => $_POST['shift'],
+						'emp_cby' => $this->session->userdata('emp_no')
+					);
+					$this->AvailableModel->insert(7, $insert_data);
+				}
 				$data = array('msg' => $_POST, 'status' => 'success');
 			}
 
@@ -184,5 +211,6 @@ Class Available extends MY_Controller {
 		}
 		echo json_encode($data);
 	}
+
 
 }

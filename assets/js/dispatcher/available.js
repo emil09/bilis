@@ -43,19 +43,22 @@ $(document).ready(function(){
 });
 
 function getDriver(coo_no){
+
+	
 	$.ajax({
 
 			url: 'available/get_driver',
 			type: 'post',
 			data: {coo_no: coo_no},
 			success: function(data, status) {
-				console.log(data);
 				var table_data = '';
 				
 				for (var i = 0; i < data.driver.length; i++) {
 					var btn_dispatched = '';
 					var unit = '';
 					var shift = '';
+					var btn_val = 'Set';
+					var btn_class = 'warning';
 					if(data.driver[i].is_today == true){
 						btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11">DISPATCH</button>';
 						unit = data.driver[i].unit_no;
@@ -69,14 +72,21 @@ function getDriver(coo_no){
 						if(!data.driver[i].shift_name){
 							shift = '';
 						}
+						btn_val = 'Edit';
+						btn_class = 'primary';
+
 					}
 					
 					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td><input type="checkbox"></td><td>' + 
 					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
-					'</td><td>'+ unit +'</td><td><button class="btn btn-warning editModal" '+
-					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')">' + 
-					'<i class="fa fa-edit"></i> Edit</button></td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
+					'</td><td>'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
+					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')">' + btn_val +
+					'</button></td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
+					$('#route').empty();
+					$.each(data.driver[i].route, function() {
+					    $('#route').append($("<option />").val(this.rte_no).text(this.rte_nam));
+					});
 				};
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
@@ -92,7 +102,7 @@ function getDriver(coo_no){
 
 function setSched(emp_no, dvr_no) {
 	driver_no = dvr_no;
-	$('#route').empty();
+	$('#shift').empty();
 	$.ajax({
 		url: 'available/get_driver_detail',
 		type: 'post',
@@ -102,28 +112,28 @@ function setSched(emp_no, dvr_no) {
 			var driver_info = data.driver[0].lname + ' (' + data.driver[0].emp_no + ')' ;
 			$('#driver_name').html(driver_info);
 			$('.server-time').html(data.date);
-			$.each(data.driver[0].route, function() {
-			    $('#route').append($("<option />").val(this.rte_no).text(this.rte_nam));
-			});
-
 			
+
+			$.each(data.shift, function() {
+			    $('#shift').append($("<option />").val(this.shift_code).text(this.shift_name));
+			});
 
 			$('#route').each(function(){
 				getUnit(this.value);
+
 			});
 			$('#route').on('change', function() {
 				getUnit(this.value);
+
 			});
 
 			if(data.sched_exist.length>0){
-				console.log(data.sched_exist[0].unt_no);
-				// $("#select").select2("val", data.sched_exist[0].unt_no);
-				
-				// $("#unit").select2("val", "175");
-
 				$('#unit').append($("<option />").val(data.sched_exist[0].unt_no).text(data.sched_exist[0].unt_lic));
 				$("#unit").select2("val", data.sched_exist[0].unt_no);
-				// this.$("#yourSelector").select2("data", existingData);
+				$('#select2-unit-container').addClass('unit-plate');
+				$('#shift').val(data.sched_exist[0].shift_code_fk);
+				$('#route').val(data.sched_exist[0].rte_no_fk);
+
 			}
 
 		},
@@ -136,7 +146,6 @@ function setSched(emp_no, dvr_no) {
 
 
 function getUnit(route_no){
-	$('#shift').empty();
 	$('#unit').empty();
 	$("#unit").select2("val", "");
 	$('#select2-unit-container').removeClass('unit-plate');
@@ -150,9 +159,8 @@ function getUnit(route_no){
 			$.each(data.unit, function() {
 			    $('#unit').append($("<option />").val(this.unt_no).text(this.unt_lic));
 			});
-			$.each(data.shift, function() {
-			    $('#shift').append($("<option />").val(this.shift_code).text(this.shift_name));
-			});
+			
+
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);
@@ -163,8 +171,6 @@ function getUnit(route_no){
 
 $("#schedForm").submit(function(event){
 	event.preventDefault();	 
-	console.log(driver_no);
-    console.log($("#schedForm").serialize()  + '&driver_no=' + driver_no);
     $.ajax({
 		url: 'available/save_sched',
 		type: 'post',
@@ -172,7 +178,6 @@ $("#schedForm").submit(function(event){
 		success: function(data, status) {
 			$('#coo_select').each(function() {
 				getDriver(this.value);
-				// console.log(this.value);
 			});
 			$('#editModalWindow').modal('hide');
 			swal({   
@@ -180,8 +185,6 @@ $("#schedForm").submit(function(event){
 				text: 'Schedule successfully added.', 
 				type: 'success' 
 			});
-			// console.log(data);
-			// get_driver(coo_no);
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);
