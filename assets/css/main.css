@@ -1,5 +1,5 @@
-/*@import url(https://fonts.googleapis.com/css?family=Roboto:700,400);
-html, body { font-family: 'Roboto', sans-serif; }*/
+/*@import url(https://fonts.googleapis.com/css?family=Roboto:700,400);*/
+html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 
 /* =======================
    ||  GLOBAL CSS  ||
@@ -22,6 +22,14 @@ html, body { font-family: 'Roboto', sans-serif; }*/
 .table-features .feat button { height: 30px }
 .day, .night { height: 30px }
 .day-text { color: #19BAEC }
+.dashboard-wrapper { margin: 60px 50px 0 }
+.dashboard-logo { width: 110px; padding: 10px 15px 30px }
+.dashcons.col-sm-4 { width: 30%; margin-left: 1.55555%; margin-right: 1.55555% }
+.dashcons { border: 3px solid #d9d9d9; padding: 10px }
+.dashcons h4 { font-weight: 600 }
+.dashcons a { margin-bottom: 5px }
+
+.main-footer > div, .main-footer strong { color: #000 }
 
 @media (max-width: 480px) { .modal-dialog { width: 90% } }
 
@@ -53,5 +61,6 @@ html, body { font-family: 'Roboto', sans-serif; }*/
 .page-dispatcher .content-header .pull-right select { height: 28px; padding: 3px 12px }
 .page-dispatcher .content-header .pull-right button { padding: 4px 10px }
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
+#driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
 #driver_data #dispatch-button.btn-warning { border: 2px solid #e08e0b; color: #000; font-weight: 600; background-color: #D4C621; opacity: 1 }
 .wrapper-dispatcher { height: 520px; overflow: auto }

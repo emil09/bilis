@@ -41,6 +41,10 @@ Class Login extends MX_Controller {
 					case "P":
 						$url = 'dispatcher';
 						break;
+
+					case "D":
+						$url = 'driver';
+						break;
 					
 					case "S":
 						$url = 'admin';
