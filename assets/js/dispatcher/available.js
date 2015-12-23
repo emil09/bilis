@@ -21,7 +21,27 @@ $(document).ready(function(){
         	closeOnConfirm: false
         }, function() {  
 	        console.log(sched_no); 
-        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
+
+	        $.ajax({
+				url: 'available/dispatch_unit',
+				type: 'post',
+				data: {sched_no: sched_no},
+				success: function(data, status) {
+					console.log(data);
+					getDriver(data.coo_no);
+					if(data.status == 'success'){
+			        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
+					}else{
+
+			        	swal('Dispatch Error!', data.msg, 'error'); 
+					}
+
+				},
+				error: function(xhr, desc, err) {
+					console.log(xhr);
+					console.log("Details: " + desc + "\nError:" + err);
+				}
+			});
         });
     });
 
@@ -54,36 +74,58 @@ function getDriver(coo_no){
 			data: {coo_no: coo_no},
 			success: function(data, status) {
 				var table_data = '';
-				
-				for (var i = 0; i < data.driver.length; i++) {
+				console.log(data);
+				for(var i = 0; i < data.driver.length; i++) {
 					var btn_dispatched = '';
 					var unit = '';
 					var shift = '';
 					var btn_val = 'Set';
 					var btn_class = 'warning';
-					if(data.driver[i].is_today == true){
-						btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].dsp_sched_no+'">DISPATCH</button>';
-						unit = data.driver[i].unit_no;
-						shift = 'Scheduled in ' + data.driver[i].shift_name + ' Shift';
-						if(!data.driver[i].dsp_sched_no){
-							btn_dispatched = ''
-						}
-						if(!unit){
-							unit = '';
-						}
-						if(!data.driver[i].shift_name){
-							shift = '';
-						}
-						btn_val = 'Edit';
-						btn_class = 'primary';
+					var btn_state = '';
+					if(data.driver[i].sched.length>0){
+						if(data.driver[i].dispatched.length>0){
+							btn_dispatched = '<button class="btn btn-success col-xs-11" data-value="'+ data.driver[i].sched[0]['dsp_sched_no']+'" disabled>DISPATCHED</button>';
+							unit = data.driver[i].sched[0]['unt_lic'];
+							shift = 'Dispatched in ' + data.driver[i].sched[0]['shift_name']+ ' Shift';
 
+							if(!data.driver[i].sched[0]['dsp_sched_no']){
+								btn_dispatched = '';
+							}
+							if(!unit){
+								unit = '';
+							}
+							if(!data.driver[i].sched[0]['shift_name']){
+								shift = '';
+							}
+							btn_val = 'Edit';
+							btn_class = 'primary';
+							btn_state = 'disabled';
+						}else{
+							console.log(data.driver[i].sched[0]['dsp_sched_no']);
+							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[0].dsp_sched_no+'">DISPATCH</button>';
+							unit = data.driver[i].sched[0]['unt_lic'];
+							shift = 'Scheduled in ' + data.driver[i].sched[0]['shift_name']+ ' Shift';
+							console.log(data.driver[i].sched[0]['shift_name']);
+							if(!data.driver[i].sched[0]['dsp_sched_no']){
+								btn_dispatched = '';
+							}
+							if(!unit){
+								unit = '';
+							}
+							if(!data.driver[i].sched[0]['shift_name']){
+								shift = '';
+							}
+							btn_val = 'Edit';
+							btn_class = 'primary';
+						}
+						
 					}
 					
 					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td><input type="checkbox"></td><td>' + 
 					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
-					'</td><td>'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
-					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')">' + btn_val +
+					'</td><td><div class="unit-plate">'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
+					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')" '+btn_state+'>' + btn_val +
 					'</button></td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
 					$('#route').empty();
 					$.each(data.driver[i].route, function() {

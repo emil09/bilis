@@ -10,7 +10,8 @@ Class AvailableModel extends CI_Model {
         '4' => 'route',
         '5' => 'vehicle',
         '6' => 'shift',
-        '7' => 'dispatch_sched'
+        '7' => 'dispatch_sched',
+        '8' => 'dispatch_unit'
 	);
 	
 	public function select_where($key = '', $select = '', $where = array()) {
@@ -39,6 +40,7 @@ Class AvailableModel extends CI_Model {
         $this->db->join($this->tables[7], 'driver_no_fk = driver_no', 'left');
         $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
         $this->db->join($this->tables[6], 'shift_code = shift_code_fk', 'left');
+        $this->db->join($this->tables[8], 'sched_no_fk = dsp_sched_no', 'left');
         $this->db->where($where);
         $this->db->order_by('emp_lname');
         $query = $this->db->get();

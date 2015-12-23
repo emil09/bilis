@@ -24,11 +24,9 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
-		// $_POST['coo_no'] = 6;
 
 		header('Content-Type: application/json');
-		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no, 
-		sched_dt, dsp_sched_no, shift_code_fk, unit_no_fk, unt_lic, shift_name,sched_dt';
+		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no, shift_name';
 		$where = array('coo_no_fk' => $_POST['coo_no']);
 		$results = $this->AvailableModel->get_driver($select, $where);
 		$data = '';
@@ -41,18 +39,36 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['fname'] = $result->emp_fname;
 			$data['driver'][$i]['emp_no'] = $result->emp_no;
 			$data['driver'][$i]['driver_no'] = $result->driver_no;
-			$data['driver'][$i]['dsp_sched_no'] = $result->dsp_sched_no;
-			$data['driver'][$i]['unit_no'] = $result->unt_lic;
-			$data['driver'][$i]['shift_name'] = $result->shift_name;
+			// $data['driver'][$i]['dsp_sched_no'] = $result->dsp_sched_no;
+			// $data['driver'][$i]['unit_no'] = $result->unt_lic;
+			// $data['driver'][$i]['shift_name'] = $result->shift_name;
 			$data['driver'][$i]['coo_no'] = $result->coo_no_fk;
-			if($result->sched_dt == date('Y-m-d')){
-				$data['driver'][$i]['is_today'] = true;
+
+			// $data['driver'][$i]['dsp_unit_no'] = $result->dsp_unit_no != '' ?$result->dsp_unit_no:' ';
+			// if($result->sched_dt == date('Y-m-d')){
+			// 	$data['driver'][$i]['is_today'] = true;
+			// }
+
+			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name';
+			$where2 = array('driver_no_fk' => $result->driver_no, 'sched_dt' => date('Y-m-d'));
+			$this->db->join('shift','shift_code = shift_code_fk', 'left');
+			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
+			$data['driver'][$i]['sched'] = $this->AvailableModel->select_where(7, $select2, $where2);
+			// $data['driver'][$i]['is_dispatched'] = false;
+			$data['driver'][$i]['dispatched'] = array();
+			if($data['driver'][$i]['sched']){
+				$data['driver'][$i]['is_dispatched'] = true;
+				$select3 = 'dsp_unit_no, dsp_by, start_dt, start_time, dsp_stat_fk';
+
+				$where3 = array('sched_no_fk' => $data['driver'][$i]['sched'][0]->dsp_sched_no);
+				$data['driver'][$i]['dispatched'] = $this->AvailableModel->select_where(8, $select3, $where3);
 			}
 
-			$select2 = 'rte_nam, rte_no';
-			$where2 = array('coo_no_fk' => $result->coo_no_fk);
-			$data['driver'][$i]['route'] = $this->AvailableModel->select_where(4, $select2, $where2);
-			
+
+			$select4 = 'rte_nam, rte_no';
+			$where4 = array('coo_no_fk' => $result->coo_no_fk);
+			$data['driver'][$i]['route'] = $this->AvailableModel->select_where(4, $select4, $where4);
+
 			$i++;
 		}
 		echo json_encode($data);
@@ -92,7 +108,6 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_unit(){
-		$_POST['route_no'] = 8;
 		header('Content-Type: application/json');
 		$day =  date('N');
 		$select = 'unt_lic, unt_no';
@@ -210,6 +225,47 @@ Class Available extends MY_Controller {
 
 		}
 		echo json_encode($data);
+	}
+
+	public function dispatch_unit(){
+
+		header('Content-Type: application/json');
+
+		if(isset($_POST['sched_no'])){
+			$where = array('dsp_sched_no'=>$_POST['sched_no']);
+			$select = 'dsp_sched_no, sched_dt, sched_time, shift_code_fk, coo_no_fk';
+			$this->db->join('driver', 'driver_no = driver_no_fk', 'left');
+			$scheds = $this->AvailableModel->select_where(7, $select, $where);
+
+			// if($scheds[0]->sched_dt == date('Y-m-d') ){
+
+			// }
+			if(strtotime(date('H:i:s')) > strtotime('3:00 am') && 
+				strtotime(date('H:i:s')) < strtotime('3:00 pm')){
+				$shift = 'D';
+			}else{
+				$shift = 'N';
+			}
+
+			if($shift == $scheds[0]->shift_code_fk && date('Y-m-d') == $scheds[0]->sched_dt){
+				// dispatched unit
+				$data = array(
+					'dsp_by' => $this->session->userdata('emp_no'),
+					'start_dt' => date('Y-m-d'),
+					'start_time' => date('H:i:s'),
+					'sched_no_fk' => $_POST['sched_no'],
+					'dsp_stat_fk' => 'A'
+				);
+				$this->AvailableModel->insert(8, $data);
+				$message = array('status'=>'success', 'coo_no'=>$scheds[0]->coo_no_fk);
+			}else{
+				// unable to dispatch, shift and date not match
+				$message = array('status'=>'error', 'msg'=>'The unit cannot be dispatched.');
+			}
+
+			echo json_encode($message);
+		}
+
 	}
 
 
