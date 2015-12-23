@@ -9,6 +9,7 @@ $(document).ready(function(){
     });
 
     $('#table-dispatcher tbody').on('click', 'button#dispatch-button', function () {
+    	var sched_no = $(this).data("value");
         swal({   
         	title: 'Are you sure?',
         	text: 'You will not be able to dispatch it again!',
@@ -18,7 +19,8 @@ $(document).ready(function(){
         	cancelButtonColor: '#d33',
         	confirmButtonText: 'Yes, dispatch unit.',
         	closeOnConfirm: false
-        }, function() {   
+        }, function() {  
+	        console.log(sched_no); 
         	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
         });
     });
@@ -60,7 +62,7 @@ function getDriver(coo_no){
 					var btn_val = 'Set';
 					var btn_class = 'warning';
 					if(data.driver[i].is_today == true){
-						btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11">DISPATCH</button>';
+						btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].dsp_sched_no+'">DISPATCH</button>';
 						unit = data.driver[i].unit_no;
 						shift = 'Scheduled in ' + data.driver[i].shift_name + ' Shift';
 						if(!data.driver[i].dsp_sched_no){
