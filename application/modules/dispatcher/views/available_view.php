@@ -1,11 +1,8 @@
-<style type="text/css">
-
-</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 style="color:#3C8DBC; float: left">
+  <h1 class="pull-left" style="color:#3C8DBC">
     <i class="fa fa-pause"> Available for Dispatch</i>
   </h1>
   <div class="pull-right">
@@ -50,8 +47,8 @@
                 <th data-sort-ignore="true">Select</th>
                 <th data-sort-initial="true">Driver</th>
                 <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
-                <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
-                <th data-hide="phone,tablet" data-sort-ignore="true">Dispatch</th>
+                <th data-hide="phone" data-sort-ignore="true">Action</th>
+                <th data-hide="phone" data-sort-ignore="true">Dispatch</th>
                 <th>Status</th>
               </tr>
             </thead>

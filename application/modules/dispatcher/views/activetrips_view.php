@@ -1,11 +1,19 @@
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left "style="color:#3C8DBC">
+  <h1 class="pull-left" style="color:#3C8DBC">
     <i class="fa fa-play"> Active Trips</i>
   </h1>
+  <div class="pull-right">
+      <p>Cooperative:</p> 
+      <select class="form-control" id="coo_select">
+        <?php foreach ($cooperatives as $cooperative ): ?>
+          <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+        <?php endforeach ?>
+      </select>
+      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
+  </div>
 </section>
 <!-- Main content -->
 <section class="content clearfix">
