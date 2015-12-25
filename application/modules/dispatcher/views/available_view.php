@@ -31,14 +31,17 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="pull-left">
-          <p>Search: <input id="filter" type="text"></p>`
-        </div>
-        <div class="pull-right">
-            <p>Action:</p> <select class="form-control">
-            <option value="volvo">Dispatch</option>
-            <option value="saab">Clear Scheduled</option>
-          </select><button class="btn btn-info btn-sm" >Submit</button>
+        <div class="table-features clearfix">
+          <div class="pull-left feat left-feat">
+            <p>Search: </p><input id="filter" class="form-control" type="text">
+          </div>
+          <div class="pull-right feat right-feat">
+              <p>Action: </p>
+              <select class="form-control">
+                <option value="endday">End Day Selected</option>
+              </select>
+              <button class="btn btn-info btn-xs">Submit</button>
+          </div>
         </div>
         <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
           <thead>

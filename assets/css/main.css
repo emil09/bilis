@@ -11,8 +11,9 @@ html, body { font-family: 'Roboto', sans-serif; }*/
 .table>tbody>tr>td, 
 .table>tfoot>tr>td { border-top: 1px solid #aaa }
 .table>thead>tr>th { border-bottom: 2px solid #aaa }
-.modal-dialog { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important }
-.unit-plate { background-image: url('../img/plate_number.png'); background-size: contain; background-repeat: no-repeat; background-position: 50% 50%; text-align: center; font-weight: 600 }
+.modal-dialog { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) !important; -webkit-transform: translate(-50%, -50%) !important; width: 480px }
+.unit-plate, .select2-results__option { background-image: url('../img/plate_number.png'); background-size: contain; background-repeat: no-repeat; background-position: 50% 50%; text-align: center; font-weight: 600 }
+.select2-container--default .select2-results__option--highlighted[aria-selected] { color: initial !important; background-color: none !important; background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../img/plate_number.png') !important }
 .table-features .feat { display: inline-flex; display: -webkit-inline-flex }
 .table-features .feat .form-control { height: 30px; padding: 4px 12px; margin-right: 10px }
 .table-features .feat p { margin-right: 10px }
@@ -22,9 +23,11 @@ html, body { font-family: 'Roboto', sans-serif; }*/
 
 /* editModalWindow */
 #editModalWindow .select2-container, #editModalWindow .day-night, #editModalWindow p { float: left; margin-right: 15px }
-#editModalWindow .select2-container { width: 350px !important }
+#editModalWindow .select2-container { width: 145px !important }
+#editModalWindow .select2-container .select2-selection--single { height: 34px }
 #editModalWindow .day-night { width: auto }
 #editModalWindow p { line-height: 2.5; margin-bottom: 0 }
+#editModalWindow .server-time { margin-right: 50px }
 .route-dropdown { width: auto }
 
 /* CSS for Dispatcher Page */
