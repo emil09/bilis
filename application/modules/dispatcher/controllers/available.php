@@ -24,54 +24,52 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
-
 		header('Content-Type: application/json');
-		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no, shift_name';
+
+		$data = array();
+
+		// This query used to display all drivers per cooperative
+		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no';
 		$where = array('coo_no_fk' => $_POST['coo_no']);
 		$results = $this->AvailableModel->get_driver($select, $where);
-		$data = '';
+		
+		// The total no. of drivers
+		$data['total'] = count($results);
 		
 		$i = 0;
-		$data['total'] = count($results);
 		foreach ($results as $result) {
 			
 			$data['driver'][$i]['lname'] = $result->emp_lname;
 			$data['driver'][$i]['fname'] = $result->emp_fname;
 			$data['driver'][$i]['emp_no'] = $result->emp_no;
 			$data['driver'][$i]['driver_no'] = $result->driver_no;
-			// $data['driver'][$i]['dsp_sched_no'] = $result->dsp_sched_no;
-			// $data['driver'][$i]['unit_no'] = $result->unt_lic;
-			// $data['driver'][$i]['shift_name'] = $result->shift_name;
 			$data['driver'][$i]['coo_no'] = $result->coo_no_fk;
 
-			// $data['driver'][$i]['dsp_unit_no'] = $result->dsp_unit_no != '' ?$result->dsp_unit_no:' ';
-			// if($result->sched_dt == date('Y-m-d')){
-			// 	$data['driver'][$i]['is_today'] = true;
-			// }
 
+			// Getting the schedule of the driver, it is empty when the driver has no schedule
 			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name';
 			$where2 = array('driver_no_fk' => $result->driver_no, 'sched_dt' => date('Y-m-d'));
 			$this->db->join('shift','shift_code = shift_code_fk', 'left');
 			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
 			$data['driver'][$i]['sched'] = $this->AvailableModel->select_where(7, $select2, $where2);
-			// $data['driver'][$i]['is_dispatched'] = false;
+
+
+			// If the driver having a schedule.. it is also checked if it is dispatched
 			$data['driver'][$i]['dispatched'] = array();
 			if($data['driver'][$i]['sched']){
-				$data['driver'][$i]['is_dispatched'] = true;
 				$select3 = 'dsp_unit_no, dsp_by, start_dt, start_time, dsp_stat_fk';
-
 				$where3 = array('sched_no_fk' => $data['driver'][$i]['sched'][0]->dsp_sched_no);
 				$data['driver'][$i]['dispatched'] = $this->AvailableModel->select_where(8, $select3, $where3);
 			}
 
-
+			// Getting the available route for the driver
 			$select4 = 'rte_nam, rte_no';
 			$where4 = array('coo_no_fk' => $result->coo_no_fk);
 			$data['driver'][$i]['route'] = $this->AvailableModel->select_where(4, $select4, $where4);
 
 			$i++;
 		}
-		echo json_encode($data);
+		echo json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function get_driver_detail(){
@@ -79,7 +77,7 @@ Class Available extends MY_Controller {
 		header('Content-Type: application/json');
 		$data = '';
 		$where = array('driver_no_fk' => $_POST['dvr_no'], 'sched_dt' =>date('Y-m-d') );
-		// $this->db->limit(1);
+		$this->db->limit(1);
 		$this->db->join('vehicle', 'unt_no = unit_no_fk', 'left');
 		$results = $this->AvailableModel->select_where(7,'driver_no_fk, unt_lic, unt_no, shift_code_fk, rte_no_fk', $where);
 		$data['sched_exist'] = $results;
