@@ -65,11 +65,11 @@ define('SlimScroll', 'assets/libs/slimScroll/jquery.slimscroll.min.js');
 // Font-Awesome
 define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css');
 
-// FooTable
-define('FooTableCSS', 'assets/libs/FooTable/css/footable.core.min.css');
-define('FooTableJS', 'assets/libs/FooTable/js/footable.js');
-define('FooTableSortJS', 'assets/libs/FooTable/js/footable.sort.js');
-define('FooTableFilterJS', 'assets/libs/FooTable/js/footable.filter.js');
+// DataTables
+define('DataTablesCSS', 'assets/libs/dataTables/css/jquery.dataTables.min.css');
+define('DataTablesBSCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
+define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
+define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
 
 // Select2
 define('Select2CSS', 'assets/libs/select2/css/select2.min.css');

@@ -29,9 +29,9 @@
       </div><!-- /.box-header -->
       <div class="box-body">
         <div class="table-features clearfix">
-          <div class="pull-left feat left-feat">
+<!--           <div class="pull-left feat left-feat">
             <p>Search: </p><input id="filter" class="form-control" type="text" placeholder="Driver's Name">
-          </div>
+          </div> -->
           <div class="pull-right feat right-feat">
               <p>Action: </p>
               <select class="form-control">
@@ -41,30 +41,20 @@
           </div>
         </div>
         <div class="wrapper-<?php echo($this->uri->segment(1)); ?>">
-          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
+          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover" data-filter="#filter">
             <thead>
               <tr>
-                <th data-sort-ignore="true">Select</th>
-                <th data-sort-initial="true">Driver</th>
-                <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
-                <th data-hide="phone" data-sort-ignore="true">Action</th>
-                <th data-hide="phone" data-sort-ignore="true">Dispatch</th>
+                <th>Select</th>
+                <th>Driver</th>
+                <th>Scheduled Unit</th>
+                <th>Action</th>
+                <th>Dispatch</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody id="driver_data">
         
             </tbody>
-            <tfoot>
-              <tr>
-                <th data-sort-ignore="true">Select</th>
-                <th data-sort-initial="true">Driver</th>
-                <th data-hide="phone,tablet" data-sort-ignore="true">Scheduled Unit</th>
-                <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
-                <th data-hide="phone,tablet" data-sort-ignore="true">Dispatch</th>
-                <th>Status</th>
-              </tr>
-            </tfoot>
           </table>
         </div>
       </div> <!-- /.box-body -->

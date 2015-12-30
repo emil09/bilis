@@ -14,8 +14,8 @@ Class Available extends MY_Controller {
 		$data['view_file'] = 'available_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
-		$data['css'] = $this->add_css(array(FooTableCSS, Select2CSS, Sweetalert2CSS));
-		$data['js'] = $this->add_js(array(FooTableJS, FooTableSortJS, FooTableFilterJS, Select2JS, AvailableJS, Sweetalert2));		
+		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesBSCSS, Select2CSS, Sweetalert2CSS));
+		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, Select2JS, AvailableJS, Sweetalert2));		
 		
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->AvailableModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);

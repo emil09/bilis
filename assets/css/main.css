@@ -63,4 +63,4 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
 #driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
 #driver_data #dispatch-button.btn-warning { border: 2px solid #e08e0b; color: #000; font-weight: 600; background-color: #D4C621; opacity: 1 }
-.wrapper-dispatcher { height: 520px; overflow: auto }
+/*.wrapper-dispatcher { height: 520px; overflow: auto }*/

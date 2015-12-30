@@ -20,14 +20,11 @@ $(document).ready(function(){
         	confirmButtonText: 'Yes, dispatch unit.',
         	closeOnConfirm: false
         }, function() {  
-	        console.log(sched_no); 
-
 	        $.ajax({
 				url: 'available/dispatch_unit',
 				type: 'post',
 				data: {sched_no: sched_no},
 				success: function(data, status) {
-					console.log(data);
 					getDriver(data.coo_no);
 					if(data.status == 'success'){
 			        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
@@ -74,7 +71,6 @@ function getDriver(coo_no){
 			data: {coo_no: coo_no},
 			success: function(data, status) {
 				var table_data = '';
-				console.log(data);
 				for(var i = 0; i < data.driver.length; i++) {
 					var btn_dispatched = '';
 					var unit = '';
@@ -101,11 +97,9 @@ function getDriver(coo_no){
 							btn_class = 'primary';
 							btn_state = 'disabled';
 						}else{
-							console.log(data.driver[i].sched[0]['dsp_sched_no']);
 							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[0].dsp_sched_no+'">DISPATCH</button>';
 							unit = data.driver[i].sched[0]['unt_lic'];
 							shift = 'Scheduled in ' + data.driver[i].sched[0]['shift_name']+ ' Shift';
-							console.log(data.driver[i].sched[0]['shift_name']);
 							if(!data.driver[i].sched[0]['dsp_sched_no']){
 								btn_dispatched = '';
 							}
@@ -134,7 +128,7 @@ function getDriver(coo_no){
 				};
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				$('#table-dispatcher').footable();
+				$('#table-dispatcher').DataTable();
 
 		},
 		error: function(xhr, desc, err) {
@@ -152,7 +146,6 @@ function setSched(emp_no, dvr_no) {
 		type: 'post',
 		data: {emp_no: emp_no, dvr_no: dvr_no},
 		success: function(data, status) {
-			console.log(data);
 			var driver_info = data.driver[0].lname + ' (' + data.driver[0].emp_no + ')' ;
 			$('#driver_name').html(driver_info);
 			$('.server-time').html(data.date);
