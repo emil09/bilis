@@ -30,7 +30,7 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 .dashcons a { margin-bottom: 5px }
 
 .main-footer > div, .main-footer strong { color: #000 }
-
+@media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }
 @media (max-width: 480px) { .modal-dialog { width: 90% } }
 
 
