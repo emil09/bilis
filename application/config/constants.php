@@ -115,3 +115,4 @@ define('Demo', 'assets/libs/theme/js/demo.js');
 define('App', 'assets/libs/theme/js/app.min.js');
 define('RegisterJS', 'assets/js/admin/register.js');
 define('AvailableJS', 'assets/js/dispatcher/available.js');
+define('ActiveTripsJS', 'assets/js/dispatcher/activetrips.js');

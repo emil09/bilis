@@ -266,5 +266,15 @@ Class Available extends MY_Controller {
 
 	}
 
+	public function delete_sched(){
+
+		header('Content-Type: application/json');
+
+		$sched = array('dsp_sched_no'=>$_POST['sched_no']);
+		$this->AvailableModel->delete(7, $sched);
+		$data = array('status'=>'success', 'msg'=>'success');
+		echo json_encode($data);
+	}
+
 
 }
