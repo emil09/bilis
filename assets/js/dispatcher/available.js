@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	$('#editModalWindow').on('hidden', function () {
 	    document.getElementById("schedForm").reset();
 	});
@@ -128,10 +127,11 @@ function getDriver(coo_no){
 				};
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				$('#table-dispatcher').DataTable({
+				$('#table-dispatcher').DataTable({ // height: 837px
 					paging : false,
-					scrollY: '300px',
-					scrollX: false
+					scrollY: '453px',
+					scrollX: 'true',
+					fixedHeader: false
 				});
 
 		},

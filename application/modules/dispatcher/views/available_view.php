@@ -12,7 +12,6 @@
           <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
         <?php endforeach ?>
       </select>
-      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
   </div>
 </section>
 <!-- Main content -->
@@ -28,20 +27,8 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="table-features clearfix">
-<!--           <div class="pull-left feat left-feat">
-            <p>Search: </p><input id="filter" class="form-control" type="text" placeholder="Driver's Name">
-          </div> -->
-          <div class="pull-right feat right-feat">
-              <p>Action: </p>
-              <select class="form-control">
-                <option value="endday">End Day Selected</option>
-              </select>
-              <button class="btn btn-primary btn-xs">Submit</button>
-          </div>
-        </div>
         <div class="wrapper-<?php echo($this->uri->segment(1)); ?>">
-          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-bordered table-hover">
+          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover">
             <thead>
               <tr>
                 <th>Select</th>

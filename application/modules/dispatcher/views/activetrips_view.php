@@ -12,7 +12,6 @@
           <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
         <?php endforeach ?>
       </select>
-      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
   </div>
 </section>
 <!-- Main content -->
@@ -28,17 +27,6 @@
       </div><!-- /.box-header -->
       <div class="box-body">
       	<div class="table-features clearfix">
-      		<div class="pull-left feat left-feat">
-      			<p>Search: </p><input id="filter" class="form-control" type="text">
-      		</div>
-	        <div class="pull-right feat right-feat">
-			    <p>Action: </p>
-			    <select class="form-control">
-				    <option value="endday">End Day Selected</option>
-			    </select>
-			    <button class="btn btn-info btn-xs">Submit</button>
-			</div>
-      	</div>
         <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
           <thead>
             <tr>
