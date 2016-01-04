@@ -26,18 +26,16 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-      	<div class="table-features clearfix">
-        <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
+        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-hover">
           <thead>
             <tr>
-              <th data-sort-ignore="true">Select</th>
-              <th data-sort-ignore="true">Trip</th>
-              <th data-sort-ignore="true">Route</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Unit</th>
-              <th data-sort-initial="true">Driver</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Start</th>
-              <th data-hide="phone,tablet">Shift</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
+              <th>Trip</th>
+              <th>Route</th>
+              <th>Unit</th>
+              <th>Driver</th>
+              <th>Start</th>
+              <th>Shift</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody id="driver_data">

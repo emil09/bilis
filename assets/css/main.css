@@ -4,7 +4,7 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 /* =======================
    ||  GLOBAL CSS  ||
    ======================= */
-.table>thead>tr>th { text-transform: uppercase }
+.table>thead>tr>th, .dataTables_filter label, .dataTables_action label, .page-dispatcher .content-header .pull-right p { text-transform: uppercase; font-weight: 600 !important }
 .table>tbody>tr>td, .table-features .feat p { line-height: 30px }
 .table>thead>tr>th, 
 .table>tbody>tr>th, 
@@ -21,7 +21,7 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 .dataTables_action label { font-weight: 400 }
 .dataTables_action select { margin-left: 0.5em; display: inline-block; width: auto }
 .dataTables_action button { height: 30px }
-.dataTables_filter { float: left }
+.dataTables_filter { float: left !important; margin-right: 10px }
 .dataTable { width: 100% !important }
 .dataTables_wrapper > .row > .col-sm-6:first-child { display: none; }
 .day, .night { height: 30px }
@@ -77,36 +77,25 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
    ========================== */
 .page-driver #calculator {
 	width: 325px;
-	height: auto;
-	
-	margin: 100px auto;
-	padding: 20px 20px 9px;
-	
-	background: #9dd2ea;
+	height: auto;	
+	padding: 20px 20px 9px;	
+	background-color: #9dd2ea;
 	background: linear-gradient(#9dd2ea, #8bceec);
 	border-radius: 3px;
 	box-shadow: 0px 4px #009de4, 0px 10px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Top portion */
-.page-driver .top span.clear {
-	float: left;
-}
-
-/* Inset shadow on the screen to create indent */
+.page-driver .top { margin-bottom: 10px }
+.page-driver .top button.clear { float: left }
 .page-driver .top .screen {
+	border: 2px;
 	height: 40px;
-	width: 212px;
-	
-	float: right;
-	
+	width: 100%;	
+	float: right;	
 	padding: 0 10px;
-	
-	background: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 	border-radius: 3px;
 	box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
-	
-	/* Typography */
 	font-size: 17px;
 	line-height: 40px;
 	color: white;
@@ -114,71 +103,33 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 	text-align: right;
 	letter-spacing: 1px;
 }
-
-/* Clear floats */
-.page-driver .keys, .page-driver .top {overflow: hidden;}
-
-/* Applying same to the keys */
-.page-driver .keys span, .page-driver .top span.clear {
+.page-driver .keys, .page-driver .top { overflow: hidden }
+.page-driver .keys button, .page-driver .top button.clear {
 	float: left;
 	position: relative;
-	top: 0;
-	
-	cursor: pointer;
-	
+	top: 0;	
+	cursor: pointer;	
 	width: 66px;
-	height: 36px;
-	
-	background: white;
+	height: 36px;	
+	background-color: white;
 	border-radius: 3px;
 	box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
-	
-	margin: 0 7px 11px 0;
-	
+	margin: 0 7px 11px 0;	
 	color: #888;
 	line-height: 36px;
 	text-align: center;
-	
-	/* prevent selection of text inside keys */
-	user-select: none;
-	
-	/* Smoothing out hover and active states using css3 transitions */
+	user-select: none;	
 	transition: all 0.2s ease;
 }
-
-.page-driver .keys span {
-	width: 90px
-}
-
-/* Remove right margins from operator keys */
-/* style different type of keys (operators/evaluate/clear) differently */
-.page-driver .keys span.operator {
-	background: #FFF0F5;
-	margin-right: 0;
-}
-
-.page-driver .keys span.eval {
-	background: #f1ff92;
-	box-shadow: 0px 4px #9da853;
-	color: #888e5f;
-}
-
-.page-driver .top span.clear {
-	background: #ff9fa8;
-	box-shadow: 0px 4px #ff7c87;
-	color: white;
-}
-
-/* Some hover effects */
-.page-driver .keys span:hover {
-	background: #9c89f6;
-	box-shadow: 0px 4px #6b54d3;
-	color: white;
-}
-
-.page-driver .keys span.eval:hover { background: #abb850; box-shadow: 0px 4px #717a33; color: #ffffff }
-.page-driver .top span.clear:hover { background: #f68991; box-shadow: 0px 4px #d3545d; color: white }
-
-.page-driver .keys span:active { box-shadow: 0px 0px #6b54d3; top: 4px }
-.page-driver .keys span.eval:active { box-shadow: 0px 0px #717a33; top: 4px }
-.page-driver .top span.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
+.page-driver .keys button { width: 31.6%; border: 0 }
+.page-driver .keys button.operator { background-color: #FFF0F5; margin-right: 0 }
+.page-driver .keys button.eval { background-color: #f1ff92; box-shadow: 0px 4px #9da853; color: #888e5f }
+.page-driver .keys button.clear { background-color: #ff9fa8; box-shadow: 0px 4px #ff7c87; color: white }
+.page-driver .keys button:hover { background-color: #9c89f6; box-shadow: 0px 4px #6b54d3; color: white }
+.page-driver .keys button.eval:hover { background-color: #abb850; box-shadow: 0px 4px #717a33; color: #ffffff }
+.page-driver .top button.clear:hover { background-color: #f68991; box-shadow: 0px 4px #d3545d; color: white }
+.page-driver .keys button:active { box-shadow: 0px 0px #6b54d3; top: 4px }
+.page-driver .keys button.eval:active { box-shadow: 0px 0px #717a33; top: 4px }
+.page-driver .top button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
+.page-driver .turnoverbutton { color: #fff !important; background-color: #00a65a !important; margin-right: 0 !important; box-shadow: 0 4px #008d4c !important }
+.page-driver .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }

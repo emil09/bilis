@@ -14,7 +14,7 @@ Class ActiveTrips extends MY_Controller {
 		$data['view_file'] = 'activetrips_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
-		$data['css'] = $this->add_css(array(DataTablesCSS, Select2CSS));
+		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, Select2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, Select2JS, ActiveTripsJS));		
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->ActiveTripsModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);

@@ -3,11 +3,15 @@ $(document).ready(function(){
 	    document.getElementById("schedForm").reset();
 	});
 
-    $('#table-dispatcher tbody').on('click', 'button#editModal', function () {
+    $('#table-available tbody').on('click', 'button#editModal', function () {
         $("#editModalWindow").modal({backdrop: 'static'});
     });
 
-    $('#table-dispatcher tbody').on('click', 'button#dispatch-button', function () {
+    $('#table-available tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+
+    $('#table-available tbody').on('click', 'button#dispatch-button', function () {
     	var sched_no = $(this).data("value");
         swal({   
         	title: 'Are you sure?',
@@ -43,7 +47,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#table-dispatcher tbody').on('click', 'button#clear-sched', function () {
+    $('#table-available tbody').on('click', 'button#clear-sched', function () {
     	var sched_no = $(this).data("value");
         swal({   
         	title: 'Are you sure?',
@@ -157,7 +161,7 @@ function getDriver(coo_no){
 						
 					}
 					
-					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td><input type="checkbox"></td><td>' + 
+					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td>' + 
 					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
 					'</td><td><div class="unit-plate">'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
@@ -170,17 +174,26 @@ function getDriver(coo_no){
 				};
 
 				
-				$('#table-dispatcher').dataTable().fnDestroy();
+				$('#table-available').dataTable().fnDestroy();
 
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				$('#table-dispatcher').DataTable({ // height: 837px
+				var table = $('#table-available').DataTable({ // height: 837px
 					paging : false,
 					scrollY: '453px',
 					scrollX: 'true',
 					fixedHeader: false
 				});
 
+				$('#selectallrows').click(function(){
+			    	$('#table-available tbody tr').addClass('selected');
+			    });
+				$('#deselectallrows').click(function(){
+			    	$('#table-available tbody tr').removeClass('selected');
+			    });
+			    $('#submitaction').click( function () {
+			        alert( table.rows('.selected').data().length +' row(s) selected' );
+			    });
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);

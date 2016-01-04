@@ -20,30 +20,26 @@
     <div class="box box-default box-solid">
       <div class="box-header">
         <h3 class="box-title">Dispatching by Driver (<span id="driver_dispatching"></span> drivers)</h3>
-
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="wrapper-<?php echo($this->uri->segment(1)); ?>">
-          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover">
-            <thead>
-              <tr>
-                <th>Select</th>
-                <th>Driver</th>
-                <th>Scheduled Unit</th>
-                <th>Action</th>
-                <th>Dispatch</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="driver_data">
-        
-            </tbody>
-          </table>
-        </div>
+        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-hover">
+          <thead>
+            <tr>
+              <th>Driver</th>
+              <th>Scheduled Unit</th>
+              <th>Action</th>
+              <th>Dispatch</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="driver_data">
+      
+          </tbody>
+        </table>
       </div> <!-- /.box-body -->
     </div> <!-- /.box-default -->
   </div>

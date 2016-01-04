@@ -12,7 +12,7 @@ Class CashTurnover extends MY_Controller {
 		$data['sidebar'] = 'driver/driver_sidebar';
 
 		// $data['css'] = $this->add_css(array());
-		// $data['js'] = $this->add_js(array());		
+		$data['js'] = $this->add_js(array(TurnoverJS));		
 
 		echo Modules::run('templates/bilis_template', $data);
 	}

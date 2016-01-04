@@ -10,33 +10,35 @@
 <section class="content clearfix">
   <div class="col-md-12">
     <div class="box box-default box-solid">
-        <div id="calculator">
-			<!-- Screen and clear key -->
-			<div class="top">
-				<span class="clear">C</span>
-				<div class="screen"></div>
+    	<div class="col-sm-6 col-xs-12">
+    		<h4><strong>Enter turnover amount</strong></h4>
+    		<div id="calculator">
+				<div class="top">
+					<div class="screen"></div>
+				</div>
+				
+				<div class="keys">
+					<button value="7">7</button>
+					<button value="8">8</button>
+					<button class="operator" value="9">9</button>
+					<button value="4">4</button>
+					<button value="5">5</button>
+					<button class="operator" value="6">6</button>
+					<button value="1">1</button>
+					<button value="2">2</button>
+					<button class="operator" value="3">3</button>
+					<button class="clear" value="C">C</button>
+					<button value="0">0</button>
+					<button class="operator" value=".">.</button>
+					<button class="turnoverbutton pull-right" value="OK">OK</button>
+					<!-- <span class="operator">x</span> -->
+				</div>
 			</div>
-			
-			<div class="keys">
-				<!-- operators and other keys -->
-				<span>7</span>
-				<span>8</span>
-				<span class="operator">9</span>
-				<!-- <span class="operator">+</span> -->
-				<span>4</span>
-				<span>5</span>
-				<span class="operator">6</span>
-				<!-- <span class="operator">-</span> -->
-				<span>1</span>
-				<span>2</span>
-				<span class="operator">3</span>
-				<!-- <span class="operator">÷</span> -->
-				<span>0</span>
-				<span>.</span>
-				<span class="operator">=</span>
-				<!-- <span class="operator">x</span> -->
-			</div>
-		</div>
+    	</div>
+    	<div class="col-sm-6 col-xs-12">
+			<h4><strong>Active Trips</strong></h4>
+    	</div>
+        
     </div> <!-- /.box-default -->
   </div>
 </section><!-- /.content -->

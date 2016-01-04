@@ -12,8 +12,8 @@ Class SchedulingLast extends MY_Controller {
 		$data['view_file'] = 'schedulinglast_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
-		$data['css'] = $this->add_css(array(FooTableCSS, Select2CSS));
-		$data['js'] = $this->add_js(array(FooTableJS, FooTableSortJS, FooTableFilterJS, Select2JS));		
+		$data['css'] = $this->add_css(array(Select2CSS));
+		$data['js'] = $this->add_js(array(Select2JS));		
 		
 		echo Modules::run('templates/bilis_template', $data);
 	}

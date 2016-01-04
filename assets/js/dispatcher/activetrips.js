@@ -6,6 +6,9 @@ $(document).ready(function(){
 	$('#coo_select').on('change', function() {
 		getDspDriver(this.value);
 	});
+    $('#table-activetrips tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
 });
 
 function getDspDriver(coo_no){
@@ -23,17 +26,39 @@ function getDspDriver(coo_no){
 					start_time = formatAMPM(new Date(data[i]['start_dt'] + ' '+data[i]['start_time']));
 					
 					table_data += '<tr>'+
-						'<td><input type="checkbox"></td>'+
 						'<td>1</td>'+
 						'<td>'+ data[i]['coo_name']+'</td>'+
 						'<td class="unit-plate">'+data[i]['unt_lic']+'</td>'+
-						'<td>'+ data[i]['emp_fname'] + ' ' + data[i]['emp_lname'] +' ('+data[i]['emp_no']+')</td>'+
+						'<td>'+ data[i]['emp_lname'] + ', ' + data[i]['emp_fname'] +' ('+data[i]['emp_no']+')</td>'+
 						'<td>'+start_date+ ' ' + start_time +'</td>'+
 						'<td>'+data[i]['shift_name']+' Shift</td>'+
 						'<td><button class="btn btn-sm btn-danger" data-value="'+data[i]['dsp_unit_no']+'">END DAY</button></td>'+
 					'</tr>';
 				}
-			$("#driver_data").html(table_data);
+
+				$('#table-activetrips').dataTable().fnDestroy();
+				$("#driver_data").html(table_data);
+				// $("#driver_dispatching").html(data.total);
+				var table = $('#table-activetrips').DataTable({ // height: 837px
+					paging : false,
+					scrollY: '453px',
+					scrollX: 'true',
+					fixedHeader: false,
+					fixedColumns:   {
+			            leftColumns: 1
+			        }
+				});
+
+				$('#selectallrows').click(function(){
+			    	$('#table-activetrips tbody tr').addClass('selected');
+			    });
+				$('#deselectallrows').click(function(){
+			    	$('#table-activetrips tbody tr').removeClass('selected');
+			    });
+
+			    $('#submitaction').click( function () {
+			        alert( table.rows('.selected').data().length +' row(s) selected' );
+			    });
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);
