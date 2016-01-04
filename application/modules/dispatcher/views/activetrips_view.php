@@ -41,46 +41,6 @@
             </tr>
           </thead>
           <tbody id="driver_data">
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>Cruise, Tom (12)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>Pitt, Brad (13)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>Clooney, George (14)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>DiCaprio, Leonardo (15)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
           </tbody>
         </table>
       </div> <!-- /.box-body -->

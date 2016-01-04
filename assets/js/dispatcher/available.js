@@ -24,7 +24,47 @@ $(document).ready(function(){
 				type: 'post',
 				data: {sched_no: sched_no},
 				success: function(data, status) {
-					getDriver(data.coo_no);
+					$('#coo_select').each(function() {
+						getDriver(this.value);
+					});
+					if(data.status == 'success'){
+			        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
+					}else{
+
+			        	swal('Dispatch Error!', data.msg, 'error'); 
+					}
+
+				},
+				error: function(xhr, desc, err) {
+					console.log(xhr);
+					console.log("Details: " + desc + "\nError:" + err);
+				}
+			});
+        });
+    });
+
+    $('#table-dispatcher tbody').on('click', 'button#clear-sched', function () {
+    	var sched_no = $(this).data("value");
+        swal({   
+        	title: 'Are you sure?',
+        	text: 'Delete this data',
+        	type: 'warning',
+        	showCancelButton: true,
+        	confirmButtonColor: '#3085d6',
+        	cancelButtonColor: '#d33',
+        	confirmButtonText: 'Confirm',
+        	closeOnConfirm: false
+        }, function() {  
+        	
+	        $.ajax({
+				url: 'available/delete_sched',
+				type: 'post',
+				data: {sched_no: sched_no},
+				success: function(data, status) {
+					$('#coo_select').each(function() {
+						getDriver(this.value);
+						console.log(this.value);
+					});
 					if(data.status == 'success'){
 			        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
 					}else{
@@ -77,6 +117,7 @@ function getDriver(coo_no){
 					var btn_val = 'Set';
 					var btn_class = 'warning';
 					var btn_state = '';
+					var button_clear = '';
 					if(data.driver[i].sched.length>0){
 						if(data.driver[i].dispatched.length>0){
 							btn_dispatched = '<button class="btn btn-success col-xs-11" data-value="'+ data.driver[i].sched[0]['dsp_sched_no']+'" disabled>DISPATCHED</button>';
@@ -110,6 +151,8 @@ function getDriver(coo_no){
 							}
 							btn_val = 'Edit';
 							btn_class = 'primary';
+
+							button_clear = ' <button class="btn btn-danger" id="clear-sched" data-value="'+ data.driver[i].sched[0].dsp_sched_no +'">Clear</button>';
 						}
 						
 					}
@@ -119,12 +162,16 @@ function getDriver(coo_no){
 					' (' + data.driver[i].emp_no + ')' +
 					'</td><td><div class="unit-plate">'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
 					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')" '+btn_state+'>' + btn_val +
-					'</button></td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
+					'</button>'+ button_clear +'</td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
 					$('#route').empty();
 					$.each(data.driver[i].route, function() {
 					    $('#route').append($("<option />").val(this.rte_no).text(this.rte_nam));
 					});
 				};
+
+				
+				$('#table-dispatcher').dataTable().fnDestroy();
+
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
 				$('#table-dispatcher').DataTable({ // height: 837px
@@ -220,12 +267,21 @@ $("#schedForm").submit(function(event){
 			$('#coo_select').each(function() {
 				getDriver(this.value);
 			});
-			$('#editModalWindow').modal('hide');
-			swal({   
-				title: 'Success!',   
-				text: 'Schedule successfully added.', 
-				type: 'success' 
-			});
+			if(data.status=='success'){
+				$('#editModalWindow').modal('hide');
+				swal({   
+					title: 'Success!',   
+					text: 'Schedule successfully added.', 
+					type: 'success' 
+				});
+			}else{
+				swal({   
+					title: 'Error!',   
+					text: 'Schedule Error.', 
+					type: 'error' 
+				});
+			}
+			
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);
