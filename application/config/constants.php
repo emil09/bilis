@@ -51,7 +51,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 */
 
 //JQuery
-define('JQuery', 'assets/libs/jQuery/jquery-1.11.2.min.js');
+define('JQuery', 'assets/libs/jQuery/jQuery-2.1.4.min.js');
 define('JQueryMigrate', 'assets/libs/jQuery/jquery-migrate-1.2.1.min.js');
 
 // Bootstrap
@@ -65,11 +65,12 @@ define('SlimScroll', 'assets/libs/slimScroll/jquery.slimscroll.min.js');
 // Font-Awesome
 define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css');
 
-// FooTable
-define('FooTableCSS', 'assets/libs/FooTable/css/footable.core.min.css');
-define('FooTableJS', 'assets/libs/FooTable/js/footable.js');
-define('FooTableSortJS', 'assets/libs/FooTable/js/footable.sort.js');
-define('FooTableFilterJS', 'assets/libs/FooTable/js/footable.filter.js');
+// DataTables
+define('DataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
+define('DataTablesResCSS', 'assets/libs/dataTables/css/responsive.dataTables.min.css');
+define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
+define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
+define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
 
 // Select2
 define('Select2CSS', 'assets/libs/select2/css/select2.min.css');
@@ -87,6 +88,7 @@ define('DatePicker3', 'assets/libs/datepicker/datepicker3.css');
 define('FastClick', 'assets/libs/fastclick/fastclick.min.js');
 
 // Sweet Alert2
+define('Sweetalert2CSS', 'assets/libs/sweetalert2/sweetalert2.css');
 define('Sweetalert2', 'assets/libs/sweetalert2/sweetalert2.min.js');
 
 // Bootstrap DatePicker

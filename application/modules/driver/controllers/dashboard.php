@@ -7,13 +7,9 @@ Class Dashboard extends MX_Controller {
 
 	public function index()
 	{
-		if($this->session->userdata('is_logged_in') == TRUE){
-			$data['module'] = 'dispatcher';
-			$data['view_file'] = 'dashboard_view';	
-			echo Modules::run('templates/bilis_template', $data);
-		}else{
-			redirect('login');
-		}
-		
+		$data['module'] = 'driver';
+		$data['view_file'] = 'dashboard_view';	
+		$data['sidebar'] = 'driver/driver_sidebar';
+		echo Modules::run('templates/bilis_template', $data);
 	}
 }

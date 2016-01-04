@@ -11,22 +11,25 @@
 <section class="content">
   <div class="col-md-12">
     <!-- Widget: user widget style 1 -->
-    <div class="box box-widget widget-user">
-      <!-- Add the bg color to the header using any of the bg-* classes -->
-      <div class="widget-user-header bg-aqua-active">
-        <h3 class="widget-user-username">test</h3>
-        <h5 class="widget-user-desc">test</h5>
+    <div class="dashboard-wrapper clearfix">
+      <div id="availabledash" class="dashcons col-sm-4 col-xs-12">
+        <img class="dashboard-logo" src="../assets/img/dispatcher/pause.png" alt="">
+        <h4>Available Dispatch</h4>
+        <p>List of vehicles and drivers currently at the terminal awaiting dispatch.</p>
+        <a class="btn btn-primary btn-md" href="available">Select</a>
       </div>
-      <div class="box-footer">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="text-left">
-              <h4 class="description-header">Welcome test to your personal page.</h4>
-              </br>
-              <span class="description-text">For any problem in the system, contact System Administrator for details. Click the Main Navigation to select operation. It is recommended to logout by clicking the logout button in the upper right of your page everytime you leave your Tablet or PC.</span>
-            </div><!-- /.description-block -->
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+      <div id="activedash" class="dashcons col-sm-4 col-xs-12">
+        <img class="dashboard-logo" src="../assets/img/dispatcher/play.png" alt="">
+        <h4>Active Trips</h4>
+        <p>List of dispatched vehicles and drivers currently on a route.</p>
+        <a class="btn btn-primary btn-md" href="activetrips">Select</a>
+      </div>
+      <div id="scheduling" class="dashcons col-sm-4 col-xs-12">
+        <img class="dashboard-logo" src="../assets/img/dispatcher/schedule.png" alt="">
+        <h4>Scheduling</h4>
+        <p>Review and update work schedule for drivers and vehicles.</p>
+        <a class="btn btn-warning btn-md" href="schedulinglast">Previous Days</a>
+        <a class="btn btn-primary btn-md" href="schedulingnext">Next 7 Days</a>
       </div>
     </div><!-- /.widget-user -->
   </div>
