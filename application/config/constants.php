@@ -51,7 +51,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 */
 
 //JQuery
-define('JQuery', 'assets/libs/jQuery/jquery-1.11.2.min.js');
+define('JQuery', 'assets/libs/jQuery/jQuery-2.1.4.min.js');
 define('JQueryMigrate', 'assets/libs/jQuery/jquery-migrate-1.2.1.min.js');
 
 // Bootstrap
@@ -66,10 +66,11 @@ define('SlimScroll', 'assets/libs/slimScroll/jquery.slimscroll.min.js');
 define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css');
 
 // DataTables
-define('DataTablesCSS', 'assets/libs/dataTables/css/jquery.dataTables.min.css');
-define('DataTablesBSCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
+define('DataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
+define('DataTablesResCSS', 'assets/libs/dataTables/css/responsive.dataTables.min.css');
 define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
 define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
+define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
 
 // Select2
 define('Select2CSS', 'assets/libs/select2/css/select2.min.css');

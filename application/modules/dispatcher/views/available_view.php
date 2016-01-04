@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="wrapper-<?php echo($this->uri->segment(1)); ?>">
-          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover" data-filter="#filter">
+          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-bordered table-hover">
             <thead>
               <tr>
                 <th>Select</th>

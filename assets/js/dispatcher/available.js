@@ -128,7 +128,11 @@ function getDriver(coo_no){
 				};
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				$('#table-dispatcher').DataTable();
+				$('#table-dispatcher').DataTable({
+					paging : false,
+					scrollY: '300px',
+					scrollX: false
+				});
 
 		},
 		error: function(xhr, desc, err) {
