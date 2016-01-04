@@ -12,7 +12,7 @@ Class ActiveTrips extends MY_Controller {
 		$data['view_file'] = 'activetrips_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
-		$data['css'] = $this->add_css(array(DataTablesCSS,, Select2CSS));
+		$data['css'] = $this->add_css(array(DataTablesCSS, Select2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, Select2JS));		
 		
 		echo Modules::run('templates/bilis_template', $data);
