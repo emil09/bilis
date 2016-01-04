@@ -110,6 +110,7 @@ function getDriver(coo_no){
 			type: 'post',
 			data: {coo_no: coo_no},
 			success: function(data, status) {
+				console.log(data);
 				var table_data = '';
 				for(var i = 0; i < data.driver.length; i++) {
 					var btn_dispatched = '';
@@ -120,40 +121,49 @@ function getDriver(coo_no){
 					var btn_state = '';
 					var button_clear = '';
 					if(data.driver[i].sched.length>0){
-						if(data.driver[i].dispatched.length>0){
+						sched_arr = data.driver[i].sched.length - 1;
+						dsp_arr = data.driver[i].dispatched.length - 1;
+						console.log(dsp_arr);
+						if(data.driver[i].dispatched.length>0 && data.driver[i].dispatched[dsp_arr]['dsp_stat_fk']=='A'){
 							btn_dispatched = '<button class="btn btn-success col-xs-11" data-value="'+ data.driver[i].sched[0]['dsp_sched_no']+'" disabled>DISPATCHED</button>';
-							unit = data.driver[i].sched[0]['unt_lic'];
-							shift = 'Dispatched in ' + data.driver[i].sched[0]['shift_name']+ ' Shift';
+							unit = data.driver[i].sched[sched_arr]['unt_lic'];
+							shift = 'Dispatched in ' + data.driver[i].sched[sched_arr]['shift_name']+ ' Shift';
 
-							if(!data.driver[i].sched[0]['dsp_sched_no']){
+							if(!data.driver[i].sched[sched_arr]['dsp_sched_no']){
 								btn_dispatched = '';
 							}
 							if(!unit){
 								unit = '';
 							}
-							if(!data.driver[i].sched[0]['shift_name']){
+							if(!data.driver[i].sched[sched_arr]['shift_name']){
 								shift = '';
 							}
 							btn_val = 'Edit';
 							btn_class = 'primary';
 							btn_state = 'disabled';
-						}else{
-							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[0].dsp_sched_no+'">DISPATCH</button>';
-							unit = data.driver[i].sched[0]['unt_lic'];
-							shift = 'Scheduled in ' + data.driver[i].sched[0]['shift_name']+ ' Shift';
-							if(!data.driver[i].sched[0]['dsp_sched_no']){
+						}
+						else if(data.driver[i].sched[sched_arr]['sched_type']=='F'){
+
+						}
+						else {
+
+						
+							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no+'">DISPATCH</button>';
+							unit = data.driver[i].sched[sched_arr]['unt_lic'];
+							shift = 'Scheduled in ' + data.driver[i].sched[sched_arr]['shift_name']+ ' Shift';
+							if(!data.driver[i].sched[sched_arr]['dsp_sched_no']){
 								btn_dispatched = '';
 							}
 							if(!unit){
 								unit = '';
 							}
-							if(!data.driver[i].sched[0]['shift_name']){
+							if(!data.driver[i].sched[sched_arr]['shift_name']){
 								shift = '';
 							}
 							btn_val = 'Edit';
 							btn_class = 'primary';
 
-							button_clear = ' <button class="btn btn-danger" id="clear-sched" data-value="'+ data.driver[i].sched[0].dsp_sched_no +'">Clear</button>';
+							button_clear = ' <button class="btn btn-danger" id="clear-sched" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no +'">Clear</button>';
 						}
 						
 					}
@@ -265,9 +275,7 @@ $("#schedForm").submit(function(event){
 		type: 'post',
 		data: $("#schedForm").serialize()  + '&driver_no=' + driver_no,
 		success: function(data, status) {
-			$('#coo_select').each(function() {
-				getDriver(this.value);
-			});
+			
 			if(data.status=='success'){
 				$('#editModalWindow').modal('hide');
 				swal({   
@@ -282,7 +290,9 @@ $("#schedForm").submit(function(event){
 					type: 'error' 
 				});
 			}
-			
+			$('#coo_select').each(function() {
+				getDriver(this.value);
+			});
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);

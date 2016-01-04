@@ -47,7 +47,7 @@ Class Available extends MY_Controller {
 
 
 			// Getting the schedule of the driver, it is empty when the driver has no schedule
-			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name';
+			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name, sched_type';
 			$where2 = array('driver_no_fk' => $result->driver_no, 'sched_dt' => date('Y-m-d'));
 			$this->db->join('shift','shift_code = shift_code_fk', 'left');
 			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
@@ -58,7 +58,8 @@ Class Available extends MY_Controller {
 			$data['driver'][$i]['dispatched'] = array();
 			if($data['driver'][$i]['sched']){
 				$select3 = 'dsp_unit_no, dsp_by, start_dt, start_time, dsp_stat_fk';
-				$where3 = array('sched_no_fk' => $data['driver'][$i]['sched'][0]->dsp_sched_no);
+				$where3 =  array('driver_no_fk' => $result->driver_no, 'sched_dt' => date('Y-m-d'));
+				$this->db->join('dispatch_sched','dsp_sched_no = sched_no_fk', 'left');
 				$data['driver'][$i]['dispatched'] = $this->AvailableModel->select_where(8, $select3, $where3);
 			}
 
@@ -106,36 +107,38 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_unit(){
+		// $_POST['route_no'] = 9;
 		header('Content-Type: application/json');
 		$day =  date('N');
 		$select = 'unt_lic, unt_no';
 		
 		switch ($day) {
 			case '1':
-				$d1 = 1; 
-				$d2 = 2;
+				$c1 = 1; 
+				$c2 = 2;
 				break;
 			case '2':
-				$d1 = 3; 
-				$d2 = 4;
+				$c1 = 3; 
+				$c2 = 4;
 				break;
 			case '3':
-				$d1 = 5; 
-				$d2 = 6;
+				$c1 = 5; 
+				$c2 = 6;
 				break;
 			case '4':
-				$d1 = 7; 
-				$d2 = 8;
+				$c1 = 7; 
+				$c2 = 8;
 				break;
 			case '5':
-				$d1 = 9; 
-				$d2 = 0;
+				$c1 = 9; 
+				$c2 = 0;
 				break;
 			
 			default:
 				break;
 		}
-		$unt_scheds = $this->AvailableModel->select_where(7, 'unit_no_fk', array('sched_dt' =>date('Y-m-d')));
+
+		$unt_scheds = $this->AvailableModel->unit_avail('unit_no_fk, unt_lic, dsp_stat_fk');
 		$x = 0;
 		$unt_sched = array();
 		foreach ($unt_scheds as $id)
@@ -144,9 +147,9 @@ Class Available extends MY_Controller {
 	        $x++;
 	    }
 
-		if(isset($d1, $d2)){
-			$this->db->not_like('unt_lic', $d1, 'before');
-			$this->db->not_like('unt_lic', $d2, 'before');
+		if(isset($c1, $c2)){
+			$this->db->not_like('unt_lic', $c1, 'before');
+			$this->db->not_like('unt_lic', $c2, 'before');
 		}
 
 		if(!empty($unt_sched)){
@@ -179,14 +182,15 @@ Class Available extends MY_Controller {
 					'status' => 'error'
 				);
 
-			}
+			} 	
 			else{
 				$select = 'dsp_sched_no';
 				$where = array(
 					'driver_no_fk' => $_POST['driver_no'],
-					'sched_dt' => date('Y-m-d')
+					'sched_dt' => date('Y-m-d'), 
+					'sched_type' => 'A'
 				);
-				$results = $this->AvailableModel->select_where(7, $select, $where);
+				$results = $this->AvailableModel->get_driver_avail($select, $where);
 				if(count($results)>0){
 					$update_data = array(
 						'sched_dt' => date('Y-m-d'),
@@ -209,7 +213,8 @@ Class Available extends MY_Controller {
 						'unit_no_fk' => $_POST['unit'],
 						'rte_no_fk' => $_POST['route'],
 						'shift_code_fk' => $_POST['shift'],
-						'emp_cby' => $this->session->userdata('emp_no')
+						'emp_cby' => $this->session->userdata('emp_no'),
+						'sched_type' => 'A'
 					);
 					$this->AvailableModel->insert(7, $insert_data);
 				}
@@ -258,7 +263,7 @@ Class Available extends MY_Controller {
 				$message = array('status'=>'success', 'coo_no'=>$scheds[0]->coo_no_fk);
 			}else{
 				// unable to dispatch, shift and date not match
-				$message = array('status'=>'error', 'msg'=>'The unit cannot be dispatched.');
+				$message = array('status'=>'error', 'msg'=>'The time frame for dispatch is not allowed, please double check shift schedule.');
 			}
 
 			echo json_encode($message);
@@ -274,6 +279,20 @@ Class Available extends MY_Controller {
 		$this->AvailableModel->delete(7, $sched);
 		$data = array('status'=>'success', 'msg'=>'success');
 		echo json_encode($data);
+	}
+
+	public function test(){
+		header('Content-Type: application/json');
+		$_POST['driver_no'] = 409;
+		$select = 'dsp_sched_no, driver_no_fk, dsp_stat_fk';
+		$where = array(
+			'driver_no_fk' => $_POST['driver_no'],
+			'sched_dt' => date('Y-m-d'),
+			'dsp_stat_fk' => 'A',
+			'dsp_stat_fk' => null
+		);
+		$results = $this->AvailableModel->get_driver_avail($select, $where);
+		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 
 

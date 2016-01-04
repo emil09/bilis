@@ -6,6 +6,47 @@ $(document).ready(function(){
 	$('#coo_select').on('change', function() {
 		getDspDriver(this.value);
 	});
+
+	$('#driver_data').on('click', 'button.end-day', function () {
+    	var dsp_no = $(this).data("value");
+    	console.log(dsp_no);
+        swal({   
+        	title: 'Are you sure to end this trip?',
+        	text: 'The action will not be undone.',
+        	type: 'warning',
+        	showCancelButton: true,
+        	confirmButtonColor: '#3085d6',
+        	cancelButtonColor: '#d33',
+        	confirmButtonText: 'Confirm',
+        	closeOnConfirm: false
+        }, function() {  
+	        $.ajax({
+				url: 'activetrips/end_day',
+				type: 'post',
+				data: {dsp_no: dsp_no},
+				success: function(data, status) {
+					// $('#coo_select').each(function() {
+					// 	getDriver(this.value);
+					// });
+					if(data.status == 'success'){
+			        	swal('Success', 'Trip Successfully Ended .', 'success'); 
+						$('#coo_select').each(function() {
+							getDspDriver(this.value);
+						});
+					}else{
+
+			        	swal('Dispatch Error!', data.msg, 'error'); 
+					}
+
+
+				},
+				error: function(xhr, desc, err) {
+					console.log(xhr);
+					console.log("Details: " + desc + "\nError:" + err);
+				}
+			});
+        });
+    });
 });
 
 function getDspDriver(coo_no){
@@ -21,7 +62,7 @@ function getDspDriver(coo_no){
 
 					start_date = formatDate(new Date(data[i]['start_dt']));
 					start_time = formatAMPM(new Date(data[i]['start_dt'] + ' '+data[i]['start_time']));
-					
+
 					table_data += '<tr>'+
 						'<td><input type="checkbox"></td>'+
 						'<td>1</td>'+
@@ -30,7 +71,7 @@ function getDspDriver(coo_no){
 						'<td>'+ data[i]['emp_fname'] + ' ' + data[i]['emp_lname'] +' ('+data[i]['emp_no']+')</td>'+
 						'<td>'+start_date+ ' ' + start_time +'</td>'+
 						'<td>'+data[i]['shift_name']+' Shift</td>'+
-						'<td><button class="btn btn-sm btn-danger" data-value="'+data[i]['dsp_unit_no']+'">END DAY</button></td>'+
+						'<td><button class="btn btn-sm btn-danger end-day" data-value="'+data[i]['dsp_unit_no']+'">END DAY</button></td>'+
 					'</tr>';
 				}
 			$("#driver_data").html(table_data);
