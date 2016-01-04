@@ -16,6 +16,7 @@ Class ActiveTrips extends MY_Controller {
 
 		$data['css'] = $this->add_css(array(DataTablesCSS, Select2CSS, Sweetalert2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, Select2JS, ActiveTripsJS, Sweetalert2));		
+
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->ActiveTripsModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;

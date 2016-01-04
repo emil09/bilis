@@ -68,6 +68,7 @@ define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css')
 // DataTables
 define('DataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
 define('DataTablesResCSS', 'assets/libs/dataTables/css/responsive.dataTables.min.css');
+define('DataTablesJSCSS', 'assets/libs/dataTables/css/jquery.dataTables.min.css');
 define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
 define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
 define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
@@ -116,3 +117,4 @@ define('App', 'assets/libs/theme/js/app.min.js');
 define('RegisterJS', 'assets/js/admin/register.js');
 define('AvailableJS', 'assets/js/dispatcher/available.js');
 define('ActiveTripsJS', 'assets/js/dispatcher/activetrips.js');
+define('TurnoverJS', 'assets/js/driver/turnover.js');

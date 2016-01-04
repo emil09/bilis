@@ -4,7 +4,7 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 /* =======================
    ||  GLOBAL CSS  ||
    ======================= */
-.table>thead>tr>th { text-transform: uppercase }
+.table>thead>tr>th, .dataTables_filter label, .dataTables_action label, .page-dispatcher .content-header .pull-right p { text-transform: uppercase; font-weight: 600 !important }
 .table>tbody>tr>td, .table-features .feat p { line-height: 30px }
 .table>thead>tr>th, 
 .table>tbody>tr>th, 
@@ -16,14 +16,18 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 .modal-dialog { width: 480px; margin: 0 auto; margin-top: 100px }
 .unit-plate, .select2-results__option { background-image: url('../img/plate_number.png'); background-size: contain; background-repeat: no-repeat; background-position: 50% 50%; text-align: center; font-weight: 600 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] { color: initial !important; background-color: none !important; background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../img/plate_number.png') !important }
-.table-features .feat { display: inline-flex; display: -webkit-inline-flex }
-.table-features .feat .form-control { height: 30px; padding: 4px 12px; margin-right: 10px }
-.table-features .feat p { margin-right: 10px }
-.table-features .feat button { height: 30px }
+.dataTables_action { float: right }
+.dataTables_action .form-control { height: 30px; padding: 4px 12px; margin-right: 10px }
+.dataTables_action label { font-weight: 400 }
+.dataTables_action select { margin-left: 0.5em; display: inline-block; width: auto }
+.dataTables_action button { height: 30px }
+.dataTables_filter { float: left !important; margin-right: 10px }
+.dataTable { width: 100% !important }
+.dataTables_wrapper > .row > .col-sm-6:first-child { display: none; }
 .day, .night { height: 30px }
 .day-text { color: #19BAEC }
 .dashboard-wrapper { margin: 60px 50px 0 }
-.dashboard-logo { width: 110px; padding: 10px 15px 30px }
+.dashboard-logo { width: 110px; padding: 10px 12px 25px }
 .dashcons.col-sm-4 { width: 30%; margin-left: 1.55555%; margin-right: 1.55555% }
 .dashcons { border: 3px solid #d9d9d9; padding: 10px }
 .dashcons h4 { font-weight: 600 }
@@ -63,4 +67,69 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
 #driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
 #driver_data #dispatch-button.btn-warning { border: 2px solid #e08e0b; color: #000; font-weight: 600; background-color: #D4C621; opacity: 1 }
-/*.wrapper-dispatcher { height: 520px; overflow: auto }*/
+
+
+
+
+
+/* ==========================
+   ||  CSS for Driver  ||
+   ========================== */
+.page-driver #calculator {
+	width: 325px;
+	height: auto;	
+	padding: 20px 20px 9px;	
+	background-color: #9dd2ea;
+	background: linear-gradient(#9dd2ea, #8bceec);
+	border-radius: 3px;
+	box-shadow: 0px 4px #009de4, 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.page-driver .top { margin-bottom: 10px }
+.page-driver .top button.clear { float: left }
+.page-driver .top .screen {
+	border: 2px;
+	height: 40px;
+	width: 100%;	
+	float: right;	
+	padding: 0 10px;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	box-shadow: inset 0px 4px rgba(0, 0, 0, 0.2);
+	font-size: 17px;
+	line-height: 40px;
+	color: white;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	text-align: right;
+	letter-spacing: 1px;
+}
+.page-driver .keys, .page-driver .top { overflow: hidden }
+.page-driver .keys button, .page-driver .top button.clear {
+	float: left;
+	position: relative;
+	top: 0;	
+	cursor: pointer;	
+	width: 66px;
+	height: 36px;	
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+	margin: 0 7px 11px 0;	
+	color: #888;
+	line-height: 36px;
+	text-align: center;
+	user-select: none;	
+	transition: all 0.2s ease;
+}
+.page-driver .keys button { width: 31.6%; border: 0 }
+.page-driver .keys button.operator { background-color: #FFF0F5; margin-right: 0 }
+.page-driver .keys button.eval { background-color: #f1ff92; box-shadow: 0px 4px #9da853; color: #888e5f }
+.page-driver .keys button.clear { background-color: #ff9fa8; box-shadow: 0px 4px #ff7c87; color: white }
+.page-driver .keys button:hover { background-color: #9c89f6; box-shadow: 0px 4px #6b54d3; color: white }
+.page-driver .keys button.eval:hover { background-color: #abb850; box-shadow: 0px 4px #717a33; color: #ffffff }
+.page-driver .top button.clear:hover { background-color: #f68991; box-shadow: 0px 4px #d3545d; color: white }
+.page-driver .keys button:active { box-shadow: 0px 0px #6b54d3; top: 4px }
+.page-driver .keys button.eval:active { box-shadow: 0px 0px #717a33; top: 4px }
+.page-driver .top button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
+.page-driver .turnoverbutton { color: #fff !important; background-color: #00a65a !important; margin-right: 0 !important; box-shadow: 0 4px #008d4c !important }
+.page-driver .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }
