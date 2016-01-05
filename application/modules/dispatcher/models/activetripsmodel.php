@@ -19,8 +19,9 @@ Class ActiveTripsModel extends CI_Model {
         $this->db->from($this->tables[$key]);
         $this->db->where($where);
         $query = $this->db->get();
-        return $query->result();;
+        return $query->result();
     }
+    
     public function get_dspdriver($select = '', $where = array()) {
         $this->db->select($select);
         $this->db->from($this->tables[8]);
