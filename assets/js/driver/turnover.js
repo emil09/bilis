@@ -82,8 +82,8 @@ function get_active_trips(){
 		                '</tr>'+
 		                '<tr>'+
 							'<th>Departure</th>'+
-							'<td>'+ data['driver'][0]['start_dt'] +' ' + 
-							data['driver'][0]['start_time'] +'</td>'+
+							'<td>'+ formatDate(data['driver'][0]['start_dt']) +' ' + 
+							formatAMPM(data['driver'][0]['start_dt'] + ' ' + data['driver'][0]['start_time']) +'</td>'+
 		                '</tr>';
 		    $('#act_table').html(table_data);
 
@@ -159,3 +159,31 @@ $("#turnoverForm").submit(function(event){
 
 	
 })
+
+function formatAMPM(date) {
+
+	date = new Date(date);
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var ampm = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	hours = hours ? hours : 12; // the hour '0' should be '12'
+	minutes = minutes < 10 ? '0'+minutes : minutes;
+	var strTime = hours + ':' + minutes + ' ' + ampm;
+	return strTime;
+}
+
+function formatDate(date){
+
+	date = new Date(date);
+	var monthNames = [
+	  "Jan", "Feb", "Mar",
+	  "Apr", "May", "Jun", "Jul",
+	  "Aug", "Sept", "Oct",
+	  "Nov", "Dec"
+	];
+	var day = date.getDate();
+	var monthIndex = date.getMonth();
+	var year = date.getFullYear();
+	return monthNames[monthIndex] + '. ' + day + ', '+ year;
+}

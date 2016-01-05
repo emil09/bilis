@@ -61,7 +61,9 @@ Class Cashturnover extends MY_Controller {
 			$turnover_data = array(
 				'dsp_no_fk'	=>	$_POST['dsp_no'],
 				'amt_in' 	=>	$_POST['amt'],
-				'trp_stat'	=> 	'T'
+				'trp_stat'	=> 	'T',
+				'to_dt'		=>  date('Y-m-d'), 
+				'to_time'	=>	date('H:i:s')
 			);
 
 			$this->CashturnoverModel->insert(9, $turnover_data);
