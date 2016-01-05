@@ -19,7 +19,7 @@
   <div class="col-md-12">
     <div class="box box-default box-solid">
       <div class="box-header">
-        <h3 class="box-title">Active Trips (25)</h3>
+        <h3 class="box-title">Active Trips (<span id="active-drivers-count"></span> drivers)</h3>
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
@@ -38,6 +38,17 @@
               <th>Action</th>
             </tr>
           </thead>
+<!--           <tfoot>
+            <tr>
+              <th>Trip</th>
+              <th>Route</th>
+              <th>Unit</th>
+              <th>Driver</th>
+              <th>Start</th>
+              <th>Shift</th>
+              <th>Action</th>
+            </tr>
+          </tfoot> -->
           <tbody id="driver_data">
           </tbody>
         </table>

@@ -7,10 +7,6 @@ $(document).ready(function(){
         $("#editModalWindow").modal({backdrop: 'static'});
     });
 
-    $('#table-available tbody').on( 'click', 'tr', function () {
-        $(this).toggleClass('selected');
-    });
-
     $('#table-available tbody').on('click', 'button#dispatch-button', function () {
     	var sched_no = $(this).data("value");
         swal({   
@@ -70,10 +66,10 @@ $(document).ready(function(){
 						console.log(this.value);
 					});
 					if(data.status == 'success'){
-			        	swal('Dispatch Success!', 'The unit has been dispatched.', 'success'); 
+			        	swal('Clear Data Success!', 'The unit has been cleared.', 'success'); 
 					}else{
 
-			        	swal('Dispatch Error!', data.msg, 'error'); 
+			        	swal('Clear Data Error!', data.msg, 'error'); 
 					}
 
 				},
@@ -126,7 +122,6 @@ function getDriver(coo_no){
 					if(data.driver[i].sched.length>0){
 						sched_arr = data.driver[i].sched.length - 1;
 						dsp_arr = data.driver[i].dispatched.length - 1;
-						console.log(dsp_arr);
 						if(data.driver[i].dispatched.length>0 && data.driver[i].dispatched[dsp_arr]['dsp_stat_fk']=='A'){
 							btn_dispatched = '<button class="btn btn-success col-xs-11" data-value="'+ data.driver[i].sched[0]['dsp_sched_no']+'" disabled>DISPATCHED</button>';
 							unit = data.driver[i].sched[sched_arr]['unt_lic'];
@@ -174,7 +169,7 @@ function getDriver(coo_no){
 					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td>' + 
 					data.driver[i].lname + ', ' + data.driver[i].fname + 
 					' (' + data.driver[i].emp_no + ')' +
-					'</td><td><div class="unit-plate">'+ unit +'</td><td><button class="btn btn-'+ btn_class+' editModal" '+
+					'</td><td><div class="unit-plate">'+ unit +'</div></td><td><button class="btn btn-'+ btn_class+' editModal" '+
 					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')" '+btn_state+'>' + btn_val +
 					'</button>'+ button_clear +'</td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
 					$('#route').empty();
@@ -188,25 +183,125 @@ function getDriver(coo_no){
 
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				var table = $('#table-available').DataTable({ // height: 837px
+				$('#table-available tfoot th').each( function () {
+			        var title = $(this).text();
+			        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+			    });
+				var tabler = $('#table-available').DataTable({ // height: 837px
 					paging : false,
-					scrollY: '453px',
+					scrollY: '400px',
 					scrollX: 'true',
-					fixedHeader: false
+					fixedHeader: false,
+					dom: 'T<"clear">lfrtip',
+					tableTools: {
+			            sRowSelect:   'multi',
+			            sRowSelector: 'td:first-child',
+			            aButtons:     [  ]
+			        }
 				});
 
+				tabler.columns().every( function () {
+			        var that = this;
+			 
+			        $( 'input', this.footer() ).on( 'keyup change', function () {
+			            if ( that.search() !== this.value ) {
+			                that
+			                    .search( this.value )
+			                    .draw();
+			            }
+			        });
+			    });
+
 				$('#selectallrows').click(function(){
-			    	$('#table-available tbody tr').addClass('selected');
+			    	$('#table-available tbody tr').addClass('DTTT_selected selected');
 			    });
 				$('#deselectallrows').click(function(){
-			    	$('#table-available tbody tr').removeClass('selected');
+			    	$('#table-available tbody tr').removeClass('DTTT_selected selected');
 			    });
 			    $('#submitaction').click( function () {
-			        //alert( table.rows('.selected').data().length +' row(s) selected' );
 			        var e = document.getElementById("actionselect");
 					var value = e.options[e.selectedIndex].value;
-					var text = e.options[e.selectedIndex].text;
-					alert(value);
+					if(value=="dispatch" && tabler.rows('.selected').data().length) {
+				        swal({   
+				        	title: 'Are you sure?',
+				        	text: 'You will not be able to dispatch these units again.',
+				        	type: 'warning',
+				        	showCancelButton: true,
+				        	confirmButtonColor: '#3085d6',
+				        	cancelButtonColor: '#d33',
+				        	confirmButtonText: 'Yes, dispatch units.',
+				        	closeOnConfirm: false
+				        }, function() {  
+							for(var i=0; i<tabler.rows('.selected').data().length; i++) {
+								if(tabler.rows('.selected').data()[i][3] !== '') {
+									var sched_val = tabler.rows('.selected').data()[i][3];
+									var sched_no  = $(sched_val).data("value");
+					        		$.ajax({
+										url: 'available/dispatch_unit',
+										type: 'post',
+										data: {sched_no: sched_no},
+										success: function(data, status) {
+											$('#coo_select').each(function() {
+												getDriver(this.value);
+											});
+											if(data.status == 'success'){
+									        	swal('Dispatch Success!', 'The units have been dispatched.', 'success');
+											}else{
+
+									        	swal('Dispatch Error!', data.msg, 'error');
+											}
+
+										},
+										error: function(xhr, desc, err) {
+											console.log(xhr);
+											console.log("Details: " + desc + "\nError:" + err);
+										}
+									}); //ajax
+								} //if
+							} //for
+						}); //swal
+					}
+					else if (value=="clear" && tabler.rows('.selected').data().length) {
+				        swal({   
+				        	title: 'Are you sure?',
+				        	text: 'Delete these data',
+				        	type: 'warning',
+				        	showCancelButton: true,
+				        	confirmButtonColor: '#3085d6',
+				        	cancelButtonColor: '#d33',
+				        	confirmButtonText: 'Confirm',
+				        	closeOnConfirm: false
+				        }, function() {  
+				        	for(var i=0; i<tabler.rows('.selected').data().length; i++) {
+								if(tabler.rows('.selected').data()[i][3] !== '') {
+									var sched_val = tabler.rows('.selected').data()[i][3];
+									var sched_no = $(sched_val).data("value");
+							        $.ajax({
+										url: 'available/delete_sched',
+										type: 'post',
+										data: {sched_no: sched_no},
+										success: function(data, status) {
+											$('#coo_select').each(function() {
+												getDriver(this.value);
+												console.log(this.value);
+											});
+											if(data.status == 'success'){
+									        	swal('Clear Data Success!', 'The units have been cleared.', 'success'); 
+											}else{
+
+									        	swal('Clear Data Error!', data.msg, 'error'); 
+											}
+
+										},
+										error: function(xhr, desc, err) {
+											console.log(xhr);
+											console.log("Details: " + desc + "\nError:" + err);
+										}
+									}); //ajax
+								} //if
+							} //for
+				        }); //swal
+					}
 			    });
 		},
 		error: function(xhr, desc, err) {

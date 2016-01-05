@@ -36,6 +36,15 @@
               <th>Status</th>
             </tr>
           </thead>
+          <tfoot>
+            <tr>
+              <th>Driver</th>
+              <th>Scheduled Unit</th>
+              <th>Action</th>
+              <th>Dispatch</th>
+              <th>Status</th>
+            </tr>
+          </tfoot>
           <tbody id="driver_data">
       
           </tbody>

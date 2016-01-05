@@ -69,9 +69,11 @@ define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css')
 define('DataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
 define('DataTablesResCSS', 'assets/libs/dataTables/css/responsive.dataTables.min.css');
 define('DataTablesJSCSS', 'assets/libs/dataTables/css/jquery.dataTables.min.css');
+define('DataTableToolsCSS', 'assets/libs/dataTables/css/dataTables.tableTools.min.css');
 define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
 define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
 define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
+define('DataTableToolsJS', 'assets/libs/dataTables/js/dataTables.tableTools.min.js');
 
 // Select2
 define('Select2CSS', 'assets/libs/select2/css/select2.min.css');

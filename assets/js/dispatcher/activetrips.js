@@ -9,7 +9,6 @@ $(document).ready(function(){
 
 	$('#driver_data').on('click', 'button.end-day', function () {
     	var dsp_no = $(this).data("value");
-    	console.log(dsp_no);
         swal({   
         	title: 'Are you sure to end this trip?',
         	text: 'The action will not be undone.',
@@ -47,20 +46,14 @@ $(document).ready(function(){
 			});
         });
     });   
-
-    $('#table-activetrips tbody').on( 'click', 'tr', function () {
-        $(this).toggleClass('selected');
-    });
 });
 
 function getDspDriver(coo_no){
-	console.log(coo_no);
 	$.ajax({
 		url: 'activetrips/dsp_driver',
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status) {
-			console.log(data);
 			var table_data = '';
 				for(var i = 0; i < data.length; i++) {
 
@@ -70,7 +63,7 @@ function getDspDriver(coo_no){
 					table_data += '<tr>'+
 						'<td>1</td>'+
 						'<td>'+ data[i]['coo_name']+'</td>'+
-						'<td class="unit-plate">'+data[i]['unt_lic']+'</td>'+
+						'<td><div class="unit-plate">'+data[i]['unt_lic']+'</div></td>'+
 						'<td>'+ data[i]['emp_lname'] + ', ' + data[i]['emp_fname'] +' ('+data[i]['emp_no']+')</td>'+
 						'<td>'+start_date+ ' ' + start_time +'</td>'+
 						'<td>'+data[i]['shift_name']+' Shift</td>'+
@@ -80,26 +73,87 @@ function getDspDriver(coo_no){
 
 				$('#table-activetrips').dataTable().fnDestroy();
 				$("#driver_data").html(table_data);
-				// $("#driver_dispatching").html(data.total);
-				var table = $('#table-activetrips').DataTable({ // height: 837px
+				$("#active-drivers-count").html(data.length);
+				$('#table-activetrips tfoot th').each( function () {
+			        var title = $(this).text();
+			        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+			    });
+				var tabler = $('#table-activetrips').DataTable({ // height: 837px
 					paging : false,
-					scrollY: '453px',
+					scrollY: '400px',
 					scrollX: 'true',
 					fixedHeader: false,
-					fixedColumns:   {
-			            leftColumns: 1
+					dom: 'T<"clear">lfrtip',
+					tableTools: {
+			            sRowSelect:   'multi',
+			            sRowSelector: 'td:first-child',
+			            aButtons:     [  ]
 			        }
 				});
 
+				tabler.columns().every( function () {
+			        var that = this;
+			 
+			        $( 'input', this.footer() ).on( 'keyup change', function () {
+			            if ( that.search() !== this.value ) {
+			                that
+			                    .search( this.value )
+			                    .draw();
+			            }
+			        });
+			    });
+
 				$('#selectallrows').click(function(){
-			    	$('#table-activetrips tbody tr').addClass('selected');
+			    	$('#table-activetrips tbody tr').addClass('DTTT_selected selected');
 			    });
 				$('#deselectallrows').click(function(){
-			    	$('#table-activetrips tbody tr').removeClass('selected');
+			    	$('#table-activetrips tbody tr').removeClass('DTTT_selected selected');
 			    });
 
 			    $('#submitaction').click( function () {
-			        alert( table.rows('.selected').data().length +' row(s) selected' );
+			        var e = document.getElementById("actionselect");
+					var value = e.options[e.selectedIndex].value;
+					if(value=="endday" && tabler.rows('.selected').data().length) {
+				        swal({   
+				        	title: 'Are you sure to end day these units?',
+				        	text: 'The action will not be undone.',
+				        	type: 'warning',
+				        	showCancelButton: true,
+				        	confirmButtonColor: '#3085d6',
+				        	cancelButtonColor: '#d33',
+				        	confirmButtonText: 'Confirm',
+				        	closeOnConfirm: false
+				        }, function() {
+				        	for(var i=0; i<tabler.rows('.selected').data().length; i++) {
+				        		if(tabler.rows('.selected').data()[i][6] !== '') {
+				        			var dsp_val = tabler.rows('.selected').data()[i][6];
+				        			var dsp_no  = $(dsp_val).data("value");
+							        $.ajax({
+										url: 'activetrips/end_day',
+										type: 'post',
+										data: {dsp_no: dsp_no},
+										success: function(data, status) {
+											if(data.status == 'success'){
+									        	swal('Success', 'Units Successfully Ended .', 'success'); 
+												$('#coo_select').each(function() {
+													getDspDriver(this.value);
+												});
+											}else{
+
+									        	swal('Dispatch Error!', data.msg, 'error'); 
+											}
+
+
+										},
+										error: function(xhr, desc, err) {
+											console.log(xhr);
+											console.log("Details: " + desc + "\nError:" + err);
+										}
+									}); //ajax
+								} //if
+							} //for
+				        });  //swal
+					}
 			    });
 		},
 		error: function(xhr, desc, err) {
