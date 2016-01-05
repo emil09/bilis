@@ -202,7 +202,11 @@ function getDriver(coo_no){
 			    	$('#table-available tbody tr').removeClass('selected');
 			    });
 			    $('#submitaction').click( function () {
-			        alert( table.rows('.selected').data().length +' row(s) selected' );
+			        //alert( table.rows('.selected').data().length +' row(s) selected' );
+			        var e = document.getElementById("actionselect");
+					var value = e.options[e.selectedIndex].value;
+					var text = e.options[e.selectedIndex].text;
+					alert(value);
 			    });
 		},
 		error: function(xhr, desc, err) {
