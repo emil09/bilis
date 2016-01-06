@@ -14,7 +14,7 @@
 
       <header class="main-header">
         <nav class="navbar navbar-static-top">
-          <div class="container">
+          <div class="container-fluid">
             <div class="navbar-header">
               <a href="<?php echo base_url() ?>dispatcher/dashboard" class="navbar-brand"><b>BILIS</b></a>
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -38,11 +38,11 @@
                   </ul>
                 </li>
               </ul>
-              <form class="navbar-form navbar-left" role="search">
+             <!--  <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                   <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
                 </div>
-              </form>
+              </form> -->
             </div><!-- /.navbar-collapse -->
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
