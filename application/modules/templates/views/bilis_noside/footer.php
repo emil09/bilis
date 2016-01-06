@@ -14,6 +14,17 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-       <?php echo $js; ?>
+     <?php echo $js; ?>
+    <script type="text/javascript">
+      $('.sk-circle , .spinner-cont')
+      .hide()
+      .ajaxStart(function() {
+          $(this).show();
+      }).ajaxStop(function() {
+          $(this).hide();
+      });
+    </script>
+      
+
   </body>
 </html>
