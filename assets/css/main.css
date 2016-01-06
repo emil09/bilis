@@ -12,7 +12,7 @@
 .table>thead>tr>td, 
 .table>tbody>tr>td, 
 .table>tfoot>tr>td { border-top: 1px solid #aaa }
-.table>thead>tr>th { border-bottom: 2px solid #aaa }
+.table>thead>tr>th { border-bottom: 2px solid #aaa; background-color: #3C8DBC; color: #fff; }
 .modal-dialog { width: 480px; margin: 0 auto; margin-top: 100px }
 .unit-plate, .select2-results__option { background-image: url('../img/plate_number.png'); background-size: contain; background-repeat: no-repeat; background-position: 50% 50%; text-align: center; font-weight: 600 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] { color: initial !important; background-color: none !important; background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../img/plate_number.png') !important }
