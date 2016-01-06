@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Login extends MX_Controller {
+Class Login extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 
@@ -98,8 +98,5 @@ Class Login extends MX_Controller {
 
 	}
 
-	// public function test(){
-	// 	$results = $this->LoginModel->select_where(0, 'emp_no, emp_pos', array('emp_no' => '487'));
-	// 	print_r($results[0]->emp_no);
-	// }
+	
 }

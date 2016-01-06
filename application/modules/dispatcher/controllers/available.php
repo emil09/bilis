@@ -8,8 +8,7 @@ Class Available extends MY_Controller {
 		$this->load->model('AvailableModel','',TRUE);
 	}
 
-	public function index()
-	{
+	public function index(){
 		$data['module'] = 'dispatcher';
 		$data['view_file'] = 'available_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
@@ -19,7 +18,7 @@ Class Available extends MY_Controller {
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->AvailableModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
-		echo Modules::run('templates/bilis_template', $data);
+		echo Modules::run('templates/bilis_noside', $data);
 	}
 
 	public function get_driver(){
@@ -99,7 +98,7 @@ Class Available extends MY_Controller {
 			
 			$i++;
 		}
-		$data['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');
+		$data['shift'] = $this->AvailableModel->select_where(6, 'shift_code, shift_name');
 
 		
 		echo json_encode($data);
