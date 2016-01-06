@@ -20,7 +20,7 @@ Class ActiveTrips extends MY_Controller {
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->ActiveTripsModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
-		echo Modules::run('templates/bilis_template', $data);
+		echo Modules::run('templates/bilis_noside', $data);
 	}
 
 	public function dsp_driver(){

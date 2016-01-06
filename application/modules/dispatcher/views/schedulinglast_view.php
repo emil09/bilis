@@ -3,8 +3,8 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left "style="color:#3C8DBC">
-    <i class="fa fa-backward"> Previous Days</i>
+  <h1 class="pull-left">
+    <i class="fa fa-backward"></i> Previous Days
   </h1>
 </section>
 <!-- Main content -->
