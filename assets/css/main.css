@@ -26,7 +26,7 @@
 .dataTables_wrapper > .row > .col-sm-6:first-child { display: none; }
 .day, .night { height: 30px }
 .day-text { color: #19BAEC }
-.dashboard-wrapper { margin: 60px 50px 0 }
+.dashboard-wrapper { margin: 60px 25px 0 }
 .dashboard-logo { width: 110px; padding: 10px 12px 25px }
 .dashcons.col-sm-4 { width: 30%; margin-left: 1.55555%; margin-right: 1.55555% }
 .dashcons { border: 3px solid #d9d9d9; padding: 10px }
@@ -37,25 +37,9 @@
 .table-bordered>tbody>tr>td { border: 1px solid #aaa }
 #cooperativeselect { display: inline-flex; }
 #cooperativeselect p { margin-right: 50px; line-height: 28px; text-transform: uppercase; font-weight: 600; }
-#clear-sched {
-    width: 49%;
-}
-#editModal.btn-primary {
-    width: 49%;
-}
-#editModal.btn-warning {
-    display: block;
-    margin: 0 auto;
-    width: 50%;
-}
-#editModal.btn-primary[disabled] {
-    width: 49%;
-    margin: 0 auto;
-    display: block;
-}
-.end-day { width: 50%;
-    margin: 0 auto;
-    display: block; }
+#clear-sched, #editModal.btn-primary, #editModal.btn-primary[disabled] { width: 49% }
+#editModal.btn-warning, .end-day { display: block; margin: 0 auto; width: 50% }
+#editModal.btn-primary[disabled] { margin: 0 auto; display: block }
 
 .main-footer > div, .main-footer strong { color: #000 }
 @media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }
