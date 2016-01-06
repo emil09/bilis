@@ -17,7 +17,7 @@
 <!-- Main content -->
 <section class="content clearfix">
   <div class="col-md-12">
-    <div class="box box-default box-solid">
+    <div class="box">
       <div class="box-header">
         <h3 class="box-title">Dispatching by Driver (<span id="driver_dispatching"></span> drivers)</h3>
         <div class="box-tools pull-right">
@@ -26,7 +26,7 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-hover">
+        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
           <thead>
             <tr>
               <th>Driver</th>
@@ -36,15 +36,6 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>Driver</th>
-              <th>Scheduled Unit</th>
-              <th>Action</th>
-              <th>Dispatch</th>
-              <th>Status</th>
-            </tr>
-          </tfoot>
           <tbody id="driver_data">
       
           </tbody>

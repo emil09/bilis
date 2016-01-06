@@ -1,5 +1,5 @@
 /*@import url(https://fonts.googleapis.com/css?family=Roboto:700,400);*/
-html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
+/*html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }*/
 
 /* =======================
    ||  GLOBAL CSS  ||
@@ -32,6 +32,9 @@ html, body, h4, h5 { font-family: 'Roboto', sans-serif !important }
 .dashcons { border: 3px solid #d9d9d9; padding: 10px }
 .dashcons h4 { font-weight: 600 }
 .dashcons a { margin-bottom: 5px }
+.table-bordered>thead>tr>th { border: 1px solid #111 !important; border-bottom-width: 0px !important; border-left: 0 !important }
+.table-bordered>thead>tr>th:first-child { border-left: 1px solid #111 !important }
+.table-bordered>tbody>tr>td { border: 1px solid #aaa }
 
 .main-footer > div, .main-footer strong { color: #000 }
 @media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }

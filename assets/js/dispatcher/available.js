@@ -183,13 +183,9 @@ function getDriver(coo_no){
 
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				$('#table-available tfoot th').each( function () {
-			        var title = $(this).text();
-			        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-			    });
 				var tabler = $('#table-available').DataTable({ // height: 837px
 					paging : false,
-					scrollY: '400px',
+					scrollY: '450px',
 					scrollX: 'true',
 					fixedHeader: false,
 					dom: 'T<"clear">lfrtip',
@@ -199,18 +195,6 @@ function getDriver(coo_no){
 			            aButtons:     [  ]
 			        }
 				});
-
-				tabler.columns().every( function () {
-			        var that = this;
-			 
-			        $( 'input', this.footer() ).on( 'keyup change', function () {
-			            if ( that.search() !== this.value ) {
-			                that
-			                    .search( this.value )
-			                    .draw();
-			            }
-			        });
-			    });
 
 				$('#selectallrows').click(function(){
 			    	$('#table-available tbody tr').addClass('DTTT_selected selected');

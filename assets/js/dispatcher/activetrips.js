@@ -74,13 +74,9 @@ function getDspDriver(coo_no){
 				$('#table-activetrips').dataTable().fnDestroy();
 				$("#driver_data").html(table_data);
 				$("#active-drivers-count").html(data.length);
-				$('#table-activetrips tfoot th').each( function () {
-			        var title = $(this).text();
-			        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-			    });
 				var tabler = $('#table-activetrips').DataTable({ // height: 837px
 					paging : false,
-					scrollY: '400px',
+					scrollY: '450px',
 					scrollX: 'true',
 					fixedHeader: false,
 					dom: 'T<"clear">lfrtip',
@@ -90,18 +86,6 @@ function getDspDriver(coo_no){
 			            aButtons:     [  ]
 			        }
 				});
-
-				tabler.columns().every( function () {
-			        var that = this;
-			 
-			        $( 'input', this.footer() ).on( 'keyup change', function () {
-			            if ( that.search() !== this.value ) {
-			                that
-			                    .search( this.value )
-			                    .draw();
-			            }
-			        });
-			    });
 
 				$('#selectallrows').click(function(){
 			    	$('#table-activetrips tbody tr').addClass('DTTT_selected selected');
