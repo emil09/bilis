@@ -9,7 +9,7 @@
 
     <?php echo $css; ?>
   </head>
-  <body class="hold-transition skin-blue layout-top-nav">
+  <body class="page-<?php echo($this->uri->segment(1)); ?> hold-transition skin-blue layout-top-nav">
     <style type="text/css">
   .sk-circle {
     width: 100px;
