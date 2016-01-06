@@ -1,9 +1,8 @@
-$('.sk-circle')
+$('.sk-circle , #test')
 .hide()  // Hide it initially
 .ajaxStart(function() {
     $(this).show();
-})
-.ajaxStop(function() {
+}).ajaxStop(function() {
     $(this).hide();
 });
 
