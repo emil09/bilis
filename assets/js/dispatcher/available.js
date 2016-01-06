@@ -1,4 +1,15 @@
+$('.sk-circle')
+.hide()  // Hide it initially
+.ajaxStart(function() {
+    $(this).show();
+})
+.ajaxStop(function() {
+    $(this).hide();
+});
+
 $(document).ready(function(){
+
+	
 	$('#editModalWindow').on('hidden', function () {
 	    document.getElementById("schedForm").reset();
 	});

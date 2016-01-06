@@ -1,18 +1,4 @@
 
-<style type="text/css">
-.sk-spinner-circle .sk-circle12 {
-  -webkit-transform: rotate(330deg);
-  -ms-transform: rotate(330deg);
-  transform: rotate(330deg);
-}
-.sk-spinner-circle .sk-circle {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
@@ -22,7 +8,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="col-md-12">
-<div class="sk-circle12 sk-circle"> asdf</div>
+
     <!-- Widget: user widget style 1 -->
     <div class="dashboard-wrapper clearfix">
       <div id="availabledash" class="dashcons col-sm-4 col-xs-12">
