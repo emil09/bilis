@@ -5,7 +5,7 @@
   <h1 class="pull-left" style="color:#3C8DBC">
     <i class="fa fa-pause"> Available for Dispatch</i>
   </h1>
-  <div class="pull-right">
+  <div id="cooperativeselect" class="pull-right">
       <p>Cooperative:</p> 
       <select class="form-control" id="coo_select">
         <?php foreach ($cooperatives as $cooperative ): ?>

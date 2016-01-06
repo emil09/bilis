@@ -35,6 +35,8 @@
 .table-bordered>thead>tr>th { border: 1px solid #111 !important; border-bottom-width: 0px !important; border-left: 0 !important }
 .table-bordered>thead>tr>th:first-child { border-left: 1px solid #111 !important }
 .table-bordered>tbody>tr>td { border: 1px solid #aaa }
+#cooperativeselect { display: inline-flex; }
+#cooperativeselect p { margin-right: 10px; line-height: 28px; text-transform: uppercase; font-weight: 600; }
 
 .main-footer > div, .main-footer strong { color: #000 }
 @media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }
