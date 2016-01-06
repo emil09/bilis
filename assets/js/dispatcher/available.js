@@ -185,7 +185,8 @@ function getDriver(coo_no){
 				$("#driver_dispatching").html(data.total);
 				var tabler = $('#table-available').DataTable({ // height: 837px
 					paging : false,
-					scrollY: '450px',
+					scrollY: '45vh',
+        			scrollCollapse: true,
 					scrollX: 'true',
 					fixedHeader: false,
 					dom: 'T<"clear">lfrtip',

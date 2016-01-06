@@ -36,7 +36,26 @@
 .table-bordered>thead>tr>th:first-child { border-left: 1px solid #111 !important }
 .table-bordered>tbody>tr>td { border: 1px solid #aaa }
 #cooperativeselect { display: inline-flex; }
-#cooperativeselect p { margin-right: 10px; line-height: 28px; text-transform: uppercase; font-weight: 600; }
+#cooperativeselect p { margin-right: 50px; line-height: 28px; text-transform: uppercase; font-weight: 600; }
+#clear-sched {
+    width: 49%;
+}
+#editModal.btn-primary {
+    width: 49%;
+}
+#editModal.btn-warning {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+}
+#editModal.btn-primary[disabled] {
+    width: 49%;
+    margin: 0 auto;
+    display: block;
+}
+.end-day { width: 50%;
+    margin: 0 auto;
+    display: block; }
 
 .main-footer > div, .main-footer strong { color: #000 }
 @media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }

@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <div class="pull-right">
+    <div id="cooperativeselect" class="pull-right">
         <p>Cooperative:</p> 
         <select class="form-control" id="coo_select">
           <?php foreach ($cooperatives as $cooperative ): ?>
@@ -29,7 +29,7 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-hover">
+        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
           <thead>
             <tr>
               <th>Trip</th>
