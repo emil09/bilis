@@ -54,6 +54,7 @@ function getDspDriver(coo_no){
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status) {
+			console.log(data);
 			var table_data = '';
 				for(var i = 0; i < data.length; i++) {
 
@@ -62,7 +63,7 @@ function getDspDriver(coo_no){
 
 					table_data += '<tr>'+
 						'<td>1</td>'+
-						'<td>'+ data[i]['coo_name']+'</td>'+
+						'<td>'+ data[i]['rte_nam']+'</td>'+
 						'<td><div class="unit-plate">'+data[i]['unt_lic']+'</div></td>'+
 						'<td>'+ data[i]['emp_lname'] + ', ' + data[i]['emp_fname'] +' ('+data[i]['emp_no']+')</td>'+
 						'<td>'+start_date+ ' ' + start_time +'</td>'+

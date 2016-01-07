@@ -26,9 +26,10 @@ Class ActiveTrips extends MY_Controller {
 	public function dsp_driver(){
 		
 		header('Content-Type: application/json');
-		$select = 'sched_no_fk, shift_code_fk, coo_no_fk, coo_name, 
-		unt_lic,emp_fname, emp_lname, employee.emp_no, start_dt, start_time, shift_name, dsp_unit_no';
-		$where = array('dsp_stat_fk'=> 'A', 'coo_no_fk' => $_POST['coo_no']);
+		$select = 'sched_no_fk, shift_code_fk, driver.coo_no_fk, coo_name, 
+		unt_lic,emp_fname, emp_lname, employee.emp_no, start_dt, start_time, shift_name, 
+		dsp_unit_no, dispatch_sched.rte_no_fk, route.rte_nam';
+		$where = array('dsp_stat_fk'=> 'A', 'driver.coo_no_fk' => $_POST['coo_no']);
 		$this->db->order_by('start_dt desc , start_time desc');
 		$results = $this->ActiveTripsModel->get_dspdriver($select, $where);
 		echo json_encode($results, JSON_PRETTY_PRINT);

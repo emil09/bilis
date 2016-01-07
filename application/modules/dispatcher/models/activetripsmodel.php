@@ -27,10 +27,11 @@ Class ActiveTripsModel extends CI_Model {
         $this->db->from($this->tables[8]);
         $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
         $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
-        $this->db->join($this->tables[3], 'coo_no = coo_no_fk', 'left');
+        $this->db->join($this->tables[3], 'coo_no = driver.coo_no_fk', 'left');
         $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
         $this->db->join($this->tables[0], 'employee.emp_no = driver.emp_no_fk', 'left');
         $this->db->join($this->tables[6], 'shift_code = shift_code_fk', 'left');
+        $this->db->join($this->tables[4], 'route.rte_no = dispatch_sched.rte_no_fk', 'left');
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result();;
