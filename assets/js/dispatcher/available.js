@@ -307,6 +307,7 @@ function setSched(emp_no, dvr_no) {
 		type: 'post',
 		data: {emp_no: emp_no, dvr_no: dvr_no},
 		success: function(data, status) {
+			console.log(data);
 			var driver_info = data.driver[0].lname + ' (' + data.driver[0].emp_no + ')' ;
 			$('#driver_name').html(driver_info);
 			$('.server-time').html(data.date);
@@ -352,7 +353,7 @@ function getUnit(route_no){
 		type: 'post',
 		data: {route_no: route_no},
 		success: function(data, status) {
-
+			console.log(data);
 			$('#unit').append($("<option />").val('').text(''));
 			$.each(data.unit, function() {
 			    $('#unit').append($("<option />").val(this.unt_no).text(this.unt_lic));

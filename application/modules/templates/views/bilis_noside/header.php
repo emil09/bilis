@@ -42,8 +42,10 @@
                 <i class="fa fa-bars"></i>
               </button>
             </div>
+
             <?php isset($sidebar) ? $this->load->view($sidebar): ''; ?>
             
+
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">

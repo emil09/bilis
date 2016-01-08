@@ -75,7 +75,8 @@ Class Available extends MY_Controller {
 
 		header('Content-Type: application/json');
 		$data = '';
-		$where = array('driver_no_fk' => $_POST['dvr_no'], 'sched_dt' =>date('Y-m-d') );
+		$where = array('driver_no_fk' => $_POST['dvr_no'], 
+			'sched_dt' =>date('Y-m-d'), 'sched_type' => 'A' );
 		$this->db->limit(1);
 		$this->db->join('vehicle', 'unt_no = unit_no_fk', 'left');
 		$results = $this->AvailableModel->select_where(7,'driver_no_fk, unt_lic, unt_no, shift_code_fk, rte_no_fk', $where);

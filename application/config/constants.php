@@ -117,6 +117,20 @@ define('Main', 'assets/css/main.css');
 define('Demo', 'assets/libs/theme/js/demo.js');
 define('App', 'assets/libs/theme/js/app.min.js');
 define('RegisterJS', 'assets/js/admin/register.js');
+
+
+/*
+|--------------------------------------------------------------------------
+| Dispatcher
+|--------------------------------------------------------------------------
+*/
 define('AvailableJS', 'assets/js/dispatcher/available.js');
 define('ActiveTripsJS', 'assets/js/dispatcher/activetrips.js');
+define('ScheduleNextJS', 'assets/js/dispatcher/schedulenext.js');
+
+/*
+|--------------------------------------------------------------------------
+| Driver
+|--------------------------------------------------------------------------
+*/
 define('TurnoverJS', 'assets/js/driver/turnover.js');
