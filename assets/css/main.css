@@ -166,8 +166,8 @@
 	text-align: right;
 	letter-spacing: 1px;
 }
-.page-driver .keys, .page-driver .top { overflow: hidden }
-.page-driver .keys button, .page-driver .top button.clear {
+.page-driver .keys, .login-page .keys, .page-driver .top { overflow: hidden }
+.page-driver .keys button, .login-page .keys button, .page-driver .top button.clear {
 	float: left;
 	position: relative;
 	top: 0;	
@@ -184,15 +184,19 @@
 	user-select: none;	
 	transition: all 0.2s ease;
 }
-.page-driver .keys button { width: 31.6%; border: 0 }
-.page-driver .keys button.operator { background-color: #FFF0F5; margin-right: 0 }
+.page-driver .keys button, .login-page .keys button { width: 31.6%; border: 0 }
+.page-driver .keys button.operator, .login-page .keys button.operator { background-color: #FFF0F5; margin-right: 0 }
 .page-driver .keys button.eval { background-color: #f1ff92; box-shadow: 0px 4px #9da853; color: #888e5f }
-.page-driver .keys button.clear { background-color: #ff9fa8; box-shadow: 0px 4px #ff7c87; color: white }
-.page-driver .keys button:hover { background-color: #9c89f6; box-shadow: 0px 4px #6b54d3; color: white }
+.page-driver .keys button.clear, .login-page .keys button.clear { background-color: #ff9fa8; box-shadow: 0px 4px #ff7c87; color: white }
+.page-driver .keys button:hover, .login-page .keys button:gover { background-color: #9c89f6; box-shadow: 0px 4px #6b54d3; color: white }
 .page-driver .keys button.eval:hover { background-color: #abb850; box-shadow: 0px 4px #717a33; color: #ffffff }
-.page-driver .top button.clear:hover { background-color: #f68991; box-shadow: 0px 4px #d3545d; color: white }
-.page-driver .keys button:active { box-shadow: 0px 0px #6b54d3; top: 4px }
+.page-driver .top button.clear:hover, .login-page .keys button.clear:hover { background-color: #f68991; box-shadow: 0px 4px #d3545d; color: white }
+.page-driver .keys button:active, .login-page .keys button:active { box-shadow: 0px 0px #6b54d3; top: 4px }
 .page-driver .keys button.eval:active { box-shadow: 0px 0px #717a33; top: 4px }
-.page-driver .top button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
+.page-driver .top button.clear:active, .login-page .keys button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
 .page-driver .turnoverbutton { color: #fff !important; background-color: #00a65a !important; margin-right: 0 !important; box-shadow: 0 4px #008d4c !important }
 .page-driver .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }
+.login-page .keys button, .login-page .keys button { box-shadow: 0 4px #367fa9 }
+.login-page .keys button, .login-page .keys button.operator { background-color: #3C8DBC; color: #fff }
+.login-page .keys button.operator.proceed { background-color: #00A65A; color: #fff; box-shadow: 0 4px #008d4c }
+.login-page .keys button.operator.proceed:active { top: 4px; box-shadow: 0px 0px #008d4c }

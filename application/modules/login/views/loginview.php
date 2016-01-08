@@ -16,6 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/theme/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/iCheck/square/blue.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/main.css">
 
   </head>
   <body class="hold-transition login-page">
@@ -33,37 +34,37 @@
             <input type="text" class="form-control" id="emp_no" name="emp_no" placeholder="Enter employee number">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
-<!--           <div class="form-group has-feedback">
+          <div class="form-group has-feedback">
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div> -->
+          </div>
           <div class="row">
-            <div class="col-xs-12">
-              <table class="table table-bordered text-center">
-                    <tbody>
-                      <tr>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="1" onClick="addNumber(this)">1</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="2" id="2" onClick="addNumber(this)">2</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="3" id="3" onClick="addNumber(this)">3</button></td>
-                      </tr>
-                      <tr>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="4" id="4" onClick="addNumber(this)">4</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="5" id="5" onClick="addNumber(this)">5</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="6" id="6" onClick="addNumber(this)">6</button></td>
-                      </tr>
-                      <tr>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="7" id="7" onClick="addNumber(this)">7</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="8" id="8" onClick="addNumber(this)">8</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="9" id="9" onClick="addNumber(this)">9</button></td>
-                      </tr>
-                      <tr>
-                        <td width="33%"><button type="button" class="btn btn-block btn-danger btn-sm btn-block" value="CLR" id="CLR" onClick="clrNumber(this)">CLR</button></td>
-                        <td width="33%"><button type="button" class="btn btn-block btn-primary btn-sm btn-block" value="0" id="0" onClick="addNumber(this)">0</button></td>
-                        <td width="33%"><button type="button" id="log_btn" class="btn btn-block btn-success btn-sm btn-block" onclick="log_username()">OK</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div><!-- /.col -->
+            <!-- <div class="col-xs-12">
+              <div class="keys">
+                <button type="button" value="1">1</button>
+                <button type="button" value="2">2</button>
+                <button type="button" value="3" class="operator">3</button>
+                <button type="button" value="4">4</button>
+                <button type="button" value="5">5</button>
+                <button type="button" value="6" class="operator">6</button>
+                <button type="button" value="7">7</button>
+                <button type="button" value="8">8</button>
+                <button type="button" value="9" class="operator">9</button>
+                <button type="button" value="CLR" class="clear">CLR</button>
+                <button type="button">0</button>
+                <button type="button" class="operator proceed" value=".">OK</button>
+              </div>
+            </div> --><!-- /.col -->
+            <div class="col-xs-8">
+              <div class="checkbox icheck">
+                <label class="">
+                  <div class="icheckbox_square-blue" aria-checked="true" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> Remember Me
+                </label>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            </div>
           </div>
         </form>
       </div><!-- /.login-box-body -->
@@ -78,14 +79,27 @@
     <!-- <script src="js/js-custom.js"></script>-->
     <script src="<?php echo base_url(); ?>assets/js/login.js"></script>
     <script type='text/javascript'>
-      function addNumber(element){
-        document.getElementById('emp_no').value = document.getElementById('emp_no').value+element.value;
-      }
+      // function addNumber(element){
+      //   document.getElementById('emp_no').value = document.getElementById('emp_no').value+element.value;
+      // }
       function clrNumber(element){
         document.getElementById('emp_no').value = '';
       }
 
       $(function () {
+        var num = '';
+        $('.keys button').click(function(){
+          if ($(this).val() != "CLR" && $(this).val() != "OK") {
+            num += $(this).val();
+            console.log($(this).val());
+            console.log(num);
+          }
+          else if ($(this).val() == "CLR") {
+            $("#emp_no").val("");
+            num = '';
+          }
+          $("#emp_no").val(num);
+        });
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',
           radioClass: 'iradio_square-blue',
