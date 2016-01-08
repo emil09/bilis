@@ -10,7 +10,7 @@
 <!-- Main content -->
 <section class="content clearfix">
   <div class="col-md-12">
-    <div class="box box-default box-solid">
+    <div class="box">
       <div class="box-header">
         <h3 class="box-title">Scheduling by Driver (25)</h3>
         <div class="box-tools pull-right">

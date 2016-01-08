@@ -15,7 +15,7 @@ Class Cashturnover extends MY_Controller {
 		$data['css'] = $this->add_css(array(Sweetalert2CSS));
 		$data['js'] = $this->add_js(array(TurnoverJS, Sweetalert2));		
 
-		echo Modules::run('templates/bilis_template', $data);
+		echo Modules::run('templates/bilis_noside', $data);
 	}
 
 	public function active_trip(){

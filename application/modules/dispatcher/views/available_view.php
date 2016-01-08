@@ -3,9 +3,7 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left" style="color:#3C8DBC">
-    <i class="fa fa-pause"> Available for Dispatch </i>
-  </h1>
+  <h1 class="pull-left"><i class="fa fa-pause"></i> Available for Dispatch</h1>
   <div id="cooperativeselect" class="pull-right">
       <p>Cooperative:</p> 
       <select class="form-control" id="coo_select">

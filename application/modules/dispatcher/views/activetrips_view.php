@@ -1,22 +1,17 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
-<section class="content-header">
-   <h1><i class="fa fa-play"></i> Active Trips</h1>
-</section>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div id="cooperativeselect" class="pull-right">
-        <p>Cooperative:</p> 
-        <select class="form-control" id="coo_select">
-          <?php foreach ($cooperatives as $cooperative ): ?>
-            <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
-          <?php endforeach ?>
-        </select>
-    </div>
+<section class="content-header clearfix">
+  <h1 class="pull-left"><i class="fa fa-play"></i> Active Trips</h1>
+  <div id="cooperativeselect" class="pull-right">
+    <p>Cooperative:</p> 
+    <select class="form-control" id="coo_select">
+      <?php foreach ($cooperatives as $cooperative ): ?>
+        <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+      <?php endforeach ?>
+    </select>
   </div>
-</div>
+</section>
 <!-- Main content -->
 <section class="content clearfix">
   <div class="col-md-12">

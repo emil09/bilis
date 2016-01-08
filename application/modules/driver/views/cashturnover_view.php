@@ -10,9 +10,7 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left" style="color:#3C8DBC">
-    <i class="fa fa-pause"> Cash Turnover</i>
-  </h1>
+  <h1 class="pull-left"><i class="fa fa-money"> Cash Turnover</i></h1>
 </section>
 <!-- Main content -->
 <section class="content clearfix">

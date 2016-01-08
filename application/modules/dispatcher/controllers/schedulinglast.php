@@ -15,7 +15,7 @@ Class SchedulingLast extends MY_Controller {
 		$data['css'] = $this->add_css(array(Select2CSS));
 		$data['js'] = $this->add_js(array(Select2JS));		
 		
-		echo Modules::run('templates/bilis_template', $data);
+		echo Modules::run('templates/bilis_noside', $data);
 	}
 
 }
