@@ -36,8 +36,7 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody id="driver_data">
-          </tbody>
+          <tbody id="driver_data"></tbody>
         </table>
       </div> <!-- /.box-body -->
     </div> <!-- /.box-default -->

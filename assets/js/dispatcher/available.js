@@ -186,7 +186,7 @@ function getDriver(coo_no){
 
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
-				var tabler = $('#table-available').DataTable({ // height: 837px
+				var tabler = $('#table-available').DataTable({
 					paging : false,
 					scrollY: '45vh',
         			scrollCollapse: true,
@@ -353,7 +353,6 @@ function getUnit(route_no){
 		type: 'post',
 		data: {route_no: route_no},
 		success: function(data, status) {
-			console.log(data);
 			$('#unit').append($("<option />").val('').text(''));
 			$.each(data.unit, function() {
 			    $('#unit').append($("<option />").val(this.unt_no).text(this.unt_lic));

@@ -134,3 +134,11 @@ define('ScheduleNextJS', 'assets/js/dispatcher/schedulenext.js');
 |--------------------------------------------------------------------------
 */
 define('TurnoverJS', 'assets/js/driver/turnover.js');
+
+/*
+|--------------------------------------------------------------------------
+| Cashier
+|--------------------------------------------------------------------------
+*/
+define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
+define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');

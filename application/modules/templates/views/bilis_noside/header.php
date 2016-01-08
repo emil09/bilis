@@ -36,12 +36,6 @@
       <header class="main-header">
         <nav class="navbar navbar-static-top">
           <div class="container-fluid">
-            <div class="navbar-header">
-              <a href="<?php echo base_url() ?>dispatcher/dashboard" class="navbar-brand"><b>BILIS</b></a>
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <i class="fa fa-bars"></i>
-              </button>
-            </div>
 
             <?php isset($sidebar) ? $this->load->view($sidebar): ''; ?>
             

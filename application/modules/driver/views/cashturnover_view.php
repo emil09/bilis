@@ -1,16 +1,8 @@
-<style type="text/css">
-	#act_table tr th{
-		padding-left: 20px;
-	}
-	#act_table tr th, #act_table tr td{
-		border:0;
-	}
-</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left"><i class="fa fa-money"> Cash Turnover</i></h1>
+  <h1 class="pull-left"><i class="fa fa-money"></i> Cash Turnover</h1>
 </section>
 <!-- Main content -->
 <section class="content clearfix">
@@ -18,11 +10,7 @@
     
     	<div class="col-sm-6 col-xs-12">
     		<div class="box">
-	    		<div class="box-header">
-		            <h3 class="box-title">Enter turnover amount</h3>
-	            </div>
-	            <!-- <h4><strong>Enter turnover amount</strong></h4> -->
-	           
+	    		<div class="box-header"><h3 class="box-title">Enter turnover amount</h3></div>
 	            <div class="box-body">
 	            	<form id="turnoverForm" method="post" autocomplete="off">
 			    		<div id="calculator" class="center-block">

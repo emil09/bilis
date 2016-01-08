@@ -20,13 +20,13 @@
         <img class="dashboard-logo" src="../assets/img/driver/currency43.png" alt="">
         <h4>Cash Turnover</h4>
         <p>Count money from the trip just completed and submit to terminal cashier.</p>
-        <a class="btn btn-primary btn-md" href="cashturnover">Select</a>
+        <a class="btn btn-primary btn-md" href="cashturnover">CREATE</a>
       </div>
       <div id="activedash" class="dashcons by3 col-sm-4 col-xs-12">
         <img class="dashboard-logo" src="../assets/img/driver/wrench.png" alt="">
         <h4>Job Order</h4>
         <p>Request to evaluate and troubleshoot vehicle-related problems.</p>
-        <a class="btn btn-primary btn-md" href="joborder">Select</a>
+        <a class="btn btn-primary btn-md" href="joborder">CREATE</a>
       </div>
     </div><!-- /.widget-user -->
   </div>

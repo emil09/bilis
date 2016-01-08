@@ -4,16 +4,23 @@
 /* =======================
    ||  GLOBAL CSS  ||
    ======================= */
+.content-wrapper, .modal-header { background-color: #DEE7F5 }
+.table-bordered>thead>tr>th, 
+.table-bordered>tbody>tr>th, 
+.table-bordered>tfoot>tr>th, 
+.table-bordered>thead>tr>td, 
+.table-bordered>tbody>tr>td, 
+.table-bordered>tfoot>tr>td,
+.table-bordered>thead:first-child>tr:first-child>th { border: 1px solid #111; }
 .table>thead>tr>th, .dataTables_filter label, .dataTables_action label, .page-dispatcher .content-header .pull-right p { text-transform: uppercase; font-weight: 600 !important }
-.table>tbody>tr>td, .table-features .feat p { line-height: 30px }
-.table>thead>tr>th, 
-.table>tbody>tr>th, 
-.table>tfoot>tr>th, 
-.table>thead>tr>td, 
-.table>tbody>tr>td, 
-.table>tfoot>tr>td { border-top: 1px solid #aaa }
-.table>thead>tr>th { border-bottom: 2px solid #aaa; background-color: #3C8DBC; color: #fff; }
-.modal-dialog { width: 480px; margin: 0 auto; margin-top: 100px }
+.dataTable>tbody>tr>td, .table-features .feat p { line-height: 30px }
+.dataTable>thead>tr>th, 
+.dataTable>tbody>tr>th, 
+.dataTable>tfoot>tr>th, 
+.dataTable>thead>tr>td, 
+.dataTable>tbody>tr>td, 
+.dataTable>tfoot>tr>td { border-top: 1px solid #aaa }
+.dataTable>thead>tr>th { border-bottom: 2px solid #aaa; background-color: #3C8DBC; color: #fff; }
 .unit-plate, .select2-results__option { background-image: url('../img/plate_number.png'); background-size: contain; background-repeat: no-repeat; background-position: 50% 50%; text-align: center; font-weight: 600 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] { color: initial !important; background-color: none !important; background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../img/plate_number.png') !important }
 .dataTables_action { float: right }
@@ -30,12 +37,12 @@
 .dashboard-logo { width: 110px; padding: 10px 12px 25px }
 .dashcons.by3 { width: 30%; margin-left: 1.55555%; margin-right: 1.55555% }
 .dashcons.by2 { width: 47%; margin-left: 1.5%; margin-right: 1.5% }
-.dashcons { border: 3px solid #d9d9d9; padding: 10px }
+.dashcons { border: 3px solid #d9d9d9; padding: 10px; background-color: #ecf0f5 }
 .dashcons h4 { font-weight: 600 }
 .dashcons a { margin-bottom: 5px }
-.table-bordered>thead>tr>th { border: 1px solid #111 !important; border-bottom-width: 0px !important; border-left: 0 !important }
-.table-bordered>thead>tr>th:first-child { border-left: 1px solid #111 !important }
-.table-bordered>tbody>tr>td { border: 1px solid #aaa }
+.dataTable.table-bordered>thead>tr>th { border: 1px solid #111 !important; border-bottom-width: 0px !important; border-left: 0 !important }
+.dataTable.table-bordered>thead>tr>th:first-child { border-left: 1px solid #111 !important }
+.dataTable.table-bordered>tbody>tr>td { border: 1px solid #aaa }
 #cooperativeselect { display: inline-flex }
 #cooperativeselect p { margin-right: 50px; line-height: 23px; text-transform: uppercase; font-weight: 600; }
 #clear-sched, #editModal.btn-primary, #editModal.btn-primary[disabled] { width: 49% }
@@ -101,6 +108,13 @@
 
 .main-footer > div, .main-footer strong { color: #000 }
 @media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }
+@media (max-width: 640px) {
+   .page-dispatcher section.content, .page-dispatcher section.content > .col-md-12 { padding-left: 0; padding-right: 0 }
+   .dashboard-wrapper { margin: 10px 0px 0 }
+   .content-header { padding: 15px 0 0; }
+   #availabledash, #activedash { margin-bottom: 15px }
+   #editModal.btn-warning, .end-day { width: 95% }
+}
 @media (max-width: 480px) { .modal-dialog { width: 90% } }
 
 
@@ -114,7 +128,7 @@
 #editModalWindow .select2-container { width: 190px !important }
 #editModalWindow .select2-container .select2-selection--single { height: 34px }
 #editModalWindow .day-night { width: auto }
-#editModalWindow p { line-height: 2.5; margin-bottom: 0 }
+#editModalWindow p, #cashturnoverModal p { line-height: 2; margin-bottom: 0 }
 #editModalWindow .server-time { margin-right: 50px }
 .route-dropdown { width: auto }
 
@@ -126,9 +140,10 @@
 /* ==========================
    ||  CSS for Dispatcher  ||
    ========================== */
+.page-dispatcher .modal-dialog { width: 480px; margin: 0 auto; margin-top: 100px }
 .page-dispatcher .content-header .pull-right p, .page-dispatcher .content-header .pull-right select { float: left; width: auto; margin-right: 10px }
 .page-dispatcher .content-header .pull-right p { margin-top: 2px; margin-bottom: 2px }
-.page-dispatcher .content-header .pull-right select { height: 28px; padding: 3px 12px }
+.page-dispatcher .content-header .pull-right select, #route { height: 28px; padding: 3px 12px }
 .page-dispatcher .content-header .pull-right button { padding: 4px 10px }
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
 #driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
@@ -141,6 +156,8 @@
 /* ==========================
    ||  CSS for Driver  ||
    ========================== */
+.page-driver #act_table tr th { padding-left: 20px }
+.page-driver #act_table tr th, .page-driver #act_table tr td { border:0 }
 .page-driver #calculator {
 	width: 325px;
     height: auto;
@@ -210,3 +227,8 @@
    ||  CSS for Cashier  ||
    ========================== */
 .page-cashier .dashboard-wrapper { margin: 60px 120px 0 }
+.page-cashier .modal-dialog { margin: 100px auto 0px }
+#cashturnover-button, #editturnover-button { width: 50%; margin: 0 auto; display: block }
+#editturnover-button { width: 70% }
+.left-col h4, .right-col h4 { font-weight: 600 }
+.selectedtrip td { text-align: right; color: #3CB4EC; font-weight: 600 }
