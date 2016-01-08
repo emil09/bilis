@@ -10,7 +10,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
   <h1 class="pull-left">
-    <i class="fa fa-calendar-minus-o"></i> Previous Days
+    <i class="fa fa-calendar-plus-o"></i> Next Days
   </h1>
   <ol class="breadcrumb">
     <li><a href="#">Scheduling</a></li>
@@ -26,28 +26,23 @@
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
-        <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
+        
       </div><!-- /.box-header -->
       <div class="box-body">
-      	<div class="table-features clearfix">
-      		<div class="pull-left feat left-feat">
-      			<p>Search: </p><input id="filter" class="form-control" type="text">
-      		</div>
-	        <div class="pull-right feat right-feat">
-			    <p>Action: </p>
-			    <select class="form-control">
-				    <option value="endday">End Day Selected</option>
-			    </select>
-			    <button class="btn btn-info btn-xs">Submit</button>
-			</div>
-      	</div>
+        <div class="pull-right" id="cooperativeselect" >   
+          <p>Cooperative:</p> 
+          <select class="form-control" id="coo_select">
+            <?php foreach ($cooperatives as $cooperative ): ?>
+              <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+            <?php endforeach ?>
+          </select>
+        </div>
         <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
           <thead>
             <tr>
               <th data-sort-initial="true">Driver</th>
-              <th data-sort-ignore="true">Shift</th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-7 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-6 days')); ?></th>
+              <th data-sort-ignore="true">ACTION</th>
+              <th data-sort-ignore="true">SHIFT</th>
               <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-5 days')); ?></th>
               <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-4 days')); ?></th>
               <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-3 days')); ?></th>
@@ -55,51 +50,7 @@
               <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-1 day')); ?></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-            	<td>Cruise, Tom (12)</td>
-            	<td><div class="day-text">DAY</div><div class="night-text">NIGHT</div></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            </tr>
-            <tr>
-            	<td>Pitt, Brad (13)</td>
-            	<td><div class="day-text">DAY</div><div class="night-text">NIGHT</div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-				<td><div class="day unit-plate">ABC-123</div> <div class="night"></div></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            </tr>
-            <tr>
-            	<td>Clooney, George (14)</td>
-            	<td><div class="day-text">DAY</div><div class="night-text">NIGHT</div></td>
-				<td><div class="day unit-plate">ABC-123</div> <div class="night"></div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            </tr>
-            <tr>
-            	<td>DiCaprio, Leonardo (15)</td>
-            	<td><div class="day-text">DAY</div><div class="night-text">NIGHT</div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-				<td><div class="day unit-plate">ABC-123</div> <div class="night"></div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day"></div> <div class="night unit-plate">ABC-123</div></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            	<td></td>
-            	<td><div class="day unit-plate">ABC-123</div> <div class="night"></td>
-            </tr>
+          <tbody id="schednext_data">
           </tbody>
         </table>
       </div> <!-- /.box-body -->

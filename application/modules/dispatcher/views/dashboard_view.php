@@ -27,8 +27,8 @@
         <img class="dashboard-logo" src="../assets/img/dispatcher/schedule.png" alt="">
         <h4>Scheduling</h4>
         <p>Review and update work schedule for drivers and vehicles.</p>
-        <a class="btn btn-warning btn-md" href="schedulinglast">Previous Days</a>
-        <a class="btn btn-primary btn-md" href="schedulingnext">Next 7 Days</a>
+        <a class="btn btn-warning btn-md" href="scheduling/previous">Previous Days</a>
+        <a class="btn btn-primary btn-md" href="scheduling/next">Next 7 Days</a>
       </div>
     </div><!-- /.widget-user -->
   </div>
