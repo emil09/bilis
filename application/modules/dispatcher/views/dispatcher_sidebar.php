@@ -1,13 +1,17 @@
-<ul class="sidebar-menu">
-  <li class="header">MAIN NAVIGATION</li>
-  <li class="<?php if($this->uri->segment(2)=='dashboard'){echo 'active';} ?>"><a href="dashboard"><i class="fa fa-home"></i><span>Home</span></a></li>
-  <li class="<?php if($this->uri->segment(2)=='available'){echo 'active';} ?>"><a href="available"><i class="fa fa-pause"></i><span>Available for Dispatch</span></a></li>
-  <li class="<?php if($this->uri->segment(2)=='activetrips'){echo 'active';} ?>"><a href="activetrips"><i class="fa fa-play"></i> <span>Active Trips</span></a></li>
-  <li class="treeview <?php if($this->uri->segment(2)=='schedulinglast'){echo 'active';} ?>"><a href="#"><i class="fa fa-calendar"></i> <span>Scheduling</span><i class="fa fa-angle-left pull-right"></i></a>
-    <ul class="treeview-menu">
-      <li><a href="schedulinglast"><i class="fa fa-backward"></i> Previous Days</a></li>
-      <li><a href="schedulingnext"><i class="fa fa-forward"></i> Next 7 Days</a></li>
-    </ul>
-  </li>
-  <li><a href="dispatch.php"><i class="fa fa-clone"></i> <span>Dispatch Report</span></a></li>
-</ul>
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li class="<?php if($this->uri->segment(2)=='dashboard'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/dashboard">Home</a></li>
+    <li class="<?php if($this->uri->segment(2)=='available'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/available">Available for Dispatch</a></li>
+
+    <li class="<?php if($this->uri->segment(2)=='activetrips'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/activetrips">Active Trips</a></li>
+
+    <li class="dropdown <?php if($this->uri->segment(2)=='scheduling'){echo 'active';} ?>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Scheduling <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="<?php if($this->uri->segment(3)=='previous'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling/previous">Previous 7 Days</a></li>
+        <li class="<?php if($this->uri->segment(3)=='next'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling/next">Next 7 Days</a></li>
+      </ul>
+    </li>
+  </ul>
+</div><!-- /.navbar-collapse -->

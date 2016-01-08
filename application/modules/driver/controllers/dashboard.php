@@ -10,6 +10,6 @@ Class Dashboard extends MX_Controller {
 		$data['module'] = 'driver';
 		$data['view_file'] = 'dashboard_view';	
 		$data['sidebar'] = 'driver/driver_sidebar';
-		echo Modules::run('templates/bilis_template', $data);
+		echo Modules::run('templates/bilis_noside', $data);
 	}
 }

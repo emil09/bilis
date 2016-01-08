@@ -16,6 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/theme/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/iCheck/square/blue.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/main.css">
 
   </head>
   <body class="hold-transition login-page">
@@ -38,6 +39,22 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
+            <!-- <div class="col-xs-12">
+              <div class="keys">
+                <button type="button" value="1">1</button>
+                <button type="button" value="2">2</button>
+                <button type="button" value="3" class="operator">3</button>
+                <button type="button" value="4">4</button>
+                <button type="button" value="5">5</button>
+                <button type="button" value="6" class="operator">6</button>
+                <button type="button" value="7">7</button>
+                <button type="button" value="8">8</button>
+                <button type="button" value="9" class="operator">9</button>
+                <button type="button" value="CLR" class="clear">CLR</button>
+                <button type="button">0</button>
+                <button type="button" class="operator proceed" value=".">OK</button>
+              </div>
+            </div> --><!-- /.col -->
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label class="">
@@ -62,14 +79,27 @@
     <!-- <script src="js/js-custom.js"></script>-->
     <script src="<?php echo base_url(); ?>assets/js/login.js"></script>
     <script type='text/javascript'>
-      function addNumber(element){
-        document.getElementById('username').value = document.getElementById('username').value+element.value;
-      }
+      // function addNumber(element){
+      //   document.getElementById('emp_no').value = document.getElementById('emp_no').value+element.value;
+      // }
       function clrNumber(element){
-        document.getElementById('username').value = '';
+        document.getElementById('emp_no').value = '';
       }
 
       $(function () {
+        var num = '';
+        $('.keys button').click(function(){
+          if ($(this).val() != "CLR" && $(this).val() != "OK") {
+            num += $(this).val();
+            console.log($(this).val());
+            console.log(num);
+          }
+          else if ($(this).val() == "CLR") {
+            $("#emp_no").val("");
+            num = '';
+          }
+          $("#emp_no").val(num);
+        });
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',
           radioClass: 'iradio_square-blue',

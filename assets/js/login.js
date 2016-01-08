@@ -9,13 +9,10 @@ $(document).ready(function(){
 			success: function(data, status) {
 				data = JSON.parse(data);
 				if(data.status == 'success'){
-					console.log(data.msg);
 					window.location.href = data.url + '/dashboard';
 				}
 				else{
-					console.log(data);
 					$("#errmsg").html(data.msg).show();
-					// $("#errmsg").html(data.msg).show().fadeOut(10000);
 				}
 			},
 			error: function(xhr, desc, err) {
@@ -32,4 +29,3 @@ $(document).ready(function(){
 		}
    });
 });
-	
