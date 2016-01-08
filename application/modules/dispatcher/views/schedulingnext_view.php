@@ -43,11 +43,13 @@
               <th data-sort-initial="true">Driver</th>
               <th data-sort-ignore="true">ACTION</th>
               <th data-sort-ignore="true">SHIFT</th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-5 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-4 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-3 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-2 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('-1 day')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('1 days')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('2 days')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('3 days')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('4 days')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('5 day')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('6 days')); ?></th>
+              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('7 day')); ?></th>
             </tr>
           </thead>
           <tbody id="schednext_data">
@@ -58,48 +60,45 @@
   </div>
 </section>
 <!-- /.content -->
-<div class="modal modal-default fade" id="editModalWindow" role="dialog">
-  <div class="modal-dialog">
+<div class="modal modal-default fade" id="scheduling_modal" role="dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
+
+      <form role="form" id="schedForm">
       <div class="modal-header">
-        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for Jones (1)</h4>
+        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for <span id="driver_detail"></h4>
         <div class="pull-right">
           <p class="pull-left">Route:</p>
-          <select class="form-control route-dropdown">
-            <option selected="selected">All Route</option>
-            <option>Lagro - Cubao</option>
+          <select class="form-control route-dropdown" id="route">
+            
           </select>
         </div>
         <input type="text" class="form-control" id="emp_no_d" style="display:none;">
       </div>
       <div class="modal-body">
         <div class="text-center" style="margin-bottom: 20px;" id="notif_update"></div>
-        <form role="form">
           <div class="box-body">
-            <div class="form-group">
-              <p>Dec 18 2015</p>
-              <select class="form-control select2">
-                <option value="" selected></option>
-                <option value="abc-123">ABC-123</option>
-                <option value="abc-123">ABC-123</option>
-                <option value="abc-123">ABC-123</option>
-                <!-- <option>ABC-123</option>
-                <option>ABC-123</option>
-                <option>ABC-123</option>
-                <option>ABC-123</option> -->
-              </select>
-              <select class="form-control day-night">
-                <option selected="selected">Day</option>
-                <option>Night</option>
-              </select>
-            </div> <!-- /.form-group -->
+            
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Unit</th>
+                    <th>Shift</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="set_sched_table">
+                  
+                </tbody>
+              </table>
           </div>
-        </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" id="update_employee" onclick="update_employee()">Save changes</button>
+        <button type="button" class="btn btn-success" id="schedFormSubmit">Save changes</button>
       </div>
+      </form> 
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -355,6 +355,7 @@ function getUnit(route_no){
 		success: function(data, status) {
 			console.log(data);
 			$('#unit').append($("<option />").val('').text(''));
+			
 			$.each(data.unit, function() {
 			    $('#unit').append($("<option />").val(this.unt_no).text(this.unt_lic));
 			});
