@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	var base_url = window.location.origin;
 	$("#loginForm").submit(function(event){
 		event.preventDefault();	 
 
@@ -7,7 +8,7 @@ $(document).ready(function(){
 			type: 'post',
 			data: $('#loginForm').serialize(),
 			success: function(data, status) {
-				data = JSON.parse(data);
+				console.log(data);
 				if(data.status == 'success'){
 					window.location.href = data.url + '/dashboard';
 				}

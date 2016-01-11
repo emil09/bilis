@@ -31,6 +31,9 @@ Class SchedulingModel extends CI_Model {
     public function insert($key = '', $data = array()){
         $this->db->insert($this->tables[$key], $data); 
     }
+    public function insert_batch($key = '', $data = array()){
+        $this->db->insert_batch($this->tables[$key], $data); 
+    }
 
     public function dispatcher_detail($select = '', $where = array()){
         $this->db->select($select);
