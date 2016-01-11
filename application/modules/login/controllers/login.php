@@ -69,6 +69,7 @@ Class Login extends MY_Controller {
 			$data = array('msg' => $_POST, 'status' => 'error');
 
 		}
+		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
 
