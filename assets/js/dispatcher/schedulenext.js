@@ -27,7 +27,7 @@ $(document).ready(function(){
 			type: 'post',
 			data: data,
 			success: function(data, status) {
-				console.log(data);
+				
 				$('#coo_select').each(function() {
 					getDriver(this.value);
 				});
@@ -51,7 +51,7 @@ function getDriver(coo_no){
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status) {
-			console.log(data);
+			
 			for(var i = 0; i < data['driver'].length; i++) {
 				schednext_data += 	
 				'<tr>'+
@@ -173,6 +173,7 @@ function setSched(emp_no){
 			type: 'post',
 			data: {route_no: rte_no, date: next_days},
 			success: function(data, status) {
+				console.log(data);
 				// console.log(data.length);
 				// $('#unit'+i).append($("<option />").val('').text(''));
 

@@ -70,7 +70,7 @@ Class SchedulingModel extends CI_Model {
         $this->db->from($this->tables[7]);
         $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
         $this->db->join($this->tables[8], 'dsp_sched_no = sched_no_fk', 'left');
-        $this->db->where(array('sched_dt'=>date('Y-m-d'), 'dsp_stat_fk' =>'A'));
+        $this->db->where('dsp_stat_fk', 'A');
         $this->db->or_where('dsp_stat_fk', null);
         $query = $this->db->get();
         return $query->result();;

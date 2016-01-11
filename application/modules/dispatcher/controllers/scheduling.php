@@ -133,8 +133,9 @@ Class Scheduling extends MY_Controller {
 				default:
 					break;
 			}
-
-			$unt_scheds = $this->SchedulingModel->unit_avail('unit_no_fk, unt_lic, dsp_stat_fk');
+			$this->db->where('sched_dt', $_POST['date'][$i]);
+			$this->db->where('shift_code_fk','N');
+			$unt_scheds = $this->SchedulingModel->unit_avail('unit_no_fk, unt_lic, dsp_stat_fk, shift_code_fk');
 			$x = 0;
 			$unt_sched = array();
 			foreach ($unt_scheds as $id)
@@ -153,7 +154,7 @@ Class Scheduling extends MY_Controller {
 			}
 			$where = array('rte_no' => $_POST['route_no']);
 			$results[$i]['unit'] = $this->SchedulingModel->select_where(5, $select, $where);
-	
+			$results[$i]['test'] = $unt_scheds;
 		}
 		
 		echo json_encode($results, JSON_PRETTY_PRINT);
