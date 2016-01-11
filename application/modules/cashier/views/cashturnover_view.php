@@ -22,32 +22,7 @@
 			              <th>End</th>
 			            </tr>
 			          </thead>
-			          <tbody id="driver_data">
-			          	<tr>
-			          		<td><button id="cashturnover-button" class="btn btn-primary">2</button></td>
-			          		<td>Lagro - Cubao</td>
-			          		<td>CWE-498</td>
-			          		<td>998 Abad, Alvin</td>
-			          		<td>200.00</td>
-			          		<td>Aug 05 2015 08:00 AM</td>
-			          	</tr>
-			          	<tr>
-			          		<td><button id="cashturnover-button" class="btn btn-primary">3</button></td>
-			          		<td>Lagro - Cubao</td>
-			          		<td>CWE-498</td>
-			          		<td>998 Abad, Alvin</td>
-			          		<td>300.00</td>
-			          		<td>Aug 05 2015 08:00 AM</td>
-			          	</tr>
-			          	<tr>
-			          		<td><button id="cashturnover-button" class="btn btn-primary">4</button></td>
-			          		<td>Lagro - Cubao</td>
-			          		<td>CWE-498</td>
-			          		<td>998 Abad, Alvin</td>
-			          		<td>400.00</td>
-			          		<td>Aug 05 2015 08:00 AM</td>
-			          	</tr>
-			          </tbody>
+			          <tbody id="available_turnover"></tbody>
 			        </table>
 				</div> <!-- .box-body -->
 			</div>
@@ -89,30 +64,7 @@
 	          <div class="right-col col-sm-6">
 	          	<h4>Selected Trip</h4>
 				<table class="selectedtrip table table-bordered">
-	          		<tr>
-		          		<th>Trip</th>
-		          		<td>2</td>
-		          	</tr>
-		          	<tr>
-		          		<th>Route</th>
-		          		<td>Lagro-Cubao</td>
-		          	</tr>
-		          	<tr>
-		          		<th>Unit</th>
-		          		<td>CWE-498</td>
-		          	</tr>
-		          	<tr>
-		          		<th>Driver</th>
-		          		<td>(998) Abad, Alvin</td>
-		          	</tr>
-		          	<tr>
-		          		<th>Amount Turnover</th>
-		          		<td>200.00</td>
-		          	</tr>
-		          	<tr>
-		          		<th>Arrival</th>
-		          		<td>2015-08-05 08:00:00</td>
-		          	</tr>
+					<tbody id="selected_details"></tbody>
 	          	</table>
 	          </div>
 	        </div>

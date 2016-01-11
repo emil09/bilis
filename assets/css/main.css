@@ -42,7 +42,9 @@
 .dashcons a { margin-bottom: 5px }
 .dataTable.table-bordered>thead>tr>th { border: 1px solid #111 !important; border-bottom-width: 0px !important; border-left: 0 !important }
 .dataTable.table-bordered>thead>tr>th:first-child { border-left: 1px solid #111 !important }
-.dataTable.table-bordered>tbody>tr>td { border: 1px solid #aaa }
+/*.dataTable.table-bordered>tbody>tr>td { border: 1px solid #aaa }*/
+table.table-bordered.dataTable td:first-child { border-left-width: 1px }
+table.table-bordered.dataTable td:last-child { border-right-width: 1px !important }
 #cooperativeselect { display: inline-flex }
 #cooperativeselect p { margin-right: 50px; line-height: 23px; text-transform: uppercase; font-weight: 600; }
 #clear-sched, #editModal.btn-primary, #editModal.btn-primary[disabled] { width: 49% }
@@ -104,6 +106,7 @@
           transform: scale(1);
 }
 }
+
 
 
 .main-footer > div, .main-footer strong { color: #000 }
@@ -223,7 +226,7 @@
 .page-driver .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }
 .login-page .keys button, .login-page .keys button { box-shadow: 0 4px #367fa9 }
 .login-page .keys button, .login-page .keys button.operator { background-color: #3C8DBC; color: #fff }
-.login-page .keys button.operator.proceed { background-color: #00A65A; color: #fff; box-shadow: 0 4px #008d4c }
+.login-page .keys button.operator.proceed { background-color: #8A8A8A; color: #fff; box-shadow: 0 4px #797979 }
 .login-page .keys button.operator.proceed:active { top: 4px; box-shadow: 0px 0px #008d4c }
 
 
