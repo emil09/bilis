@@ -18,7 +18,7 @@ $(document).ready(function(){
 		}
 		else if ($(this).val() == "C") {
 			$(".screen").val("");
-			num = '0';
+			num = '';
 		}
 		$("#amt").html(num);
 	});

@@ -29,17 +29,17 @@ $(document).ready(function(){
 			return false;
 		}
     });
-	var emp_h = $('#empnokeys').outerHeight();
-	var pass_h = $('#passkeys').outerHeight();
+	var emp_h = $('#empnokeys').height();
+	var pass_h = $('#passkeys').height();
 	$('#empnokeys').css({'height': '0px', 'transition': '1s'});
 	$('#passkeys').css({'height': '0px', 'transition': '1s'});
 
 	$('#emp_no').on("focus", function(){
-	    $('#empnokeys').css({'display': 'block', 'height': emp_h+'px', 'transition': '1s'});
+	    $('#empnokeys').css({'display': 'block', 'height': '188px', 'transition': '1s'});
 	    $('#passkeys').css({'display': 'none', 'height': '0px', 'transition': '1s'});
 	});
 	$('#password').on("focus", function(){
-		$('#passkeys').css({'display': 'block', 'height': pass_h+'px', 'transition': '1s'});
+		$('#passkeys').css({'display': 'block', 'height': '188px', 'transition': '1s'});
 	    $('#empnokeys').css({'display': 'none', 'height': '0px', 'transition': '1s'});
 	});
 
