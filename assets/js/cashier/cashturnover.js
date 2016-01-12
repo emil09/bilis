@@ -10,22 +10,16 @@ function get_available_turnover(){
 	$.get("cashturnover/available_turnover", function(data, status){
 		var table_data = '';
 		var test = '';
-		var trip_ctr = 0;
 		if(data.cash_turnover.length > 0){
 			console.log(data);
 			for(var i = 0; i < data.cash_turnover.length; i++) {
-				if(trip_ctr==0) 
-					test = data['cash_turnover'][i]['emp_no_fk'];
-				if(test == data['cash_turnover'][i]['emp_no_fk']) 
-					trip_ctr = trip_ctr + 1;
-				else 
-					trip_ctr=1;
+				
 				
 				table_data += '<tr>'+
-									'<td><button id="cashturnover-button" class="btn btn-primary" onclick="assignBag('+data["cash_turnover"][i]["emp_no_fk"]+', '+trip_ctr+')">'+ trip_ctr +'</button></td>'+
+									'<td><button id="cashturnover-button" class="btn btn-primary" onclick="assignBag('+data["cash_turnover"][i]["emp_no_fk"]+', '+data["cash_turnover"][i]["trips_ctr"]+')">'+ data["cash_turnover"][i]["trips_ctr"] +'</button></td>'+
 									'<td>' + data['cash_turnover'][i]['rte_nam'] + '</td>'+
 									'<td>'+data['cash_turnover'][i]['unt_lic']+'</td>'+
-									'<td>'+data['cash_turnover'][i]['emp_no_fk']+' '+data['cash_turnover'][i]['emp_lname']+', '+data['cash_turnover'][i]['emp_fname']+'</td>'+
+									'<td>('+data['cash_turnover'][i]['emp_no_fk']+') '+data['cash_turnover'][i]['emp_lname']+', '+data['cash_turnover'][i]['emp_fname']+'</td>'+
 									'<td>'+data['cash_turnover'][i]['amt_in']+'</td>'+
 									'<td>'+ formatDate(data['cash_turnover'][i]['to_dt']) +' ' + 
 									formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
@@ -103,7 +97,7 @@ function assignBag(emp_no, trip_ctr) {
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Driver</th>'+
-										'<td>' + data['driver'][i]['emp_no_fk'] + '</td>'+
+										'<td>(' + data['driver'][i]['emp_no_fk'] + ') '+data['driver'][i]['emp_lname']+', '+data['driver'][i]['emp_fname']+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Amount Turnover</th>'+

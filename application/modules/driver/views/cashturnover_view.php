@@ -30,10 +30,9 @@
 								<button type="button" value="2">2</button>
 								<button type="button" value="3" class="operator">3</button>
 								<button type="button" value="C" class="clear">C</button>
-								<button type="button">0</button>
+								<button type="button" value="0">0</button>
 								<button type="button" class="operator" value=".">.</button>
 								<button type="submit" class="turnoverbutton pull-right" value="OK">OK</button>
-								<!-- <span class="operator">x</span> -->
 							</div>
 						</div>
 					</form>

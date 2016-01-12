@@ -37,8 +37,7 @@ $(document).ready(function(){
 		        this.value = val.substring(0, val.length - 1);
 		    }
 			$("#amt").html(this.value);
-		
-			
+
    	});
 
 	// $("#screen").change(function(){
@@ -57,16 +56,26 @@ $(document).ready(function(){
 function get_active_trips(){
 
 	$.get("cashturnover/active_trip", function(data, status){
-		console.log(data);
+		var test ='';
 		if(data.driver.length > 0){
+			var tempctr = parseInt(data['trip'].length) -1;
 			dsp_no = data['driver'][0]['dsp_unit_no'];
+			if(data.trip.length > 0) {
+				test = data['trip'][tempctr]['trips_ctr'];
+				trip_ctr = parseInt(data['trip'][tempctr]['trips_ctr']) + 1;
+			}
+			else {
+				console.log("hello");
+				trip_ctr=1;
+			}
+			
 			var table_data = '<tr>'+
 							'<th class="col-lg-4">Shift</th>'+
 							'<td  class="col-lg-8">'+ data['driver'][0]['shift_name'] +' Shift </td>'+
 		                '</tr>'+
 		                '<tr>'+
 							'<th>Trip</th>'+
-							'<td>' + parseInt(data['trip'].length + 1) + '</td>'+
+							'<td>' + trip_ctr + '</td>'+
 		                '</tr>'+
 		                '<tr>'+
 							'<th>Route</th>'+
@@ -86,7 +95,7 @@ function get_active_trips(){
 							formatAMPM(data['driver'][0]['start_dt'] + ' ' + data['driver'][0]['start_time']) +'</td>'+
 		                '</tr>';
 		    $('#act_table').html(table_data);
-
+		    $('.turnoverbutton').attr('id', trip_ctr);
 			$("#amt").html(0);
 		}else{
 			swal({   
@@ -106,6 +115,7 @@ function get_active_trips(){
 }
 
 $("#turnoverForm").submit(function(event){
+	var trip_ctr = $('.turnoverbutton')[0].id;
 	event.preventDefault();
 	 swal({   
         	title: 'Are you sure you want to turn over?',
@@ -120,7 +130,7 @@ $("#turnoverForm").submit(function(event){
 	       $.ajax({
 			url: 'cashturnover/save_turnover',
 			type: 'post',
-			data: $('#turnoverForm').serialize() + '&dsp_no=' + dsp_no,
+			data: $('#turnoverForm').serialize() + '&dsp_no=' + dsp_no + '&trip_ctr=' + trip_ctr,
 			success: function(data, status) {
 
 
@@ -146,7 +156,7 @@ $("#turnoverForm").submit(function(event){
 				        });
 					}
 					
-					
+				setTimeout(window.location.reload.bind(window.location), 1000);
 				},
 				error: function(xhr, desc, err) {
 					console.log(xhr);

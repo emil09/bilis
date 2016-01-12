@@ -31,7 +31,7 @@ Class Cashturnover extends MY_Controller {
 		if(count($results['driver'])>0){
 			$results['trip'] = $this->CashturnoverModel->select_where(
 				9, 
-				'trp_id, dsp_no_fk, amt_in, trp_stat', 
+				'trp_id, dsp_no_fk, trips_ctr, amt_in, trp_stat', 
 				array('dsp_no_fk'=>$results['driver'][0]->dsp_unit_no)
 			);
 		}
@@ -52,7 +52,6 @@ Class Cashturnover extends MY_Controller {
 			);
 
 		}else{
-			
 			$data = array(
 				'msg' => $_POST, 
 				'status' => 'success'
@@ -61,6 +60,7 @@ Class Cashturnover extends MY_Controller {
 			$turnover_data = array(
 				'dsp_no_fk'	=>	$_POST['dsp_no'],
 				'amt_in' 	=>	$_POST['amt'],
+				'trips_ctr' =>	$_POST['trip_ctr'],
 				'trp_stat'	=> 	'T',
 				'to_dt'		=>  date('Y-m-d'), 
 				'to_time'	=>	date('H:i:s')
