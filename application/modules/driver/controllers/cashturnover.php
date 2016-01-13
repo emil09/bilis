@@ -3,7 +3,7 @@
 Class Cashturnover extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
-
+		$this->check_session_driver();
 		$this->load->model('CashturnoverModel','',TRUE);
 	}
 

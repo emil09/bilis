@@ -3,6 +3,7 @@
 Class Dashboard extends MX_Controller {
 	public function __construct(){
 		parent::__construct();
+		$this->check_session_driver();
 	}
 
 	public function index()

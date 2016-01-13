@@ -55,7 +55,7 @@ Class Login extends MY_Controller {
 						break;
 					
 					default:
-						$url = 'admin';
+						$url = '';
 						
 				}
 
