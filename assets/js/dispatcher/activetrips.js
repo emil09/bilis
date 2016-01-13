@@ -62,7 +62,7 @@ function getDspDriver(coo_no){
 					start_time = formatAMPM(new Date(data[i]['start_dt'] + ' '+data[i]['start_time']));
 
 					table_data += '<tr>'+
-						'<td>'+data[i]['trips_ctr']+'</td>'+
+						'<td>'+ (parseInt(data[i]['count_trp'])+ 1) +'</td>'+
 						'<td>'+ data[i]['rte_nam']+'</td>'+
 						'<td><div class="unit-plate">'+data[i]['unt_lic']+'</div></td>'+
 						'<td>'+ data[i]['emp_lname'] + ', ' + data[i]['emp_fname'] +' ('+data[i]['emp_no']+')</td>'+
