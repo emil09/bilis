@@ -52,7 +52,7 @@
                 <button type="button" value="9" class="operator">9</button>
                 <button type="button" value="CLR" class="clear">CLR</button>
                 <button type="button" value="0">0</button>
-                <button type="button" class="operator proceed" value="backspace">⌫</button>
+                <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
               </div>
               <div id="passkeys" class="keys">
                 <button type="button" value="1">1</button>
@@ -66,7 +66,7 @@
                 <button type="button" value="9" class="operator">9</button>
                 <button type="button" value="CLR" class="clear">CLR</button>
                 <button type="button" value="0">0</button>
-                <button type="button" class="operator proceed" value="backspace">⌫</button>
+                <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
               </div>
             </div> <!-- /.col -->
             <div class="col-xs-8">

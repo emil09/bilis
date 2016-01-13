@@ -11,7 +11,8 @@ Class ActiveTripsModel extends CI_Model {
         '5' => 'vehicle',
         '6' => 'shift',
         '7' => 'dispatch_sched',
-        '8' => 'dispatch_unit'
+        '8' => 'dispatch_unit',
+        '9' => 'trip'
 	);
 	
 	public function select_where($key = '', $select = '', $where = array()) {
@@ -25,6 +26,7 @@ Class ActiveTripsModel extends CI_Model {
     public function get_dspdriver($select = '', $where = array()) {
         $this->db->select($select);
         $this->db->from($this->tables[8]);
+        $this->db->join($this->tables[9], 'dsp_no_fk = dsp_unit_no', 'left');
         $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
         $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
         $this->db->join($this->tables[3], 'coo_no = driver.coo_no_fk', 'left');

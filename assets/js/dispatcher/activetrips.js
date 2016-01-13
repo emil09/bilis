@@ -62,7 +62,7 @@ function getDspDriver(coo_no){
 					start_time = formatAMPM(new Date(data[i]['start_dt'] + ' '+data[i]['start_time']));
 
 					table_data += '<tr>'+
-						'<td>1</td>'+
+						'<td>'+data[i]['trips_ctr']+'</td>'+
 						'<td>'+ data[i]['rte_nam']+'</td>'+
 						'<td><div class="unit-plate">'+data[i]['unt_lic']+'</div></td>'+
 						'<td>'+ data[i]['emp_lname'] + ', ' + data[i]['emp_fname'] +' ('+data[i]['emp_no']+')</td>'+
@@ -172,4 +172,8 @@ function formatDate(date){
 	var monthIndex = date.getMonth();
 	var year = date.getFullYear();
 	return monthNames[monthIndex] + '. ' + day + ', '+ year;
+}
+
+function reload() {
+	window.location.reload(true);
 }

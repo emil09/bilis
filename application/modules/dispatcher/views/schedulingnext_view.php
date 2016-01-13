@@ -37,19 +37,19 @@
             <?php endforeach ?>
           </select>
         </div>
-        <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
+        <table id="table-<?php echo($this->uri->segment(2).'-'.$this->uri->segment(3)); ?>" class="table table-bordered">
           <thead>
             <tr>
-              <th data-sort-initial="true">Driver</th>
-              <th data-sort-ignore="true">ACTION</th>
-              <th data-sort-ignore="true">SHIFT</th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('1 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('2 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('3 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('4 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('5 day')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('6 days')); ?></th>
-              <th data-sort-ignore="true"><?php echo date("M j Y", strtotime('7 day')); ?></th>
+              <th>Driver</th>
+              <th class="col-md-1">ACTION</th>
+              <th>SHIFT</th>
+              <th><?php echo date("M j Y", strtotime('1 days')); ?></th>
+              <th><?php echo date("M j Y", strtotime('2 days')); ?></th>
+              <th><?php echo date("M j Y", strtotime('3 days')); ?></th>
+              <th><?php echo date("M j Y", strtotime('4 days')); ?></th>
+              <th><?php echo date("M j Y", strtotime('5 day')); ?></th>
+              <th><?php echo date("M j Y", strtotime('6 days')); ?></th>
+              <th><?php echo date("M j Y", strtotime('7 day')); ?></th>
             </tr>
           </thead>
           <tbody id="schednext_data">
@@ -66,7 +66,7 @@
 
       <form role="form" id="schedForm">
       <div class="modal-header">
-        <h4 class="modal-title pull-left"><i class="fa fa-user"></i> Schedule for <span id="driver_detail"></h4>
+        <h4 class="modal-title pull-left"><i class="fa fa-calendar"></i> Schedule for <span id="driver_detail"></h4>
         <div class="pull-right">
           <p class="pull-left">Route:</p>
           <select class="form-control route-dropdown" id="route">
@@ -79,7 +79,7 @@
         <div class="text-center" style="margin-bottom: 20px;" id="notif_update"></div>
           <div class="box-body">
             
-              <table class="table table-bordered">
+              <table class="table">
                 <thead>
                   <tr>
                     <th>Day</th>
@@ -95,8 +95,8 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" id="schedFormSubmit">Save changes</button>
+          <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-left: 5px">Close</button>
+          <button type="button" class="btn btn-primary" id="schedFormSubmit">Save changes</button>
       </div>
       </form> 
     </div><!-- /.modal-content -->

@@ -154,7 +154,10 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
 #driver_data #dispatch-button.btn-warning { border: 2px solid #e08e0b; color: #000; font-weight: 600; background-color: #D4C621; opacity: 1 }
 .select2-container { width: 190px !important }
-
+#table-scheduling-next .day-text,
+#table-scheduling-next .night-text,
+#table-scheduling-next .unit-plate { line-height: 30px }
+#table-scheduling-next #editModal.btn-warning { width: 60% }
 
 
 

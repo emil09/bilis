@@ -400,3 +400,8 @@ $("#schedForm").submit(function(event){
 		}
     }); 
 });
+
+
+function reload() {
+	window.location.reload(true);
+}

@@ -67,7 +67,7 @@ function getDriver(coo_no){
 								schednext_data +='<td><div class="day"></div> <div class="night unit-plate">'+data['driver'][i]['sched'][c]['unt_lic']+'</div></td>';
 							}
 						}
-						for(var d=0; d<(6-data['driver'][i]['sched'].length); d++){
+						for(var d=0; d<=(6-data['driver'][i]['sched'].length); d++){
 							schednext_data += '<td></td>';
 						}
 					}else{
@@ -83,8 +83,30 @@ function getDriver(coo_no){
 
 			    schednext_data +='</tr>';
 			}
-			$('#schednext_data').html(schednext_data);	
-			
+			$('#table-scheduling-next').dataTable().fnDestroy();
+			$('#schednext_data').html(schednext_data);
+
+			var tabler = $('#table-scheduling-next').DataTable({
+				paging : false,
+				autoWidth : false,
+				scrollY: '45vh',
+    			scrollCollapse: true,
+				scrollX: 'true',
+				fixedHeader: false,
+				dom: 'T<"clear">lfrtip',
+				tableTools: {
+		            sRowSelect:   'multi',
+		            sRowSelector: 'td:first-child',
+		            aButtons:     [  ]
+		        }
+			});
+
+			$('#selectallrows').click(function(){
+		    	$('#table-available tbody tr').addClass('DTTT_selected selected');
+		    });
+			$('#deselectallrows').click(function(){
+		    	$('#table-available tbody tr').removeClass('DTTT_selected selected');
+		    });
 
 
 		},
@@ -203,4 +225,8 @@ function setSched(emp_no){
 		
 	}
 
+}
+
+function reload() {
+	window.location.reload(true);
 }
