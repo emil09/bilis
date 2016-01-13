@@ -56,7 +56,11 @@ Class Scheduling extends MY_Controller {
 			$this->db->where('sched_dt <', date("Y-m-d", strtotime('7 day')));
 			$this->db->join('shift','shift_code = shift_code_fk', 'left');
 			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
+			$this->db->order_by('sched_dt');
 			$results['driver'][$i]->sched = $this->SchedulingModel->select_where(7, $select2, $where2);
+		}
+		for ($i=1; $i <= 7; $i++) { 
+			$results['date'][$i-1] =  date("Y-m-d", strtotime($i . ' days'));
 		}
 		
 
@@ -71,9 +75,9 @@ Class Scheduling extends MY_Controller {
 		$this->db->limit(1);
 		$results = $this->SchedulingModel->get_driver($select, $where2);
 		
-		for ($i=1; $i <= 7; $i++) { 
-			$data['date'][$i-1] =  date("Y-m-d", strtotime($i . ' days'));
-		}
+		// for ($i=1; $i <= 7; $i++) { 
+		// 	$data['date'][$i-1] =  date("Y-m-d", strtotime($i . ' days'));
+		// }
 		// $data['date']= $date;
 		$i = 0;
 		foreach ($results as $result) {
@@ -175,22 +179,61 @@ Class Scheduling extends MY_Controller {
 		}
 		else
 		{
-			for ($i=0; $i < count($_POST['unit']); $i++) { 
-				if($_POST['unit'][$i] != ''){
-					$rte = $this->SchedulingModel->select_where(5, 'rte_no', array('unt_no'=>$_POST['unit'][$i]));
-					$insert_data[$i] = array(
-						'driver_no_fk' 	=> $_POST['driver_no'],
-						'shift_code_fk' => $_POST['shift'][$i],
-						'sched_dt'	 	=> $_POST['dates'][$i],
-						'unit_no_fk' 	=> $_POST['unit'][$i],
-						'rte_no_fk'		=> $rte[0]->rte_no,
-						'sched_time'	=> date('H:i:s'),
-						'sched_type'	=> 'A'
-					);
+			
+				// insert
+				$insert_data = '';
+				$update_data = '';
+				$update_id = '';
+				for ($i=0; $i < count($_POST['unit']); $i++) { 
+					if($_POST['unit'][$i] != ''){
+						$select = 'sched_dt, sched_time, unit_no_fk, dsp_sched_no';
+						$where = array(
+							'sched_dt' => $_POST['dates'][$i],
+							'shift_code_fk' => $_POST['shift'][$i],
+							'sched_type'	=> 'A',
+							'driver_no_fk' 	=> $_POST['driver_no']
+						);
+						$have_sched = $this->SchedulingModel->select_where(7, $select, $where);
+						if(count($have_sched)>0){
+
+							
+								$rte = $this->SchedulingModel->select_where(5, 'rte_no', array('unt_no'=>$_POST['unit'][$i]));
+								$update_data[$i] = array(
+									'driver_no_fk' 	=> $_POST['driver_no'],
+									'shift_code_fk' => $_POST['shift'][$i],
+									'sched_dt'	 	=> $_POST['dates'][$i],
+									'unit_no_fk' 	=> $_POST['unit'][$i],
+									'rte_no_fk'		=> $rte[0]->rte_no,
+									'sched_time'	=> date('H:i:s'),
+									'sched_type'	=> 'A',
+									'dsp_sched_no'=> $have_sched[0]->dsp_sched_no
+								);
+								// $update_id = array('dsp_sched_no'=> $have_sched[0]->dsp_sched_no);
+						}else{
+								$rte = $this->SchedulingModel->select_where(5, 'rte_no', array('unt_no'=>$_POST['unit'][$i]));
+								$insert_data[$i] = array(
+									'driver_no_fk' 	=> $_POST['driver_no'],
+									'shift_code_fk' => $_POST['shift'][$i],
+									'sched_dt'	 	=> $_POST['dates'][$i],
+									'unit_no_fk' 	=> $_POST['unit'][$i],
+									'rte_no_fk'		=> $rte[0]->rte_no,
+									'sched_time'	=> date('H:i:s'),
+									'sched_type'	=> 'A'
+								);							
+						}
+					}
+				}	
+				// $this->SchedulingModel->insert_batch(7, $insert_data);
+				if($insert_data != ''){
+
+					$this->SchedulingModel->insert_batch(7, $insert_data);
 				}
-			}
-			$this->SchedulingModel->insert_batch(7, $insert_data);
-			$data['data'] = $insert_data;
+				if($update_data != ''){
+					
+					$this->SchedulingModel->update_batch(7, $update_data, 'dsp_sched_no');
+				}
+				$data['data1'] = $insert_data;
+				$data['data2'] = $have_sched;
 		}
 		echo json_encode($data, JSON_PRETTY_PRINT);
 	}

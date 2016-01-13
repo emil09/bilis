@@ -19,6 +19,7 @@ $(document).ready(function(){
 		data = $('#schedForm').serializeArray();
 		data.push({name: 'emp_no', value: sel_emp_no});
 		data.push({name: 'driver_no', value: sel_drver_no});
+
 		for(var c=0; c<dates.length;c++){
 			data.push({name: 'dates[]', value: dates[c]});
 		}// console.log(dates);
@@ -27,11 +28,12 @@ $(document).ready(function(){
 			type: 'post',
 			data: data,
 			success: function(data, status) {
+				console.log(data);
 				
+				$("#scheduling_modal").modal('hide');
 				$('#coo_select').each(function() {
 					getDriver(this.value);
 				});
-				$("#scheduling_modal").modal('hide');
 			},
 			error: function(xhr, desc, err) {
 				console.log(xhr);
@@ -43,7 +45,8 @@ $(document).ready(function(){
 });
 
 function getDriver(coo_no){
-	var schednext_data = '';
+	var schednext_data = ' ';
+
 
 
 	$.ajax({
@@ -51,38 +54,51 @@ function getDriver(coo_no){
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status) {
-			
+
+
+			dates = [];
+			for (var i = 0; i < data.date.length; i++){ 
+		    	dates.push(data.date[i]);
+		    }
+
 			for(var i = 0; i < data['driver'].length; i++) {
+
 				schednext_data += 	
 				'<tr>'+
 			    	'<td>'+ data['driver'][i].emp_lname + ', ' + data['driver'][i].emp_fname + ' (' + data['driver'][i].emp_no + ')' + '</td>'+
 					'<td><button id="editModal" onclick="setSched('+ data['driver'][i].emp_no +')" class="btn btn-warning">Set</button></td>'+ 
 					'<td><div class="day-text">DAY</div><div class="night-text">NIGHT</div></td>';
+
+
+					var sched_dt = new Array();
+					
+
 					if(data['driver'][i]['sched'].length>0){
-						// schednext_data += '<td>test</td>';
+						
 						for(var c=0; c < data['driver'][i]['sched'].length; c++){
-							if(data['driver'][i]['sched'][c]['shift_code_fk'] == 'D'){
-								schednext_data +='<td><div class="day  unit-plate">'+data['driver'][i]['sched'][c]['unt_lic']+'</div> <div class="night"></div></td>';
-							}else{
-								schednext_data +='<td><div class="day"></div> <div class="night unit-plate">'+data['driver'][i]['sched'][c]['unt_lic']+'</div></td>';
-							}
+							sched_dt.push(data['driver'][i]['sched'][c]['sched_dt']);
 						}
-						for(var d=0; d<=(6-data['driver'][i]['sched'].length); d++){
+					}
+
+					for(var d=0; d < dates.length; d++){
+
+						var chek = sched_dt.indexOf(dates[d]);
+						if(sched_dt.indexOf(dates[d]) !== -1){
+							if(data['driver'][i]['sched'][chek]['shift_code_fk'] == 'D'){
+								schednext_data +='<td><div class="day  unit-plate">'+data['driver'][i]['sched'][chek]['unt_lic']+'</div> <div class="night"></div></td>';
+							}else{
+								schednext_data +='<td><div class="day"></div> <div class="night unit-plate">'+data['driver'][i]['sched'][chek]['unt_lic']+'</div></td>';
+							}
+						}else{
 							schednext_data += '<td></td>';
 						}
-					}else{
-						schednext_data += '<td></td>'+
-						'<td></td>'+
-						'<td></td>'+
-						'<td></td>'+                                         
-						'<td></td>'+
-						'<td></td>'+
-						'<td></td>';
 					}
-					
 
 			    schednext_data +='</tr>';
 			}
+
+
+			// console.log(schednext_data);
 			$('#table-scheduling-next').dataTable().fnDestroy();
 			$('#schednext_data').html(schednext_data);
 
@@ -118,16 +134,14 @@ function getDriver(coo_no){
 }
 
 function setSched(emp_no){
-	// console.log(emp_no);
 	sel_emp_no = emp_no;	
-
 	$.ajax({
 		url: 'get_driver_detail',
 		type: 'post',
 		data: {emp_no: emp_no},
 		success: function(data, status) {
-			console.log(data);
-			next_days = data.date;
+		
+			// next_days = dates;
 			sel_drver_no = data.driver[0]['driver_no'];
 
 			$('#driver_detail').html(data.driver[0]['lname'] + ' ('+ data.driver[0]['emp_no']+ ')');
@@ -142,10 +156,10 @@ function setSched(emp_no){
 				shift_option += '<option value="'+data.shift[c]['shift_code']+'">' + data.shift[c]['shift_name'] + '</option>';
 			}
 
-			for (var i = 0; i < data.date.length; i++) {
-				dates.push(data.date[i]);
+			for (var i = 0; i < dates.length; i++) {
+			
 				set_sched_table += '<tr>'+
-                    '<td>'+data.date[i]+'</td>'+
+                    '<td>'+dates[i]+'</td>'+
                     '<td>'+
                     	'<select class="form-control select2" id="unit'+ i +'" name="unit[]">'+
                 		'</select>'+
@@ -183,17 +197,13 @@ function setSched(emp_no){
 	});
 
 	function getUnit(rte_no){
-		console.log(rte_no);
-		console.log(next_days.length);
-		
 			
 		
 		
-				
 		$.ajax({
 			url: 'get_unit',
 			type: 'post',
-			data: {route_no: rte_no, date: next_days},
+			data: {route_no: rte_no, date: dates},
 			success: function(data, status) {
 				console.log(data);
 				// console.log(data.length);
