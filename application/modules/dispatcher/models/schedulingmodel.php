@@ -60,6 +60,10 @@ Class SchedulingModel extends CI_Model {
         $this->db->where($id);
         $this->db->update($this->tables[$key], $data);
     }
+    public function update_batch($key = '', $data = array(), $id = array()){
+        // $$this->db->where($id);
+        $this->db->update_batch($this->tables[$key], $data, $id);
+    }
 
     public function delete($key = '', $data = array()){
         $this->db->delete($this->tables[$key], $data); 
