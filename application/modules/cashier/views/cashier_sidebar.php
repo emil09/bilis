@@ -9,5 +9,6 @@
     <li class="<?php if($this->uri->segment(2)=='dashboard'){echo 'active';} ?>"><a href="<?php echo base_url() ?>cashier/dashboard">Home</a></li>
     <li class="<?php if($this->uri->segment(2)=='cashturnover'){echo 'active';} ?>"><a href="<?php echo base_url() ?>cashier/cashturnover">Cash Turnover</a></li>
     <li class="<?php if($this->uri->segment(2)=='turnoverreport'){echo 'active';} ?>"><a href="<?php echo base_url() ?>cashier/turnoverreport">Turnover Report</a></li>
+    <li class="<?php if($this->uri->segment(2)=='activetripsreport'){echo 'active';} ?>"><a href="<?php echo base_url() ?>cashier/activetripsreport">Active Trips Report</a></li>
   </ul>
 </div>

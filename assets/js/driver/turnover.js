@@ -1,6 +1,6 @@
 var num = '';
 var dsp_no = '';
-$(document).ready(function(){
+$(function(){
 	get_active_trips();
 	$(".screen" ).focus();
 

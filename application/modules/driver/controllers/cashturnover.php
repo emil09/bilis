@@ -44,6 +44,7 @@ Class Cashturnover extends MY_Controller {
 
 		$this->form_validation->set_rules('dsp_no', 'Dispatch No', 'required');
 		$this->form_validation->set_rules('amt', 'Amount', 'required');
+		$this->form_validation->set_rules('loc_select', 'Location', 'required');
 		if ($this->form_validation->run($this) == FALSE){
 
 			$data = array(

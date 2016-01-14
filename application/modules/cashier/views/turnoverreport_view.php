@@ -16,42 +16,38 @@
                     <tr>
                       <th>Batch</th>
                       <th>Bag</th>
-                      <th>Trip</th>
-                      <th>Route</th>
-                      <th>Unit</th>
                       <th>Driver</th>
-                      <th>Amount</th>
-                      <th>Turned Over</th>
+                      <th>Unit</th>
+                      <th>Trip</th>
+                      <th>Amount Received</th>
+                      <th>Date & Time Received</th>
                     </tr>
                   </thead>
                   <tbody id="driver_data">
                     <tr>
                       <td>1</td>
                       <td>1</td>
-                      <td><button id="editturnover-button" class="btn btn-primary">1</button></td>
-                      <td>Bagong Silang - Philcoa</td>
-                      <td>PWS-463</td>
                       <td>223 Lucban, Carmelo</td>
+                      <td>PWS-463</td>
+                      <td><button id="editturnover-button" class="btn btn-primary">1</button></td>
                       <td>880.00</td>
                       <td>Jan 08 2016 07:21 AM</td>
                     </tr>
                     <tr>
                       <td>1</td>
                       <td>2</td>
-                      <td><button id="editturnover-button" class="btn btn-primary">1</button></td>
-                      <td>Bagong Silang - Philcoa</td>
-                      <td>PXD-158</td>
                       <td>247 San Miguel, Benjo</td>
+                      <td>PXD-158</td>
+                      <td><button id="editturnover-button" class="btn btn-primary">1</button></td>
                       <td>730.00</td>
                       <td>Jan 08 2016 07:39 AM</td>
                     </tr>
                     <tr>
                       <td>1</td>
                       <td>2</td>
-                      <td><button id="editturnover-button" class="btn btn-primary">6</button></td>
-                      <td>Bagong Silang - Philcoa</td>
-                      <td>TWH-726</td>
                       <td>232 Osayen, Melecio</td>
+                      <td>TWH-726</td>
+                      <td><button id="editturnover-button" class="btn btn-primary">6</button></td>
                       <td>1390.00</td>
                       <td>Jan 08 2016 10:22 AM</td>
                     </tr>

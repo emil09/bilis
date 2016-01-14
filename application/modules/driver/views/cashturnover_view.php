@@ -3,6 +3,14 @@
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
   <h1 class="pull-left"><i class="fa fa-money"></i> Cash Turnover</h1>
+<!--   <div id="locationselect" class="pull-right">
+      <p>Location:</p>
+      <select class="form-control" id="loc_select">
+          <option value="1">Cubao Office</option>
+          <option value="2">Hilltop Office</option>
+          <option value="3">Pioneer Office</option>
+      </select>
+  </div> -->
 </section>
 <!-- Main content -->
 <section class="content clearfix">
@@ -10,9 +18,21 @@
     
     	<div class="col-sm-6 col-xs-12">
     		<div class="box">
-	    		<div class="box-header"><h3 class="box-title">Enter turnover amount</h3></div>
-	            <div class="box-body">
-	            	<form id="turnoverForm" method="post" autocomplete="off">
+    			<form id="turnoverForm" method="post" autocomplete="off">
+		    		<div class="box-header">
+		    			<h3 class="box-title">Enter turnover amount</h3>
+		    			<div id="locationselect" class="pull-right">
+					    	<p>Location:</p>
+					    	<select class="form-control" id="loc_select" name="loc_select" required>
+					    		<option value="" selected disabled>Select your location</option>
+					        	<option value="1">Cubao Office</option>
+					        	<option value="2">Hilltop Office</option>
+					        	<option value="3">Pioneer Office</option>
+					    	</select>
+						</div>
+					</div>
+		            <div class="box-body">
+		            	
 			    		<div id="calculator" class="center-block">
 							<div class="top">
 								<!-- <div class="screen"></div> -->
@@ -35,9 +55,8 @@
 								<button type="submit" class="turnoverbutton pull-right" value="OK">OK</button>
 							</div>
 						</div>
-					</form>
-				</div>
-				
+					</div>
+				</form>
 			</div>
     	</div>
     	<div class="col-sm-6 col-xs-12">
@@ -58,5 +77,4 @@
     	</div>
   </div>
 </section><!-- /.content -->
-</div><!-- /.modal -->
 </div><!-- /.content-wrapper -->

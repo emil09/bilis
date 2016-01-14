@@ -144,3 +144,4 @@ define('TurnoverJS', 'assets/js/driver/turnover.js');
 */
 define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
 define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');
+define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');

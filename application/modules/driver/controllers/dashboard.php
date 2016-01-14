@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Dashboard extends MX_Controller {
+Class Dashboard extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->check_session_driver();
