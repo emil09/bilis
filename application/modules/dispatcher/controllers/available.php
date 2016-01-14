@@ -242,28 +242,18 @@ Class Available extends MY_Controller {
 			// if($scheds[0]->sched_dt == date('Y-m-d') ){
 
 			// }
-			if(strtotime(date('H:i:s')) > strtotime('3:00 am') && 
-				strtotime(date('H:i:s')) < strtotime('3:00 pm')){
-				$shift = 'D';
-			}else{
-				$shift = 'N';
-			}
-
-			if($shift == $scheds[0]->shift_code_fk && date('Y-m-d') == $scheds[0]->sched_dt){
-				// dispatched unit
-				$data = array(
-					'dsp_by' => $this->session->userdata('emp_no'),
-					'start_dt' => date('Y-m-d'),
-					'start_time' => date('H:i:s'),
-					'sched_no_fk' => $_POST['sched_no'],
-					'dsp_stat_fk' => 'A'
-				);
-				$this->AvailableModel->insert(8, $data);
-				$message = array('status'=>'success', 'coo_no'=>$scheds[0]->coo_no_fk);
-			}else{
-				// unable to dispatch, shift and date not match
-				$message = array('status'=>'error', 'msg'=>'The time frame for dispatch is not allowed, please double check shift schedule.');
-			}
+			
+			// dispatched unit
+			$data = array(
+				'dsp_by' => $this->session->userdata('emp_no'),
+				'start_dt' => date('Y-m-d'),
+				'start_time' => date('H:i:s'),
+				'sched_no_fk' => $_POST['sched_no'],
+				'dsp_stat_fk' => 'A'
+			);
+			$this->AvailableModel->insert(8, $data);
+			$message = array('status'=>'success', 'coo_no'=>$scheds[0]->coo_no_fk);
+		
 
 			echo json_encode($message);
 		}

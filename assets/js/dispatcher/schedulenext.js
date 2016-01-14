@@ -15,7 +15,6 @@ $(document).ready(function(){
 
 
 	$('#schedFormSubmit').click(function(){
-		console.log($('#schedForm').serializeArray());
 		data = $('#schedForm').serializeArray();
 		data.push({name: 'emp_no', value: sel_emp_no});
 		data.push({name: 'driver_no', value: sel_drver_no});
@@ -28,7 +27,6 @@ $(document).ready(function(){
 			type: 'post',
 			data: data,
 			success: function(data, status) {
-				console.log(data);
 				
 				$("#scheduling_modal").modal('hide');
 				$('#coo_select').each(function() {
@@ -41,7 +39,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-
 });
 
 function getDriver(coo_no){
@@ -54,7 +51,6 @@ function getDriver(coo_no){
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status) {
-
 
 			dates = [];
 			for (var i = 0; i < data.date.length; i++){ 
@@ -161,11 +157,11 @@ function setSched(emp_no){
 				set_sched_table += '<tr>'+
                     '<td>'+dates[i]+'</td>'+
                     '<td>'+
-                    	'<select class="form-control select2" id="unit'+ i +'" name="unit[]">'+
+                    	'<select class="form-control select2" id="unit'+ i +'" name="unit[]"  data-value="'+i+'">'+
                 		'</select>'+
                 	'</td>'+
                     '<td>'+
-                    	'<select class="form-control shift" name="shift[]">'+ shift_option +
+                    	'<select class="form-control shift" id="shift'+i+'" name="shift[]">'+ shift_option +
                 		'</select>'+
                 	'</td>'+
                     '<td><button class="btn btn-danger" disabled>Clear</button></td>'+
@@ -186,8 +182,12 @@ function setSched(emp_no){
 				getUnit(this.value);
 			});
 
+			$('.select2').on('change', function(){
+				console.log($(this).data('value'));
+				shift_avail($(this).val(), $(this).data('value'));
+			});
+		
 			
-
 			
 		},
 		error: function(xhr, desc, err) {
@@ -195,47 +195,74 @@ function setSched(emp_no){
 			console.log("Details: " + desc + "\nError:" + err);
 		}
 	});
-
-	function getUnit(rte_no){
-			
-		
-		
-		$.ajax({
-			url: 'get_unit',
-			type: 'post',
-			data: {route_no: rte_no, date: dates},
-			success: function(data, status) {
-				console.log(data);
-				// console.log(data.length);
-				// $('#unit'+i).append($("<option />").val('').text(''));
-
-				for(i = 0; i < data.length; i++){
-					test = $('#unit'+i).val()
-					test2 = $('#unit'+i).text()
-					$('#unit'+i).empty();
-					// $('#unit'+i).select2("val", "");
-					// console.log(test);
-					// $('#select2-unit-container').removeClass('unit-plate');
-					// console.log($('#unit'+i).val());
-					$('#unit'+i).append($("<option />").val(test).text(test2));
-					// console.log(test);
-					$.each(data[i].unit, function() {
-					    $('#unit'+i).append($("<option />").val(this.unt_no).text(this.unt_lic));
-					});
-				};
-
-			},
-			error: function(xhr, desc, err) {
-				console.log(xhr);
-				console.log("Details: " + desc + "\nError:" + err);
-			}
-		});
-
-			
-		
-	}
-
 }
+
+function shift_avail(unit_no, i){
+	$.ajax({
+		url: 'shift_avail',
+		type: 'post',
+		data: {unit_no: unit_no, date: dates[i]},
+		success: function(data, status) {
+			if(data.length>0){
+				if(data[0]['shift_code_fk'] == 'D'){
+					$('#shift'+i ).val('N');
+					$('#shift' + i + ' option[value="D"]').attr("disabled","disabled");
+				}
+				else{
+					$('#shift'+i ).val('D');
+					$('#shift' + i + ' option[value="N"]').attr("disabled","disabled");
+				}
+			}
+
+		},
+		error: function(xhr, desc, err) {
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
+		}
+	});
+
+	
+}
+
+function getUnit(rte_no){
+		
+	
+	
+	$.ajax({
+		url: 'get_unit',
+		type: 'post',
+		data: {route_no: rte_no, date: dates},
+		success: function(data, status) {
+			console.log(data);
+			// console.log(data.length);
+			// $('#unit'+i).append($("<option />").val('').text(''));
+
+			for(i = 0; i < data.length; i++){
+				test = $('#unit'+i).val()
+				test2 = $('#unit'+i).text()
+				$('#unit'+i).empty();
+				// $('#unit'+i).select2("val", "");
+				// console.log(test);
+				// $('#select2-unit-container').removeClass('unit-plate');
+				// console.log($('#unit'+i).val());
+				$('#unit'+i).append($("<option />").val(test).text(test2));
+				// console.log(test);
+				$.each(data[i].unit, function() {
+					// console.log(index);
+				    $('#unit'+i).append($("<option />").val(this.unt_no).text(this.unt_lic));
+
+				});
+			};
+
+		},
+		error: function(xhr, desc, err) {
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
+		}
+	});
+}
+
+
 
 function reload() {
 	window.location.reload(true);
