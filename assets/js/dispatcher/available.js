@@ -1,5 +1,4 @@
-
-$(document).ready(function(){
+$(function(){
 
 	
 	$('#editModalWindow').on('hidden', function () {

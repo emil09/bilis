@@ -18,6 +18,28 @@ Class MY_Controller extends MX_Controller {
 		}
 	}
 
+	public function check_session_cashier() {
+		if($this->session->userdata('is_logged_in') == TRUE ){
+			if ($this->session->userdata('position') != 'C') {
+				show_404();
+			}
+		}
+		else{
+			redirect('login');
+		}
+	}
+
+	public function check_session_driver() {
+		if($this->session->userdata('is_logged_in') == TRUE ){
+			if ($this->session->userdata('position') != 'D') {
+				show_404();
+			}
+		}
+		else{
+			redirect('login');
+		}
+	}
+
 	public function check_session_admin(){
 		if($this->session->userdata('is_logged_in') == TRUE ){
 			if ($this->session->userdata('position') != 'S') {

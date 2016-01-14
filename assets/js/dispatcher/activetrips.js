@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 
 	$('#coo_select').each(function() {
 		getDspDriver(this.value);

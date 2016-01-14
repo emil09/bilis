@@ -2,7 +2,7 @@ var next_days = '';
 var dates = [];
 var sel_emp_no = '';
 var sel_drver_no = '';
-$(document).ready(function(){
+$(function(){
 	$('#coo_select').each(function() {
 		getDriver(this.value);
 	});

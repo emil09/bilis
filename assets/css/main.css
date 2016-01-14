@@ -45,8 +45,8 @@
 /*.dataTable.table-bordered>tbody>tr>td { border: 1px solid #aaa }*/
 table.table-bordered.dataTable td:first-child { border-left-width: 1px }
 table.table-bordered.dataTable td:last-child { border-right-width: 1px !important }
-#cooperativeselect { display: inline-flex }
-#cooperativeselect p { margin-right: 50px; line-height: 23px; text-transform: uppercase; font-weight: 600; }
+#cooperativeselect, #locationselect { display: inline-flex }
+#cooperativeselect p, #locationselect p { margin-right: 50px; line-height: 23px; text-transform: uppercase; font-weight: 600; margin-bottom: 0 }
 #clear-sched, #editModal.btn-primary, #editModal.btn-primary[disabled] { width: 49% }
 #editModal.btn-warning, .end-day { display: block; margin: 0 auto; width: 50% }
 #editModal.btn-primary[disabled] { margin: 0 auto; display: block }
@@ -146,7 +146,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
    ||  CSS for Dispatcher  ||
    ========================== */
 #table-available .modal-dialog { width: 480px; margin: 0 auto; margin-top: 100px }
-.page-dispatcher .content-header .pull-right p, .page-dispatcher .content-header .pull-right select { float: left; width: auto; margin-right: 10px }
+.page-dispatcher .content-header .pull-right p, .page-dispatcher .content-header .pull-right select, .page-driver .content-header .pull-right select { float: left; width: auto; margin-right: 10px }
 .page-dispatcher .content-header .pull-right p { margin-top: 2px; margin-bottom: 2px }
 .page-dispatcher .content-header .pull-right select, #route { height: 28px; padding: 3px 12px }
 .page-dispatcher .content-header .pull-right button { padding: 4px 10px }
@@ -166,6 +166,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 /* ==========================
    ||  CSS for Driver  ||
    ========================== */
+.page-driver #locationselect select { height: 28px; padding: 3px 12px }
 .page-driver #act_table tr th { padding-left: 20px }
 .page-driver #act_table tr th, .page-driver #act_table tr td { border:0 }
 .page-driver #calculator {

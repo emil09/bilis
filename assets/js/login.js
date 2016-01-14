@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	var base_url = window.location.origin;
 	$("#loginForm").submit(function(event){
 		event.preventDefault();	 

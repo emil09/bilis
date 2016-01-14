@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	$("#errmsg").hide();
 	
 	$("#employeeForm").submit(function(event){

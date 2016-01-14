@@ -3,7 +3,7 @@
 Class Dashboard extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
-		// $this->check_session_dispatcher();
+		$this->check_session_cashier();
 	}
 
 	public function index()
