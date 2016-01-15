@@ -3,14 +3,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
   <h1 class="pull-left"><i class="fa fa-money"></i> Cash Turnover</h1>
-<!--   <div id="locationselect" class="pull-right">
-      <p>Location:</p>
-      <select class="form-control" id="loc_select">
-          <option value="1">Cubao Office</option>
-          <option value="2">Hilltop Office</option>
-          <option value="3">Pioneer Office</option>
-      </select>
-  </div> -->
 </section>
 <!-- Main content -->
 <section class="content clearfix">

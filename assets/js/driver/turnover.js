@@ -2,25 +2,46 @@ var num = '';
 var dsp_no = '';
 $(function(){
 	get_active_trips();
+	get_turnover_location();
 	$(".screen" ).focus();
-
+	var floorValue = 0;
+	var remainder = 0;
 	$("#calculator button").click(function(e) {
 		if ($(this).val() != "C" && $(this).val() != "OK") {
 			num += $(this).val();
 
-			var valid = /^\d*(\.\d{0,2})?$/.test(num);
-		    if(!valid){
-		        console.log("Invalid input!");
-		        num = num.substring(0, num.length - 1)
-		    }
-		   
-			$(".screen").val(num);
+			// var valid = /^\d*(\.\d{0,2})?$/.test(num);
+		 //    if(!valid){
+		 //        console.log("Invalid input!");
+		 //        num = num.substring(0, num.length - 1)
+		 //    }
+
+		 	floorValue = Math.floor(num);
+			remainder = num - floorValue;
+			if (remainder < 0.325) {
+			    if (remainder < 0.125) {
+			        newValue = floorValue;
+			    } else {
+			        newValue = floorValue + 0.25;
+			    }
+			} else {
+			    if (remainder < 0.625) {
+			        newValue = floorValue + 0.5;
+			    } else if (remainder < 0.875) {
+			        newValue = floorValue + 0.75;
+			    } else {
+			        newValue = floorValue + 1;
+			    }
+			}
+		   	
+			$(".screen").val(newValue);
 		}
 		else if ($(this).val() == "C") {
 			$(".screen").val("");
 			num = '';
 		}
-		$("#amt").html(num);
+		
+		$("#amt").html(newValue);
 	});
 
 	
@@ -39,19 +60,22 @@ $(function(){
 			$("#amt").html(this.value);
 
    	});
-
-	// $("#screen").change(function(){
-	// 	console.log('test');
-	// 	// if($(this).val.length == 0){
-
-	// 	// 	$("#amt").html(0);
-	// 	// }
-	// });
-
-
-
-
 });
+
+function get_turnover_location(){
+
+	$.get("cashturnover/turnover_location", function(data, status){
+		var loc_data = '';
+		loc_data = '<option value="" selected disabled>Select your location</option>';
+		for (var i=0; i<parseInt(data.location.length);i++) {
+			loc_data += '<option value="'+data['location'][i]['loc_no']+'">'+data['location'][i]['loc_name']+'</option>'
+		}
+		$('#loc_select').html(loc_data);
+		//     $('.turnoverbutton').attr('id', trip_ctr);
+		// 	$("#amt").html(0);
+		// }
+    });
+}
 
 function get_active_trips(){
 
@@ -63,11 +87,7 @@ function get_active_trips(){
 			if(data.trip.length > 0) {
 				test = data['trip'][tempctr]['trips_ctr'];
 				trip_ctr = parseInt(data['trip'][tempctr]['trips_ctr']) + 1;
-			}
-			else {
-				console.log("hello");
-				trip_ctr=1;
-			}
+			} else { trip_ctr=1; }
 			
 			var table_data = '<tr>'+
 							'<th class="col-lg-4">Shift</th>'+

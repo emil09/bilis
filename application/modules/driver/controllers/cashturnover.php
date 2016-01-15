@@ -38,6 +38,17 @@ Class Cashturnover extends MY_Controller {
 		echo json_encode($results);
 	}
 
+	public function turnover_location() {
+		header('Content-Type: application/json');
+		$select = 'dsp_stat_fk, d.emp_no_fk, c.loc_no, loc_name';
+		$where = array(
+			'd.emp_no_fk' => $this->session->userdata('emp_no'),
+			'dsp_stat_fk' => 'A',
+		);
+		$results['location'] = $this->CashturnoverModel->turnover_location($select, $where);
+		echo json_encode($results);
+	}
+
 	public function save_turnover(){
 
 		header('Content-Type: application/json');
