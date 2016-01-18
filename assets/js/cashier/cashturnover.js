@@ -11,7 +11,6 @@ function get_available_turnover(){
 		var table_data = '';
 		var test = '';
 		if(data.cash_turnover.length > 0){
-			console.log(data);
 			for(var i = 0; i < data.cash_turnover.length; i++) {
 				
 				
@@ -81,7 +80,6 @@ function assignBag(emp_no, trip_ctr) {
 		data: {emp_no: emp_no, trip_ctr: trip_ctr},
 		success: function(data, status) {
 			if(data.driver.length > 0){
-				console.log(data);
 				for(var i = 0; i < data.driver.length; i++) {
 					var table_data = '<tr>'+
 										'<th>Trip</th>'+

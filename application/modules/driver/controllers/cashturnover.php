@@ -46,7 +46,7 @@ Class Cashturnover extends MY_Controller {
 			'dsp_stat_fk' => 'A',
 		);
 		$results['location'] = $this->CashturnoverModel->turnover_location($select, $where);
-		echo json_encode($results);
+		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 
 	public function save_turnover(){
@@ -73,6 +73,7 @@ Class Cashturnover extends MY_Controller {
 				'dsp_no_fk'	=>	$_POST['dsp_no'],
 				'amt_in' 	=>	$_POST['amt'],
 				'trips_ctr' =>	$_POST['trip_ctr'],
+				'loc_no'	=>	$_POST['loc_select'],
 				'trp_stat'	=> 	'T',
 				'to_dt'		=>  date('Y-m-d'), 
 				'to_time'	=>	date('H:i:s')

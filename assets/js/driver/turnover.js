@@ -143,17 +143,17 @@ $("#turnoverForm").submit(function(event){
 	var trip_ctr = $('.turnoverbutton')[0].id;
 	var sentence ='';
 	event.preventDefault();
-	 swal({   
-        	title: 'Are you sure you want to turn over?',
-        	text: 'Action will not be undone',
-        	type: 'warning',
-        	showCancelButton: true,
-        	confirmButtonColor: '#3085d6',
-        	cancelButtonColor: '#d33',
-        	confirmButtonText: 'Confirm',
-        	closeOnConfirm: false
-        }, function() {  
-	       $.ajax({
+	swal({   
+        title: 'Are you sure you want to turn over?',
+        text: 'Action will not be undone',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm',
+        closeOnConfirm: false
+    }, function() {  
+		$.ajax({
 			url: 'cashturnover/save_turnover',
 			type: 'post',
 			data: $('#turnoverForm').serialize() + '&dsp_no=' + dsp_no + '&trip_ctr=' + trip_ctr,
@@ -202,12 +202,8 @@ $("#turnoverForm").submit(function(event){
 				console.log(xhr);
 				console.log("Details: " + desc + "\nError:" + err);
 			}
-		   }); 
-			
-        });
-
-
-	
+		}); // ajax	
+    }); //swal
 })
 
 function formatAMPM(date) {
