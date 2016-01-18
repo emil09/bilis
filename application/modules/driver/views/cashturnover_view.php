@@ -15,11 +15,8 @@
 		    			<h3 class="box-title">Enter turnover amount</h3>
 		    			<div id="locationselect" class="pull-right">
 					    	<p>Location:</p>
-					    	<select class="form-control" id="loc_select" name="loc_select" required>
-					    		<option value="" selected disabled>Select your location</option>
-					        	<option value="1">Cubao Office</option>
-					        	<option value="2">Hilltop Office</option>
-					        	<option value="3">Pioneer Office</option>
+					    	<select class="form-control" id="loc_select" name="loc_select">
+
 					    	</select>
 						</div>
 					</div>
