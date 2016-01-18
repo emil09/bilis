@@ -6,50 +6,55 @@ $(function(){
 	$(".screen" ).focus();
 	var floorValue = 0;
 	var remainder = 0;
+	var newValue = 0;
 	$("#calculator button").click(function(e) {
 		if ($(this).val() != "C" && $(this).val() != "OK") {
 			num += $(this).val();
 
-			// var valid = /^\d*(\.\d{0,2})?$/.test(num);
-		 //    if(!valid){
-		 //        console.log("Invalid input!");
-		 //        num = num.substring(0, num.length - 1)
-		 //    }
-
-		 	floorValue = Math.floor(num);
-			remainder = num - floorValue;
-			if (remainder < 0.325) {
-			    if (remainder < 0.125) {
-			        newValue = floorValue;
-			    } else {
-			        newValue = floorValue + 0.25;
-			    }
-			} else {
-			    if (remainder < 0.625) {
-			        newValue = floorValue + 0.5;
-			    } else if (remainder < 0.875) {
-			        newValue = floorValue + 0.75;
-			    } else {
-			        newValue = floorValue + 1;
-			    }
-			}
-		   	
-			$(".screen").val(newValue);
+			var valid = /^\d*(\.\d{0,2})?$/.test(num);
+		    if(!valid){
+		        num = num.substring(0, num.length - 1)
+		    }
+		    else {
+		    	if(num.indexOf(".")!=-1) {
+		    		floorValue = Math.floor(parseFloat(num));
+		    		remainder = num - floorValue;
+		    		if (remainder < 0.325) {
+		    			if (remainder < 0.125) {
+		    				newValue = floorValue;
+		    			} else {
+		    				newValue = floorValue + 0.25;
+		    			}
+		    		} else {
+		    			if (remainder < 0.625) {
+		    				newValue = floorValue + 0.5;
+		    			} else if (remainder < 0.875) {
+		    				newValue = floorValue + 0.75;
+		    			} else {
+		    				newValue = floorValue + 1;
+		    			}
+		    		}
+		    		$(".screen").val(newValue);
+		    		$("#amt").html(newValue);
+		    	}
+				if(newValue ==0) {
+					$(".screen").val(num);
+					$("#amt").html(num);
+				}
+		    }
 		}
 		else if ($(this).val() == "C") {
 			$(".screen").val("");
+			$("#amt").html('');
 			num = '';
+			newValue = 0;
+			floorValue = 0;
+			remainder = 0;
 		}
-		
-		$("#amt").html(newValue);
 	});
 
-	
-	
-
 	$(".screen").keyup(function (e) {
-	
-		
+
 			var valid = /^\d*(\.\d{0,2})?$/.test(this.value),
 		        val = this.value;
 
@@ -136,18 +141,19 @@ function get_active_trips(){
 
 $("#turnoverForm").submit(function(event){
 	var trip_ctr = $('.turnoverbutton')[0].id;
+	var sentence ='';
 	event.preventDefault();
-	 swal({   
-        	title: 'Are you sure you want to turn over?',
-        	text: 'Action will not be undone',
-        	type: 'warning',
-        	showCancelButton: true,
-        	confirmButtonColor: '#3085d6',
-        	cancelButtonColor: '#d33',
-        	confirmButtonText: 'Confirm',
-        	closeOnConfirm: false
-        }, function() {  
-	       $.ajax({
+	swal({   
+        title: 'Are you sure you want to turn over?',
+        text: 'Action will not be undone',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm',
+        closeOnConfirm: false
+    }, function() {  
+		$.ajax({
 			url: 'cashturnover/save_turnover',
 			type: 'post',
 			data: $('#turnoverForm').serialize() + '&dsp_no=' + dsp_no + '&trip_ctr=' + trip_ctr,
@@ -168,27 +174,36 @@ $("#turnoverForm").submit(function(event){
 				    	window.location.reload(true);
 				    });
 				}else {
+					sentence = data.msg;
+					if (sentence.indexOf('Location') >= 0) { 
 						swal({   
-			        	title: 'Error',
-			        	text: 'Amount is Required',
-			        	type: 'error',
-			        	confirmButtonColor: '#3085d6',
-			        	cancelButtonColor: '#d33',
-			        	confirmButtonText: 'Ok',
-			        	closeOnConfirm: true
-				    });
+				        	title: 'Error',
+				        	text: 'Location is Required',
+				        	type: 'error',
+				        	confirmButtonColor: '#3085d6',
+				        	cancelButtonColor: '#d33',
+				        	confirmButtonText: 'Ok',
+				        	closeOnConfirm: true
+					    });
+					} else if (sentence.indexOf('Location') >= 0) { 
+						swal({   
+				        	title: 'Error',
+				        	text: 'Amount is Required',
+				        	type: 'error',
+				        	confirmButtonColor: '#3085d6',
+				        	cancelButtonColor: '#d33',
+				        	confirmButtonText: 'Ok',
+				        	closeOnConfirm: true
+					    });
+					}
 				}
 			},
 			error: function(xhr, desc, err) {
 				console.log(xhr);
 				console.log("Details: " + desc + "\nError:" + err);
 			}
-		   }); 
-			
-        });
-
-
-	
+		}); // ajax	
+    }); //swal
 })
 
 function formatAMPM(date) {

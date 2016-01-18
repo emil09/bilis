@@ -22,9 +22,10 @@ Class Cashturnover extends MY_Controller {
 	public function available_turnover(){
 
 		header('Content-Type: application/json');
-		$select = 'emp_no_fk, emp_lname, emp_fname, unit_no_fk, trips_ctr, rte_nam, unt_lic, amt_in, to_dt, to_time';
+		$select = 'd.emp_no_fk, emp_lname, emp_fname, unit_no_fk, trips_ctr, t.loc_no, rte_nam, unt_lic, amt_in, to_dt, to_time';
 		$where = array(
 			'dsp_stat_fk' => 'A',
+			'c.emp_no_fk' => $this->session->userdata('emp_no')
 		);
 
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
@@ -33,10 +34,10 @@ Class Cashturnover extends MY_Controller {
 
 	public function get_assigned_detail(){
 		header('Content-Type: application/json');
-		$select = 'dsp_unit_no, dsp_stat_fk, emp_no_fk, emp_fname, emp_lname, rte_no_fk, unit_no_fk, start_dt, 
+		$select = 'dsp_unit_no, dsp_stat_fk, d.emp_no_fk, emp_fname, emp_lname, rte_no_fk, unit_no_fk, start_dt, 
 			start_time, shift_code_fk, shift_name, rte_nam, unt_lic';
 		$where = array(
-			'emp_no_fk' => $_POST['emp_no'],
+			'd.emp_no_fk' => $_POST['emp_no'],
 			'trips_ctr' => $_POST['trip_ctr'],
 			'dsp_stat_fk' => 'A',
 		);
@@ -49,7 +50,5 @@ Class Cashturnover extends MY_Controller {
 			);
 		}
 		echo json_encode($results);
-		// echo $_POST['emp_no'];
-		// echo $_POST['unit_no'];
 	}
 }
