@@ -4,7 +4,8 @@
 /* =======================
    ||  GLOBAL CSS  ||
    ======================= */
-.content-wrapper, .modal-header { background-color: #DEE7F5 }
+.content-wrapper{ background-color: #DEE7F5 }
+.modal-header{ background-color: #3c8dbc; color: #fff;}
 .table-bordered>thead>tr>th, 
 .table-bordered>tbody>tr>th, 
 .table-bordered>tfoot>tr>th, 
@@ -133,7 +134,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #scheduling_modal .select2-container .select2-selection--single,
 #editModalWindow .select2-container .select2-selection--single { height: 34px }
 #scheduling_modal .day-night, #editModalWindow .day-night { width: auto }
-#scheduling_modal p , #editModalWindow p { line-height: 2.5; margin-bottom: 0 }
+#scheduling_modal p , #editModalWindow p { line-height: 2; margin-bottom: 0 }
 #editModalWindow .server-time { margin-right: 50px }
 .route-dropdown { width: auto }
 

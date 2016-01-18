@@ -70,9 +70,10 @@ Class AvailableModel extends CI_Model {
         $this->db->select($select);
         $this->db->from($this->tables[7]);
         $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
-        $this->db->join($this->tables[8], 'dsp_sched_no = sched_no_fk', 'left');
-        $this->db->where(array('sched_dt'=>date('Y-m-d'), 'dsp_stat_fk' =>'A'));
-        $this->db->or_where('dsp_stat_fk', null);
+        $this->db->where(array('sched_dt'=> date('Y-m-d'), 'sched_type' => 'A'));
+
+        // $this->db->where(array('sched_dt'=>date('Y-m-d'),'shift_code_fk'=> 'D', 'sched_type' =>'N'));
+
         $query = $this->db->get();
         return $query->result();;
     }

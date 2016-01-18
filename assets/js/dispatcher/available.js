@@ -1,3 +1,4 @@
+var driver_no = '';
 $(function(){
 
 	
@@ -11,6 +12,7 @@ $(function(){
 
     $('#table-available tbody').on('click', 'button#dispatch-button', function () {
     	var sched_no = $(this).data("value");
+    	var unit_no = $(this).data("unit");
         swal({   
         	title: 'Are you sure?',
         	text: 'You will not be able to dispatch it again!',
@@ -24,7 +26,7 @@ $(function(){
 	        $.ajax({
 				url: 'available/dispatch_unit',
 				type: 'post',
-				data: {sched_no: sched_no},
+				data: {sched_no: sched_no, unit_no: unit_no},
 				success: function(data, status) {
 					$('#coo_select').each(function() {
 						getDriver(this.value);
@@ -148,7 +150,7 @@ function getDriver(coo_no){
 						else {
 
 						
-							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no+'">DISPATCH</button>';
+							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no+'" data-unit="'+ data.driver[i].sched[sched_arr].unit_no_fk+'">DISPATCH</button>';
 							unit = data.driver[i].sched[sched_arr]['unt_lic'];
 							shift = 'Scheduled in ' + data.driver[i].sched[sched_arr]['shift_name']+ ' Shift';
 							if(!data.driver[i].sched[sched_arr]['dsp_sched_no']){
@@ -175,6 +177,7 @@ function getDriver(coo_no){
 					' id="editModal" onclick="setSched('+data.driver[i].emp_no+ ',' +  data.driver[i].driver_no+')" '+btn_state+'>' + btn_val +
 					'</button>'+ button_clear +'</td><td>'+btn_dispatched+'</td><td><span class="dispatch-status">'+shift +'</span></td></tr>';
 					$('#route').empty();
+					$('#route').append($("<option />").val(0).text('All Route'));
 					$.each(data.driver[i].route, function() {
 					    $('#route').append($("<option />").val(this.rte_no).text(this.rte_nam));
 					});
@@ -223,10 +226,11 @@ function getDriver(coo_no){
 								if(tabler.rows('.selected').data()[i][3] !== '') {
 									var sched_val = tabler.rows('.selected').data()[i][3];
 									var sched_no  = $(sched_val).data("value");
+									var unit_no  = $(sched_val).data("unit");
 					        		$.ajax({
 										url: 'available/dispatch_unit',
 										type: 'post',
-										data: {sched_no: sched_no},
+										data: {sched_no: sched_no, unit_no: unit_no},
 										success: function(data, status) {
 											$('#coo_select').each(function() {
 												getDriver(this.value);
@@ -243,10 +247,10 @@ function getDriver(coo_no){
 											console.log(xhr);
 											console.log("Details: " + desc + "\nError:" + err);
 										}
-									}); //ajax
-								} //if
-							} //for
-						}); //swal
+									});
+								}
+							}
+						});
 					}
 					else if (value=="clear" && tabler.rows('.selected').data().length) {
 				        swal({   
@@ -270,7 +274,6 @@ function getDriver(coo_no){
 										success: function(data, status) {
 											$('#coo_select').each(function() {
 												getDriver(this.value);
-												console.log(this.value);
 											});
 											if(data.status == 'success'){
 									        	swal('Clear Data Success!', 'The units have been cleared.', 'success'); 
@@ -284,10 +287,10 @@ function getDriver(coo_no){
 											console.log(xhr);
 											console.log("Details: " + desc + "\nError:" + err);
 										}
-									}); //ajax
-								} //if
-							} //for
-				        }); //swal
+									});
+								}
+							}
+				        }); 
 					}
 			    });
 		},
@@ -306,7 +309,6 @@ function setSched(emp_no, dvr_no) {
 		type: 'post',
 		data: {emp_no: emp_no, dvr_no: dvr_no},
 		success: function(data, status) {
-			console.log(data);
 			var driver_info = data.driver[0].lname + ' (' + data.driver[0].emp_no + ')' ;
 			$('#driver_name').html(driver_info);
 			$('.server-time').html(data.date);
@@ -332,6 +334,34 @@ function setSched(emp_no, dvr_no) {
 				$('#shift').val(data.sched_exist[0].shift_code_fk);
 				$('#route').val(data.sched_exist[0].rte_no_fk);
 
+			}
+
+			$('.select2').on('change', function(){
+				shift_avail($(this).val());
+			});
+		},
+		error: function(xhr, desc, err) {
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
+		}
+	});
+}
+
+function shift_avail(unit_no){
+	$.ajax({
+		url: 'available/shift_avail',
+		type: 'post',
+		data: {unit_no: unit_no, driver_no: driver_no},
+		success: function(data, status) {
+			if(data.length>0){
+				if(data[0]['shift_code_fk'] == 'D' ){
+					$('#shift' ).val('N');
+					$('#shift' + ' option[value="D"]').attr("disabled","disabled");
+				}
+				else{
+					$('#shift').val('D');
+					$('#shift' + ' option[value="N"]').attr("disabled","disabled");
+				}
 			}
 
 		},

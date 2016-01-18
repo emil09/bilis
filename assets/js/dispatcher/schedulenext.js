@@ -27,7 +27,7 @@ $(function(){
 			type: 'post',
 			data: data,
 			success: function(data, status) {
-				
+				console.log(data);
 				$("#scheduling_modal").modal('hide');
 				$('#coo_select').each(function() {
 					getDriver(this.value);
@@ -44,12 +44,10 @@ $(function(){
 function getDriver(coo_no){
 	var schednext_data = ' ';
 
-
-
 	$.ajax({
 		url: 'get_driver',
 		type: 'post',
-		data: {coo_no: coo_no},
+		data: {coo_no: coo_no, date: dates},
 		success: function(data, status) {
 
 			dates = [];
@@ -134,16 +132,18 @@ function setSched(emp_no){
 	$.ajax({
 		url: 'get_driver_detail',
 		type: 'post',
-		data: {emp_no: emp_no},
+		data: {emp_no: emp_no, date: dates},
 		success: function(data, status) {
-		
-			// next_days = dates;
+			console.log(data);
+
 			sel_drver_no = data.driver[0]['driver_no'];
 
 			$('#driver_detail').html(data.driver[0]['lname'] + ' ('+ data.driver[0]['emp_no']+ ')');
 			var set_sched_table = '';
 			var shift_option = '';
 			$('#route').empty();
+
+			$('#route').append($("<option />").val(0).text('All Route'));
 		    $.each(data.route, function() {
 			    $('#route').append($("<option/>").val(this.rte_no).text(this.rte_nam));
 			});
@@ -176,18 +176,21 @@ function setSched(emp_no){
 
             
             $('#route').each(function(){
-				getUnit(this.value);
+            	getUnit(this.value);
+				check_sched(emp_no, this.value);
+				
 			});
 			$('#route').on('change', function() {
+
 				getUnit(this.value);
+				check_sched(emp_no, this.value);
+				
 			});
 
 			$('.select2').on('change', function(){
-				console.log($(this).data('value'));
 				shift_avail($(this).val(), $(this).data('value'));
 			});
-		
-			
+
 			
 		},
 		error: function(xhr, desc, err) {
@@ -201,10 +204,11 @@ function shift_avail(unit_no, i){
 	$.ajax({
 		url: 'shift_avail',
 		type: 'post',
-		data: {unit_no: unit_no, date: dates[i]},
+		data: {unit_no: unit_no, date: dates[i], driver_no: sel_drver_no},
 		success: function(data, status) {
+			
 			if(data.length>0){
-				if(data[0]['shift_code_fk'] == 'D'){
+				if(data[0]['shift_code_fk'] == 'D' ){
 					$('#shift'+i ).val('N');
 					$('#shift' + i + ' option[value="D"]').attr("disabled","disabled");
 				}
@@ -220,13 +224,50 @@ function shift_avail(unit_no, i){
 			console.log("Details: " + desc + "\nError:" + err);
 		}
 	});
+}
 
+
+function check_sched(emp_no, rte_no){
+	$.ajax({
+		url: 'check_sched',
+		type: 'post',
+		data: {emp_no: emp_no, rte_no: rte_no, date: dates},
+		success: function(data, status) {
+			console.log(data);
+
+			for (var i = 0; i < data.schedule.length;i++) {
+				
+				if(data.schedule.length>0){
+
+					var dateIndex = dates.indexOf(data.schedule[i]['sched_dt']);
+					var unitval = data.schedule[i]['unit_no_fk'];
+					var unittext = data.schedule[i]['unt_lic'];
+					var shiftval = data.schedule[i]['shift_code_fk'];
+				
+					$('#unit'+dateIndex).append($("<option />").val(unitval).text(unittext));
+					
+					$("#unit"+dateIndex).select2("val", unitval);
+
+					$('#shift'+dateIndex).val(shiftval);
+
+					$('#select2-unit'+dateIndex+'-container').addClass('unit-plate');
+
+				}else{
+
+					$('#unit0').select2("val", "");
+				}
+			};
+
+		},
+		error: function(xhr, desc, err) {
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
+		}
+	});
 	
 }
 
 function getUnit(rte_no){
-		
-	
 	
 	$.ajax({
 		url: 'get_unit',
@@ -234,21 +275,16 @@ function getUnit(rte_no){
 		data: {route_no: rte_no, date: dates},
 		success: function(data, status) {
 			console.log(data);
-			// console.log(data.length);
-			// $('#unit'+i).append($("<option />").val('').text(''));
-
 			for(i = 0; i < data.length; i++){
-				test = $('#unit'+i).val()
-				test2 = $('#unit'+i).text()
+
+				test = '';
+				test2 = '';
+
+
 				$('#unit'+i).empty();
-				// $('#unit'+i).select2("val", "");
-				// console.log(test);
-				// $('#select2-unit-container').removeClass('unit-plate');
-				// console.log($('#unit'+i).val());
 				$('#unit'+i).append($("<option />").val(test).text(test2));
-				// console.log(test);
+			
 				$.each(data[i].unit, function() {
-					// console.log(index);
 				    $('#unit'+i).append($("<option />").val(this.unt_no).text(this.unt_lic));
 
 				});

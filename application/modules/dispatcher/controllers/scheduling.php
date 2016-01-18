@@ -76,10 +76,9 @@ Class Scheduling extends MY_Controller {
 		$this->db->limit(1);
 		$results = $this->SchedulingModel->get_driver($select, $where2);
 		
-		// for ($i=1; $i <= 7; $i++) { 
-		// 	$data['date'][$i-1] =  date("Y-m-d", strtotime($i . ' days'));
-		// }
-		// $data['date']= $date;
+		
+
+		
 		$i = 0;
 		foreach ($results as $result) {
 			$data['driver'][$i]['lname'] = $result->emp_lname;
@@ -88,8 +87,6 @@ Class Scheduling extends MY_Controller {
 			$data['driver'][$i]['coo_name'] = $result->coo_name;
 			$data['driver'][$i]['coo_no_fk'] = $result->coo_no_fk;	
 			$data['driver'][$i]['driver_no'] = $result->driver_no;		
-		
-			
 
 			$i++;
 		}
@@ -102,6 +99,22 @@ Class Scheduling extends MY_Controller {
 		
 		echo json_encode($data, JSON_PRETTY_PRINT);
 
+	}
+
+	public function check_sched(){
+		$select = 'unt_lic, unit_no_fk, sched_dt, sched_time, shift_code_fk';
+		$this->db->join('driver','driver_no = driver_no_fk', 'left');
+		$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
+		if ($_POST['rte_no']!=0) {
+			$this->db->where('rte_no_fk',$_POST['rte_no']);
+		}
+		$where = array('emp_no_fk'=>$_POST['emp_no']);
+		$this->db->where('sched_dt >=', $_POST['date'][0]);
+		$this->db->where('sched_dt <=', end($_POST['date']));
+		$data['schedule'] = $this->SchedulingModel->select_where(7, $select ,$where);
+
+		header('Content-Type: application/json');
+		echo json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function get_unit(){
@@ -159,8 +172,10 @@ Class Scheduling extends MY_Controller {
 			if(!empty($unt_sched)){
 				$this->db->where_not_in('unt_no', $unt_sched);
 			}
-			$where = array('rte_no' => $_POST['route_no']);
-			$results[$i]['unit'] = $this->SchedulingModel->select_where(5, $select, $where);
+			if($_POST['route_no'] != 0){
+				$this->db->where('rte_no', $_POST['route_no']);
+			}
+			$results[$i]['unit'] = $this->SchedulingModel->select_where(5, $select);
 			
 		}
 		
@@ -244,6 +259,7 @@ Class Scheduling extends MY_Controller {
 	public function shift_avail(){
 		$select = 'shift_code_fk';
 		$where = array('sched_dt' => $_POST['date'], 'unit_no_fk' =>$_POST['unit_no']);
+		$this->db->where('driver_no_fk !=', $_POST['driver_no']);
 		$data = $this->SchedulingModel->select_where(7, $select, $where);
 		header('Content-Type: application/json');
 		echo json_encode($data, JSON_PRETTY_PRINT);
