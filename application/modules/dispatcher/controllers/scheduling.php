@@ -226,7 +226,6 @@ Class Scheduling extends MY_Controller {
 									'sched_type'	=> 'A',
 									'dsp_sched_no'=> $have_sched[0]->dsp_sched_no
 								);
-								// $update_id = array('dsp_sched_no'=> $have_sched[0]->dsp_sched_no);
 						}else{
 								$rte = $this->SchedulingModel->select_where(5, 'rte_no', array('unt_no'=>$_POST['unit'][$i]));
 								$insert_data[$i] = array(
@@ -241,7 +240,6 @@ Class Scheduling extends MY_Controller {
 						}
 					}
 				}	
-				// $this->SchedulingModel->insert_batch(7, $insert_data);
 				if($insert_data != ''){
 
 					$this->SchedulingModel->insert_batch(7, $insert_data);

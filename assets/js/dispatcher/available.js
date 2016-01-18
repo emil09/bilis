@@ -309,6 +309,7 @@ function setSched(emp_no, dvr_no) {
 		type: 'post',
 		data: {emp_no: emp_no, dvr_no: dvr_no},
 		success: function(data, status) {
+			console.log(data);
 			var driver_info = data.driver[0].lname + ' (' + data.driver[0].emp_no + ')' ;
 			$('#driver_name').html(driver_info);
 			$('.server-time').html(data.date);
@@ -404,7 +405,7 @@ $("#schedForm").submit(function(event){
 		type: 'post',
 		data: $("#schedForm").serialize()  + '&driver_no=' + driver_no,
 		success: function(data, status) {
-			
+			console.log(data);
 			if(data.status=='success'){
 				$('#editModalWindow').modal('hide');
 				swal({   

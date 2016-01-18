@@ -189,13 +189,12 @@ Class Available extends MY_Controller {
 	public function save_sched(){
 
 		header('Content-Type: application/json');
-		if(isset($_POST['route']) && isset($_POST['unit']) && isset($_POST['driver_no'])){
+		if(isset($_POST['unit']) && isset($_POST['driver_no'])){
 
 
 			$this->form_validation->set_rules('driver_no', 'Driver Number', 'required');
 			$this->form_validation->set_rules('unit', 'Unit Number', 'required');
 			$this->form_validation->set_rules('shift', 'Shift', 'required');
-			$this->form_validation->set_rules('route', 'Route', 'required');
 			
 
 			if ($this->form_validation->run($this) == FALSE){
