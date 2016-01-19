@@ -106,7 +106,6 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_unit(){
-		// $_POST['route_no'] = 9;
 		header('Content-Type: application/json');
 		$day =  date('N');
 		$select = 'unt_lic, unt_no';
@@ -175,6 +174,8 @@ Class Available extends MY_Controller {
 		if($_POST['route_no'] != 0){
 			$this->db->where('rte_no', $_POST['route_no']);
 		}
+		
+		$this->db->where('coo_no', $_POST['coo_no']);
 
 		$results['unit'] = $this->AvailableModel->select_where(5, $select);
 		$results['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');

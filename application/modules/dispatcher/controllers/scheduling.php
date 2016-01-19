@@ -18,7 +18,11 @@ Class Scheduling extends MY_Controller {
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
 		$data['css'] = $this->add_css(array(Select2CSS));
-		$data['js'] = $this->add_js(array(Select2JS));		
+		$data['js'] = $this->add_js(array(Select2JS, SchedulePrev));		
+
+		$where = array('emp_no' => $this->session->userdata('emp_no'));
+		$cooperatives = $this->SchedulingModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);
+		$data['cooperatives'] = $cooperatives;
 		
 		echo Modules::run('templates/bilis_noside', $data);
 	}
@@ -149,6 +153,8 @@ Class Scheduling extends MY_Controller {
 					break;
 				
 				default:
+					$c1 = '';
+					$c2 = '';
 					break;
 			}
 			$this->db->where(array('sched_dt' => $_POST['date'][$i], 'shift_code_fk'=>'D', 'shift_code_fk'=>'N'));
@@ -164,7 +170,7 @@ Class Scheduling extends MY_Controller {
 		        $x++;
 		    }
 
-			if(isset($c1, $c2)){
+			if(($c1!=='') && ($c2!=='')){
 				$this->db->not_like('unt_lic', $c1, 'before');
 				$this->db->not_like('unt_lic', $c2, 'before');
 			}
@@ -175,6 +181,8 @@ Class Scheduling extends MY_Controller {
 			if($_POST['route_no'] != 0){
 				$this->db->where('rte_no', $_POST['route_no']);
 			}
+
+			$this->db->where('coo_no', $_POST['coo_no']);
 			$results[$i]['unit'] = $this->SchedulingModel->select_where(5, $select);
 			
 		}
@@ -238,7 +246,20 @@ Class Scheduling extends MY_Controller {
 									'sched_type'	=> 'A'
 								);							
 						}
+					}else{
+						$select = 'sched_dt, sched_time, unit_no_fk, dsp_sched_no';
+						$where = array(
+							'sched_dt' => $_POST['dates'][$i],
+							'shift_code_fk' => $_POST['shift'][$i],
+							'sched_type'	=> 'A',
+							'driver_no_fk' 	=> $_POST['driver_no']
+						);
+						$h_sched = $this->SchedulingModel->select_where(7, $select, $where);
+						if(count($h_sched)>0){
+							$this->SchedulingModel->delete(7, array('dsp_sched_no'=> $h_sched[0]->dsp_sched_no));
+						}
 					}
+					
 				}	
 				if($insert_data != ''){
 
@@ -249,7 +270,7 @@ Class Scheduling extends MY_Controller {
 					$this->SchedulingModel->update_batch(7, $update_data, 'dsp_sched_no');
 				}
 				$data['data1'] = $insert_data;
-				$data['data2'] = $_POST;
+				$data['data2'] = $_POST['unit'];
 		}
 		echo json_encode($data, JSON_PRETTY_PRINT);
 	}
@@ -266,4 +287,40 @@ Class Scheduling extends MY_Controller {
 		print_r($_SERVER['HTTP_HOST']);
 	}
 
+	// previous
+	public function get_prev(){
+		$init_d = $_POST['d'];
+		for ($i=$init_d, $j = 0; $i < $init_d + 7; $i++, $j++) { 		
+			$data['dates'][$j] = date('Y-m-d',strtotime('-'.$i.' day'));
+		}
+
+		header('Content-Type: application/json');
+		echo json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function get_prev_driver(){
+		// This query used to display all drivers per cooperative
+		$select = 'employee.emp_no, emp_fname, emp_lname, coo_no_fk, driver_no';
+		$where = array('coo_no_fk' => $_POST['coo_no']);
+
+		$results['driver'] = $this->SchedulingModel->get_driver($select, $where);
+		
+		for ($i=0; $i < count($results['driver']); $i++) { 
+
+			// Getting the schedule of the driver, it is empty when the driver has no schedule
+			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name, sched_type, shift_code_fk';
+		
+			$where2 = array('driver_no_fk' => $results['driver'][$i]->driver_no);
+			$this->db->where('sched_dt >=', end($_POST['dates']));
+			$this->db->where('sched_dt <=', $_POST['dates'][0] );
+			$this->db->join('shift','shift_code = shift_code_fk', 'left');
+			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
+			$this->db->order_by('sched_dt');
+			$results['driver'][$i]->sched = $this->SchedulingModel->select_where(7, $select2, $where2);
+		}
+		
+
+		header('Content-Type: application/json');
+		echo json_encode($results, JSON_PRETTY_PRINT);	
+	}
 }

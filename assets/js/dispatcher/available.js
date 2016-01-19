@@ -381,7 +381,7 @@ function getUnit(route_no){
 	$.ajax({
 		url: 'available/get_unit',
 		type: 'post',
-		data: {route_no: route_no},
+		data: {route_no: route_no, coo_no: $('#coo_select').val()},
 		success: function(data, status) {
 			$('#unit').append($("<option />").val('').text(''));
 			
