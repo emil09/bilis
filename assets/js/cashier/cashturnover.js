@@ -1,8 +1,36 @@
 $(function(){
+	$("#errmsg").hide();
 	get_available_turnover();
 	
     $('#table-cashturnover tbody').on('click', 'button#cashturnover-button', function () {
         $("#cashturnoverModal").modal({backdrop: 'static'});
+    });
+
+    $('#cashturnoverForm').submit(function(event){
+    	event.preventDefault();
+    	$.ajax({
+			url: 'cashturnover/turnover_details',
+			type: 'post',
+			data: $('#cashturnoverForm').serialize(),
+			success: function(data, status) {
+				console.log(data);
+				if(data.status == 'success') {
+					$('#cashturnoverModal').modal('hide');
+					swal({   
+						title: 'Success!',   
+						text: 'Cash turnover successful.', 
+						type: 'success' 
+					});
+				}
+				else{
+					$("#errmsg").html(data.msg).show(200);
+				}
+			},
+			error: function(xhr, desc, err) {
+				console.log(xhr);
+				console.log("Details: " + desc + "\nError:" + err);
+			}
+	    });
     });
 });
 
@@ -12,8 +40,6 @@ function get_available_turnover(){
 		var test = '';
 		if(data.cash_turnover.length > 0){
 			for(var i = 0; i < data.cash_turnover.length; i++) {
-				
-				
 				table_data += '<tr>'+
 									'<td><button id="cashturnover-button" class="btn btn-primary" onclick="assignBag('+data["cash_turnover"][i]["emp_no_fk"]+', '+data["cash_turnover"][i]["trips_ctr"]+')">'+ data["cash_turnover"][i]["trips_ctr"] +'</button></td>'+
 									'<td>' + data['cash_turnover'][i]['rte_nam'] + '</td>'+
@@ -33,7 +59,7 @@ function get_available_turnover(){
 				scrollCollapse: true,
 				scrollX: 'true',
 				fixedHeader: false,
-				"order": [[ 3, "desc" ]]
+				order: [[ 5, "desc" ]]
 			});
 			$('#selectallrows').click(function(){
 		    	$('#table-cashturnover tbody tr').addClass('DTTT_selected selected');
@@ -79,11 +105,12 @@ function assignBag(emp_no, trip_ctr) {
 		type: 'post',
 		data: {emp_no: emp_no, trip_ctr: trip_ctr},
 		success: function(data, status) {
+			console.log(data)
 			if(data.driver.length > 0){
 				for(var i = 0; i < data.driver.length; i++) {
 					var table_data = '<tr>'+
 										'<th>Trip</th>'+
-										'<td>'+ data['trip'][i]['trips_ctr'] +'</td>'+
+										'<td>'+ data['trip'][0]['trips_ctr'] +'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Route</th>'+
@@ -99,7 +126,7 @@ function assignBag(emp_no, trip_ctr) {
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Amount Turnover</th>'+
-										'<td>'+data['trip'][i]['amt_in']+'</td>'+
+										'<td>'+data['trip'][0]['amt_in']+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Arrival</th>'+

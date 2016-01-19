@@ -26,58 +26,80 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
+        <div id="errmsg" class="callout callout-danger"></div>
         <div class="text-center" style="margin-bottom: 20px;" id="notif_message_log"></div>
         <form name="loginForm" id="loginForm" method="POST">
-          <div id="errmsg" class="callout callout-danger">
-          </div>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" id="emp_no" name="emp_no" placeholder="Enter employee number">
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-          </div>
-          <div class="form-group has-feedback">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <div id="empnokeys" class="keys">
-                <button type="button" value="1">1</button>
-                <button type="button" value="2">2</button>
-                <button type="button" value="3" class="operator">3</button>
-                <button type="button" value="4">4</button>
-                <button type="button" value="5">5</button>
-                <button type="button" value="6" class="operator">6</button>
-                <button type="button" value="7">7</button>
-                <button type="button" value="8">8</button>
-                <button type="button" value="9" class="operator">9</button>
-                <button type="button" value="CLR" class="clear">CLR</button>
-                <button type="button" value="0">0</button>
-                <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
-              </div>
-              <div id="passkeys" class="keys">
-                <button type="button" value="1">1</button>
-                <button type="button" value="2">2</button>
-                <button type="button" value="3" class="operator">3</button>
-                <button type="button" value="4">4</button>
-                <button type="button" value="5">5</button>
-                <button type="button" value="6" class="operator">6</button>
-                <button type="button" value="7">7</button>
-                <button type="button" value="8">8</button>
-                <button type="button" value="9" class="operator">9</button>
-                <button type="button" value="CLR" class="clear">CLR</button>
-                <button type="button" value="0">0</button>
-                <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
-              </div>
-            </div> <!-- /.col -->
-            <div class="col-xs-8">
-              <div class="checkbox icheck">
-                <label class="">
-                  <div class="icheckbox_square-blue" aria-checked="true" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> Remember Me
-                </label>
+            <div class="slide-out">
+              <input type="text" class="form-control" id="emp_no" name="emp_no" placeholder="Enter employee number" style="margin-bottom: 15px" readonly>
+              <span class="glyphicon glyphicon-user form-control-feedback"></span>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div id="empnokeys" class="keys">
+                    <button type="button" value="1">1</button>
+                    <button type="button" value="2">2</button>
+                    <button type="button" value="3" class="operator">3</button>
+                    <button type="button" value="4">4</button>
+                    <button type="button" value="5">5</button>
+                    <button type="button" value="6" class="operator">6</button>
+                    <button type="button" value="7">7</button>
+                    <button type="button" value="8">8</button>
+                    <button type="button" value="9" class="operator">9</button>
+                    <button type="button" value="CLR" class="clear">CLR</button>
+                    <button type="button" value="0">0</button>
+                    <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
+                  </div>
+                </div>
+                <!-- <div class="col-xs-8">
+                  <div class="checkbox icheck">
+                    <label class="">
+                      <div class="icheckbox_square-blue" aria-checked="true" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> Remember Me
+                    </label>
+                  </div>
+                </div> -->
+                <div class="col-xs-12">
+                  <button id="next-btn" class="btn btn-success btn-block btn-flat">Next</button>
+                </div>
               </div>
             </div>
-            <div class="col-xs-4">
-              <button type="submit" id="signin-btn" class="btn btn-success btn-block btn-flat">Sign In</button>
+          </div>
+          <div class="form-group has-feedback">
+            <div class="slide-in hide-form">
+              <div class="clearfix" style="position: relative">
+                <p id="employeename"></p><p id="notyou">(<span>Not You?</span>)</p>
+              </div>
+              <div style="position: relative">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="margin-bottom: 15px" readonly>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div id="passkeys" class="keys">
+                    <button type="button" value="1">1</button>
+                    <button type="button" value="2">2</button>
+                    <button type="button" value="3" class="operator">3</button>
+                    <button type="button" value="4">4</button>
+                    <button type="button" value="5">5</button>
+                    <button type="button" value="6" class="operator">6</button>
+                    <button type="button" value="7">7</button>
+                    <button type="button" value="8">8</button>
+                    <button type="button" value="9" class="operator">9</button>
+                    <button type="button" value="CLR" class="clear">CLR</button>
+                    <button type="button" value="0">0</button>
+                    <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
+                  </div>
+                </div> <!-- /.col -->
+                <div class="col-xs-8">
+                  <div class="checkbox icheck">
+                    <label class="">
+                      <div class="icheckbox_square-blue" aria-checked="true" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> Remember Me
+                    </label>
+                  </div>
+                </div>
+                <div class="col-xs-4">
+                  <button type="submit" id="signin-btn" class="btn btn-success btn-block btn-flat">Sign In</button>
+                </div>
+              </div>
             </div>
           </div>
         </form>

@@ -13,7 +13,8 @@ Class CashturnoverModel extends CI_Model {
         '7' => 'dispatch_sched',
         '8' => 'dispatch_unit',
         '9' => 'trip',
-        '10'=> 'cashier'
+        '10'=> 'cashier',
+        '11'=> 'cash_turnover'
     );
     
     public function select_where($key = '', $select = '', $where = array()) {

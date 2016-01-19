@@ -32,7 +32,7 @@
 <div id="cashturnoverModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
-	      <form id="schedForm">
+	      <form id="cashturnoverForm">
 	        <div class="modal-header">
 	          <h4 class="modal-title pull-left">Cash turnover to <strong><?php echo $fname . ' ' . $lname; ?></strong></h4>
 	          <button type="button" class="btn btn-danger btn-xs pull-right" data-dismiss="modal" style="margin-left: 5px"><i class="fa fa-times"></i></button>
@@ -43,15 +43,15 @@
 	          	<table class="table">
 	          		<tr>
 		          		<td><p>Bag</p></td>
-		          		<td><input type="text" class="form-control" placeholder="Bag #"></td>
+		          		<td><input type="text" id="bag_no" class="form-control" name="bag_no" placeholder="Bag #"></td>
 		          	</tr>
 		          	<tr>
 		          		<td><p>Batch</p></td>
 		          		<td>
 		          			<select name="batch" id="batch" class="form-control">
 		          				<option value="" selected disabled>Select batch</option>
-		          				<option value="1">1</option>
-		          				<option value="2">2</option>
+		          				<option value="D">1</option>
+		          				<option value="N">2</option>
 		          			</select>
 		          		</td>
 		          	</tr>
@@ -60,6 +60,7 @@
 		          		<td><button id="accept-turnover" class="btn btn-primary pull-right">Accept</button></td>
 		          	</tr>
 	          	</table>
+	          	<div id="errmsg" class="callout callout-danger"></div>
 	          </div>
 	          <div class="right-col col-sm-6">
 	          	<h4>Selected Trip</h4>
