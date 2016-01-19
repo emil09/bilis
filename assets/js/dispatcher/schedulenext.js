@@ -18,16 +18,16 @@ $(function(){
 		data = $('#schedForm').serializeArray();
 		data.push({name: 'emp_no', value: sel_emp_no});
 		data.push({name: 'driver_no', value: sel_drver_no});
-
 		for(var c=0; c<dates.length;c++){
 			data.push({name: 'dates[]', value: dates[c]});
-		}// console.log(dates);
+		}
 		$.ajax({
 			url: 'save_sched',
 			type: 'post',
 			data: data,
 			success: function(data, status) {
-				console.log(data);
+				
+		console.log(data);
 				$("#scheduling_modal").modal('hide');
 				$('#coo_select').each(function() {
 					getDriver(this.value);
@@ -134,7 +134,6 @@ function setSched(emp_no){
 		type: 'post',
 		data: {emp_no: emp_no, date: dates},
 		success: function(data, status) {
-			console.log(data);
 
 			sel_drver_no = data.driver[0]['driver_no'];
 
@@ -164,7 +163,7 @@ function setSched(emp_no){
                     	'<select class="form-control shift" id="shift'+i+'" name="shift[]">'+ shift_option +
                 		'</select>'+
                 	'</td>'+
-                    '<td><button class="btn btn-danger" disabled>Clear</button></td>'+
+                    '<td><button type="button" class="btn btn-danger clear" data-value="'+i+'">Clear</button></td>'+
                 '</tr>';
 			};
 			
@@ -176,19 +175,27 @@ function setSched(emp_no){
 
             
             $('#route').each(function(){
-            	getUnit(this.value);
+            	
 				check_sched(emp_no, this.value);
+				getUnit(this.value);
 				
 			});
 			$('#route').on('change', function() {
 
-				getUnit(this.value);
+				
 				check_sched(emp_no, this.value);
+				getUnit(this.value);
 				
 			});
 
 			$('.select2').on('change', function(){
 				shift_avail($(this).val(), $(this).data('value'));
+			});
+
+			$('.clear').click(function(){
+				var i = $(this).data('value');
+				$('#unit'+i).select2("val", "");
+				$('#select2-unit'+i+ '-container').removeClass('unit-plate');
 			});
 
 			
@@ -233,7 +240,6 @@ function check_sched(emp_no, rte_no){
 		type: 'post',
 		data: {emp_no: emp_no, rte_no: rte_no, date: dates},
 		success: function(data, status) {
-			console.log(data);
 
 			for (var i = 0; i < data.schedule.length;i++) {
 				
@@ -245,16 +251,15 @@ function check_sched(emp_no, rte_no){
 					var shiftval = data.schedule[i]['shift_code_fk'];
 				
 					$('#unit'+dateIndex).append($("<option />").val(unitval).text(unittext));
-					
-					$("#unit"+dateIndex).select2("val", unitval);
+					// $("#unit"+dateIndex).val(unitval);
+					// $("#unit"+dateIndex).val("val", unitval);
+					$('#unit'+dateIndex).select2("val", unitval);
+					// console.log(unitval);
 
 					$('#shift'+dateIndex).val(shiftval);
 
 					$('#select2-unit'+dateIndex+'-container').addClass('unit-plate');
 
-				}else{
-
-					$('#unit0').select2("val", "");
 				}
 			};
 
@@ -272,16 +277,15 @@ function getUnit(rte_no){
 	$.ajax({
 		url: 'get_unit',
 		type: 'post',
-		data: {route_no: rte_no, date: dates},
+		data: {route_no: rte_no, date: dates, coo_no: $('#coo_select').val()},
 		success: function(data, status) {
-			console.log(data);
 			for(i = 0; i < data.length; i++){
 
 				test = '';
 				test2 = '';
 
 
-				$('#unit'+i).empty();
+				// $('#unit'+i).empty();
 				$('#unit'+i).append($("<option />").val(test).text(test2));
 			
 				$.each(data[i].unit, function() {

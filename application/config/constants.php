@@ -129,6 +129,7 @@ define('RegisterJS', 'assets/js/admin/register.js');
 define('AvailableJS', 'assets/js/dispatcher/available.js');
 define('ActiveTripsJS', 'assets/js/dispatcher/activetrips.js');
 define('ScheduleNextJS', 'assets/js/dispatcher/schedulenext.js');
+define('SchedulePrev', 'assets/js/dispatcher/scheduleprev.js');
 
 /*
 |--------------------------------------------------------------------------
