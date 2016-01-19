@@ -47,7 +47,7 @@
                     <button type="button" value="9" class="operator">9</button>
                     <button type="button" value="CLR" class="clear">CLR</button>
                     <button type="button" value="0">0</button>
-                    <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
+                    <button type="button" class="operator proceed" value="backspace"><i class="fa fa-long-arrow-left" style="font-size: 11px"></i> Backspace</button>
                   </div>
                 </div>
                 <!-- <div class="col-xs-8">
@@ -86,7 +86,7 @@
                     <button type="button" value="9" class="operator">9</button>
                     <button type="button" value="CLR" class="clear">CLR</button>
                     <button type="button" value="0">0</button>
-                    <button type="button" class="operator proceed" value="backspace"><i class="fa fa-arrow-left" style="font-size: 16px"></i></button>
+                    <button type="button" class="operator proceed" value="backspace"><i class="fa fa-long-arrow-left" style="font-size: 11px"></i> Backspace</button>
                   </div>
                 </div> <!-- /.col -->
                 <div class="col-xs-8">
