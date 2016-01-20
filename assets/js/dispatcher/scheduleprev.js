@@ -15,8 +15,6 @@ $(function(){
 		getdata(d);
 		$('#next').attr('disabled',false);
 
-
-
 	});
 	$('#next').click(function(){
 		
@@ -29,10 +27,6 @@ $(function(){
 			}
 
 	});
-
-	
-
-	
 
 });
 
@@ -106,31 +100,18 @@ function getDrivers(coo_no){
 
 			    prevbody +='</tr>';
 			}
-
+			$('#table-scheduling-previous').dataTable().fnDestroy();
 			$('#prevbody').html(prevbody);
 
+			var tabler = $('#table-scheduling-previous').DataTable({
+				paging : false,
+				autoWidth : false,
+				scrollY: '45vh',
+				scrollCollapse: true,
+				scrollX: 'true',
+				fixedHeader: false
+			});
 
-
-
-
-
-
-
-
-			// console.log(data);
-			// for(var i=0; i<data['driver'].length;i++){
-
-			// 	prevbody += '<tr>'+
-			// 				'<td>'+data['driver'][i].emp_lname + ', ' + data['driver'][i].emp_fname + ' (' + data['driver'][i].emp_no + ')'+'</td>'+
-			// 				'<td></td>'+
-			// 				'<td></td>'+
-			// 				'<td></td>'+
-			// 				'<td></td>'+
-			// 				'<td></td>'+
-			// 				'<td></td>'+
-			// 				'<td></td>'+
-			// 				'<tr/>';
-			// }
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);

@@ -30,7 +30,7 @@
         
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="btn-group">
+        <div class="btn-group" style="margin-bottom: 10px">
           <button type="button" class="btn btn-default" id="prev">Previous</button>
           <button type="button" class="btn btn-default" id="next">Next</button>
         </div>
@@ -53,46 +53,4 @@
   </div>
 </section>
 <!-- /.content -->
-<div class="modal modal-default fade" id="scheduling_modal" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <form role="form" id="schedForm">
-      <div class="modal-header">
-        <h4 class="modal-title pull-left"><i class="fa fa-calendar"></i> Schedule for <span id="driver_detail"></h4>
-        <div class="pull-right">
-          <p class="pull-left">Route:</p>
-          <select class="form-control route-dropdown" id="route">
-            
-          </select>
-        </div>
-        <input type="text" class="form-control" id="emp_no_d" style="display:none;">
-      </div>
-      <div class="modal-body">
-        <div class="text-center" style="margin-bottom: 20px;" id="notif_update"></div>
-          <div class="box-body">
-            
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Day</th>
-                    <th>Unit</th>
-                    <th>Shift</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="set_sched_table">
-                  
-                </tbody>
-              </table>
-          </div>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-danger pull-right" data-dismiss="modal" style="margin-left: 5px">Close</button>
-          <button type="button" class="btn btn-primary" id="schedFormSubmit">Save changes</button>
-      </div>
-      </form> 
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 </div><!-- /.content-wrapper -->

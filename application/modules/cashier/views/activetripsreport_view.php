@@ -28,58 +28,6 @@
                     </tr>
                   </thead>
                   <tbody id="active_list_data">
-                    <tr>
-                      <td>Adrigado, Poltivillar (33)</td>
-                      <td>TXH-766</td>
-                      <td>450.00</td>
-                      <td>400.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>850.00</td>
-                      <td>425.00</td>
-                    </tr>
-                    <tr>
-                      <td>Alzate, Leo (35)</td>
-                      <td>NXK-636</td>
-                      <td>700.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>700.00</td>
-                      <td>700.00</td>
-                    </tr>
-                    <tr>
-                      <td>Aquilato, Mark (40)</td>
-                      <td>PXM-706</td>
-                      <td>340.00</td>
-                      <td>290.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>630.00</td>
-                      <td>315.00</td>
-                    </tr>
-                    <tr>
-                      <td>Artates, Andres (41)</td>
-                      <td>TWB-532</td>
-                      <td>500.00</td>
-                      <td>350.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>0.00</td>
-                      <td>850.00</td>
-                      <td>425.00</td>
-                    </tr>
                   </tbody>
                 </table>
 				      </div> <!-- .box-body -->

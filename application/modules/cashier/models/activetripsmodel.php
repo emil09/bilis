@@ -20,8 +20,9 @@ Class ActiveTripsModel extends CI_Model {
     public function active_list($select = '', $where = array()) {
         $this->db->select($select);
         $this->db->distinct();
-        $this->db->from($this->tables[10].' AS c');
-        $this->db->join($this->tables[9].' AS t', 'c.loc_no = t.loc_no');
+        // $this->db->from($this->tables[10].' AS c');
+        $this->db->from($this->tables[9].' AS t');
+        // $this->db->from($this->tables[9].' AS t', 'c.loc_no = t.loc_no');
         $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk');
         $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk');
         $this->db->join($this->tables[1].' AS d', 'driver_no = driver_no_fk');
