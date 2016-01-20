@@ -40,7 +40,7 @@ Class Cashturnover extends MY_Controller {
 
 	public function turnover_location() {
 		header('Content-Type: application/json');
-		$select = 'dsp_stat_fk, d.emp_no_fk, c.loc_no, loc_name';
+		$select = 'dsp_stat_fk, d.emp_no_fk, c.loc_no_fk, loc_name';
 		$where = array(
 			'd.emp_no_fk' => $this->session->userdata('emp_no'),
 			'dsp_stat_fk' => 'A',

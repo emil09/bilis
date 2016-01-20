@@ -14,7 +14,7 @@
     <li class="dropdown <?php if($this->uri->segment(2)=='scheduling'){echo 'active';} ?>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Scheduling <span class="caret"></span></a>
       <ul class="dropdown-menu" role="menu">
-        <li class="<?php if($this->uri->segment(3)=='previous'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling/previous">Previous 7 Days</a></li>
+        <li class="<?php if($this->uri->segment(3)=='previous'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling/previous">Previous Days</a></li>
         <li class="<?php if($this->uri->segment(3)=='next'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling/next">Next 7 Days</a></li>
       </ul>
     </li>

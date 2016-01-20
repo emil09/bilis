@@ -290,7 +290,7 @@ Class Scheduling extends MY_Controller {
 	// previous
 	public function get_prev(){
 		$init_d = $_POST['d'];
-		for ($i=$init_d, $j = 0; $i < $init_d + 7; $i++, $j++) { 		
+		for ($i=$init_d + 7, $j = 0; $i >$init_d -1; $i--, $j++) { 		
 			$data['dates'][$j] = date('Y-m-d',strtotime('-'.$i.' day'));
 		}
 
@@ -311,8 +311,8 @@ Class Scheduling extends MY_Controller {
 			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name, sched_type, shift_code_fk';
 		
 			$where2 = array('driver_no_fk' => $results['driver'][$i]->driver_no);
-			$this->db->where('sched_dt >=', end($_POST['dates']));
-			$this->db->where('sched_dt <=', $_POST['dates'][0] );
+			$this->db->where('sched_dt <=', end($_POST['dates']));
+			$this->db->where('sched_dt >=', $_POST['dates'][0] );
 			$this->db->join('shift','shift_code = shift_code_fk', 'left');
 			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
 			$this->db->order_by('sched_dt');
