@@ -37,27 +37,23 @@ function get_active_list(){
 									'<td>'+average.toFixed(2)+'</td>'+
 									'</tr>'
 			}
-
-			$('#table-activetripsreport').dataTable().fnDestroy();
-
-		    $('#active_list_data').html(table_data);
-			var tabler = $('#table-activetripsreport').DataTable({
-				paging : false,
-				autoWidth : false,
-				scrollY: '45vh',
-				scrollCollapse: true,
-				scrollX: 'true',
-				fixedHeader: false,
-				// fixedColumns:   {
-		  //           leftColumns: 1
-		  //       }
-			});
-			$('#selectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
-		    });
-			$('#deselectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
-		    });
 		}
+		$('#table-activetripsreport').dataTable().fnDestroy();
+
+	    $('#active_list_data').html(table_data);
+		var tabler = $('#table-activetripsreport').DataTable({
+			paging : false,
+			autoWidth : false,
+			scrollY: '45vh',
+			scrollCollapse: true,
+			scrollX: 'true',
+			fixedHeader: false,
+		});
+		$('#selectallrows').click(function(){
+	    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
+	    });
+		$('#deselectallrows').click(function(){
+	    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
+	    });
 	});
 }

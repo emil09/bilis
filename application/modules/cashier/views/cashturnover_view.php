@@ -3,6 +3,14 @@
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
   <h1 class="pull-left"><i class="fa fa-money"></i> Cash Turnover</h1>
+<div id="cooperativeselect" class="pull-right">
+  <p>Cooperative:</p> 
+  <select class="form-control" id="coo_select">
+    <?php foreach ($cooperatives as $cooperative ): ?>
+      <option value="<?php echo $cooperative->coo_no_fk; ?>"><?php echo $cooperative->coo_name; ?></option>
+    <?php endforeach ?>
+  </select>
+</div>
 </section>
 <!-- Main content -->
 <section class="content clearfix">

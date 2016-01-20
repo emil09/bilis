@@ -55,8 +55,8 @@
 	              <h3 class="box-title">Active Trips</h3>
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body no-padding">
-	              <table class="table" id="act_table">
+	            <div class="box-body">
+	              <table class="table table-bordered" id="act_table">
 	                <tbody>
 	              	</tbody>
 	            </table>

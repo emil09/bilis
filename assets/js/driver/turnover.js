@@ -95,8 +95,8 @@ function get_active_trips(){
 			} else { trip_ctr=1; }
 			
 			var table_data = '<tr>'+
-							'<th class="col-lg-4">Shift</th>'+
-							'<td  class="col-lg-8">'+ data['driver'][0]['shift_name'] +' Shift </td>'+
+							'<th>Shift</th>'+
+							'<td>'+ data['driver'][0]['shift_name'] +' Shift </td>'+
 		                '</tr>'+
 		                '<tr>'+
 							'<th>Trip</th>'+

@@ -15,14 +15,17 @@ Class Cashturnover extends MY_Controller {
 		$data['sidebar'] = 'cashier/cashier_sidebar';
 		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Sweetalert2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, CashTurnoverJS, Sweetalert2));
-
+		$where = array('emp_no' => $this->session->userdata('emp_no'));
+		$cooperatives = $this->CashturnoverModel->cashier_detail('emp_no_fk, coo_no_fk, coo_name, emp_lname', $where);
+		// print_r($cooperatives);
+		$data['cooperatives'] = $cooperatives;
 		echo Modules::run('templates/bilis_noside', $data);
 	}
 
 	public function available_turnover(){
 
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
-		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
+		$select = 'trp_id, coo_no, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
 		$where = array('loc_no'=>$cashier[0]->loc_no, 'trp_stat'=>'T');
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
 

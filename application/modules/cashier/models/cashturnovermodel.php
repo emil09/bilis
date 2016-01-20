@@ -24,6 +24,17 @@ Class CashturnoverModel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function cashier_detail($select = '', $where = array()){
+        $this->db->select($select);
+        $this->db->from($this->tables[0]);
+        $this->db->join($this->tables[10], 'emp_no_fk = emp_no', 'left');
+        $this->db->join($this->tables[3], 'coo_no_fk = coo_no', 'left');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function available_turnover($select = '', $where = array()) {
         $this->db->select($select);
         $this->db->from($this->tables[9]);

@@ -9,7 +9,7 @@
   <div class="col-md-12">
     	<div class="col-sm-12 col-xs-12">
     		<div class="box">
-	    		<div class="box-header"><h3 class="box-title">All Routes Sales Report in Day shift (Jan 14 2016)</h3></div>
+	    		<div class="box-header"><h3 class="box-title">All Routes Sales Report (<?php echo date('M d, Y'); ?>)</h3></div>
 	            <div class="box-body">
                 <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
                   <thead>
@@ -27,6 +27,12 @@
                       <th>Average</th>
                     </tr>
                   </thead>
+                  <!-- <tfoot>
+                      <tr>
+                          <th colspan="9" style="text-align:right">Total:</th>
+                          <th></th>
+                      </tr>
+                  </tfoot> -->
                   <tbody id="active_list_data">
                   </tbody>
                 </table>
@@ -35,4 +41,4 @@
     	</div>
   </div>
 </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
+</div><!-- /.content-wrapper
