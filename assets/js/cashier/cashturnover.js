@@ -5,33 +5,6 @@ $(function(){
     $('#table-cashturnover tbody').on('click', 'button#cashturnover-button', function () {
         $("#cashturnoverModal").modal({backdrop: 'static'});
     });
-
-    $('#cashturnoverForm').submit(function(event){
-    	event.preventDefault();
-    	$.ajax({
-			url: 'cashturnover/turnover_details',
-			type: 'post',
-			data: $('#cashturnoverForm').serialize(),
-			success: function(data, status) {
-				console.log(data);
-				if(data.status == 'success') {
-					$('#cashturnoverModal').modal('hide');
-					swal({   
-						title: 'Success!',   
-						text: 'Cash turnover successful.', 
-						type: 'success' 
-					});
-				}
-				else{
-					$("#errmsg").html(data.msg).show(200);
-				}
-			},
-			error: function(xhr, desc, err) {
-				console.log(xhr);
-				console.log("Details: " + desc + "\nError:" + err);
-			}
-	    });
-    });
 });
 
 function get_available_turnover(){

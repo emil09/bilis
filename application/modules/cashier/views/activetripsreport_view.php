@@ -27,7 +27,7 @@
                       <th>Average</th>
                     </tr>
                   </thead>
-                  <tbody id="driver_data">
+                  <tbody id="active_list_data">
                     <tr>
                       <td>Adrigado, Poltivillar (33)</td>
                       <td>TXH-766</td>

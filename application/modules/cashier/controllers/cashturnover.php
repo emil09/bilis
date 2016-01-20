@@ -52,43 +52,4 @@ Class Cashturnover extends MY_Controller {
 		echo json_encode($results);
 	}
 
-	public function turnover_details() {
-		header('Content-Type: application/json');
-		$this->form_validation->set_rules('bag_no', 'Bag Number', 'required|integer|callback__check_bag');
-		$this->form_validation->set_rules('batch', 'Batch', 'required');
-		if ($this->form_validation->run($this) == FALSE){
-
-			$data = array(
-				'msg' => validation_errors(' ', ' '), 
-				'status' => 'error'
-			);
-		}
-		else {
-			$insert_data = array(
-				'ct_cashier_fk' => 1,
-				'ct_bag'		=> $_POST['bag_no'],
-				'ct_batch_fk'	=> $_POST['batch'],
-				'ct_date' => date('Y-m-d'),
-				'ct_time' => date('H:i:s'),
-				'trp_id_fk'		=> 2
-				// 'rte_no_fk' => $rte[0]->rte_no,
-			);
-			$this->CashturnoverModel->insert(11, $insert_data);
-
-			$data = array('msg' => $_POST, 'status' => 'success');
-		}
-
-		
-		echo json_encode($data, JSON_PRETTY_PRINT);
-	}
-
-	public function _check_bag($str){
-		if($str==''){
-			$this->form_validation->set_message('_check_bag', 'Bag Number required');
-			return FALSE;
-		}
-		else{
-			return TRUE;
-		}
-	}
 }

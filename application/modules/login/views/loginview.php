@@ -22,7 +22,8 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href=""><b>BILIS</b> Login</a>
+        <!-- <b>BILIS</b> Login -->
+        <a href=""><img src="assets/img/beep_logo.JPG" alt=""></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
