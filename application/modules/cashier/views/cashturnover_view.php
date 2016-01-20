@@ -32,7 +32,7 @@
 <div id="cashturnoverModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
-	      <form id="cashturnoverForm">
+	      <form id="cashturnoverForm" autocomplete="off">
 	        <div class="modal-header">
 	          <h4 class="modal-title pull-left">Cash turnover to <strong><?php echo $fname . ' ' . $lname; ?></strong></h4>
 	          <button type="button" class="btn btn-danger btn-xs pull-right" data-dismiss="modal" style="margin-left: 5px"><i class="fa fa-times"></i></button>
@@ -57,7 +57,7 @@
 		          	</tr>
 		          	<tr>
 		          		<td> </td>
-		          		<td><button id="accept-turnover" class="btn btn-primary pull-right">Accept</button></td>
+		          		<td><button type="submit" id="accept-turnover" class="btn btn-primary pull-right">Accept</button></td>
 		          	</tr>
 	          	</table>
 	          	<div id="errmsg" class="callout callout-danger"></div>

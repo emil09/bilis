@@ -328,6 +328,14 @@ function setSched(emp_no, dvr_no) {
 
 			});
 
+			$('#shift').on('change', function() {
+				getUnit($('#route').val());
+			});
+			$('#route').each(function(){
+				getUnit($('#route').val());
+
+			});
+
 			if(data.sched_exist.length>0){
 				$('#unit').append($("<option />").val(data.sched_exist[0].unt_no).text(data.sched_exist[0].unt_lic));
 				$("#unit").select2("val", data.sched_exist[0].unt_no);
@@ -338,6 +346,7 @@ function setSched(emp_no, dvr_no) {
 			}
 
 			$('.select2').on('change', function(){
+				console.log($(this).val());
 				shift_avail($(this).val());
 			});
 		},
@@ -357,12 +366,18 @@ function shift_avail(unit_no){
 			if(data.length>0){
 				if(data[0]['shift_code_fk'] == 'D' ){
 					$('#shift' ).val('N');
-					$('#shift' + ' option[value="D"]').attr("disabled","disabled");
+					$('#shift' + ' option[value="D"]').attr("disabled",true);
+				
 				}
 				else{
 					$('#shift').val('D');
-					$('#shift' + ' option[value="N"]').attr("disabled","disabled");
+					$('#shift' + ' option[value="N"]').attr("disabled",true);
 				}
+			}else{
+
+					$('#shift' + ' option[value="N"]').attr("disabled",false);
+
+					$('#shift' + ' option[value="D"]').attr("disabled",false);
 			}
 
 		},
@@ -377,11 +392,15 @@ function shift_avail(unit_no){
 function getUnit(route_no){
 	$('#unit').empty();
 	$("#unit").select2("val", "");
+	var shift_sel = $('#shift').val();
+	$('#shift').on('change', function(){
+		shift_sel = $(this).val();
+	});
 	$('#select2-unit-container').removeClass('unit-plate');
 	$.ajax({
 		url: 'available/get_unit',
 		type: 'post',
-		data: {route_no: route_no, coo_no: $('#coo_select').val()},
+		data: {route_no: route_no, coo_no: $('#coo_select').val(), shift_sel: shift_sel},
 		success: function(data, status) {
 			$('#unit').append($("<option />").val('').text(''));
 			

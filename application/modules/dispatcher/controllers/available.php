@@ -136,10 +136,7 @@ Class Available extends MY_Controller {
 				break;
 		}
 
-		if(isset($c1, $c2)){
-			$this->db->not_like('unt_lic', $c1, 'before');
-			$this->db->not_like('unt_lic', $c2, 'before');
-		}
+		
 		$this->db->where('shift_code_fk', 'D');
 		$arr1 = $this->AvailableModel->unit_avail('unit_no_fk');
 
@@ -177,6 +174,11 @@ Class Available extends MY_Controller {
 		
 		$this->db->where('coo_no', $_POST['coo_no']);
 
+
+		if(isset($c1, $c2) && $_POST['shift_sel']=='D'){
+			$this->db->not_like('unt_lic', $c1, 'before');
+			$this->db->not_like('unt_lic', $c2, 'before');
+		}
 		$results['unit'] = $this->AvailableModel->select_where(5, $select);
 		$results['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');
 
@@ -304,8 +306,8 @@ Class Available extends MY_Controller {
 	}
 
 	public function shift_avail(){
-		$select = 'shift_code_fk';
-		$where = array('sched_dt' => date('Y-m-d'), 'unit_no_fk' =>$_POST['unit_no']);
+		$select = 'shift_code_fk,sched_type';
+		$where = array('sched_dt' => date('Y-m-d'), 'unit_no_fk' =>$_POST['unit_no'], 'sched_type'=>'A');
 		$this->db->where('driver_no_fk !=', $_POST['driver_no']);
 		$data = $this->AvailableModel->select_where(7, $select, $where);
 		header('Content-Type: application/json');

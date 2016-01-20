@@ -26,22 +26,22 @@ Class CashturnoverModel extends CI_Model {
     }
     public function available_turnover($select = '', $where = array()) {
         $this->db->select($select);
-        $this->db->from($this->tables[10].' AS c');
-        $this->db->join($this->tables[9].' AS t', 'c.loc_no = t.loc_no');
-        $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk');
-        $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk');
-        $this->db->join($this->tables[1].' AS d', 'driver_no = driver_no_fk');
-        $this->db->join($this->tables[0], 'emp_no = d.emp_no_fk');
-        $this->db->join($this->tables[6], 'shift_code = shift_code_fk');
-        $this->db->join($this->tables[4], 'rte_no = rte_no_fk');
-        $this->db->join($this->tables[5], 'unt_no = unit_no_fk');
-        $this->db->where($where);
+        $this->db->from($this->tables[9]);
+        $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk', 'left');
+        $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
+        $this->db->join($this->tables[4], 'rte_no = rte_no_fk', 'left');
+        $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
+        $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
+        $this->db->join($this->tables[0], 'employee.emp_no = emp_no_fk', 'left');
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result();
     }
     public function insert($key = '', $data = array()){
         $this->db->insert($this->tables[$key], $data); 
+    }
+    public function update($key = '', $data = array(), $where = array()){
+        $this->db->update($this->tables[$key], $data, $where); 
     }
 
 

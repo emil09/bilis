@@ -5,10 +5,38 @@ $(function(){
     $('#table-cashturnover tbody').on('click', 'button#cashturnover-button', function () {
         $("#cashturnoverModal").modal({backdrop: 'static'});
     });
+
+    $('#cashturnoverForm').submit(function(e){
+    	e.preventDefault();
+    	
+
+    	 $.ajax({
+			url: 'cashturnover/post_ct',
+			type: 'post',
+			data: $('#cashturnoverForm').serialize() + "&trp_id=" + trp_id,
+			success: function(data, status) {
+				console.log(data);
+				if(data.status == 'success'){
+
+					get_available_turnover();	
+					$('#cashturnoverModal').modal('hide');
+				}else{
+
+				}
+			},
+			error: function(xhr, desc, err) {
+				console.log(xhr);
+				console.log("Details: " + desc + "\nError:" + err);
+			}
+		});
+    });
 });
+
+var trp_id = '';
 
 function get_available_turnover(){
 	$.get("cashturnover/available_turnover", function(data, status){
+		console.log(data);
 		var table_data = '';
 		var test = '';
 		if(data.cash_turnover.length > 0){
@@ -23,24 +51,26 @@ function get_available_turnover(){
 									formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
 								'</tr>';
 			}
-			$('#table-cashturnover').dataTable().fnDestroy();
-
-		    $('#available_turnover').html(table_data);
-		    var tabler = $('#table-cashturnover').DataTable({
-				paging : false,
-				scrollY: '45vh',
-				scrollCollapse: true,
-				scrollX: 'true',
-				fixedHeader: false,
-				order: [[ 5, "desc" ]]
-			});
-			$('#selectallrows').click(function(){
-		    	$('#table-cashturnover tbody tr').addClass('DTTT_selected selected');
-		    });
-			$('#deselectallrows').click(function(){
-		    	$('#table-cashturnover tbody tr').removeClass('DTTT_selected selected');
-		    });
+			
 		}
+
+		$('#table-cashturnover').dataTable().fnDestroy();
+
+	    $('#available_turnover').html(table_data);
+	    var tabler = $('#table-cashturnover').DataTable({
+			paging : false,
+			scrollY: '45vh',
+			scrollCollapse: true,
+			scrollX: 'true',
+			fixedHeader: false,
+			order: [[ 5, "desc" ]]
+		});
+		$('#selectallrows').click(function(){
+	    	$('#table-cashturnover tbody tr').addClass('DTTT_selected selected');
+	    });
+		$('#deselectallrows').click(function(){
+	    	$('#table-cashturnover tbody tr').removeClass('DTTT_selected selected');
+	    });
 	});
 }
 
@@ -78,9 +108,11 @@ function assignBag(emp_no, trip_ctr) {
 		type: 'post',
 		data: {emp_no: emp_no, trip_ctr: trip_ctr},
 		success: function(data, status) {
-			console.log(data)
+			trp_id = data['trip'][0]['trp_id'];
+			
 			if(data.driver.length > 0){
 				for(var i = 0; i < data.driver.length; i++) {
+
 					var table_data = '<tr>'+
 										'<th>Trip</th>'+
 										'<td>'+ data['trip'][0]['trips_ctr'] +'</td>'+

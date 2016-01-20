@@ -21,26 +21,21 @@ Class Cashturnover extends MY_Controller {
 
 	public function available_turnover(){
 
-		header('Content-Type: application/json');
-		$select = 'd.emp_no_fk, emp_lname, emp_fname, unit_no_fk, trips_ctr, t.loc_no, rte_nam, unt_lic, amt_in, to_dt, to_time';
-		$where = array(
-			'dsp_stat_fk' => 'A',
-			'c.emp_no_fk' => $this->session->userdata('emp_no')
-		);
-
+		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
+		$where = array('loc_no'=>$cashier[0]->loc_no, 'trp_stat'=>'T');
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
+
+		header('Content-Type: application/json');
 		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 
 	public function get_assigned_detail(){
 		header('Content-Type: application/json');
-		$select = 'dsp_unit_no, dsp_stat_fk, d.emp_no_fk, emp_fname, emp_lname, rte_no_fk, unit_no_fk, start_dt, 
-			start_time, shift_code_fk, shift_name, rte_nam, unt_lic';
-		$where = array(
-			'd.emp_no_fk' => $_POST['emp_no'],
-			'trips_ctr' => $_POST['trip_ctr'],
-			'dsp_stat_fk' => 'A',
-		);
+		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk, dsp_unit_no, start_dt, start_time';
+		$where = array('loc_no'=>$cashier[0]->loc_no, 'driver.emp_no_fk'=>$_POST['emp_no']);
+		
 		$results['driver'] = $this->CashturnoverModel->available_turnover($select, $where);
 		if(count($results['driver'])>0){
 			$results['trip'] = $this->CashturnoverModel->select_where(
@@ -50,6 +45,40 @@ Class Cashturnover extends MY_Controller {
 			);
 		}
 		echo json_encode($results);
+	}
+
+	public function post_ct(){
+
+
+		$this->form_validation->set_rules('bag_no', 'Bag No.', 'required');
+		$this->form_validation->set_rules('batch', 'Batch', 'required');
+		$this->form_validation->set_rules('trp_id', 'Trip ID', 'required');
+
+		if ($this->form_validation->run($this) == FALSE){
+
+			$data = array('status' => 'error');
+
+		}else{
+
+			$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+			$insert_data = array(
+				'ct_cashier_fk' =>	$cashier[0]->cashier_no,
+				'ct_bag'		=>	$_POST['bag_no'],
+				'ct_batch_fk'	=>	$_POST['batch'],
+				'ct_date'		=>	date('Y-m-d'),
+				'ct_time'		=>	date('H:i:s'),
+				'trp_id_fk'		=>	$_POST['trp_id']
+			);
+			$this->CashturnoverModel->insert(11, $insert_data);
+
+			$this->CashturnoverModel->update(9, array('trp_stat'=>'C'), array('trp_id'=>$_POST['trp_id']));
+
+			$data = array('status' => 'success');
+		}
+
+		header('Content-Type: application/json');
+		echo json_encode($data);
+
 	}
 
 }
