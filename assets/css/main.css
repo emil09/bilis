@@ -249,8 +249,8 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 .page-driver .top button.clear:active, .login-page .keys button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
 .page-driver .turnoverbutton { color: #fff !important; background-color: #00a65a !important; margin-right: 0 !important; box-shadow: 0 4px #008d4c !important }
 .page-driver .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }
-.login-page .keys button { box-shadow: 0 4px #E0C04E }
-.login-page .keys button, .login-page .keys button.operator { background-color: #FFD74C; color: #000 }
+.login-page .keys button { box-shadow: 0 4px #828080 }
+.login-page .keys button, .login-page .keys button.operator { background-color: #A2A0A0; color: #000 }
 .login-page .keys button.operator.proceed { background-color: #8A8A8A; color: #fff; box-shadow: 0 4px #797979; text-transform: uppercase; font-size: 12px }
 .login-page .keys button.operator.proceed:active { top: 4px; box-shadow: 0px 0px #008d4c }
 

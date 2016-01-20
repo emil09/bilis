@@ -79,7 +79,7 @@ function getDspDriver(coo_no){
 					paging : false,
 					scrollY: '45vh',
         			scrollCollapse: true,
-					scrollX: 'true',
+					scrollX: true,
 					fixedHeader: false,
 					dom: 'T<"clear">lfrtip',
 					tableTools: {

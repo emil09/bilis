@@ -17,8 +17,8 @@ Class Scheduling extends MY_Controller {
 		$data['view_file'] = 'schedulinglast_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
 
-		$data['css'] = $this->add_css(array(Select2CSS));
-		$data['js'] = $this->add_js(array(Select2JS, SchedulePrev));		
+		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, Select2CSS));
+		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, Select2JS, SchedulePrevJS));
 
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->SchedulingModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);
