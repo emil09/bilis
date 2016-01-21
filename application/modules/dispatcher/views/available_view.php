@@ -1,62 +1,43 @@
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left" style="color:#3C8DBC">
-    <i class="fa fa-pause"> Available for Dispatch</i>
-  </h1>
-  <div class="pull-right">
+  <h1 class="pull-left"><i class="fa fa-pause"></i> Available for Dispatch</h1>
+
+  <div id="cooperativeselect" class="pull-right">
       <p>Cooperative:</p> 
       <select class="form-control" id="coo_select">
         <?php foreach ($cooperatives as $cooperative ): ?>
           <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
         <?php endforeach ?>
       </select>
-      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
   </div>
 </section>
 <!-- Main content -->
 <section class="content clearfix">
   <div class="col-md-12">
-    <div class="box box-default box-solid">
+    <div class="box">
       <div class="box-header">
         <h3 class="box-title">Dispatching by Driver (<span id="driver_dispatching"></span> drivers)</h3>
-
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <div class="table-features clearfix">
-<!--           <div class="pull-left feat left-feat">
-            <p>Search: </p><input id="filter" class="form-control" type="text" placeholder="Driver's Name">
-          </div> -->
-          <div class="pull-right feat right-feat">
-              <p>Action: </p>
-              <select class="form-control">
-                <option value="endday">End Day Selected</option>
-              </select>
-              <button class="btn btn-primary btn-xs">Submit</button>
-          </div>
-        </div>
-        <div class="wrapper-<?php echo($this->uri->segment(1)); ?>">
-          <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>Select</th>
-                <th>Driver</th>
-                <th>Scheduled Unit</th>
-                <th>Action</th>
-                <th>Dispatch</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="driver_data">
-        
-            </tbody>
-          </table>
-        </div>
+        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Driver</th>
+              <th>Scheduled Unit</th>
+              <th>Action</th>
+              <th>Dispatch</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="driver_data"></tbody>
+        </table>
       </div> <!-- /.box-body -->
     </div> <!-- /.box-default -->
   </div>

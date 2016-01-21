@@ -43,12 +43,12 @@
           <div class="text-center" style="margin-bottom: 20px;" id="notif_reg"></div>
         </div><!-- /.box-header -->
         <!-- form start -->
-        <div class="alert alert-warning alert-dismissable" id="infomsg" style="margin-bottom: 0!important;">
+        <!-- <div class="alert alert-warning alert-dismissable" id="infomsg" style="margin-bottom: 0!important;">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <h4>
           	<i class="fa fa-warning"></i> Note:</h4>
           	(*) Asterisk indicates required field.
-      	</div>
+      	</div> -->
         <div id="errmsg" class="alert alert-danger alert-dismissable"></div>
           <form role="form" method="post" id="employeeForm">
             <div class="box-body" >

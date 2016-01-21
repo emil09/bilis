@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class Login extends MX_Controller {
+Class Login extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 
@@ -17,12 +17,51 @@ Class Login extends MX_Controller {
 		}
 	}
 
+	public function prelogin(){
+
+		if(isset($_POST['emp_no'])) {
+			$url = '';
+			$this->form_validation->set_rules('emp_no', 'Emp Number', 'required|integer|callback__check_emp');
+			$select = 'emp_fname, emp_lname, emp_pos';
+			$where = array(
+				'emp_no' => $_POST['emp_no']
+			);
+			$results = $this->LoginModel->select_where(0, $select, $where);
+			if ($this->form_validation->run($this) == FALSE){
+				$data = array(
+					'msg' => validation_errors(' '), 
+					'status' => 'error'
+				);
+			}
+			else {
+				if($results[0]->emp_pos == "D") {
+					$this->create_session($_POST['emp_no']);
+					switch ($this->session->userdata('position')) {
+						case "D":
+							$url = 'driver';
+							break;
+					}
+					$this->session->set_userdata('url', $url);
+					$data = array('msg' => $_POST, 'url'=> $url, 'credentials' => $results, 'status' => 'success');
+				}
+				else {
+					$data = array('msg' => $_POST, 'credentials' => $results, 'status' => 'success');
+				}
+			}
+		}
+		else{
+			$data = array('msg' => $_POST, 'status' => 'error');
+		}
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
 	public function postlogin(){
 
 		if(isset($_POST['emp_no']) && isset($_POST['password'])){
 
 
-			$this->form_validation->set_rules('emp_no', 'Emp Number', 'required|integer|callback__check_emp');
+			$this->form_validation->set_rules('emp_no', 'Emp Number', 'required|integer|callback__check_empl');
 			$this->form_validation->set_rules('password', 'Password', 'integer');
 
 			if ($this->form_validation->run($this) == FALSE){
@@ -38,20 +77,24 @@ Class Login extends MX_Controller {
 
 				$this->create_session($_POST['emp_no']);
 				switch ($this->session->userdata('position')) {
+					case "C":
+						$url = 'cashier';
+						break;
+
 					case "P":
 						$url = 'dispatcher';
 						break;
 
-					case "D":
-						$url = 'driver';
-						break;
+					// case "D":
+					// 	$url = 'driver';
+					// 	break;
 					
 					case "S":
 						$url = 'admin';
 						break;
 					
 					default:
-						$url = 'admin';
+						$url = '';
 						
 				}
 
@@ -65,17 +108,32 @@ Class Login extends MX_Controller {
 			$data = array('msg' => $_POST, 'status' => 'error');
 
 		}
+		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
 
 	public function _check_emp($str){
+		$where = array(
+			'emp_no' => $str
+		);
+		$results = $this->LoginModel->select_where(0, 'emp_no', $where);
+		if(count($results)==0){
+			$this->form_validation->set_message('_check_emp', 'User is not exist');
+			return FALSE;
+		}
+		else{
+			return TRUE;
+		}
+	}
+
+	public function _check_empl($str){
 		$where = array(
 			'emp_no' => $str,
 			'emp_pwd' => $_POST['password']
 		);
 		$results = $this->LoginModel->select_where(0, 'emp_no', $where);
 		if(count($results)==0){
-			$this->form_validation->set_message('_check_emp', 'User is not exist');
+			$this->form_validation->set_message('_check_empl', 'Incorrect Password');
 			return FALSE;
 		}
 		else{
@@ -98,8 +156,5 @@ Class Login extends MX_Controller {
 
 	}
 
-	// public function test(){
-	// 	$results = $this->LoginModel->select_where(0, 'emp_no, emp_pos', array('emp_no' => '487'));
-	// 	print_r($results[0]->emp_no);
-	// }
+	
 }

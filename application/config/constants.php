@@ -68,9 +68,14 @@ define('FontAwesome', 'assets/libs/font-awesome-4.5.0/css/font-awesome.min.css')
 // DataTables
 define('DataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css');
 define('DataTablesResCSS', 'assets/libs/dataTables/css/responsive.dataTables.min.css');
+define('DataTablesJSCSS', 'assets/libs/dataTables/css/jquery.dataTables.min.css');
+define('DataTableToolsCSS', 'assets/libs/dataTables/css/dataTables.tableTools.min.css');
+define('DataTablesFixedColumnCSS', 'assets/libs/dataTables/css/fixedColumns.dataTables.min.css');
 define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
 define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
 define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
+define('DataTableToolsJS', 'assets/libs/dataTables/js/dataTables.tableTools.min.js');
+define('DataTablesFixedColumnJS', 'assets/libs/dataTables/js/dataTables.fixedColumns.min.js');
 
 // Select2
 define('Select2CSS', 'assets/libs/select2/css/select2.min.css');
@@ -94,8 +99,10 @@ define('Sweetalert2', 'assets/libs/sweetalert2/sweetalert2.min.js');
 // Bootstrap DatePicker
 define('BootstrapDate', 'assets/libs/datepicker/bootstrap-datepicker.js');
 
-
-
+// Bootstrap 3 DatePicker
+define('Bootstrap3DateCSS', 'assets/libs/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css');
+define('MomentJS', 'assets/libs/bootstrap-datepicker/js/moment.js');
+define('Bootstrap3DateJS', 'assets/libs/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js');
 
 
 /*
@@ -114,4 +121,30 @@ define('Main', 'assets/css/main.css');
 define('Demo', 'assets/libs/theme/js/demo.js');
 define('App', 'assets/libs/theme/js/app.min.js');
 define('RegisterJS', 'assets/js/admin/register.js');
+
+
+/*
+|--------------------------------------------------------------------------
+| Dispatcher
+|--------------------------------------------------------------------------
+*/
 define('AvailableJS', 'assets/js/dispatcher/available.js');
+define('ActiveTripsJS', 'assets/js/dispatcher/activetrips.js');
+define('ScheduleNextJS', 'assets/js/dispatcher/schedulenext.js');
+define('SchedulePrevJS', 'assets/js/dispatcher/scheduleprev.js');
+
+/*
+|--------------------------------------------------------------------------
+| Driver
+|--------------------------------------------------------------------------
+*/
+define('TurnoverJS', 'assets/js/driver/turnover.js');
+
+/*
+|--------------------------------------------------------------------------
+| Cashier
+|--------------------------------------------------------------------------
+*/
+define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
+define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');
+define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');

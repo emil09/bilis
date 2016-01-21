@@ -2,98 +2,41 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
-  <h1 class="pull-left" style="color:#3C8DBC">
-    <i class="fa fa-play"> Active Trips</i>
-  </h1>
-  <div class="pull-right">
-      <p>Cooperative:</p> 
-      <select class="form-control" id="coo_select">
-        <?php foreach ($cooperatives as $cooperative ): ?>
-          <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
-        <?php endforeach ?>
-      </select>
-      <!-- <button class="btn btn-info btn-sm" >Submit</button> -->
+  <h1 class="pull-left"><i class="fa fa-play"></i> Active Trips</h1>
+  <div id="cooperativeselect" class="pull-right">
+    <p>Cooperative:</p> 
+    <select class="form-control" id="coo_select">
+      <?php foreach ($cooperatives as $cooperative ): ?>
+        <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+      <?php endforeach ?>
+    </select>
   </div>
 </section>
 <!-- Main content -->
 <section class="content clearfix">
   <div class="col-md-12">
-    <div class="box box-default box-solid">
+    <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Active Trips (25)</h3>
+        <h3 class="box-title">Active Trips (<span id="active-drivers-count"></span> drivers)</h3>
         <div class="box-tools pull-right">
           <button class="btn btn-box-tool" type="button" onclick="reload()"><i class="fa fa-refresh"></i></button>
         </div><!-- /.box-tools -->
         <div class="text-center" style="margin-bottom: 20px;" id="notif_table"></div>
       </div><!-- /.box-header -->
       <div class="box-body">
-      	<div class="table-features clearfix">
-      		<div class="pull-left feat left-feat">
-      			<p>Search: </p><input id="filter" class="form-control" type="text">
-      		</div>
-	        <div class="pull-right feat right-feat">
-			    <p>Action: </p>
-			    <select class="form-control">
-				    <option value="endday">End Day Selected</option>
-			    </select>
-			    <button class="btn btn-info btn-xs">Submit</button>
-			</div>
-      	</div>
-        <table id="table-<?php echo($this->uri->segment(1)); ?>" class="table table-hover footable" data-filter="#filter">
+        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
           <thead>
             <tr>
-              <th data-sort-ignore="true">Select</th>
-              <th data-sort-ignore="true">Trip</th>
-              <th data-sort-ignore="true">Route</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Unit</th>
-              <th data-sort-initial="true">Driver</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Start</th>
-              <th data-hide="phone,tablet">Shift</th>
-              <th data-hide="phone,tablet" data-sort-ignore="true">Action</th>
+              <th>Trip</th>
+              <th>Route</th>
+              <th>Unit</th>
+              <th>Driver</th>
+              <th>Start</th>
+              <th>Shift</th>
+              <th>Action</th>
             </tr>
           </thead>
-          <tbody id="driver_data">
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>Cruise, Tom (12)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>Pitt, Brad (13)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>Clooney, George (14)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-            <tr>
-            	<td><input type="checkbox"></td>
-            	<td>1</td>
-            	<td>Zabarte-Panay</td>
-            	<td class="unit-plate">ABC-123</td>
-            	<td>DiCaprio, Leonardo (15)</td>
-            	<td>Nov 02 2015 06:18 AM</td>
-            	<td>Day Shift</td>
-            	<td><button class="btn btn-sm btn-danger">END DAY</button></td>
-            </tr>
-          </tbody>
+          <tbody id="driver_data"></tbody>
         </table>
       </div> <!-- /.box-body -->
     </div> <!-- /.box-default -->
