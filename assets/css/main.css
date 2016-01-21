@@ -270,3 +270,5 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #editturnover-button { width: 70% }
 .left-col h4, .right-col h4 { font-weight: 600 }
 .selectedtrip td { text-align: right; color: #3C8DBC; font-weight: 600 }
+#table-turnoverreport #editturnover-button { width: 75%; margin: 0 auto; display: block }
+.dataTables_scrollFootInner { padding-right: 0 !important }

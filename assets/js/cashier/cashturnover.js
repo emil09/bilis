@@ -17,11 +17,13 @@ $(function(){
 			success: function(data, status) {
 				console.log(data);
 				if(data.status == 'success'){
-
-					get_available_turnover();	
+					swal('Success', 'Cash turnover success.', 'success');
+					get_available_turnover();
+					$('#bag_no').val('');
+					$('#batch').val('');
 					$('#cashturnoverModal').modal('hide');
 				}else{
-
+					swal('Error', 'Please set bag and batch.', 'error');
 				}
 			},
 			error: function(xhr, desc, err) {
@@ -36,7 +38,6 @@ var trp_id = '';
 
 function get_available_turnover(){
 	$.get("cashturnover/available_turnover", function(data, status){
-		console.log(data);
 		var table_data = '';
 		var test = '';
 		if(data.cash_turnover.length > 0){
