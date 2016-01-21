@@ -27,12 +27,13 @@
                       <th>Average</th>
                     </tr>
                   </thead>
-                  <!-- <tfoot>
+                  <tfoot>
                       <tr>
-                          <th colspan="9" style="text-align:right">Total:</th>
-                          <th></th>
+                        <th colspan="9" style="text-align: right">TOTAL:</th>
+                        <th><span id="totalvalue"></span></th>
+                        <th><span id="totalAVEvalue"></span></th>
                       </tr>
-                  </tfoot> -->
+                  </tfoot>
                   <tbody id="active_list_data">
                   </tbody>
                 </table>

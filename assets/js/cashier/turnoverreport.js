@@ -65,7 +65,7 @@ function get_turnovered_list(){
 									'<td>('+data['turnover_report'][i]['emp_no_fk']+') '+data['turnover_report'][i]['emp_lname']+', '+data['turnover_report'][i]['emp_fname']+'</td>'+
 									'<td>'+data['turnover_report'][i]['unt_lic']+'</td>'+
 									'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["turnover_report"][i]["emp_no_fk"]+', '+data["turnover_report"][i]["trips_ctr"]+', '+batch_no+', '+data["turnover_report"][i]["ct_bag"]+')">'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>'+
-									'<td>'+data['turnover_report'][i]['amt_in']+'</td>'+
+									'<td class="priority">'+data['turnover_report'][i]['amt_in']+'</td>'+
 									'<td>'+ formatDate(data['turnover_report'][i]['ct_date']) +' ' + 
 									formatAMPM(data['turnover_report'][i]['ct_date'] + ' ' + data['turnover_report'][i]['ct_time']) +'</td>'+
 								'</tr>';
@@ -85,6 +85,12 @@ function get_turnovered_list(){
 			fixedHeader: false,
 			order: [[ 6, "desc" ]]
 		});
+	    var cells = tabler.cells();
+	    var sum = 0;
+	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5]);
+	    }
+	    $('#totalvalue').html('₱'+sum.toFixed(2));
 		$('#selectallrows').click(function(){
 	    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
 	    });

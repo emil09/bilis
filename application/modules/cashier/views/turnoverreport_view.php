@@ -33,6 +33,12 @@
                   </thead>
                   <tbody id="driver_data">
                   </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5" style="text-align: right">TOTAL:</th>
+                      <th colspan="2"><span id="totalvalue"></span></th>    
+                    </tr>
+                  </tfoot>
                 </table>
 				      </div> <!-- .box-body -->
 			  </div>
