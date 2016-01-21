@@ -34,7 +34,7 @@ $(function(){
 						});
 					}else{
 
-			        	swal('Dispatch Error!', data.msg, 'error'); 
+			        	swal('Dispatch Error!', data.msg, 'error');
 					}
 
 
