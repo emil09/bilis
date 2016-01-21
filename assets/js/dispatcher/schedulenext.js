@@ -27,7 +27,6 @@ $(function(){
 			data: data,
 			success: function(data, status) {
 				
-		console.log(data);
 				$("#scheduling_modal").modal('hide');
 				$('#coo_select').each(function() {
 					getDriver(this.value);
@@ -175,22 +174,29 @@ function setSched(emp_no){
 
             
             $('#route').each(function(){
-            	
-				check_sched(emp_no, this.value);
-				getUnit(this.value);
+            	getUnit(this.value);
+				check_sched(sel_emp_no, this.value);
+				
 				
 			});
 			$('#route').on('change', function() {
 
-				
-				check_sched(emp_no, this.value);
 				getUnit(this.value);
+				check_sched(sel_emp_no, this.value);
+				
 				
 			});
 
 			$('.select2').on('change', function(){
 				shift_avail($(this).val(), $(this).data('value'));
+
 			});
+
+			var $eventSelect = $(".select2");
+		    $eventSelect.on("select2:select", function () { 
+		    	// console.log($(this).data('value'));
+				$('#select2-unit'+$(this).data('value')+ '-container').addClass('unit-plate');
+		    });
 
 			$('.clear').click(function(){
 				var i = $(this).data('value');
@@ -235,12 +241,13 @@ function shift_avail(unit_no, i){
 
 
 function check_sched(emp_no, rte_no){
+	console.log(emp_no);
 	$.ajax({
 		url: 'check_sched',
 		type: 'post',
 		data: {emp_no: emp_no, rte_no: rte_no, date: dates},
 		success: function(data, status) {
-
+		 	console.log(data.schedule);
 			for (var i = 0; i < data.schedule.length;i++) {
 				
 				if(data.schedule.length>0){
@@ -280,18 +287,19 @@ function getUnit(rte_no){
 		data: {route_no: rte_no, date: dates, coo_no: $('#coo_select').val()},
 		success: function(data, status) {
 			for(i = 0; i < data.length; i++){
-
-				test = '';
-				test2 = '';
-
-
-				// $('#unit'+i).empty();
-				$('#unit'+i).append($("<option />").val(test).text(test2));
+				test = $('#unit'+i).select2('val');
+				test2 = $('#unit'+i + " option:selected").text();
 			
+				$('#unit'+i).select2('val', '');
+				$('#unit'+i).empty();
+				
 				$.each(data[i].unit, function() {
 				    $('#unit'+i).append($("<option />").val(this.unt_no).text(this.unt_lic));
-
 				});
+
+
+				$('#unit'+i).append($("<option />").val(test).text(test2));
+				$('#unit'+i).select2('val', test);
 			};
 
 		},
