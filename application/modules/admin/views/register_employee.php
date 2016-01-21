@@ -21,7 +21,7 @@
         <span class="info-box-icon" style="background:#3C8DBC; color:#fff;"><i class="fa fa-users"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Active Employee</span>
-          <span class="info-box-number">773</span>
+          <span class="info-box-number" id="emp_act"></span>
         </div><!-- /.info-box-content -->
       </div><!-- /.info-box -->
     </div>
@@ -31,7 +31,7 @@
         <span class="info-box-icon" style="background:#DD4B39; color:#fff;"><i class="fa fa-users"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Inactive Employee</span>
-          <span class="info-box-number">11</span>
+          <span class="info-box-number" id="emp_inact">11</span>
         </div><!-- /.info-box-content -->
       </div><!-- /.info-box -->
     </div>

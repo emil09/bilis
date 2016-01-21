@@ -1,4 +1,5 @@
 $(function(){
+	mem_no();
 	$("#errmsg").hide();
 	
 	$("#employeeForm").submit(function(event){
@@ -59,4 +60,14 @@ $(function(){
 	var currentDate = new Date();  
     $('#pickdate').datepicker();
 });
-	
+
+function mem_no(){
+
+		
+
+		$.get("emp_no", function(data, status){
+	        console.log(data);
+	        $('#emp_act').html(data.active);
+			$('#emp_inact').html(data.inactive);
+	    });
+	}
