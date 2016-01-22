@@ -189,7 +189,7 @@ function getDriver(coo_no){
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
 				var tabler = $('#table-available').DataTable({
-					paging : false,
+					paging : true,
 					scrollY: '45vh',
         			scrollCollapse: true,
 					scrollX: 'true',
