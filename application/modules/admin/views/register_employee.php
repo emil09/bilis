@@ -39,7 +39,8 @@
     <div class="col-sm-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Registration Form</h3>
+          <h3>Registration Form</h3>
+          <p>(*) Required Fields</p>
           <div class="text-center" style="margin-bottom: 20px;" id="notif_reg"></div>
         </div><!-- /.box-header -->
         <!-- form start -->
@@ -92,7 +93,7 @@
                     <div class="input-group-addon">
                       <i class="fa fa-lock"></i>
                     </div>
-                    <input type="password" class="form-control" name="password" placeholder="Password Number Only">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
                   </div>
                 </div>
               </div>
@@ -107,7 +108,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12">
+              <!-- <div class="col-sm-12">
                 <div class="form-group">
                   <label for="lname">SAP No.</label>
                   <div class="input-group">
@@ -117,7 +118,7 @@
                     <input type="text" class="form-control" name="sapno" placeholder="SAP No.">
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-sm-12 col-md-12">
                 <div class="form-group ">
                   <label class="required">Position</label>
