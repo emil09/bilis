@@ -265,3 +265,42 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 .dataTables_scrollFootInner { padding-right: 0 !important }
 .page-cashier .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
 .page-cashier .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
+
+
+
+/* ==========================
+   ||  CSS for Admin  ||
+   ========================== */
+.form-group.has-success div.input-group-addon{
+    border-color: #3C8DBC;
+    color: #3C8DBC;
+}
+
+.form-group.has-success .form-control, .form-group.has-success div.input-group input:focus{
+  border-color: #3C8DBC;
+  box-shadow: none;
+}
+
+ .form-group.has-error div.input-group input:focus{
+  border-color: #dd4b39;
+  box-shadow: none;
+}
+
+
+.form-group.has-error div.input-group-addon{
+    border-color: #dd4b39;
+    color: #dd4b39;
+}
+
+.form-group.has-success label, .form-group.has-error label{
+    color: #000;
+}
+
+.form-group.has-error span.err-msg{
+  color: #dd4b39;
+}
+.form-group div.input-group input:focus{
+      border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+}

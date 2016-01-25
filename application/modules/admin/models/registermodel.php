@@ -3,9 +3,13 @@
 Class RegisterModel extends CI_Model {
 
 	protected $tables = array(
-		'0' => 'employee',
-        '1' => 'driver'
-	);
+        '0' => 'employee',
+        '1' => 'driver',
+        '2' => 'dispatcher',
+        '3' => 'cashier',
+        '4' => 'cooperative',
+        '5' => 'location'
+    );
 	
 	public function select_where($key = '', $select = '', $where = array()) {
         $this->db->select($select);
