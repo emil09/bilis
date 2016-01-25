@@ -28,7 +28,7 @@ Class Cashturnover extends MY_Controller {
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
 
 		header('Content-Type: application/json');
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 	public function get_assigned_detail(){

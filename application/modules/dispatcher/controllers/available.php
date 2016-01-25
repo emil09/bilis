@@ -68,7 +68,7 @@ Class Available extends MY_Controller {
 
 			$i++;
 		}
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function get_driver_detail(){
@@ -311,7 +311,7 @@ Class Available extends MY_Controller {
 		$this->db->where('driver_no_fk !=', $_POST['driver_no']);
 		$data = $this->AvailableModel->select_where(7, $select, $where);
 		header('Content-Type: application/json');
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 

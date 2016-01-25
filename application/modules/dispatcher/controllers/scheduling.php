@@ -69,7 +69,7 @@ Class Scheduling extends MY_Controller {
 		}
 		
 
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 	public function get_driver_detail(){
@@ -101,7 +101,7 @@ Class Scheduling extends MY_Controller {
 		$where4 = array('coo_no_fk' => $result->coo_no_fk);
 		$data['route'] = $this->SchedulingModel->select_where(4, $select4, $where4);
 		
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 
 	}
 
@@ -118,7 +118,7 @@ Class Scheduling extends MY_Controller {
 		$data['schedule'] = $this->SchedulingModel->select_where(7, $select ,$where);
 
 		header('Content-Type: application/json');
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function get_unit(){
@@ -187,7 +187,7 @@ Class Scheduling extends MY_Controller {
 			
 		}
 		
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 	public function save_sched(){
@@ -272,7 +272,7 @@ Class Scheduling extends MY_Controller {
 				$data['data1'] = $insert_data;
 				$data['data2'] = $_POST['unit'];
 		}
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function shift_avail(){
@@ -281,7 +281,7 @@ Class Scheduling extends MY_Controller {
 		$this->db->where('driver_no_fk !=', $_POST['driver_no']);
 		$data = $this->SchedulingModel->select_where(7, $select, $where);
 		header('Content-Type: application/json');
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 	public function test(){
 		print_r($_SERVER['HTTP_HOST']);
@@ -295,7 +295,7 @@ Class Scheduling extends MY_Controller {
 		}
 
 		header('Content-Type: application/json');
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function get_prev_driver(){
@@ -321,6 +321,6 @@ Class Scheduling extends MY_Controller {
 		
 
 		header('Content-Type: application/json');
-		echo json_encode($results, JSON_PRETTY_PRINT);	
+		echo json_encode($results);	
 	}
 }
