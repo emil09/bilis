@@ -100,9 +100,8 @@ define('Sweetalert2', 'assets/libs/sweetalert2/sweetalert2.min.js');
 define('BootstrapDate', 'assets/libs/datepicker/bootstrap-datepicker.js');
 
 // Bootstrap 3 DatePicker
-define('Bootstrap3DateCSS', 'assets/libs/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css');
-define('MomentJS', 'assets/libs/bootstrap-datepicker/js/moment.js');
-define('Bootstrap3DateJS', 'assets/libs/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js');
+define('Bootstrap3DateCSS', 'assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css');
+define('Bootstrap3DateJS', 'assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js');
 
 
 /*

@@ -17,6 +17,16 @@
   	#loginForm .form-control-feedback { height: 40px; line-height: 40px }
   	#next-btn { font-size: 18px; line-height: 48px }
   	.hide-form.slide-out { margin-top: -75% }
+  	#select2-unit-results li, .select2-results__options li { font-size: 28px; margin: 5px 0 }
+  	#scheduling_modal table,
+  	.modal,
+  	.modal-footer button { font-size: 18px }
+  	.modal-title { font-size: 20px }
+  	#table-scheduling-next_wrapper thead th, #table-scheduling-previous_wrapper thead th { font-size: 12px }
+  	.modal-dialog { margin: 100px auto }
+  	#scheduling_modal p, #editModalWindow p { line-height: 30px }
+  	.page-dispatcher .content-header .pull-right select, #route, #shift { height: 35px; font-size: 16px }
+  	#scheduling_modal .select2-container .select2-selection--single, #editModalWindow .select2-container .select2-selection--single { height: 35px }
 }
 @media (max-width: 767px) { 
 	.dashcons.col-sm-4 { width: 100%; } 

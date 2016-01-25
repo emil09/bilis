@@ -146,7 +146,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #scheduling_modal .select2-container, #scheduling_modal .day-night, #scheduling_modal p,
 #editModalWindow .select2-container, #editModalWindow .day-night, #editModalWindow p { float: left; margin-right: 15px }
 #scheduling_modal .select2-container,
-#editModalWindow .select2-container { width: 190px !important }
+#editModalWindow .select2-container { width: 276px !important }
 #scheduling_modal .select2-container .select2-selection--single,
 #editModalWindow .select2-container .select2-selection--single { height: 34px }
 #scheduling_modal .day-night, #editModalWindow .day-night { width: auto }
@@ -265,6 +265,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 .dataTables_scrollFootInner { padding-right: 0 !important }
 .page-cashier .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
 .page-cashier .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
+#datetimepicker6 { display: inline-flex }
 
 
 
