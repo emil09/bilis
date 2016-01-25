@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/theme/css/AdminLTE.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/libs/iCheck/square/blue.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/media.css">
 
   </head>
   <body class="hold-transition login-page">

@@ -1,0 +1,33 @@
+@media (max-width: 1366px) {
+	.page-driver #calculator { width: 460px; margin-bottom: 30px }
+	.page-driver .top .screen { height: 50px }
+	.page-driver .keys button { height: 55px; font-size: 18px }
+	.page-driver .keys button { width: 32% }
+	.page-driver #act_table { width: 80%; margin-bottom: 30px }
+	.page-driver #act_table tr th, .page-driver #act_table tr td { font-size: 18px; line-height: 50px }
+
+}
+@media (max-width: 1280px) {
+	.login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 18px }
+  	.login-box, .register-box { width: 500px; margin: 5% auto }
+  	.login-page .keys button { height: 47.5px ; width: 32.2%; font-size: 20px }
+  	.login-page .keys button.operator.proceed { font-size: 18px }
+  	#loginForm { height: 345px }
+  	#loginForm #emp_no, #loginForm #password { height: 40px; font-size: 18px }
+  	#loginForm .form-control-feedback { height: 40px; line-height: 40px }
+  	#next-btn { font-size: 18px; line-height: 48px }
+  	.hide-form.slide-out { margin-top: -75% }
+}
+@media (max-width: 767px) { 
+	.dashcons.col-sm-4 { width: 100%; } 
+}
+@media (max-width: 640px) {
+	.page-dispatcher section.content, .page-dispatcher section.content > .col-md-12 { padding-left: 0; padding-right: 0 }
+   	.dashboard-wrapper { margin: 10px 0px 0 }
+   	.content-header { padding: 15px 0 0; }
+   	#availabledash, #activedash { margin-bottom: 15px }
+   	#editModal.btn-warning, .end-day { width: 95% }
+}
+@media (max-width: 480px) { 
+	.modal-dialog { width: 90% } 
+}

@@ -171,7 +171,7 @@ $("#turnoverForm").submit(function(event){
 			        	closeOnConfirm: true
 				    }, 
 				    function() {
-				    	window.location.reload(true);
+				    	window.location.href = '../logout';
 				    });
 				}else {
 					sentence = data.msg;

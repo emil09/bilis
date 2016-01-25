@@ -116,6 +116,7 @@ define('Bootstrap3DateJS', 'assets/libs/bootstrap-datepicker/js/bootstrap-dateti
 
 // CSS
 define('Main', 'assets/css/main.css');
+define('Media', 'assets/css/media.css');
 
 // JS
 define('Demo', 'assets/libs/theme/js/demo.js');

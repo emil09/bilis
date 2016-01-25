@@ -14,7 +14,7 @@ Class Templates extends MY_Controller {
 	}
 
 	public function bilis_template($data = array()){
-		$css = $this->add_css(array(BootstrapCSS, FontAwesome, AdminLTE, Skins, Main));
+		$css = $this->add_css(array(BootstrapCSS, FontAwesome, AdminLTE, Skins, Main, Media));
 		$js = $this->add_js(array(JQuery, JQueryMigrate, BootstrapJS, SlimScroll, FastClick, App, Demo));
 
 		if(isset($data['css'])){
@@ -41,7 +41,7 @@ Class Templates extends MY_Controller {
 	}
 
 	public function bilis_noside($data = array()){
-		$css = $this->add_css(array(BootstrapCSS, FontAwesome, AdminLTE, Skins, Main));
+		$css = $this->add_css(array(BootstrapCSS, FontAwesome, AdminLTE, Skins, Main, Media));
 		$js = $this->add_js(array(JQuery, JQueryMigrate, BootstrapJS, SlimScroll, FastClick, App, Demo));
 
 		if(isset($data['css'])){
