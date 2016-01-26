@@ -42,6 +42,8 @@ Class Register extends MY_Controller {
       $this->add_driver();
 		}elseif(@$_POST['position'] == 'P'){
       $this->add_dispatcher();
+    }elseif(@$_POST['position'] == 'C'){
+      $this->add_cashier();
     }else{
       if ($this->form_validation->run() == FALSE){
         $msg = array('status'=>'error');
@@ -149,6 +151,7 @@ Class Register extends MY_Controller {
       
       $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|integer');
       $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|xss_clean|matches[password]');
+      $this->form_validation->set_rules('cooperative', 'Cooperative', 'required|xss_clean');
 
       if ($this->form_validation->run() == FALSE){
         $msg = array('status'=>'error');
@@ -176,12 +179,98 @@ Class Register extends MY_Controller {
           array(
             'err_msg' => form_error('position', ' ', ' '),
             'name' => 'fg_pos'
+          ),
+          array(
+            'err_msg' => form_error('cooperative', ' ', ' '),
+            'name' => 'fg_coop'
           )
         );
       }
       else
       {
         // success
+        $data = array(
+          'emp_fname'   => $_POST['fname'],
+          'emp_mname'   => $_POST['mname'],
+          'emp_lname'   => $_POST['lname'],
+          'emp_pwd'   => $_POST['password'],
+          'emp_pos' => $_POST['position']
+        );
+        $this->RegisterModel->insert(0, $data);
+
+        $data2['emp_no_fk'] = $this->db->insert_id();
+        $data2['coo_no_fk'] = $_POST['cooperative'];
+        $this->RegisterModel->insert(2, $data2);
+        $msg = array('status'=>'success', 'msg' => 'success');
+        
+      }
+      header('Content-Type: application/json');
+      echo json_encode($msg);
+  }
+
+
+  public function add_cashier(){
+
+      
+      $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|integer');
+      $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|xss_clean|matches[password]');
+      $this->form_validation->set_rules('cooperative', 'Cooperative', 'required|xss_clean');
+      $this->form_validation->set_rules('location', 'Location', 'required|xss_clean');
+
+      if ($this->form_validation->run() == FALSE){
+        $msg = array('status'=>'error');
+        $msg['errors'] = array(
+          array(
+            'err_msg' => form_error('fname', ' ', ' '),
+            'name' => 'fg_fname'
+          ),
+          array(
+            'err_msg' => form_error('mname', ' ', ' '),
+            'name' => 'fg_mname'
+          ),
+          array(
+            'err_msg' => form_error('lname', ' ', ' '),
+            'name' => 'fg_lname'
+          ),
+          array(
+            'err_msg' => form_error('password', ' ', ' '),
+            'name' => 'fg_pw'
+          ),
+          array(
+            'err_msg' => form_error('confirmpassword', ' ', ' '),
+            'name' => 'fg_conpw'
+          ),
+          array(
+            'err_msg' => form_error('position', ' ', ' '),
+            'name' => 'fg_pos'
+          ),
+          array(
+            'err_msg' => form_error('cooperative', ' ', ' '),
+            'name' => 'fg_coop'
+          ),
+          array(
+            'err_msg' => form_error('location', ' ', ' '),
+            'name' => 'fg_loc'
+          )
+        );
+      }
+      else
+      {
+        // success
+        $data = array(
+          'emp_fname'   => $_POST['fname'],
+          'emp_mname'   => $_POST['mname'],
+          'emp_lname'   => $_POST['lname'],
+          'emp_pwd'   => $_POST['password'],
+          'emp_pos' => $_POST['position']
+        );
+        $this->RegisterModel->insert(0, $data);
+
+        $data2['emp_no_fk'] = $this->db->insert_id();
+        $data2['coo_no_fk'] = $_POST['cooperative'];
+        $data2['loc_no_fk'] = $_POST['location'];
+        $this->RegisterModel->insert(3, $data2);
+        $msg = array('status'=>'success', 'msg' => 'success');
         
       }
       header('Content-Type: application/json');
@@ -229,14 +318,16 @@ Class Register extends MY_Controller {
                   <input type="password" class="form-control reg-input" name="confirmpassword" placeholder="Confirm Password">
                 </div>
               </div>
-            </div><div class="col-sm-12 col-md-12">
-            <div class="form-group">
+            </div>
+            <div class="col-sm-12 col-md-12">
+            <div class="form-group"  id="fg_coop">
+                <span class="pull-right err-msg"></span>
               <label class="required">Cooperative</label>
               <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-users"></i>
                 </div>
-                <select class="form-control" name="cooperative">
+                <select class="form-control reg-input" name="cooperative" data-formgroup="fg_coop">
                   <option value="" disabled selected id="nocooperative">Select cooperative</option>';
                   foreach ($coops as $coo) {
                     $data .= '<option value="'.$coo->coo_no.'" id="nocooperative">'.$coo->coo_name.'</option>';
@@ -330,30 +421,57 @@ Class Register extends MY_Controller {
     }
     elseif($_POST['position'] == 'C'){
       $data = '<div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label class="required">Cooperative</label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-users"></i>
+              <div class="form-group"id="fg_pw">
+                <span class="pull-right err-msg"></span>
+                <label class="required" for="lname">Password</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                  <input type="password" class="form-control reg-input" name="password" placeholder="Password">
                 </div>
-                <select class="form-control" name="cooperative">
-                  <option value="" disabled selected id="nocooperative">Select cooperative</option>';
-                  foreach ($coops as $coo) {
-                    $data .= '<option value="'.$coo->coo_no.'" id="nocooperative">'.$coo->coo_name.'</option>';
-                  }
-      $data .='</select>
               </div>
             </div>
-          </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group" id="fg_conpw">
+                <span class="pull-right err-msg"></span>
+                <label class="required" for="lname">Confirm Password</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                  <input type="password" class="form-control reg-input" name="confirmpassword" placeholder="Confirm Password">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                  <div class="form-group" id="fg_coop">
+                  <span class="pull-right err-msg"></span>
+                    <label class="required">Cooperative</label>
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-users"></i>
+                      </div>
+                      <select class="form-control reg-input" name="cooperative"  data-formgroup="fg_coop">
+                        <option value="" disabled selected id="nocooperative">Select cooperative</option>';
+                        foreach ($coops as $coo) {
+                          $data .= '<option value="'.$coo->coo_no.'" id="nocooperative">'.$coo->coo_name.'</option>';
+                        }
+    
+    $data .= '       </select>
+                    </div>
+                  </div>
+                </div>
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label class="required">Cooperative</label>
+            <div class="form-group" id="fg_loc">
+                  <span class="pull-right err-msg"></span>
+              <label class="required">Location</label>
               <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-users"></i>
                 </div>
-                <select class="form-control" name="cooperative">
-                  <option value="" disabled selected id="nocooperative">Select Location</option>';
+                <select class="form-control reg-input" name="location" data-formgroup="fg_loc">
+                  <option value="" disabled selected id="nocooperative" >Select Location</option>';
                   foreach ($locs as $loc) {
                     $data .= '<option value="'.$loc->loc_no.'" id="nocooperative">'.$loc->loc_name.'</option>';
                   }
