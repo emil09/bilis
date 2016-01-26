@@ -35,7 +35,7 @@ Class Cashturnover extends MY_Controller {
 		header('Content-Type: application/json');
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk, dsp_unit_no, start_dt, start_time';
-		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no']);
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no'], 'trp_stat'=>'T');
 		
 		$results['driver'] = $this->CashturnoverModel->available_turnover($select, $where);
 		if(count($results['driver'])>0){
@@ -60,15 +60,17 @@ Class Cashturnover extends MY_Controller {
 			$data = array('status' => 'error');
 
 		}else{
+			$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 			$where = array(
 					'ct_bag' 		=> $_POST['bag_no'],
-					'ct_batch_fk'	=> $_POST['batch']
+					'ct_batch_fk'	=> $_POST['batch'],
+					'ct_date'		=>	date('Y-m-d'),
+					'ct_cashier_fk' =>	$cashier[0]->cashier_no
 				);
 			$bag = $this->CashturnoverModel->select(11, 'ct_bag, ct_batch_fk', $where);
 			if(count($bag)>0){
 				$data = array('status' => 'bag_error');
 			} else {
-				$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 				$insert_data = array(
 					'ct_cashier_fk' =>	$cashier[0]->cashier_no,
 					'ct_bag'		=>	$_POST['bag_no'],

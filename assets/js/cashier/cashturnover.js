@@ -15,7 +15,6 @@ $(function(){
 			type: 'post',
 			data: $('#cashturnoverForm').serialize() + "&trp_id=" + trp_id,
 			success: function(data, status) {
-				console.log(data);
 				if(data.status == 'success'){
 					swal('Success', 'Cash turnover success.', 'success');
 					get_available_turnover();
@@ -49,7 +48,7 @@ function get_available_turnover(){
 									'<td>' + data['cash_turnover'][i]['rte_nam'] + '</td>'+
 									'<td>'+data['cash_turnover'][i]['unt_lic']+'</td>'+
 									'<td>('+data['cash_turnover'][i]['emp_no_fk']+') '+data['cash_turnover'][i]['emp_lname']+', '+data['cash_turnover'][i]['emp_fname']+'</td>'+
-									'<td>'+data['cash_turnover'][i]['amt_in']+'</td>'+
+									'<td>'+data['cash_turnover'][i]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 									'<td>'+ formatDate(data['cash_turnover'][i]['to_dt']) +' ' + 
 									formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
 								'</tr>';

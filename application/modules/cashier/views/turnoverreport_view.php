@@ -59,7 +59,7 @@
               <table class="table">
                 <tr>
                   <td><p>Bag</p></td>
-                  <td><input type="text" id="bag_no" name="bag_no" class="form-control" placeholder="Bag #"></td>
+                  <td><input type="number" id="bag_no" min="1" name="bag_no" class="form-control" placeholder="Bag #"></td>
                 </tr>
                 <tr>
                   <td><p>Batch</p></td>

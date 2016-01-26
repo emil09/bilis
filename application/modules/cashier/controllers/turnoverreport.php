@@ -38,6 +38,7 @@ Class TurnoverReport extends MY_Controller {
 		}
 		
 		$results['turnover_report'] = $this->TurnoverReportModel->turnovered_list($select, $where);
+		$results['datetoday'] = date('Y-m-d');
 
 		header('Content-Type: application/json');
 		echo json_encode($results);
@@ -75,15 +76,17 @@ Class TurnoverReport extends MY_Controller {
 			$data = array('status' => 'error');
 
 		}else{
+			$cashier = $this->TurnoverReportModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 			$where = array(
 					'ct_bag' 		=> $_POST['bag_no'],
-					'ct_batch_fk'	=> $_POST['batch']
+					'ct_batch_fk'	=> $_POST['batch'],
+					'ct_date'		=>	date('Y-m-d'),
+					'ct_cashier_fk' =>	$cashier[0]->cashier_no
 				);
 			$bag = $this->TurnoverReportModel->select(11, 'ct_bag, ct_batch_fk', $where);
 			if(count($bag)>0){
 				$data = array('status' => 'bag_error');
 			} else {
-				$cashier = $this->TurnoverReportModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 				$update_data = array(
 					'ct_bag'		=>	$_POST['bag_no'],
 					'ct_batch_fk'	=>	$_POST['batch']
