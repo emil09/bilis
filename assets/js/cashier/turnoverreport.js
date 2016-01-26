@@ -23,13 +23,11 @@ $(function(){
 
     $('#updateturnoverForm').submit(function(e){
     	e.preventDefault();
-    	console.log("x: "+trp_id);
     	$.ajax({
 			url: 'turnoverreport/update_ct',
 			type: 'post',
 			data: $('#updateturnoverForm').serialize() + "&trp_id=" + trp_id,
 			success: function(data, status) {
-				console.log(data);
 				if(data.status == 'success'){
 					swal('Success', 'Cash turnover updated.', 'success');
 					setTable();
@@ -66,7 +64,9 @@ function setTable(){
 }
 
 var trp_id = '';
+
 function get_turnovered_list(ct_date, coo_no){
+
 
 	$.ajax({
 		url: 'turnoverreport/turnovered_list',
@@ -87,9 +87,13 @@ function get_turnovered_list(ct_date, coo_no){
 										'<td>'+batch_no+'</td>'+
 										'<td>'+data["turnover_report"][i]["ct_bag"]+'</td>'+
 										'<td>('+data['turnover_report'][i]['emp_no_fk']+') '+data['turnover_report'][i]['emp_lname']+', '+data['turnover_report'][i]['emp_fname']+'</td>'+
-										'<td>'+data['turnover_report'][i]['unt_lic']+'</td>'+
-										'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["turnover_report"][i]["emp_no_fk"]+', '+data["turnover_report"][i]["trips_ctr"]+', '+batch_no+', '+data["turnover_report"][i]["ct_bag"]+')">'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>'+
-										'<td class="priority">'+data['turnover_report'][i]['amt_in']+'</td>'+
+										'<td>'+data['turnover_report'][i]['unt_lic']+'</td>';
+					if(data.turnover_report[0]['ct_date'] == data.datetoday) {
+						table_data += 	'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["turnover_report"][i]["emp_no_fk"]+', '+data["turnover_report"][i]["trips_ctr"]+', '+batch_no+', '+data["turnover_report"][i]["ct_bag"]+')">'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>';
+					} else {
+						table_data += 	'<td><button id="editturnover-button" class="btn btn-primary" disabled>'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>';
+					}
+					table_data +=		'<td class="priority">'+data['turnover_report'][i]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'<td>'+ formatDate(data['turnover_report'][i]['ct_date']) +' ' + 
 										formatAMPM(data['turnover_report'][i]['ct_date'] + ' ' + data['turnover_report'][i]['ct_time']) +'</td>'+
 									'</tr>';
@@ -110,9 +114,10 @@ function get_turnovered_list(ct_date, coo_no){
 		    var cells = tabler.cells();
 		    var sum = 0;
 		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5]);
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5].replace(/,/g, ''));
 		    }
-		    $('#totalvalue').html('₱'+sum.toFixed(2));
+		    $('#totalvalue').html('₱'+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+		    $('#totalbags').html(data.turnover_report.length);
 			$('#selectallrows').click(function(){
 		    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
 		    });
@@ -142,14 +147,12 @@ function get_turnovered_list(ct_date, coo_no){
 }
 var batch_bk = '';
 function updateBag(emp_no, trip_ctr, batch_no, bag_no) {
-	console.log(emp_no+", "+trip_ctr+", "+batch_no+", "+bag_no);
 	$.ajax({
 		url: 'turnoverreport/get_reviewed_detail',
 		type: 'post',
 		data: {emp_no: emp_no, trip_ctr: trip_ctr, bag_no: bag_no, batch_no: batch_no},
 		success: function(data, status) {
 			trp_id = data['trip'][0]['trp_id'];
-			console.log(data);
 			if(data['bagbatch']['batch'] == '1'){
 				batch_bk = 'D';
 			} else {

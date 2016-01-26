@@ -14,7 +14,6 @@ $(function(){
 			type: 'post',
 			data: $('#cashturnoverForm').serialize() + "&trp_id=" + trp_id,
 			success: function(data, status) {
-				console.log(data);
 				if(data.status == 'success'){
 					swal('Success', 'Cash turnover success.', 'success');
 					$('#bag_no').val('');
@@ -45,6 +44,7 @@ $(function(){
 
 var trp_id = '';
 
+
 function get_available_turnover(coo_no){
 	$.ajax({
 		url:"cashturnover/available_turnover",
@@ -66,7 +66,7 @@ function get_available_turnover(coo_no){
 										formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
 									'</tr>';
 				}
-				
+
 			}
 
 			$('#table-cashturnover').dataTable().fnDestroy();
@@ -151,7 +151,7 @@ function assignBag(emp_no, trip_ctr) {
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Amount Turnover</th>'+
-										'<td>'+data['trip'][0]['amt_in']+'</td>'+
+										'<td>'+data['trip'][0]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Arrival</th>'+

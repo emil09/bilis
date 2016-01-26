@@ -8,35 +8,36 @@
 
 }
 @media (max-width: 1280px) {
-	.login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 18px }
-  	.login-box, .register-box { width: 500px; margin: 5% auto }
-  	.login-page .keys button { height: 47.5px ; width: 32.2%; font-size: 20px }
-  	.login-page .keys button.operator.proceed { font-size: 18px }
-  	#loginForm { height: 345px }
-  	#loginForm #emp_no, #loginForm #password { height: 40px; font-size: 18px }
-  	#loginForm .form-control-feedback { height: 40px; line-height: 40px }
-  	#next-btn { font-size: 18px; line-height: 48px }
-  	.hide-form.slide-out { margin-top: -75% }
-  	#select2-unit-results li, .select2-results__options li { font-size: 28px; margin: 5px 0 }
-  	#scheduling_modal table,
-  	.modal,
-  	.modal-footer button { font-size: 18px }
-  	.modal-title { font-size: 20px }
-  	#table-scheduling-next_wrapper thead th, #table-scheduling-previous_wrapper thead th { font-size: 12px }
-  	.modal-dialog { margin: 100px auto }
-  	#scheduling_modal p, #editModalWindow p { line-height: 30px }
-  	.page-dispatcher .content-header .pull-right select, #route, #shift { height: 35px; font-size: 16px }
-  	#scheduling_modal .select2-container .select2-selection--single, #editModalWindow .select2-container .select2-selection--single { height: 35px }
+  .login-logo img { width: 170px }
+  .login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 18px }
+	.login-box, .register-box { width: 500px; margin: 5% auto }
+	.login-page .keys button { height: 47.5px ; width: 32.2%; font-size: 20px }
+	.login-page .keys button.operator.proceed { font-size: 18px }
+	#loginForm { height: 345px }
+	#loginForm #emp_no, #loginForm #password { height: 40px; font-size: 18px }
+	#loginForm .form-control-feedback { height: 40px; line-height: 40px }
+	#next-btn { font-size: 18px; line-height: 48px }
+	.hide-form.slide-out { margin-top: -75% }
+	#select2-unit-results li, .select2-results__options li { font-size: 28px; margin: 5px 0 }
+	#scheduling_modal table,
+	.modal,
+	.modal-footer button { font-size: 18px }
+	.modal-title { font-size: 20px }
+	#table-scheduling-next_wrapper thead th, #table-scheduling-previous_wrapper thead th { font-size: 12px }
+	.modal-dialog { margin: 100px auto }
+	#scheduling_modal p, #editModalWindow p { line-height: 30px }
+	.page-dispatcher .content-header .pull-right select, #route, #shift { height: 35px; font-size: 16px }
+	#scheduling_modal .select2-container .select2-selection--single, #editModalWindow .select2-container .select2-selection--single { height: 35px }
 }
 @media (max-width: 767px) { 
 	.dashcons.col-sm-4 { width: 100%; } 
 }
 @media (max-width: 640px) {
 	.page-dispatcher section.content, .page-dispatcher section.content > .col-md-12 { padding-left: 0; padding-right: 0 }
-   	.dashboard-wrapper { margin: 10px 0px 0 }
-   	.content-header { padding: 15px 0 0; }
-   	#availabledash, #activedash { margin-bottom: 15px }
-   	#editModal.btn-warning, .end-day { width: 95% }
+ 	.dashboard-wrapper { margin: 10px 0px 0 }
+ 	.content-header { padding: 15px 0 0; }
+ 	#availabledash, #activedash { margin-bottom: 15px }
+ 	#editModal.btn-warning, .end-day { width: 95% }
 }
 @media (max-width: 480px) { 
 	.modal-dialog { width: 90% } 
