@@ -24,7 +24,6 @@ Class ActiveTrips extends MY_Controller {
 	}
 
 	public function dsp_driver(){
-		
 		header('Content-Type: application/json');
 		$select = 'sched_no_fk, shift_code_fk, driver.coo_no_fk, coo_name, 
 		unt_lic,emp_fname, emp_lname, employee.emp_no, trips_ctr, start_dt, start_time, shift_name, 

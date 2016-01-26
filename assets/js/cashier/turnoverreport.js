@@ -1,7 +1,19 @@
+var dateSel = '';
 $(function(){
-	get_turnovered_list();
+
+	// get_turnovered_list();
 	$(window).resize(function(){
-		get_turnovered_list();
+		setTable();
+	});
+	$('#coo_select').each(function(){
+		var date = new Date();
+		date = date.getFullYear() + '-' + parseInt(date.getMonth()+1) + '-' + date.getDate();
+		get_turnovered_list(date, $(this).val());
+    });
+
+
+	$('#coo_select').on('change', function(){
+		setTable();
 	});
 
 
@@ -20,9 +32,9 @@ $(function(){
 				console.log(data);
 				if(data.status == 'success'){
 					swal('Success', 'Cash turnover updated.', 'success');
-					get_turnovered_list();
+					setTable();
 					$(window).resize(function(){
-						get_turnovered_list();
+						setTable();
 					});
 					$('#turnoverreportsModal').modal('hide');
 				}else if(data.status == 'bag_error'){
@@ -38,15 +50,28 @@ $(function(){
 		});
     });
 
+
 });
 
+function setTable(){
+	var date = new Date();
+	var f_date = $('#turnover-date-filter').val();
+
+	if(f_date == ''){
+		date = date.getFullYear() + '-' + parseInt(date.getMonth()+1) + '-' + date.getDate();
+	}else{
+		date = f_date;
+	}
+	get_turnovered_list(date, $('#coo_select').val());
+}
+
 var trp_id = '';
-function get_turnovered_list(ct_date){
+function get_turnovered_list(ct_date, coo_no){
 
 	$.ajax({
 		url: 'turnoverreport/turnovered_list',
 		type: 'post',
-		data: {ct_date: ct_date},
+		data: {ct_date: ct_date, coo_no: coo_no},
 		success: function(data, status) {
 			var table_data = '';
 			var batch_no = '';
@@ -100,12 +125,13 @@ function get_turnovered_list(ct_date){
 		    	endDate: '0d'
 		    });
 
-		    $('#turnover-date-filter-button').click(function(){
-		    	var f_date = $('#turnover-date-filter').datepicker().val();
-		    	get_turnovered_list(f_date);
-		    	$('.box-title:after').css('content', '(filtered: '+f_date+')');
+			$('#turnover-date-filter').datepicker('setDate', dateSel);
 
-		    });
+		   // var test ='';
+		    $('#turnover-date-filter-button').click(function(){
+				setTable();
+	     		dateSel = $('#turnover-date-filter').datepicker().val();
+     		});
 		},
 		error: function(xhr, desc, err) {
 			console.log(xhr);

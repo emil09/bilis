@@ -16,19 +16,22 @@ Class Cashturnover extends MY_Controller {
 		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Sweetalert2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, CashTurnoverJS, Sweetalert2));
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
-		$cooperatives = $this->CashturnoverModel->cashier_detail('emp_no_fk, coo_no_fk, coo_name, emp_lname', $where);
+		$cooperatives = $this->CashturnoverModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
+		// echo '<pre>';
+		// print_r($data['cooperatives']);
+		// echo "</pre";
 		echo Modules::run('templates/bilis_noside', $data);
 	}
 
 	public function available_turnover(){
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
-		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T');
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T', 'driver.coo_no_fk'=>$_POST['coo_no']);
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
 
 		header('Content-Type: application/json');
-		echo json_encode($results);
+		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 
 	public function get_assigned_detail(){

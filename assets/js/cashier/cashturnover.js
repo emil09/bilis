@@ -1,6 +1,5 @@
 $(function(){
 	$("#errmsg").hide();
-	get_available_turnover();
 	
     $('#table-cashturnover tbody').on('click', 'button#cashturnover-button', function () {
         $("#cashturnoverModal").modal({backdrop: 'static'});
@@ -18,7 +17,6 @@ $(function(){
 				console.log(data);
 				if(data.status == 'success'){
 					swal('Success', 'Cash turnover success.', 'success');
-					get_available_turnover();
 					$('#bag_no').val('');
 					$('#batch').val('');
 					$('#cashturnoverModal').modal('hide');
@@ -34,46 +32,65 @@ $(function(){
 			}
 		});
     });
+    $('#coo_select').each(function(){
+		get_available_turnover($(this).val());
+
+    });
+	// get_available_turnover($('#coo_select').val());	
+	$('#coo_select').on('change', function(){
+		get_available_turnover($(this).val());
+	});
+
 });
 
 var trp_id = '';
 
-function get_available_turnover(){
-	$.get("cashturnover/available_turnover", function(data, status){
-		var table_data = '';
-		var test = '';
-		if(data.cash_turnover.length > 0){
-			for(var i = 0; i < data.cash_turnover.length; i++) {
-				table_data += '<tr>'+
-									'<td><button id="cashturnover-button" class="btn btn-primary" onclick="assignBag('+data["cash_turnover"][i]["emp_no_fk"]+', '+data["cash_turnover"][i]["trips_ctr"]+')">'+ data["cash_turnover"][i]["trips_ctr"] +'</button></td>'+
-									'<td>' + data['cash_turnover'][i]['rte_nam'] + '</td>'+
-									'<td>'+data['cash_turnover'][i]['unt_lic']+'</td>'+
-									'<td>('+data['cash_turnover'][i]['emp_no_fk']+') '+data['cash_turnover'][i]['emp_lname']+', '+data['cash_turnover'][i]['emp_fname']+'</td>'+
-									'<td>'+data['cash_turnover'][i]['amt_in']+'</td>'+
-									'<td>'+ formatDate(data['cash_turnover'][i]['to_dt']) +' ' + 
-									formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
-								'</tr>';
+function get_available_turnover(coo_no){
+	$.ajax({
+		url:"cashturnover/available_turnover",
+		type: 'post',
+		data: {coo_no: coo_no},
+		success: function(data, status){
+			console.log(data);
+			var table_data = '';
+			var test = '';
+			if(data.cash_turnover.length > 0){
+				for(var i = 0; i < data.cash_turnover.length; i++) {
+					table_data += '<tr>'+
+										'<td><button id="cashturnover-button" class="btn btn-primary" onclick="assignBag('+data["cash_turnover"][i]["emp_no_fk"]+', '+data["cash_turnover"][i]["trips_ctr"]+')">'+ data["cash_turnover"][i]["trips_ctr"] +'</button></td>'+
+										'<td>' + data['cash_turnover'][i]['rte_nam'] + '</td>'+
+										'<td>'+data['cash_turnover'][i]['unt_lic']+'</td>'+
+										'<td>('+data['cash_turnover'][i]['emp_no_fk']+') '+data['cash_turnover'][i]['emp_lname']+', '+data['cash_turnover'][i]['emp_fname']+'</td>'+
+										'<td>'+data['cash_turnover'][i]['amt_in']+'</td>'+
+										'<td>'+ formatDate(data['cash_turnover'][i]['to_dt']) +' ' + 
+										formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
+									'</tr>';
+				}
+				
 			}
-			
-		}
 
-		$('#table-cashturnover').dataTable().fnDestroy();
+			$('#table-cashturnover').dataTable().fnDestroy();
 
-	    $('#available_turnover').html(table_data);
-	    var tabler = $('#table-cashturnover').DataTable({
-			paging : false,
-			scrollY: '45vh',
-			scrollCollapse: true,
-			scrollX: 'true',
-			fixedHeader: false,
-			order: [[ 5, "desc" ]]
-		});
-		$('#selectallrows').click(function(){
-	    	$('#table-cashturnover tbody tr').addClass('DTTT_selected selected');
-	    });
-		$('#deselectallrows').click(function(){
-	    	$('#table-cashturnover tbody tr').removeClass('DTTT_selected selected');
-	    });
+		    $('#available_turnover').html(table_data);
+		    var tabler = $('#table-cashturnover').DataTable({
+				paging : false,
+				scrollY: '45vh',
+				scrollCollapse: true,
+				scrollX: 'true',
+				fixedHeader: false,
+				order: [[ 5, "desc" ]]
+			});
+			$('#selectallrows').click(function(){
+		    	$('#table-cashturnover tbody tr').addClass('DTTT_selected selected');
+		    });
+			$('#deselectallrows').click(function(){
+		    	$('#table-cashturnover tbody tr').removeClass('DTTT_selected selected');
+		    });
+		},
+		error: function(xhr, desc, err){
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
+		} 
 	});
 }
 

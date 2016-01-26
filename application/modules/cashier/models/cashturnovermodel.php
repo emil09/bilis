@@ -14,7 +14,8 @@ Class CashturnoverModel extends CI_Model {
         '8' => 'dispatch_unit',
         '9' => 'trip',
         '10'=> 'cashier',
-        '11'=> 'cash_turnover'
+        '11'=> 'cash_turnover',
+        '12'=> 'location'
     );
 
     public function select($key = '', $select = '', $where = array()) {
@@ -38,7 +39,8 @@ Class CashturnoverModel extends CI_Model {
         $this->db->select($select);
         $this->db->from($this->tables[0]);
         $this->db->join($this->tables[10], 'emp_no_fk = emp_no', 'left');
-        $this->db->join($this->tables[3], 'coo_no_fk = coo_no', 'left');
+        $this->db->join($this->tables[12], 'loc_no = loc_no_fk', 'left');
+        $this->db->join($this->tables[3], 'coo_no = location.coo_no_fk', 'left');
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result();
