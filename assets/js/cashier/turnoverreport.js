@@ -116,7 +116,7 @@ function get_turnovered_list(ct_date, coo_no){
 		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
 		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5].replace(/,/g, ''));
 		    }
-		    $('#totalvalue').html('₱'+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+		    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 		    $('#totalbags').html(data.turnover_report.length);
 			$('#selectallrows').click(function(){
 		    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
@@ -182,7 +182,7 @@ function updateBag(emp_no, trip_ctr, batch_no, bag_no) {
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Amount Turnover</th>'+
-										'<td>'+data['trip'][0]['amt_in']+'</td>'+
+										'<td>₱ '+data['trip'][0]['amt_in']+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Arrival</th>'+

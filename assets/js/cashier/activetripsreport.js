@@ -7,6 +7,7 @@ $(function(){
 	});
 });
 
+
 function get_active_list(coo_no){
 	$.ajax({
 		url: "activetripsreport/active_list",
@@ -31,7 +32,7 @@ function get_active_list(coo_no){
 					for (var j = 0; j < data.active_cash.length; j++) {
 						if(data.active_list[i]['emp_no_fk'] == data.active_cash[j]['emp_no_fk']) {
 							if(data.active_cash[j]['trips_ctr'] == x+1) {
-								table_data += '<td><div class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">'+data.active_cash[j]['amt_in']+
+								table_data += '<td><div class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">'+data.active_cash[j]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+
 										'<ul class="dropdown-menu"><li>'+
 											'<a><strong>Turnover Time:</strong> '+formatAMPM(data.active_cash[j]['to_dt']+" "+data.active_cash[j]['to_time'])+'</a>'+
 										'</li></ul></div></td>';
@@ -45,44 +46,39 @@ function get_active_list(coo_no){
 						table_data += '<td>0.00</td>';
 						x++;
 					}
-					table_data += '<td>'+total.toFixed(2)+'</td>'+
-										'<td>'+average.toFixed(2)+'</td>'+
+					table_data += '<td>'+total.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
+										'<td>'+average.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'</tr>'
 				}
 			}
 			$('#table-activetripsreport').dataTable().fnDestroy();
 
-		    $('#active_list_data').html(table_data);
-			var tabler = $('#table-activetripsreport').DataTable({
-				paging : false,
-				autoWidth : false,
-				scrollY: '45vh',
-				scrollCollapse: true,
-				scrollX: 'true',
-				fixedHeader: false,
-			});
-			var cells = tabler.cells();
-		    var sum = 0;
-		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9]);
-		    }
-		    $('#totalvalue').html('₱'+sum.toFixed(2));
-		    sum=0;
-		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10]);
-		    }
-		    $('#totalAVEvalue').html('₱'+sum.toFixed(2));
-			$('#selectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
-		    });
-			$('#deselectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
-		    });
-		},
-	    error: function(xhr, desc, err){
-	    	console.log(xhr);
-			console.log("Details: " + desc + "\nError:" + err);
+	    $('#active_list_data').html(table_data);
+		var tabler = $('#table-activetripsreport').DataTable({
+			paging : false,
+			autoWidth : false,
+			scrollY: '45vh',
+			scrollCollapse: true,
+			scrollX: 'true',
+			fixedHeader: false,
+		});
+		var cells = tabler.cells();
+	    var sum = 0;
+	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9].replace(/,/g, ''));
 	    }
+	    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+	    sum=0;
+	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10].replace(/,/g, ''));
+	    }
+	    $('#totalAVEvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+		$('#selectallrows').click(function(){
+	    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
+	    });
+		$('#deselectallrows').click(function(){
+	    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
+	    });
 	});
 }
 

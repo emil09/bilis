@@ -38,12 +38,11 @@ Class CashturnoverModel extends CI_Model {
     }
     public function turnover_location($select = '', $where = array()) {
         $this->db->select($select);
-        $this->db->distinct();
+        // $this->db->distinct();
         $this->db->from($this->tables[8]);
         $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk');
         $this->db->join($this->tables[1]. ' AS d', 'driver_no = driver_no_fk');
-        $this->db->join($this->tables[10]. ' AS c', 'd.coo_no_fk = c.coo_no_fk');
-        $this->db->join($this->tables[11]. ' AS l', 'c.loc_no_fk = l.loc_no');
+        $this->db->join($this->tables[11]. ' AS l', 'd.coo_no_fk = l.coo_no_fk');
         $this->db->where($where);
 
         $query = $this->db->get();

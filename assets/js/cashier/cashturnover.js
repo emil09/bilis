@@ -61,7 +61,7 @@ function get_available_turnover(coo_no){
 										'<td>' + data['cash_turnover'][i]['rte_nam'] + '</td>'+
 										'<td>'+data['cash_turnover'][i]['unt_lic']+'</td>'+
 										'<td>('+data['cash_turnover'][i]['emp_no_fk']+') '+data['cash_turnover'][i]['emp_lname']+', '+data['cash_turnover'][i]['emp_fname']+'</td>'+
-										'<td>'+data['cash_turnover'][i]['amt_in']+'</td>'+
+										'<td>'+data['cash_turnover'][i]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'<td>'+ formatDate(data['cash_turnover'][i]['to_dt']) +' ' + 
 										formatAMPM(data['cash_turnover'][i]['to_dt'] + ' ' + data['cash_turnover'][i]['to_time']) +'</td>'+
 									'</tr>';
@@ -151,7 +151,7 @@ function assignBag(emp_no, trip_ctr) {
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Amount Turnover</th>'+
-										'<td>'+data['trip'][0]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
+										'<td>₱ '+data['trip'][0]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Arrival</th>'+

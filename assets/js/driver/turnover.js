@@ -73,7 +73,7 @@ function get_turnover_location(){
 		var loc_data = '';
 		loc_data = '<option value="" selected disabled>Select your location</option>';
 		for (var i=0; i<parseInt(data.location.length);i++) {
-			loc_data += '<option value="'+data['location'][i]['loc_no_fk']+'">'+data['location'][i]['loc_name']+'</option>'
+			loc_data += '<option value="'+data['location'][i]['loc_no']+'">'+data['location'][i]['loc_name']+'</option>'
 		}
 		$('#loc_select').html(loc_data);
 		//     $('.turnoverbutton').attr('id', trip_ctr);
