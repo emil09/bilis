@@ -28,7 +28,7 @@ Class Cashturnover extends MY_Controller {
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
 
 		header('Content-Type: application/json');
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 	public function get_assigned_detail(){
@@ -51,7 +51,7 @@ Class Cashturnover extends MY_Controller {
 	public function post_ct(){
 
 
-		$this->form_validation->set_rules('bag_no', 'Bag No.', 'required');
+		$this->form_validation->set_rules('bag_no', 'Bag No.', 'required|is_natural_no_zero');
 		$this->form_validation->set_rules('batch', 'Batch', 'required');
 		$this->form_validation->set_rules('trp_id', 'Trip ID', 'required');
 
@@ -60,21 +60,29 @@ Class Cashturnover extends MY_Controller {
 			$data = array('status' => 'error');
 
 		}else{
+			$where = array(
+					'ct_bag' 		=> $_POST['bag_no'],
+					'ct_batch_fk'	=> $_POST['batch']
+				);
+			$bag = $this->CashturnoverModel->select(11, 'ct_bag, ct_batch_fk', $where);
+			if(count($bag)>0){
+				$data = array('status' => 'bag_error');
+			} else {
+				$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+				$insert_data = array(
+					'ct_cashier_fk' =>	$cashier[0]->cashier_no,
+					'ct_bag'		=>	$_POST['bag_no'],
+					'ct_batch_fk'	=>	$_POST['batch'],
+					'ct_date'		=>	date('Y-m-d'),
+					'ct_time'		=>	date('H:i:s'),
+					'trp_id_fk'		=>	$_POST['trp_id']
+				);
+				$this->CashturnoverModel->insert(11, $insert_data);
 
-			$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
-			$insert_data = array(
-				'ct_cashier_fk' =>	$cashier[0]->cashier_no,
-				'ct_bag'		=>	$_POST['bag_no'],
-				'ct_batch_fk'	=>	$_POST['batch'],
-				'ct_date'		=>	date('Y-m-d'),
-				'ct_time'		=>	date('H:i:s'),
-				'trp_id_fk'		=>	$_POST['trp_id']
-			);
-			$this->CashturnoverModel->insert(11, $insert_data);
+				$this->CashturnoverModel->update(9, array('trp_stat'=>'C'), array('trp_id'=>$_POST['trp_id']));
 
-			$this->CashturnoverModel->update(9, array('trp_stat'=>'C'), array('trp_id'=>$_POST['trp_id']));
-
-			$data = array('status' => 'success');
+				$data = array('status' => 'success');
+			}
 		}
 
 		header('Content-Type: application/json');

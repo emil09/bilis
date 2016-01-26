@@ -17,9 +17,6 @@ function get_active_list(){
 										'<a><strong>Route:</strong> '+data.active_list[i]['rte_nam']+'</a>'+
 										'<a><strong>Start Date:</strong> '+data.active_list[i]['start_dt']+'</a>'+
 										'<a><strong>Start Time:</strong> '+data.active_list[i]['start_time']+'</a>'+
-										'<a><strong>End Date:</strong> </a>'+
-										'<a><strong>End Time:</strong> </a>'+
-										'<a><strong>Status:</strong> A</a>'+
 									'</li></ul></div></td>'+
 									'<td>'+data.active_list[i]['unt_lic']+'</td>';
 				for (var j = 0; j < data.active_cash.length; j++) {

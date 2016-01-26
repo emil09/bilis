@@ -35,7 +35,7 @@ Class ActiveTrips extends MY_Controller {
 
 		$this->db->order_by('count_trp','desc');
 		$results = $this->ActiveTripsModel->get_dspdriver($select, $where);
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 	public function end_day(){

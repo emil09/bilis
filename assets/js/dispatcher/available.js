@@ -108,7 +108,6 @@ function getDriver(coo_no){
 
 	
 	$.ajax({
-
 			url: 'available/get_driver',
 			type: 'post',
 			data: {coo_no: coo_no},
@@ -189,7 +188,7 @@ function getDriver(coo_no){
 				$("#driver_data").html(table_data);
 				$("#driver_dispatching").html(data.total);
 				var tabler = $('#table-available').DataTable({
-					paging : true,
+					paging : false,
 					scrollY: '45vh',
         			scrollCollapse: true,
 					scrollX: 'true',

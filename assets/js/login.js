@@ -19,7 +19,10 @@ $(function(){
 						$('.slide-in').removeClass('hide-form');
 						emp_data = data.credentials[0].emp_fname+" "+data.credentials[0].emp_lname;
 						$('#employeename').html('Hello, '+emp_data+'!');
-						$('#loginForm').css('height', '306px');
+						loginFormHeight();
+						$(window).resize(function(){
+							loginFormHeight();
+						});
 					}
 				}
 				else{
@@ -32,6 +35,20 @@ $(function(){
 			}
 	    }); 
 	});
+
+	function loginFormHeight() {
+		var form_w = $(window).width();
+		if(form_w <= 1280) {
+			$('#loginForm').css('height', '372px');
+		}
+		else if(form_w > 1280) {
+			$('#loginForm').css('height', '306px');
+		}
+		else {
+
+		}
+	}
+
 	$("#loginForm").submit(function(event){
 		event.preventDefault();	 
 
@@ -62,8 +79,24 @@ $(function(){
 		num= '';
 		$('#employeename').html('');
 		$('#emp_no').val('');
-		$('#loginForm').css('height', '290px')
+		loginFormHeight2();
+		$(window).resize(function(){
+			loginFormHeight2();
+		});
 	});
+
+	function loginFormHeight2() {
+		var form_w = $(window).width();
+		if(form_w <= 1280) {
+			$('#loginForm').css('height', '345px');
+		}
+		else if(form_w > 1280) {
+			$('#loginForm').css('height', '290px')
+		}
+		else {
+
+		}
+	}
 	
 	$("#emp_no, #password").keypress(function (e) {
 		if (e.which != 8 && e.which != 0 && e.which != 13 && (e.which < 48 || e.which > 57)) {
@@ -71,19 +104,6 @@ $(function(){
 			return false;
 		}
     });
-	// var emp_h = $('#empnokeys').height();
-	// var pass_h = $('#passkeys').height();
-	// $('#empnokeys').css({'height': '0px', 'transition': '1s'});
-	// $('#passkeys').css({'height': '0px', 'transition': '1s'});
-
-	// $('#emp_no').on("focus", function(){
-	//     $('#empnokeys').css({'display': 'block', 'height': '188px', 'transition': '1s'});
-	//     $('#passkeys').css({'display': 'none', 'height': '0px', 'transition': '1s'});
-	// });
-	// $('#password').on("focus", function(){
-	// 	$('#passkeys').css({'display': 'block', 'height': '188px', 'transition': '1s'});
-	//     $('#empnokeys').css({'display': 'none', 'height': '0px', 'transition': '1s'});
-	// });
     $('#empnokeys button').click(function(){
 		if ($(this).val() != "CLR" && $(this).val() != "backspace") {
 			num += $(this).val();

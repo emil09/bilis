@@ -1,5 +1,9 @@
 $(function(){
 	get_turnovered_list();
+	$(window).resize(function(){
+		get_turnovered_list();
+	});
+
 
     $('#table-turnoverreport tbody').on('click', 'button#editturnover-button', function () {
         $("#turnoverreportsModal").modal({backdrop: 'static'});
@@ -17,7 +21,12 @@ $(function(){
 				if(data.status == 'success'){
 					swal('Success', 'Cash turnover updated.', 'success');
 					get_turnovered_list();
+					$(window).resize(function(){
+						get_turnovered_list();
+					});
 					$('#turnoverreportsModal').modal('hide');
+				}else if(data.status == 'bag_error'){
+					swal('Error', 'Bag already exists in the batch.', 'error');
 				}else{
 					swal('Error', 'Cash turnover not updated.', 'error');
 				}
@@ -29,74 +38,80 @@ $(function(){
 		});
     });
 
-    $('#datetimepicker6').datetimepicker();
-    $('#datetimepicker7').datetimepicker({
-        useCurrent: false //Important! See issue #1075
-    });
-    $("#datetimepicker6").on("dp.change", function (e) {
-        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-        var min = $('#datetimepicker6').data("DateTimePicker").date();
-        // var min = Date.parse( $('#datetimepicker6').data("DateTimePicker").date());
-    	console.log("min: " + min);
-    });
-    $("#datetimepicker7").on("dp.change", function (e) {
-        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        console.log($('#datetimepicker7').data("DateTimePicker").date());
-    });
 });
 
 var trp_id = '';
+function get_turnovered_list(ct_date){
 
-function get_turnovered_list(){
-	$.get("turnoverreport/turnovered_list", function(data, status){
-		var table_data = '';
-		var batch_no = '';
-		if(data.turnover_report.length > 0){
-			for(var i = 0; i < data.turnover_report.length; i++) {
-				if(data["turnover_report"][i]["ct_batch_fk"] == "D") {
-					batch_no = '1';
+	$.ajax({
+		url: 'turnoverreport/turnovered_list',
+		type: 'post',
+		data: {ct_date: ct_date},
+		success: function(data, status) {
+			var table_data = '';
+			var batch_no = '';
+			if(data.turnover_report.length > 0){
+				for(var i = 0; i < data.turnover_report.length; i++) {
+					if(data["turnover_report"][i]["ct_batch_fk"] == "D") {
+						batch_no = '1';
+					}
+					else {
+						batch_no = '2';
+					}
+					table_data += '<tr>'+
+										'<td>'+batch_no+'</td>'+
+										'<td>'+data["turnover_report"][i]["ct_bag"]+'</td>'+
+										'<td>('+data['turnover_report'][i]['emp_no_fk']+') '+data['turnover_report'][i]['emp_lname']+', '+data['turnover_report'][i]['emp_fname']+'</td>'+
+										'<td>'+data['turnover_report'][i]['unt_lic']+'</td>'+
+										'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["turnover_report"][i]["emp_no_fk"]+', '+data["turnover_report"][i]["trips_ctr"]+', '+batch_no+', '+data["turnover_report"][i]["ct_bag"]+')">'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>'+
+										'<td class="priority">'+data['turnover_report'][i]['amt_in']+'</td>'+
+										'<td>'+ formatDate(data['turnover_report'][i]['ct_date']) +' ' + 
+										formatAMPM(data['turnover_report'][i]['ct_date'] + ' ' + data['turnover_report'][i]['ct_time']) +'</td>'+
+									'</tr>';
 				}
-				else {
-					batch_no = '2';
-				}
-				table_data += '<tr>'+
-									'<td>'+batch_no+'</td>'+
-									'<td>'+data["turnover_report"][i]["ct_bag"]+'</td>'+
-									'<td>('+data['turnover_report'][i]['emp_no_fk']+') '+data['turnover_report'][i]['emp_lname']+', '+data['turnover_report'][i]['emp_fname']+'</td>'+
-									'<td>'+data['turnover_report'][i]['unt_lic']+'</td>'+
-									'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["turnover_report"][i]["emp_no_fk"]+', '+data["turnover_report"][i]["trips_ctr"]+', '+batch_no+', '+data["turnover_report"][i]["ct_bag"]+')">'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>'+
-									'<td class="priority">'+data['turnover_report'][i]['amt_in']+'</td>'+
-									'<td>'+ formatDate(data['turnover_report'][i]['ct_date']) +' ' + 
-									formatAMPM(data['turnover_report'][i]['ct_date'] + ' ' + data['turnover_report'][i]['ct_time']) +'</td>'+
-								'</tr>';
 			}
-			
+			$('#table-turnoverreport').dataTable().fnDestroy();
+
+		    $('#driver_data').html(table_data);
+		    var tabler = $('#table-turnoverreport').DataTable({
+				paging : false,
+				autoWidth: false,
+				scrollY: '45vh',
+				scrollCollapse: true,
+				scrollX: 'true',
+				fixedHeader: false,
+				order: [[ 6, "desc" ]]
+			});
+		    var cells = tabler.cells();
+		    var sum = 0;
+		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5]);
+		    }
+		    $('#totalvalue').html('₱'+sum.toFixed(2));
+			$('#selectallrows').click(function(){
+		    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
+		    });
+			$('#deselectallrows').click(function(){
+		    	$('#table-turnoverreport tbody tr').removeClass('DTTT_selected selected');
+		    });
+
+		    $('#turnover-date-filter').datepicker({
+		    	format: 'yyyy-mm-dd',
+		    	endDate: '0d'
+		    });
+
+		    $('#turnover-date-filter-button').click(function(){
+		    	var f_date = $('#turnover-date-filter').datepicker().val();
+		    	get_turnovered_list(f_date);
+		    	$('.box-title:after').css('content', '(filtered: '+f_date+')');
+
+		    });
+		},
+		error: function(xhr, desc, err) {
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
 		}
 
-		$('#table-turnoverreport').dataTable().fnDestroy();
-
-	    $('#driver_data').html(table_data);
-	    var tabler = $('#table-turnoverreport').DataTable({
-			paging : false,
-			autoWidth: false,
-			scrollY: '45vh',
-			scrollCollapse: true,
-			scrollX: 'true',
-			fixedHeader: false,
-			order: [[ 6, "desc" ]]
-		});
-	    var cells = tabler.cells();
-	    var sum = 0;
-	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5]);
-	    }
-	    $('#totalvalue').html('₱'+sum.toFixed(2));
-		$('#selectallrows').click(function(){
-	    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
-	    });
-		$('#deselectallrows').click(function(){
-	    	$('#table-turnoverreport tbody tr').removeClass('DTTT_selected selected');
-	    });
 	});
 }
 var batch_bk = '';

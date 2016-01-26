@@ -115,15 +115,6 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 
 
 .main-footer > div, .main-footer strong { color: #000 }
-@media (max-width: 767px) { .dashcons.col-sm-4 { width: 100%; } }
-@media (max-width: 640px) {
-   .page-dispatcher section.content, .page-dispatcher section.content > .col-md-12 { padding-left: 0; padding-right: 0 }
-   .dashboard-wrapper { margin: 10px 0px 0 }
-   .content-header { padding: 15px 0 0; }
-   #availabledash, #activedash { margin-bottom: 15px }
-   #editModal.btn-warning, .end-day { width: 95% }
-}
-@media (max-width: 480px) { .modal-dialog { width: 90% } }
 
 
 
@@ -155,7 +146,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #scheduling_modal .select2-container, #scheduling_modal .day-night, #scheduling_modal p,
 #editModalWindow .select2-container, #editModalWindow .day-night, #editModalWindow p { float: left; margin-right: 15px }
 #scheduling_modal .select2-container,
-#editModalWindow .select2-container { width: 190px !important }
+#editModalWindow .select2-container { width: 276px !important }
 #scheduling_modal .select2-container .select2-selection--single,
 #editModalWindow .select2-container .select2-selection--single { height: 34px }
 #scheduling_modal .day-night, #editModalWindow .day-night { width: auto }
@@ -272,6 +263,10 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 .selectedtrip td { text-align: right; color: #3C8DBC; font-weight: 600 }
 #table-turnoverreport #editturnover-button { width: 75%; margin: 0 auto; display: block }
 .dataTables_scrollFootInner { padding-right: 0 !important }
+.page-cashier .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
+.page-cashier .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
+#datetimepicker6 { display: inline-flex }
+
 
 
 /* ==========================
@@ -310,4 +305,3 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
     box-shadow: none;
     border-color: #d2d6de;
 }
-

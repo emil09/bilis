@@ -16,6 +16,15 @@ Class TurnoverReportModel extends CI_Model {
         '10'=> 'cashier',
         '11'=> 'cash_turnover'
     );
+
+    public function select($key = '', $select = '', $where = array()) {
+        $this->db->select($select);
+        $this->db->from($this->tables[$key]);
+        $this->db->where($where);
+        $this->db->order_by("ct_id", "desc");
+        $query = $this->db->get();
+        return $query->result();;
+    }
     
     public function select_where($key = '', $select = '', $where = array()) {
         $this->db->select($select);

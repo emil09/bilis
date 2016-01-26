@@ -22,6 +22,8 @@ $(function(){
 					$('#bag_no').val('');
 					$('#batch').val('');
 					$('#cashturnoverModal').modal('hide');
+				}else if(data.status == 'bag_error'){
+					swal('Error', 'Bag already exists in the batch.', 'error');
 				}else{
 					swal('Error', 'Please set bag and batch.', 'error');
 				}
