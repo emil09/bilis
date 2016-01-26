@@ -24,7 +24,7 @@ Class Cashturnover extends MY_Controller {
 	public function available_turnover(){
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
-		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T');
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T', 'to_dt'=>date('Y-m-d'),);
 		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
 
 		header('Content-Type: application/json');

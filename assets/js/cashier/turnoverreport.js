@@ -65,7 +65,7 @@ function get_turnovered_list(ct_date){
 					} else {
 						table_data += 	'<td><button id="editturnover-button" class="btn btn-primary" disabled>'+ data["turnover_report"][i]["trips_ctr"] +'</button></td>';
 					}
-					table_data +=		'<td class="priority">'+data['turnover_report'][i]['amt_in']+'</td>'+
+					table_data +=		'<td class="priority">'+data['turnover_report'][i]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'<td>'+ formatDate(data['turnover_report'][i]['ct_date']) +' ' + 
 										formatAMPM(data['turnover_report'][i]['ct_date'] + ' ' + data['turnover_report'][i]['ct_time']) +'</td>'+
 									'</tr>';
@@ -86,9 +86,9 @@ function get_turnovered_list(ct_date){
 		    var cells = tabler.cells();
 		    var sum = 0;
 		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5]);
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5].replace(/,/g, ''));
 		    }
-		    $('#totalvalue').html('₱'+sum.toFixed(2));
+		    $('#totalvalue').html('₱'+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 			$('#selectallrows').click(function(){
 		    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
 		    });
