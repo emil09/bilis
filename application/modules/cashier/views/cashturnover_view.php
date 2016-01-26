@@ -26,7 +26,7 @@
 			              <th>Route</th>
 			              <th>Unit</th>
 			              <th>Driver</th>
-			              <th>Reported</th>
+			              <th>Amount Reported</th>
 			              <th>End</th>
 			            </tr>
 			          </thead>

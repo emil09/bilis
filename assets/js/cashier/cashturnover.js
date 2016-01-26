@@ -133,7 +133,7 @@ function assignBag(emp_no, trip_ctr) {
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Amount Turnover</th>'+
-										'<td>'+data['trip'][0]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
+										'<td>₱ '+data['trip'][0]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
 										'<th>Arrival</th>'+

@@ -22,7 +22,7 @@ function get_active_list(){
 				for (var j = 0; j < data.active_cash.length; j++) {
 					if(data.active_list[i]['emp_no_fk'] == data.active_cash[j]['emp_no_fk']) {
 						if(data.active_cash[j]['trips_ctr'] == x+1) {
-							table_data += '<td><div class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">'+data.active_cash[j]['amt_in']+
+							table_data += '<td><div class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">'+data.active_cash[j]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+
 									'<ul class="dropdown-menu"><li>'+
 										'<a><strong>Turnover Time:</strong> '+formatAMPM(data.active_cash[j]['to_dt']+" "+data.active_cash[j]['to_time'])+'</a>'+
 									'</li></ul></div></td>';
@@ -36,8 +36,8 @@ function get_active_list(){
 					table_data += '<td>0.00</td>';
 					x++;
 				}
-				table_data += '<td>'+total.toFixed(2)+'</td>'+
-									'<td>'+average.toFixed(2)+'</td>'+
+				table_data += '<td>'+total.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
+									'<td>'+average.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 									'</tr>'
 			}
 		}
@@ -55,14 +55,14 @@ function get_active_list(){
 		var cells = tabler.cells();
 	    var sum = 0;
 	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9]);
+	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9].replace(/,/g, ''));
 	    }
-	    $('#totalvalue').html('₱'+sum.toFixed(2));
+	    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 	    sum=0;
 	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10]);
+	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10].replace(/,/g, ''));
 	    }
-	    $('#totalAVEvalue').html('₱'+sum.toFixed(2));
+	    $('#totalAVEvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 		$('#selectallrows').click(function(){
 	    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
 	    });
