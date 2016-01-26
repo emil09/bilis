@@ -35,7 +35,9 @@
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colspan="5" style="text-align: right">TOTAL:</th>
+                      <th colspan="1" style="text-align: right">TOTAL:</th>
+                      <th colspan="1"><span id="totalbags">0</span> bags</th>
+                      <th colspan="3"> </th>
                       <th colspan="2"><span id="totalvalue"></span></th>    
                     </tr>
                   </tfoot>

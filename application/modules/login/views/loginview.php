@@ -33,7 +33,7 @@
         <form name="loginForm" id="loginForm" method="POST">
           <div class="form-group has-feedback">
             <div class="slide-out">
-              <input type="text" class="form-control" id="emp_no" name="emp_no" placeholder="Enter employee number" style="margin-bottom: 15px" readonly>
+              <input type="text" class="form-control" id="emp_no" name="emp_no" placeholder="Enter employee number" style="margin-bottom: 15px">
               <span class="glyphicon glyphicon-user form-control-feedback"></span>
               <div class="row">
                 <div class="col-xs-12">
@@ -71,7 +71,7 @@
                 <p id="employeename"></p><p id="notyou">(<span>Not You?</span>)</p>
               </div>
               <div style="position: relative">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="margin-bottom: 15px" readonly>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="margin-bottom: 15px">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
               <div class="row">

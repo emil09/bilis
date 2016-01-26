@@ -89,6 +89,7 @@ function get_turnovered_list(ct_date){
 		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][5].replace(/,/g, ''));
 		    }
 		    $('#totalvalue').html('₱'+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+		    $('#totalbags').html(data.turnover_report.length);
 			$('#selectallrows').click(function(){
 		    	$('#table-turnoverreport tbody tr').addClass('DTTT_selected selected');
 		    });
