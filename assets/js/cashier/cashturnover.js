@@ -19,6 +19,11 @@ $(function(){
 					$('#bag_no').val('');
 					$('#batch').val('');
 					$('#cashturnoverModal').modal('hide');
+					$('#coo_select').each(function(){
+						get_available_turnover($(this).val());
+
+				    });
+
 				}else if(data.status == 'bag_error'){
 					swal('Error', 'Bag already exists in the batch.', 'error');
 				}else{

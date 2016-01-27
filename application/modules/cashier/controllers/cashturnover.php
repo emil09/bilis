@@ -18,9 +18,6 @@ Class Cashturnover extends MY_Controller {
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->CashturnoverModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
-		// echo '<pre>';
-		// print_r($data['cooperatives']);
-		// echo "</pre";
 		echo Modules::run('templates/bilis_noside', $data);
 	}
 
@@ -40,7 +37,7 @@ Class Cashturnover extends MY_Controller {
 		header('Content-Type: application/json');
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk, dsp_unit_no, start_dt, start_time';
-		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no'], 'trp_stat'=>'T');
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no'], 'trp_stat'=>'T', 'to_dt'=>date('Y-m-d'));
 		
 		$results['driver'] = $this->CashturnoverModel->available_turnover($select, $where);
 		if(count($results['driver'])>0){

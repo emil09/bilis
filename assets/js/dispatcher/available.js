@@ -193,6 +193,8 @@ function getDriver(coo_no){
         			scrollCollapse: true,
 					scrollX: 'true',
 					fixedHeader: false,
+					deferRender:    true,
+    				scroller:       true,
 					dom: 'T<"clear">lfrtip',
 					tableTools: {
 			            sRowSelect:   'multi',
