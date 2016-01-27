@@ -32,7 +32,11 @@
           <i class="fa fa-users"></i> Sales by Driver
         </a>
       </li>
-      <li><a href="sales_by_unit.php"><i class="fa fa-car"></i> Sales by Unit</a></li>
+      <li class="treeview <?php echo $this->uri->segment(3) == 'unit'? 'active': ''; ?>">
+        <a href="<?php echo base_url() ?>admin/sales/unit">
+          <i class="fa fa-car"></i> Sales by Unit
+        </a>
+      </li>
       <li>
         <a href="sales_by_time_period.php">
           <i class="fa fa-clock-o"></i> Sales Time Period <i class="fa fa-angle-left pull-right"></i>
