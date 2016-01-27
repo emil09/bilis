@@ -57,6 +57,7 @@ Class TurnoverReportModel extends CI_Model {
         $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
         $this->db->join($this->tables[0], 'employee.emp_no = emp_no_fk', 'left');
         $this->db->where($where);
+        $this->db->order_by("employee.emp_lname", "asc");
         $query = $this->db->get();
         return $query->result();
     }

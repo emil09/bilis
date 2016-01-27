@@ -51,34 +51,35 @@ function get_active_list(coo_no){
 										'</tr>'
 				}
 			}
-			$('#table-activetripsreport').dataTable().fnDestroy();
 
-	    $('#active_list_data').html(table_data);
-		var tabler = $('#table-activetripsreport').DataTable({
-			paging : false,
-			autoWidth : false,
-			scrollY: '45vh',
-			scrollCollapse: true,
-			scrollX: 'true',
-			fixedHeader: false,
-		});
-		var cells = tabler.cells();
-	    var sum = 0;
-	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9].replace(/,/g, ''));
+			$('#table-activetripsreport').dataTable().fnDestroy();
+		    $('#active_list_data').html(table_data);
+			var tabler = $('#table-activetripsreport').DataTable({
+				paging : false,
+				autoWidth : false,
+				scrollY: '45vh',
+				scrollCollapse: true,
+				scrollX: 'true',
+				fixedHeader: false,
+			});
+			var cells = tabler.cells();
+		    var sum = 0;
+		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9].replace(/,/g, ''));
+		    }
+		    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+		    sum=0;
+		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10].replace(/,/g, ''));
+		    }
+		    $('#totalAVEvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
+			$('#selectallrows').click(function(){
+		    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
+		    });
+			$('#deselectallrows').click(function(){
+		    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
+		    });
 	    }
-	    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
-	    sum=0;
-	    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-	    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10].replace(/,/g, ''));
-	    }
-	    $('#totalAVEvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
-		$('#selectallrows').click(function(){
-	    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
-	    });
-		$('#deselectallrows').click(function(){
-	    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
-	    });
 	});
 }
 

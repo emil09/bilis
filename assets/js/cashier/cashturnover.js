@@ -83,7 +83,7 @@ function get_available_turnover(coo_no){
 				scrollCollapse: true,
 				scrollX: 'true',
 				fixedHeader: false,
-				order: [[ 5, "desc" ]]
+				order: [[ 0, "desc" ], [ 5, "desc" ]]
 			});
 			$('#selectallrows').click(function(){
 		    	$('#table-cashturnover tbody tr').addClass('DTTT_selected selected');
