@@ -21,13 +21,17 @@
       </li>
     </ul>
   </li>
-  <li class="treeview">
+  <li class="treeview <?php echo $this->uri->segment(2) == 'sales'? 'active': ''; ?>">
     <a href="#">
       <i class="fa fa-money"></i> <span>Sales</span>
       <i class="fa fa-angle-left pull-right"></i>
     </a>
-    <ul class="treeview-menu" style="display: none;">
-      <li><a href="sales_by_driver.php"><i class="fa fa-users"></i> Sales by Driver</a></li>
+    <ul class="treeview-menu <?php echo $this->uri->segment(3) == 'driver'? 'menu_open': ''; ?>">
+      <li class="treeview <?php echo $this->uri->segment(3) == 'driver'? 'active': ''; ?>">
+        <a href="<?php echo base_url() ?>admin/sales/driver">
+          <i class="fa fa-users"></i> Sales by Driver
+        </a>
+      </li>
       <li><a href="sales_by_unit.php"><i class="fa fa-car"></i> Sales by Unit</a></li>
       <li>
         <a href="sales_by_time_period.php">

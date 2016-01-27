@@ -30,7 +30,7 @@
         <p class="login-box-msg">Sign in to start your session</p>
         <div id="errmsg" class="callout callout-danger"></div>
         <div class="text-center" style="margin-bottom: 20px;" id="notif_message_log"></div>
-        <form name="loginForm" id="loginForm" method="POST">
+        <form name="loginForm" id="loginForm" method="POST" autocomplete="off">
           <div class="form-group has-feedback">
             <div class="slide-out">
               <input type="text" class="form-control" id="emp_no" name="emp_no" placeholder="Enter employee number" style="margin-bottom: 15px">
