@@ -77,6 +77,51 @@
             <div class="box-header with-border">
               <h3 class="box-title">All Routes Sales Report in Day Shift (Jan 27 2016)</h3>
             </div>
+            <div class="box-body">
+            	<table id="sales-by-driver" class="table table-bordered">
+            		<thead>
+            			<th>Unit</th>
+            			<th>Driver</th>
+            			<th>Trip 1</th>
+            			<th>Trip 2</th>
+            			<th>Trip 3</th>
+            			<th>Trip 4</th>
+            			<th>Trip 5</th>
+            			<th>Trip 6</th>
+            			<th>Trip 7</th>
+            			<th>Total</th>
+            			<th>Average</th>
+            		</thead>
+            		<tbody>
+            			<tr>
+            				<td>PWN-980</td>
+            				<td>Adolfo, Florante (668)</td>
+            				<td>550.00</td>
+            				<td>600.00</td>
+            				<td>500.00</td>
+            				<td>200.00</td>
+            				<td>0.00</td>
+            				<td>0.00</td>
+            				<td>0.00</td>
+            				<td>1,850.00</td>
+            				<td>462.50</td>
+            			</tr>
+            			<tr>
+            				<td>PWK-665</td>
+            				<td>Agdol, Dante (695)</td>
+            				<td>900.00</td>
+            				<td>650.00</td>
+            				<td>0.00</td>
+            				<td>0.00</td>
+            				<td>0.00</td>
+            				<td>0.00</td>
+            				<td>0.00</td>
+            				<td>1,550.00</td>
+            				<td>775.00</td>
+            			</tr>
+            		</tbody>
+            	</table>
+            </div>
           </div><!-- /.box-primary -->
         </div>
       </div>

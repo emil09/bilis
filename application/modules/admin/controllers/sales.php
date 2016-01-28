@@ -15,8 +15,8 @@ Class Sales extends MY_Controller {
 	}
 
 	public function driver() {
-		$data['css'] = $this->add_css(array(DatePicker3, Sweetalert2CSS));
-    	$data['js'] = $this->add_js(array(BootstrapDate , Sweetalert2));
+		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Bootstrap3DateCSS, Sweetalert2CSS));
+    	$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, Bootstrap3DateJS, Sweetalert2, SalesByDriverJS));
     
 		$data['module'] = 'admin';
 		$data['view_file'] = 'sales_driver';	
@@ -25,8 +25,8 @@ Class Sales extends MY_Controller {
 		
 	}
 	public function unit() {
-		$data['css'] = $this->add_css(array(DatePicker3, Sweetalert2CSS));
-    	$data['js'] = $this->add_js(array(BootstrapDate , Sweetalert2));
+		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Bootstrap3DateCSS, Sweetalert2CSS));
+    	$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, Bootstrap3DateJS, Sweetalert2, SalesByUnitJS));
     
 		$data['module'] = 'admin';
 		$data['view_file'] = 'sales_unit';	

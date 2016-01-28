@@ -148,3 +148,11 @@ define('TurnoverJS', 'assets/js/driver/turnover.js');
 define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
 define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');
 define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');
+
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+*/
+define('SalesByDriverJS', 'assets/js/admin/salesbydriver.js');
+define('SalesByUnitJS', 'assets/js/admin/salesbyunit.js');
