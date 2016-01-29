@@ -16,7 +16,7 @@ function get_active_list(coo_no){
 		success: function(data, status){
 			var table_data = '';
 			if(data.active_list.length > 0){
-				console.log(data);
+				var lg_num = 0;
 				for (var i = 0; i < data.active_list.length; i++) {
 					var x = 0;
 					var total = 0;
@@ -38,39 +38,73 @@ function get_active_list(coo_no){
 										'</li></ul></div></td>';
 								total+=parseFloat(data.active_cash[j]['amt_in']);
 								x++;
+								if(lg_num < x) {
+									lg_num=x;
+								}
 							}
 						}
 					}
 					average = total/x;
-					while(x<7) {
-						table_data += '<td>0.00</td>';
-						x++;
+					if(lg_num > 7) {
+						while(x<lg_num) {
+							table_data += '<td>0.00</td>';
+							x++;
+						}
+					} else {
+						while(x<7) {
+							table_data += '<td>0.00</td>';
+							x++;
+						}
 					}
 					table_data += '<td>'+total.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'<td>'+average.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'</tr>'
 				}
 			}
+			var trip = 7;
+			var foot = trip+2;
+			thead_data = '<tr>'+
+							'<th>Driver</th>'+
+							'<th>Unit</th>';
+			if(lg_num > trip) {
+				trip = lg_num;
+				foot = lg_num+2;
+			}
+			for(var i=1; i<=trip; i++) {
+				thead_data += '<th>Trip '+i+'</th>';
+			}
+			tfoot_data = '<tr>'+
+                        '<th colspan="'+foot+'" style="text-align: right">TOTAL:</th>'+
+                        '<th><span id="totalvalue"></span></th>'+
+                        '<th><span id="totalAVEvalue"></span></th>'+
+                        '</tr>';
+
+			thead_data += '<th>Total</th><th>Average</th></tr>';
+
+			$('#activetrips-thead').html(thead_data);
+			$('#activetrips-tfoot').html(tfoot_data);
 
 			$('#table-activetripsreport').dataTable().fnDestroy();
 		    $('#active_list_data').html(table_data);
 			var tabler = $('#table-activetripsreport').DataTable({
 				paging : false,
-				autoWidth : false,
-				scrollY: '45vh',
-				scrollCollapse: true,
-				scrollX: 'true',
-				fixedHeader: false,
+				// autoWidth : false,
+				// scrollY: '45vh',
+				// scrollCollapse: true,
+				// scrollX: 'true',
+				// fixedHeader: false,
 			});
 			var cells = tabler.cells();
 		    var sum = 0;
+		    var tots = trip+2;
+		    var ave = trip+3;
 		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][9].replace(/,/g, ''));
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][tots].replace(/,/g, ''));
 		    }
 		    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 		    sum=0;
 		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
-		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][10].replace(/,/g, ''));
+		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][ave].replace(/,/g, ''));
 		    }
 		    $('#totalAVEvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 			$('#selectallrows').click(function(){

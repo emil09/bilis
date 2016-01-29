@@ -305,3 +305,11 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
     box-shadow: none;
     border-color: #d2d6de;
 }
+
+.page-admin .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
+.page-admin .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
+.page-admin .dataTable tfoot tr th, .page-cashier .dataTable tfoot tr th { padding: 10px 8px }
+.page-admin #totalvalue { color: rgb(9, 179, 23); font-weight: bold; }
+.page-admin #status-A { color: #00A65A }
+.page-admin #status-F { color: #DD4B39 }
+.page-admin tbody td:first-child .open>a:before { content: "\f0d7" }
