@@ -280,9 +280,9 @@ Class Register extends MY_Controller {
 	public function emp_no(){
 
     
-    $emp_act = $this->RegisterModel->select_where(0, 'emp_no', array('emp_stat'=>'A'));
+    $emp_act = $this->RegisterModel->select_where(0, 'emp_no', array('emp_stat'=>'1'));
 
-    $emp_inact = $this->RegisterModel->select_where(0, 'emp_no', array('emp_stat'=>'I'));
+    $emp_inact = $this->RegisterModel->select_where(0, 'emp_no', array('emp_stat'=>'2'));
 
     $data['active'] = count($emp_act);
     $data['inactive'] = count($emp_inact);

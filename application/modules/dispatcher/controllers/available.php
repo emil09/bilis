@@ -22,6 +22,7 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
+		$_POST['coo_no'] = 6;
 		header('Content-Type: application/json');
 
 		$data = array();
@@ -53,13 +54,15 @@ Class Available extends MY_Controller {
 
 
 			// If the driver having a schedule.. it is also checked if it is dispatched
-			$data['driver'][$i]['dispatched'] = array();
-			if($data['driver'][$i]['sched']){
-				$select3 = 'dsp_unit_no, dsp_by, start_dt, start_time, dsp_stat_fk';
-				$where3 =  array('driver_no_fk' => $result->driver_no, 'sched_dt' => date('Y-m-d'));
+			// $data['driver'][$i]['dispatched'] = array();
+			// if($data['driver'][$i]['sched']){
+				$select3 = 'dsp_unit_no, dsp_by, start_dt, start_time, dsp_stat_fk, unt_lic, shift_name';
+				$where3 =  array('driver_no_fk' => $result->driver_no);
 				$this->db->join('dispatch_sched','dsp_sched_no = sched_no_fk', 'left');
+				$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
+				$this->db->join('shift','shift_code = shift_code_fk', 'left');
 				$data['driver'][$i]['dispatched'] = $this->AvailableModel->select_where(8, $select3, $where3);
-			}
+			// }
 
 			// Getting the available route for the driver
 			$select4 = 'rte_nam, rte_no';
@@ -68,7 +71,7 @@ Class Available extends MY_Controller {
 
 			$i++;
 		}
-		echo json_encode($data);
+		echo json_encode($data, JSON_PRETTY_PRINT);
 	}
 
 	public function get_driver_detail(){

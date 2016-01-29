@@ -122,52 +122,44 @@ function getDriver(coo_no){
 					var btn_class = 'warning';
 					var btn_state = '';
 					var button_clear = '';
-					if(data.driver[i].sched.length>0){
-						sched_arr = data.driver[i].sched.length - 1;
-						dsp_arr = data.driver[i].dispatched.length - 1;
-						if(data.driver[i].dispatched.length>0 && data.driver[i].dispatched[dsp_arr]['dsp_stat_fk']=='A'){
-							btn_dispatched = '<button class="btn btn-success col-xs-11" data-value="'+ data.driver[i].sched[0]['dsp_sched_no']+'" disabled>DISPATCHED</button>';
-							unit = data.driver[i].sched[sched_arr]['unt_lic'];
-							shift = 'Dispatched in ' + data.driver[i].sched[sched_arr]['shift_name']+ ' Shift';
 
-							if(!data.driver[i].sched[sched_arr]['dsp_sched_no']){
-								btn_dispatched = '';
-							}
-							if(!unit){
-								unit = '';
-							}
-							if(!data.driver[i].sched[sched_arr]['shift_name']){
-								shift = '';
-							}
-							btn_val = 'Edit';
-							btn_class = 'primary';
-							btn_state = 'disabled';
-						}
-						else if(data.driver[i].sched[sched_arr]['sched_type']=='F'){
-
-						}
-						else {
-
+					
+					sched_arr = data.driver[i].sched.length - 1;
+					dsp_arr = data.driver[i].dispatched.length - 1;
+					if(data.driver[i].dispatched.length>0 && data.driver[i].dispatched[dsp_arr]['dsp_stat_fk']=='A'){
 						
-							btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no+'" data-unit="'+ data.driver[i].sched[sched_arr].unit_no_fk+'">DISPATCH</button>';
-							unit = data.driver[i].sched[sched_arr]['unt_lic'];
-							shift = 'Scheduled in ' + data.driver[i].sched[sched_arr]['shift_name']+ ' Shift';
-							if(!data.driver[i].sched[sched_arr]['dsp_sched_no']){
-								btn_dispatched = '';
-							}
-							if(!unit){
-								unit = '';
-							}
-							if(!data.driver[i].sched[sched_arr]['shift_name']){
-								shift = '';
-							}
-							btn_val = 'Edit';
-							btn_class = 'primary';
+						btn_dispatched = '<button class="btn btn-success col-xs-11" data-value="'+ data.driver[i].dispatched[dsp_arr]['sched_no_fk']+'" disabled>DISPATCHED</button>';
+						unit = data.driver[i].dispatched[dsp_arr]['unt_lic'];
+						shift = 'Dispatched in ' + data.driver[i].dispatched[dsp_arr]['shift_name']+ ' Shift';
 
-							button_clear = ' <button class="btn btn-danger" id="clear-sched" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no +'">Clear</button>';
-						}
-						
+						btn_val = 'Edit';
+						btn_class = 'primary';
+						btn_state = 'disabled';
 					}
+					else if(data.driver[i].sched.length>0 && data.driver[i].sched[sched_arr]['sched_type']=='F'){
+
+					}
+					else if(data.driver[i].sched.length>0) {
+
+					
+						btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no+'" data-unit="'+ data.driver[i].sched[sched_arr].unit_no_fk+'">DISPATCH</button>';
+						unit = data.driver[i].sched[sched_arr]['unt_lic'];
+						shift = 'Scheduled in ' + data.driver[i].sched[sched_arr]['shift_name']+ ' Shift';
+						if(!data.driver[i].sched[sched_arr]['dsp_sched_no']){
+							btn_dispatched = '';
+						}
+						if(!unit){
+							unit = '';
+						}
+						if(!data.driver[i].sched[sched_arr]['shift_name']){
+							shift = '';
+						}
+						btn_val = 'Edit';
+						btn_class = 'primary';
+
+						button_clear = ' <button class="btn btn-danger" id="clear-sched" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no +'">Clear</button>';
+					}
+						
 					
 					table_data += '<tr id="driver-' + data.driver[i].emp_no + '"><td>' + 
 					data.driver[i].lname + ', ' + data.driver[i].fname + 

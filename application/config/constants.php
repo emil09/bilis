@@ -120,7 +120,6 @@ define('Media', 'assets/css/media.css');
 // JS
 define('Demo', 'assets/libs/theme/js/demo.js');
 define('App', 'assets/libs/theme/js/app.min.js');
-define('RegisterJS', 'assets/js/admin/register.js');
 
 
 /*
@@ -148,3 +147,12 @@ define('TurnoverJS', 'assets/js/driver/turnover.js');
 define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
 define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');
 define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+*/
+define('RegisterJS', 'assets/js/admin/register.js');
+define('UpdateEmpJS', 'assets/js/admin/update_employee.js');

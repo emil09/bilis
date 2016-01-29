@@ -374,10 +374,20 @@
         $aaData[$row_key] = array_diff_key($aaData[$row_key], ($this->check_cType())? $this->unset_columns : array_intersect($this->columns, $this->unset_columns));
 
         if(!$this->check_cType())
-          $aaData[$row_key] = array_values($aaData[$row_key]);
+          $aaData[$row_key][] = array_values($aaData[$row_key]);
 
       }
 
+        // for ($j=0; $j < count($aaData); $j++) { 
+        //   $test[$j][0] = $aaData[$j]['emp_no'];
+
+        //   $test[$j][1] = $aaData[$j]['emp_fname'];
+        // }
+        // for ($j=0; $j < count($aaData); $j++) { 
+        //   $test[1][$j] = $aaData[$j]['loc_no'];
+        // }
+     
+      
       if($output == 'json')
       {
         $sOutput = array
@@ -604,8 +614,8 @@
         return '{' . join(',', $json) . '}';
       }
     }
-	
-	 /**
+  
+   /**
      * returns the sql statement of the last query run
      * @return type
      */
@@ -616,3 +626,4 @@
   }
 /* End of file Datatables.php */
 /* Location: ./application/libraries/Datatables.php */
+  
