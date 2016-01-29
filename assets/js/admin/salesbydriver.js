@@ -1,42 +1,53 @@
 $(function(){
 	$('#coo_select').each(function(){
-		get_active_list($(this).val());
+		get_sales_by_driver_list($(this).val());
 	});
 	$('#coo_select').on('change', function(){
-		get_active_list($(this).val());
+		get_sales_by_driver_list($(this).val());
 	});
 });
 
-
-function get_active_list(coo_no){
+function get_sales_by_driver_list(coo_no) {
 	$.ajax({
-		url: "activetripsreport/active_list",
+		url: "sales_by_driver_list",
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status){
 			var table_data = '';
-			if(data.active_list.length > 0){
+			if(data.sales_list.length > 0){
 				var lg_num = 0;
-				for (var i = 0; i < data.active_list.length; i++) {
+				for (var i = 0; i < data.sales_list.length; i++) {
 					var x = 0;
 					var total = 0;
 					var average = 0;
+					var enddate = '';
+					var endtime = '';
+					if(data.sales_list[i]['end_dt'] == "0000-00-00") {
+						enddate = '';
+						endtime = '';
+					} else {
+						enddate = data.sales_list[i]['end_dt'];
+						endtime = data.sales_list[i]['end_time'];
+					}
 					table_data += '<tr>'+
-										'<td><div class="dropdown"><a href="#" class="dropdown-toggle fa fa-caret-right" data-toggle="dropdown" style="color: #00A65A"> ('+data.active_list[i]['emp_no_fk']+') '+data.active_list[i]['emp_lname']+', '+data.active_list[i]['emp_fname']+'</a>'+
+										'<td><div class="dropdown"><a href="#" id="status-'+data.sales_list[i]['dsp_stat_fk']+'" class="dropdown-toggle fa fa-caret-right" data-toggle="dropdown"> '+data.sales_list[i]['emp_lname']+', '+data.sales_list[i]['emp_fname']+' ('+data.sales_list[i]['emp_no_fk']+')</a>'+
 										'<ul class="dropdown-menu"><li>'+
-											'<a><strong>Route:</strong> '+data.active_list[i]['rte_nam']+'</a>'+
-											'<a><strong>Start Date:</strong> '+data.active_list[i]['start_dt']+'</a>'+
-											'<a><strong>Start Time:</strong> '+data.active_list[i]['start_time']+'</a>'+
+											'<a><strong>Route:</strong> '+data.sales_list[i]['rte_nam']+'</a>'+
+											'<a><strong>Start Date:</strong> '+data.sales_list[i]['start_dt']+'</a>'+
+											'<a><strong>Start Time:</strong> '+data.sales_list[i]['start_time']+'</a>'+
+											'<a><strong>End Date:</strong> '+enddate+'</a>'+
+											'<a><strong>End Time:</strong> '+endtime+'</a>'+
+											'<a><strong>Status:</strong> '+data.sales_list[i]['dsp_stat_fk']+'</a>'+
 										'</li></ul></div></td>'+
-										'<td>'+data.active_list[i]['unt_lic']+'</td>';
-					for (var j = 0; j < data.active_cash.length; j++) {
-						if(data.active_list[i]['emp_no_fk'] == data.active_cash[j]['emp_no_fk']) {
-							if(data.active_cash[j]['trips_ctr'] == x+1) {
-								table_data += '<td><div class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">'+data.active_cash[j]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+
+										'<td>'+data.sales_list[i]['unt_lic']+'</td>';
+					for (var j = 0; j < data.sales_cash.length; j++) {
+						if(data.sales_list[i]['emp_no_fk'] == data.sales_cash[j]['emp_no_fk']) {
+							if(data.sales_cash[j]['trips_ctr'] == x+1) {
+								table_data += '<td><div class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">'+data.sales_cash[j]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+
 										'<ul class="dropdown-menu"><li>'+
-											'<a><strong>Turnover Time:</strong> '+formatAMPM(data.active_cash[j]['to_dt']+" "+data.active_cash[j]['to_time'])+'</a>'+
+											'<a><strong>Turnover Time:</strong> '+formatAMPM(data.sales_cash[j]['to_dt']+" "+data.sales_cash[j]['to_time'])+'</a>'+
 										'</li></ul></div></td>';
-								total+=parseFloat(data.active_cash[j]['amt_in']);
+								total+=parseFloat(data.sales_cash[j]['amt_in']);
 								x++;
 								if(lg_num < x) {
 									lg_num=x;
@@ -56,7 +67,7 @@ function get_active_list(coo_no){
 							x++;
 						}
 					}
-					table_data += '<td>'+total.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
+					table_data += '<td style="color: #09B317">'+total.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'<td>'+average.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'</tr>'
 				}
@@ -81,12 +92,12 @@ function get_active_list(coo_no){
 
 			thead_data += '<th>Total</th><th>Average</th></tr>';
 
-			$('#activetrips-thead').html(thead_data);
-			$('#activetrips-tfoot').html(tfoot_data);
+			$('#sales-by-driver-thead').html(thead_data);
+			$('#sales-by-driver-tfoot').html(tfoot_data);
 
-			$('#table-activetripsreport').dataTable().fnDestroy();
-		    $('#active_list_data').html(table_data);
-			var tabler = $('#table-activetripsreport').DataTable({
+			$('#sales-by-driver').dataTable().fnDestroy();
+		    $('#sales-by-driver-tbody').html(table_data);
+			var tabler = $('#sales-by-driver').DataTable({
 				paging : false,
 				// autoWidth : false,
 				// scrollY: '45vh',
@@ -108,10 +119,10 @@ function get_active_list(coo_no){
 		    }
 		    $('#totalAVEvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
 			$('#selectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
+		    	$('#sales-by-driver tbody tr').addClass('DTTT_selected selected');
 		    });
 			$('#deselectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
+		    	$('#sales-by-driver tbody tr').removeClass('DTTT_selected selected');
 		    });
 	    }
 	});

@@ -165,7 +165,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #table-available .modal-dialog { width: 480px; margin: 0 auto; margin-top: 100px }
 .page-dispatcher .content-header .pull-right p, .page-dispatcher .content-header .pull-right select, .page-driver .content-header .pull-right select { float: left; width: auto; margin-right: 10px }
 .page-dispatcher .content-header .pull-right p { margin-top: 2px; margin-bottom: 2px }
-.page-dispatcher .content-header .pull-right select, #route { height: 28px; padding: 3px 12px }
+.page-dispatcher .content-header .pull-right select, .page-dispatcher #route { height: 28px; padding: 3px 12px }
 .page-dispatcher .content-header .pull-right button { padding: 4px 10px }
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
 #driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
@@ -305,3 +305,11 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
     box-shadow: none;
     border-color: #d2d6de;
 }
+
+.page-admin .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
+.page-admin .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
+.page-admin .dataTable tfoot tr th, .page-cashier .dataTable tfoot tr th { padding: 10px 8px }
+.page-admin #totalvalue { color: rgb(9, 179, 23); font-weight: bold; }
+.page-admin #status-A { color: #00A65A }
+.page-admin #status-F { color: #DD4B39 }
+.page-admin tbody td:first-child .open>a:before { content: "\f0d7" }

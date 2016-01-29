@@ -41,6 +41,6 @@ Class ActiveTripsReport extends MY_Controller {
 		);
 		$results['active_cash'] = $this->ActiveTripsModel->active_list($select, $where);
 
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 }

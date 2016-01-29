@@ -3,6 +3,7 @@ $(function(){
 	var base_url = window.location.origin;
 	var emp_data = '';
 	var num = '';
+	$('#emp_no').focus();
 	$("#next-btn").click(function(event){
 		event.preventDefault();
         $.ajax({
@@ -27,6 +28,7 @@ $(function(){
 				}
 				else{
 					$("#errmsg").html(data.msg).show(200).delay(1200).fadeOut(800);
+					$('#emp_no').focus();
 				}
 			},
 			error: function(xhr, desc, err) {
@@ -79,6 +81,8 @@ $(function(){
 		num= '';
 		$('#employeename').html('');
 		$('#emp_no').val('');
+		$('#password').val('');
+		$('#emp_no').focus();
 		loginFormHeight2();
 		$(window).resize(function(){
 			loginFormHeight2();
@@ -97,6 +101,12 @@ $(function(){
 
 		}
 	}
+
+	$("#password").keyup(function (e) {
+	    if (e.keyCode == 13) {
+	    	$("#signin-btn").click();
+	    }
+	});
 	
 	$("#emp_no, #password").keypress(function (e) {
 		if (e.which != 8 && e.which != 0 && e.which != 13 && (e.which < 48 || e.which > 57)) {

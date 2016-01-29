@@ -156,3 +156,6 @@ define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');
 */
 define('RegisterJS', 'assets/js/admin/register.js');
 define('UpdateEmpJS', 'assets/js/admin/update_employee.js');
+define('SalesByDriverJS', 'assets/js/admin/salesbydriver.js');
+define('SalesByUnitJS', 'assets/js/admin/salesbyunit.js');
+
