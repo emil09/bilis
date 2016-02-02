@@ -9,6 +9,10 @@ html, body { user-select: none; -webkit-user-select: none; -moz-user-select: non
     padding-right:0;
     padding-left:0;
 }
+.no5-gutter > [class*='col-'] {
+    padding-right:5px;
+    padding-left:5px;
+}
 .content-wrapper{ background-color: #DEE7F5 }
 .modal-header{ background-color: #3c8dbc; color: #fff;}
 .table-bordered>thead>tr>th, 
@@ -313,3 +317,4 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 .page-admin #status-A { color: #00A65A }
 .page-admin #status-F { color: #DD4B39 }
 .page-admin tbody td:first-child .open>a:before { content: "\f0d7" }
+#export-group button { padding: 6px 6px }
