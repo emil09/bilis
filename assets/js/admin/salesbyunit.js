@@ -1,21 +1,51 @@
 $(function(){
+	var check = 0;
 	$('#coo_select').each(function(){
-		get_sales_by_unit_list($(this).val());
+		get_route_list($(this).val());
 	});
 	$('#coo_select').on('change', function(){
-		get_sales_by_unit_list($(this).val());
+		get_route_list($(this).val());
 	});
+	if(check == 0) { get_sales_by_unit_list($('#coo_select').val(), $('#route').val()); }
+	$('#display-report').click(function(e){
+		e.preventDefault();
+		check = 1;
+		if($('#coo_select').val() != '' && $('#route').val() != '') {
+			get_sales_by_unit_list($('#coo_select').val(), $('#route').val());
+		}
+	});
+	$('#pickdate').datepicker({
+    	format: 'yyyy-mm-dd',
+    	endDate: '0d'
+    });
 });
 
-function get_sales_by_unit_list(coo_no) {
+function get_route_list(coo_no) {
 	$.ajax({
-		url: "sales_by_driver_list",
+		url: "my_route_list",
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status){
+			var route_data = '';
+			var table_data = '';
+			if(data.route_list.length > 0) {
+				for (var i=0; i<data.route_list.length; i++) {
+					route_data += '<option value="'+data.route_list[i]['rte_no']+'">'+data.route_list[i]['rte_nam']+'</option>';
+				}
+				$('#route').html(route_data);
+			}
+		}
+	});
+}
+
+function get_sales_by_unit_list(coo_no, rte_no) {
+	$.ajax({
+		url: "sales_by_driver_list",
+		type: 'post',
+		data: {coo_no: coo_no, rte_no: rte_no},
+		success: function(data, status){
 			var table_data = '';
 			if(data.sales_list.length > 0){
-
 				var lg_num = 0;
 				for (var i = 0; i < data.sales_list.length; i++) {
 					var x = 0;

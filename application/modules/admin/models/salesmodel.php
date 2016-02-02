@@ -34,6 +34,14 @@ Class SalesModel extends CI_Model {
         return $query->result();
     }
 
+    public function route_list($select = '', $where = array()) {
+        $this->db->select($select);
+        $this->db->from($this->tables[4]);
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function all_coops($select = ''){
         $this->db->select($select);
         $this->db->from($this->tables[3]);
