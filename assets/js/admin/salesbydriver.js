@@ -18,7 +18,7 @@ $(function(){
 	if(check == 0) {
 		$('#route-header').html('All Routes');
 		$('#shift-header').html($('#shift option:selected').text());
-		get_sales_by_driver_list('', '', $('#shift').val());
+		get_sales_by_driver_list('', '', $('#shift').val(), $('#sales-date').val());
 	}
 	$('#display-report').click(function(e){
 		e.preventDefault();
@@ -26,11 +26,11 @@ $(function(){
 		if($('#coo_select').val() != '' && $('#route').val() != '') {
 			$('#route-header').html($('#route option:selected').text());
 			$('#shift-header').html($('#shift option:selected').text());
-			get_sales_by_driver_list($('#coo_select').val(), $('#route').val(), $('#shift').val());
+			get_sales_by_driver_list($('#coo_select').val(), $('#route').val(), $('#shift').val(), $('#sales-date').val());
 		} else {
 			$('#route-header').html('All Routes');
 			$('#shift-header').html($('#shift option:selected').text());
-			get_sales_by_driver_list('', '', $('#shift').val());
+			get_sales_by_driver_list('', '', $('#shift').val(), $('#sales-date').val());
 		}
 	});
 	$('#pickdate').datepicker({
@@ -58,11 +58,11 @@ function get_route_list(coo_no) {
 	});
 }
 
-function get_sales_by_driver_list(coo_no, rte_no, shift_code) {
+function get_sales_by_driver_list(coo_no, rte_no, shift_code, start_dt) {
 	$.ajax({
 		url: "sales_by_driver_list",
 		type: 'post',
-		data: {coo_no: coo_no, rte_no: rte_no, shift_code: shift_code},
+		data: {coo_no: coo_no, rte_no: rte_no, shift_code: shift_code, start_dt: start_dt},
 		success: function(data, status){
 			console.log(data);
 			var table_data = '';
@@ -92,6 +92,11 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code) {
 											'<a><strong>Status:</strong> '+data.sales_list[i]['dsp_stat_fk']+'</a>'+
 										'</li></ul></div></td>'+
 										'<td>'+data.sales_list[i]['unt_lic']+'</td>';
+					for (var ctr=0;ctr<data.sales_cash.length;ctr++) {
+						if(lg_num < data.sales_cash[ctr]['trips_ctr']) {
+							lg_num = data.sales_cash[ctr]['trips_ctr'];
+						}
+					}
 					for (var j = 0; j < data.sales_cash.length; j++) {
 						if(data.sales_list[i]['emp_no_fk'] == data.sales_cash[j]['emp_no_fk']) {
 							if(data.sales_cash[j]['trips_ctr'] == x+1) {
@@ -101,9 +106,6 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code) {
 										'</li></ul></div></td>';
 								total+=parseFloat(data.sales_cash[j]['amt_in']);
 								x++;
-								if(lg_num < x) {
-									lg_num=x;
-								}
 							}
 						}
 					}
@@ -130,8 +132,8 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code) {
 							'<th>Driver</th>'+
 							'<th>Unit</th>';
 			if(lg_num > trip) {
-				trip = lg_num;
-				foot = lg_num+2;
+				trip = parseInt(lg_num);
+				foot = parseInt(lg_num)+2;
 			}
 			for(var i=1; i<=trip; i++) {
 				thead_data += '<th>Trip '+i+'</th>';
@@ -150,12 +152,7 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code) {
 			$('#sales-by-driver').dataTable().fnDestroy();
 		    $('#sales-by-driver-tbody').html(table_data);
 			var tabler = $('#sales-by-driver').DataTable({
-				paging : false,
-				autoWidth : false,
-				// scrollY: '45vh',
-				// scrollCollapse: true,
-				// scrollX: 'true',
-				// fixedHeader: false,
+				paging : false
 			});
 			var cells = tabler.cells();
 		    var sum = 0;

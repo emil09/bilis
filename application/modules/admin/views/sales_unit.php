@@ -111,7 +111,7 @@
               <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<?php echo date('M j Y'); ?>)</h3>
             </div>
             <div class="box-body">
-            	<table id="sales-by-unit" class="table table-bordered">
+            	<table id="sales-by-unit" class="table table-bordered dt-responsive nowrap">
                     <thead id="sales-by-unit-thead">
                     </thead>
                     <tfoot id="sales-by-unit-tfoot">

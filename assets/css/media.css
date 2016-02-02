@@ -40,5 +40,15 @@
  	#editModal.btn-warning, .end-day { width: 95% }
 }
 @media (max-width: 480px) { 
-	.modal-dialog { width: 90% } 
+	.modal-dialog { width: 90% }
+	.login-logo img { width: 110px }
+	.login-box, .register-box { width: 88%; min-width: 360px }
+	.login-page .keys button { width: 31.8% }
+	.login-box .text-center { margin-bottom: 0 !important }
+	.hide-form.slide-out { margin-top: -92% }
+	.login-box-msg { padding-bottom: 10px }
+}
+@media (max-width: 380px) {
+	.login-box, .register-box { width: 96% }
+	.login-page .keys button { height: 45px; font-size: 16px }
 }

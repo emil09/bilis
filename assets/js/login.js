@@ -40,7 +40,10 @@ $(function(){
 
 	function loginFormHeight() {
 		var form_w = $(window).width();
-		if(form_w <= 1280) {
+		if(form_w <= 480) {
+			$('#loginForm').css('height', '365px');
+		}
+		else if(form_w <= 1280 && form_w >= 481) {
 			$('#loginForm').css('height', '372px');
 		}
 		else if(form_w > 1280) {
@@ -49,6 +52,7 @@ $(function(){
 		else {
 
 		}
+
 	}
 
 	$("#loginForm").submit(function(event){

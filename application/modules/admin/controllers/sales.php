@@ -50,12 +50,14 @@ Class Sales extends MY_Controller {
 			$where = array(
 				'start_dt' 		=> date('Y-m-d'),
 				'shift_code_fk'	=> $_POST['shift_code'],
+				'start_dt'	=> $_POST['start_dt'],
 			);
 		} else {
 			$where = array(
 				'start_dt' 		=> date('Y-m-d'),
 				'rte_no_fk'		=> $_POST['rte_no'],
 				'shift_code_fk'	=> $_POST['shift_code'],
+				'start_dt'	=> $_POST['start_dt'],
 				'd.coo_no_fk'	=> $_POST['coo_no']	
 				// 'c.emp_no_fk' => $this->session->userdata('emp_no')
 			);
@@ -67,12 +69,14 @@ Class Sales extends MY_Controller {
 			$where = array(
 				'start_dt' 		=> date('Y-m-d'),
 				'shift_code_fk'	=> $_POST['shift_code'],
+				'start_dt'	=> $_POST['start_dt'],
 			);
 		} else {
 			$where = array(
 				'start_dt' 		=> date('Y-m-d'),
 				'rte_no_fk'		=> $_POST['rte_no'],
 				'shift_code_fk'	=> $_POST['shift_code'],
+				'start_dt'	=> $_POST['start_dt'],
 				'd.coo_no_fk'	=> $_POST['coo_no']	
 				// 'c.emp_no_fk' => $this->session->userdata('emp_no')
 			);

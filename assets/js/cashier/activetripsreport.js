@@ -16,11 +16,12 @@ function get_active_list(coo_no){
 		success: function(data, status){
 			var table_data = '';
 			if(data.active_list.length > 0){
-				var lg_num = 0;
+				var largesttrip = 0;
 				for (var i = 0; i < data.active_list.length; i++) {
 					var x = 0;
 					var total = 0;
 					var average = 0;
+					
 					table_data += '<tr>'+
 										'<td><div class="dropdown"><a href="#" class="dropdown-toggle fa fa-caret-right" data-toggle="dropdown" style="color: #00A65A"> ('+data.active_list[i]['emp_no_fk']+') '+data.active_list[i]['emp_lname']+', '+data.active_list[i]['emp_fname']+'</a>'+
 										'<ul class="dropdown-menu"><li>'+
@@ -29,6 +30,11 @@ function get_active_list(coo_no){
 											'<a><strong>Start Time:</strong> '+data.active_list[i]['start_time']+'</a>'+
 										'</li></ul></div></td>'+
 										'<td>'+data.active_list[i]['unt_lic']+'</td>';
+					for (var ctr=0;ctr<data.active_cash.length;ctr++) {
+						if(largesttrip < data.active_cash[ctr]['trips_ctr']) {
+							largesttrip = data.active_cash[ctr]['trips_ctr'];
+						}
+					}
 					for (var j = 0; j < data.active_cash.length; j++) {
 						if(data.active_list[i]['emp_no_fk'] == data.active_cash[j]['emp_no_fk']) {
 							if(data.active_cash[j]['trips_ctr'] == x+1) {
@@ -38,15 +44,12 @@ function get_active_list(coo_no){
 										'</li></ul></div></td>';
 								total+=parseFloat(data.active_cash[j]['amt_in']);
 								x++;
-								if(lg_num < x) {
-									lg_num=x;
-								}
 							}
 						}
 					}
 					average = total/x;
-					if(lg_num > 7) {
-						while(x<lg_num) {
+					if(largesttrip > 7) {
+						while(x<largesttrip) {
 							table_data += '<td>0.00</td>';
 							x++;
 						}
@@ -66,9 +69,9 @@ function get_active_list(coo_no){
 			thead_data = '<tr>'+
 							'<th>Driver</th>'+
 							'<th>Unit</th>';
-			if(lg_num > trip) {
-				trip = lg_num;
-				foot = lg_num+2;
+			if(largesttrip > trip) {
+				trip = parseInt(largesttrip);
+				foot = parseInt(largesttrip)+2;
 			}
 			for(var i=1; i<=trip; i++) {
 				thead_data += '<th>Trip '+i+'</th>';
@@ -98,7 +101,7 @@ function get_active_list(coo_no){
 		    var sum = 0;
 		    var tots = trip+2;
 		    var ave = trip+3;
-		    for(var ctr=0;ctr<cells['context'][0]['aoData'].length;ctr++) {
+		    for(var ctr=1;ctr<cells['context'][0]['aoData'].length;ctr++) {
 		    	sum += parseFloat(cells['context'][0]['aoData'][ctr]['_aData'][tots].replace(/,/g, ''));
 		    }
 		    $('#totalvalue').html('₱ '+sum.toFixed(2).toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ","));
