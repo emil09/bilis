@@ -16,6 +16,7 @@ Class Cashturnover extends MY_Controller {
 		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Sweetalert2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, CashTurnoverJS, Sweetalert2));
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
+		$this->db->distinct();
 		$cooperatives = $this->CashturnoverModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
 		echo Modules::run('templates/bilis_noside', $data);
