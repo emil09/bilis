@@ -49,9 +49,10 @@
                                 <label>Cooperative</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
-                                        <i class="fa fa-exchange"></i>
+                                        <i class="fa fa-sitemap"></i>
                                     </div>
                                     <select class="form-control" id="coo_select">
+                                      <option value='' selected>All Cooperatives</option>
                                       <?php foreach ($cooperatives as $cooperative ): ?>
                                         <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
                                       <?php endforeach ?>
@@ -107,7 +108,7 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">All Routes Sales Report in Day Shift (<?php echo date('M j Y'); ?>)</h3>
+              <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<?php echo date('M j Y'); ?>)</h3>
             </div>
             <div class="box-body">
             	<table id="sales-by-unit" class="table table-bordered">

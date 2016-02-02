@@ -1,13 +1,14 @@
 var dateSel = '';
 $(function(){
 
-	// get_turnovered_list();
 	$(window).resize(function(){
 		setTable();
 	});
 	$('#coo_select').each(function(){
 		var date = new Date();
 		date = date.getFullYear() + '-' + parseInt(date.getMonth()+1) + '-' + date.getDate();
+		dateSel = date;
+		$('#turnover-date-filter').datepicker('setDate', dateSel);
 		get_turnovered_list(date, $(this).val());
     });
 
@@ -132,7 +133,6 @@ function get_turnovered_list(ct_date, coo_no){
 
 			$('#turnover-date-filter').datepicker('setDate', dateSel);
 
-		   // var test ='';
 		    $('#turnover-date-filter-button').click(function(){
 				setTable();
 	     		dateSel = $('#turnover-date-filter').datepicker().val();

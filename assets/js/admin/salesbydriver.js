@@ -1,17 +1,36 @@
+var dateSel = '';
 $(function(){
 	var check = 0;
+	var date = new Date();
+	date = date.getFullYear() + '-' + parseInt(date.getMonth()+1) + '-' + date.getDate();
+	dateSel = date;
+	$('#sales-date').datepicker({
+    	format: 'yyyy-mm-dd',
+    	endDate: '0d'
+    });
+	$('#sales-date').datepicker('setDate', dateSel);
 	$('#coo_select').each(function(){
 		get_route_list($(this).val());
 	});
 	$('#coo_select').on('change', function(){
 		get_route_list($(this).val());
 	});
-	if(check == 0) { get_sales_by_driver_list($('#coo_select').val(), $('#route').val()); }
+	if(check == 0) {
+		$('#route-header').html('All Routes');
+		$('#shift-header').html($('#shift option:selected').text());
+		get_sales_by_driver_list('', '', $('#shift').val());
+	}
 	$('#display-report').click(function(e){
 		e.preventDefault();
 		check = 1;
 		if($('#coo_select').val() != '' && $('#route').val() != '') {
-			get_sales_by_driver_list($('#coo_select').val(), $('#route').val());
+			$('#route-header').html($('#route option:selected').text());
+			$('#shift-header').html($('#shift option:selected').text());
+			get_sales_by_driver_list($('#coo_select').val(), $('#route').val(), $('#shift').val());
+		} else {
+			$('#route-header').html('All Routes');
+			$('#shift-header').html($('#shift option:selected').text());
+			get_sales_by_driver_list('', '', $('#shift').val());
 		}
 	});
 	$('#pickdate').datepicker({
@@ -28,22 +47,24 @@ function get_route_list(coo_no) {
 		success: function(data, status){
 			var route_data = '';
 			var table_data = '';
+			if(data.route_list.length == 0) { route_data += "<option value='' selected>All Routes</option>"; }
 			if(data.route_list.length > 0) {
 				for (var i=0; i<data.route_list.length; i++) {
 					route_data += '<option value="'+data.route_list[i]['rte_no']+'">'+data.route_list[i]['rte_nam']+'</option>';
 				}
-				$('#route').html(route_data);
 			}
+			$('#route').html(route_data);
 		}
 	});
 }
 
-function get_sales_by_driver_list(coo_no, rte_no) {
+function get_sales_by_driver_list(coo_no, rte_no, shift_code) {
 	$.ajax({
 		url: "sales_by_driver_list",
 		type: 'post',
-		data: {coo_no: coo_no, rte_no: rte_no},
+		data: {coo_no: coo_no, rte_no: rte_no, shift_code: shift_code},
 		success: function(data, status){
+			console.log(data);
 			var table_data = '';
 			if(data.sales_list.length > 0){
 				var lg_num = 0;
@@ -130,7 +151,7 @@ function get_sales_by_driver_list(coo_no, rte_no) {
 		    $('#sales-by-driver-tbody').html(table_data);
 			var tabler = $('#sales-by-driver').DataTable({
 				paging : false,
-				// autoWidth : false,
+				autoWidth : false,
 				// scrollY: '45vh',
 				// scrollCollapse: true,
 				// scrollX: 'true',
