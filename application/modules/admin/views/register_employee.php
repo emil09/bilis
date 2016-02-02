@@ -114,7 +114,7 @@
               </div>
             </div> -->
 
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-6">
                 <div class="form-group"  id="fg_pos">
                 <span class="pull-right err-msg"></span>
                   <label class="required">Position</label>
@@ -137,6 +137,17 @@
                     </select>
                   </div>
                 </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <label>Start Date</label>
+                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" >
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control" name="start_date" placeholder="Start Date">
+                </div>
+              </div>
             </div>
             <!-- <div class="col-sm-12">
               <div class="form-group">
@@ -178,4 +189,30 @@
     </div>
   </div>
 </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+<div id="user_info_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left"><i class="fa fa-user"></i> User Information</span></h4>
+        </div>
+        <div class="modal-body" id="user_info">
+
+            <div class="center-block user-info-con">
+              <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Success!</strong> Employee successfully registered.
+              </div>
+              <table class="table borderless" id="user_info_data">
+              
+              </table>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger pull-right" id="closeModal" style="margin-left: 5px">Close</button>
+        </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </div><!-- /.content-wrapper -->

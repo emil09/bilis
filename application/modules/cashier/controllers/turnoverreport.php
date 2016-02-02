@@ -15,6 +15,7 @@ Class TurnoverReport extends MY_Controller {
 		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Bootstrap3DateCSS, Sweetalert2CSS));
 		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, Bootstrap3DateJS, Sweetalert2, TurnoverReportJS));
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
+		$this->db->distinct();
 		$cooperatives = $this->TurnoverReportModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
 		echo Modules::run('templates/bilis_noside', $data);

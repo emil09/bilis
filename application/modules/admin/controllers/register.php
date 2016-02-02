@@ -65,6 +65,9 @@ Class Register extends MY_Controller {
             'name' => 'fg_pos'
           )
         );
+      }else{
+        $msg = array('status'=>'error');
+        $msg['errors'] = '';
       }
       header('Content-Type: application/json');
       echo json_encode($msg);
@@ -78,7 +81,8 @@ Class Register extends MY_Controller {
       $this->form_validation->set_rules('emp_lic', 'License Number', 'required|xss_clean');
       $this->form_validation->set_rules('emp_ltp', 'License Type', 'required|xss_clean');
       $this->form_validation->set_rules('emp_lis', 'License Issue Date', 'required|xss_clean');
-
+      $this->form_validation->set_rules('start_date', 'License Issue Date', 'xss_clean');
+      $this->form_validation->set_rules('emp_lix', 'License Expiration Date', 'xss_clean');
       if ($this->form_validation->run() == FALSE){
         $msg = array('status'=>'error');
         $msg['errors'] = array(
@@ -126,10 +130,13 @@ Class Register extends MY_Controller {
           'emp_fname'   => $_POST['fname'],
           'emp_mname'   => $_POST['mname'],
           'emp_lname'   => $_POST['lname'],
-          'emp_pos' => $_POST['position']
+          'emp_pos' => $_POST['position'],
+          'emp_stat' => 1,
+          'emp_cby' => $this->session->userdata('emp_id'),
+          'emp_beg' => $_POST['start_date']
         );
         $this->RegisterModel->insert(0, $data);
-
+        $emp_id =  $this->db->insert_id();
         $data2['emp_no_fk'] = $this->db->insert_id();
         $data2['unit_no'] = $_POST['unit'];
         $data2['coo_no_fk'] = $_POST['cooperative'];
@@ -138,7 +145,7 @@ Class Register extends MY_Controller {
         $data2['emp_lis'] = $_POST['emp_lis'];
         $data2['emp_lix'] = $_POST['emp_lix'];
         $this->RegisterModel->insert(1, $data2);
-        $msg = array('status'=>'success', 'msg' => 'success');
+        $msg = array('status'=>'success', 'msg' => 'success', 'emp_id'=>$emp_id);
           
       }
 
@@ -194,14 +201,19 @@ Class Register extends MY_Controller {
           'emp_mname'   => $_POST['mname'],
           'emp_lname'   => $_POST['lname'],
           'emp_pwd'   => $_POST['password'],
-          'emp_pos' => $_POST['position']
+          'emp_pos' => $_POST['position'],
+          'emp_stat' =>1,
+          'emp_beg' => $_POST['start_date']
         );
         $this->RegisterModel->insert(0, $data);
-
-        $data2['emp_no_fk'] = $this->db->insert_id();
-        $data2['coo_no_fk'] = $_POST['cooperative'];
-        $this->RegisterModel->insert(2, $data2);
-        $msg = array('status'=>'success', 'msg' => 'success');
+        $emp_id = $this->db->insert_id();
+        for ($i=0; $i < count($_POST['cooperative']); $i++) { 
+          $data2['emp_no_fk'] = $emp_id;
+          $data2['coo_no_fk'] = $_POST['cooperative'][$i];
+          $this->RegisterModel->insert(2, $data2);
+          $msg = array('status'=>'success', 'msg' => 'success', 'emp_id'=>$emp_id);
+        }
+        
         
       }
       header('Content-Type: application/json');
@@ -214,7 +226,6 @@ Class Register extends MY_Controller {
       
       $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|integer');
       $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|xss_clean|matches[password]');
-      $this->form_validation->set_rules('cooperative', 'Cooperative', 'required|xss_clean');
       $this->form_validation->set_rules('location', 'Location', 'required|xss_clean');
 
       if ($this->form_validation->run() == FALSE){
@@ -245,10 +256,6 @@ Class Register extends MY_Controller {
             'name' => 'fg_pos'
           ),
           array(
-            'err_msg' => form_error('cooperative', ' ', ' '),
-            'name' => 'fg_coop'
-          ),
-          array(
             'err_msg' => form_error('location', ' ', ' '),
             'name' => 'fg_loc'
           )
@@ -262,15 +269,19 @@ Class Register extends MY_Controller {
           'emp_mname'   => $_POST['mname'],
           'emp_lname'   => $_POST['lname'],
           'emp_pwd'   => $_POST['password'],
-          'emp_pos' => $_POST['position']
+          'emp_pos' => $_POST['position'],
+          'emp_stat' => 1,
+          'emp_beg' => $_POST['start_date']
         );
         $this->RegisterModel->insert(0, $data);
-
-        $data2['emp_no_fk'] = $this->db->insert_id();
-        $data2['coo_no_fk'] = $_POST['cooperative'];
-        $data2['loc_no_fk'] = $_POST['location'];
-        $this->RegisterModel->insert(3, $data2);
-        $msg = array('status'=>'success', 'msg' => 'success');
+        $emp_id = $this->db->insert_id();
+        for ($i=0; $i < count($_POST['location']) ; $i++) { 
+          $data2['emp_no_fk'] = $emp_id;
+          $data2['loc_no_fk'] = $_POST['location'][$i];
+          $this->RegisterModel->insert(3, $data2);
+        }
+        
+        $msg = array('status'=>'success', 'msg' => 'success', 'emp_id'=>$emp_id);
         
       }
       header('Content-Type: application/json');
@@ -288,6 +299,29 @@ Class Register extends MY_Controller {
     $data['inactive'] = count($emp_inact);
     header('Content-Type: application/json');
     echo json_encode($data);
+  }
+
+  public function get_user_info(){
+    $mem_id = $_POST['id'];
+    $this->db->limit(1);
+    $this->db->join('employee_role', 'role_id = emp_pos', 'left');
+    $results = $this->RegisterModel->select_where(0, 'emp_no, CONCAT(emp_fname, " ", emp_lname) as emp_name, emp_pos, name, emp_beg', array('emp_no'=>$mem_id));
+    echo  '<tr>
+            <th class="col-xs-4">Name:</th>
+            <td class="col-xs-8">'.$results[0]->emp_name.'</td>
+          </tr>
+          <tr>
+            <th class="col-xs-4">Employee Number:</th>
+            <td class="col-xs-8">'.$results[0]->emp_no.'</td>
+          </tr>
+          <tr>
+            <th class="col-xs-4">Position:</th>
+            <td class="col-xs-8">'.$results[0]->name.'</td>
+          </tr>
+          <tr>
+            <th class="col-xs-4">Start Date:</th>
+            <td class="col-xs-8">'.$results[0]->emp_beg.'</td>
+          </tr>';
   }
 
   public function get_addedfield(){
@@ -325,7 +359,25 @@ Class Register extends MY_Controller {
             <div class="form-group"  id="fg_coop">
                 <span class="pull-right err-msg"></span>
               <label class="required">Cooperative</label>
-              <div class="input-group">
+              <div class="form-control no-padding">
+                      
+                      <select class="form-control reg-input" name="cooperative[]"  id="cooperative" multiple data-formgroup="fg_coop">';
+                        foreach ($coops as $coo) {
+                          $data .= '<option value="'.$coo->coo_no.'">'.$coo->coo_name.'</option>';
+                        }
+    
+    $data .= '       </select>
+                    </div>
+
+            </div>
+          </div>';
+    }
+    elseif($_POST['position'] == 'D'){
+      $data = '<div class="col-sm-12 col-md-6">
+                  <div class="form-group" id="fg_coop">
+                  <span class="pull-right err-msg"></span>
+                    <label class="required">Cooperative</label>
+                    <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-users"></i>
                 </div>
@@ -336,26 +388,6 @@ Class Register extends MY_Controller {
                   }
       $data .='</select>
               </div>
-            </div>
-          </div>';
-    }
-    elseif($_POST['position'] == 'D'){
-      $data = '<div class="col-sm-12 col-md-6">
-                  <div class="form-group" id="fg_coop">
-                  <span class="pull-right err-msg"></span>
-                    <label class="required">Cooperative</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-users"></i>
-                      </div>
-                      <select class="form-control reg-input" name="cooperative"  data-formgroup="fg_coop">
-                        <option value="" disabled selected id="nocooperative">Select cooperative</option>';
-                        foreach ($coops as $coo) {
-                          $data .= '<option value="'.$coo->coo_no.'" id="nocooperative">'.$coo->coo_name.'</option>';
-                        }
-    
-    $data .= '       </select>
-                    </div>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
@@ -401,7 +433,7 @@ Class Register extends MY_Controller {
                   <div class="form-group" id="fg_emp_lis">
                     <span class="pull-right err-msg"></span>
                     <label class="required">License Issue Date</label>
-                      <div class="input-group date" data-provide="datepicker">
+                      <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                         <div class="input-group-addon">
                            <i class="fa fa-calendar"></i>
                         </div>
@@ -412,7 +444,7 @@ Class Register extends MY_Controller {
                 <div class="col-sm-12 col-md-6">
                   <div class="form-group">
                     <label>License Expiration Date</label>
-                    <div class="input-group date" data-provide="datepicker">
+                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" >
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
@@ -452,8 +484,8 @@ Class Register extends MY_Controller {
                   <span class="pull-right err-msg"></span>
               <label class="required">Location</label>
               
-               <div class="form-control no-padding multiple-select">
-                <select class="form-control reg-input" name="location" multiple data-formgroup="fg_loc">';
+               <div class="form-control no-padding">
+                <select class="form-control reg-input" name="location[]" id="location" multiple data-formgroup="fg_loc">';
                   foreach ($locs as $loc) {
                     $data .= '<option value="'.$loc->loc_no.'" id="nocooperative">'.$loc->loc_name.'</option>';
                   }

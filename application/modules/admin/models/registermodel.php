@@ -12,7 +12,7 @@ Class RegisterModel extends CI_Model {
     );
 	
 	public function select_where($key = '', $select = '', $where = array()) {
-        $this->db->select($select);
+        $this->db->select($select, FALSE);
         $this->db->from($this->tables[$key]);
         $this->db->where($where);
         $query = $this->db->get();
