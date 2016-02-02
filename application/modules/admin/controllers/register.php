@@ -17,8 +17,8 @@ Class Register extends MY_Controller {
 
 	public function employee()
 	{
-		$data['css'] = $this->add_css(array(DatePicker3, Sweetalert2CSS));
-    $data['js'] = $this->add_js(array(BootstrapDate , Sweetalert2, RegisterJS));    
+		$data['css'] = $this->add_css(array(DatePicker3, Sweetalert2CSS, Select2CSS));
+    $data['js'] = $this->add_js(array(BootstrapDate , Sweetalert2, Select2JS, RegisterJS));    
     
 		$data['module'] = 'admin';
 		$data['view_file'] = 'register_employee';	
@@ -292,6 +292,8 @@ Class Register extends MY_Controller {
 
   public function get_addedfield(){
     $coops = $this->RegisterModel->select_where(4, 'coo_no, coo_name');
+    
+    $this->db->distinct();
     $locs = $this->RegisterModel->select_where(5, 'loc_no, loc_name');
 
     if($_POST['position'] == 'P'){
@@ -444,39 +446,19 @@ Class Register extends MY_Controller {
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6">
-                  <div class="form-group" id="fg_coop">
-                  <span class="pull-right err-msg"></span>
-                    <label class="required">Cooperative</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-users"></i>
-                      </div>
-                      <select class="form-control reg-input" name="cooperative"  data-formgroup="fg_coop">
-                        <option value="" disabled selected id="nocooperative">Select cooperative</option>';
-                        foreach ($coops as $coo) {
-                          $data .= '<option value="'.$coo->coo_no.'" id="nocooperative">'.$coo->coo_name.'</option>';
-                        }
-    
-    $data .= '       </select>
-                    </div>
-                  </div>
-                </div>
+            
           <div class="col-sm-12 col-md-6">
             <div class="form-group" id="fg_loc">
                   <span class="pull-right err-msg"></span>
               <label class="required">Location</label>
-              <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-users"></i>
-                </div>
-                <select class="form-control reg-input" name="location" data-formgroup="fg_loc">
-                  <option value="" disabled selected id="nocooperative" >Select Location</option>';
+              
+               <div class="form-control no-padding multiple-select">
+                <select class="form-control reg-input" name="location" multiple data-formgroup="fg_loc">';
                   foreach ($locs as $loc) {
                     $data .= '<option value="'.$loc->loc_no.'" id="nocooperative">'.$loc->loc_name.'</option>';
                   }
       $data .='</select>
-              </div>
+              <div>
             </div>
           </div>';
     }

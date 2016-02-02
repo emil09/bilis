@@ -70,6 +70,13 @@ $(function(){
 			data: {position: this.value},
 			success: function(data, status) {
 				$("#fields").html(data);
+
+				$("select[name=location]").select2({
+				  placeholder: "Select a Location",
+				  allowClear: true
+				});
+				$('.select2-selection--multiple').addClass('select2-selection--custom');
+				$('.select2-container').addClass('select2-container-custom');
 			},
 			error: function(xhr, desc, err) {
 				console.log(xhr);

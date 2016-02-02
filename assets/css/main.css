@@ -174,7 +174,7 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #driver_data #dispatch-button.btn-success { border: 2px solid #088C50; color: #000; font-weight: 600; background-color: #12AD34; opacity: 1 }
 #driver_data #dispatch-button.btn-success[disabled] { opacity: 1 }
 #driver_data #dispatch-button.btn-warning { border: 2px solid #e08e0b; color: #000; font-weight: 600; background-color: #D4C621; opacity: 1 }
-.select2-container { width: 190px !important }
+span.select2-container { width: 190px }
 #table-scheduling-next .day-text,
 #table-scheduling-next .night-text,
 #table-scheduling-next .unit-plate { line-height: 30px }
@@ -318,3 +318,19 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 .page-admin #status-F { color: #DD4B39 }
 .page-admin tbody td:first-child .open>a:before { content: "\f0d7" }
 #export-group button { padding: 6px 6px }
+
+
+span.select2-selection--multiple.select2-selection--custom{
+  border: 0;
+  border-radius: 0px;
+}
+span.select2-container-custom {
+  width: 100%;
+}
+
+span.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #3c8dbc;
+    border-color: #367fa9;
+    padding: 1px 10px;
+    color: #fff;
+}
