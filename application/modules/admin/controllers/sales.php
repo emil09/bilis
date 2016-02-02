@@ -46,21 +46,38 @@ Class Sales extends MY_Controller {
 
 		header('Content-Type: application/json');
 		$select = 'd.emp_no_fk, emp_lname, emp_fname, rte_nam, unt_lic, start_dt, start_time, d.coo_no_fk, dsp_stat_fk, end_dt, end_time';
-		$where = array(
-			'start_dt' 		=> date('Y-m-d'),
-			'rte_no_fk'		=> $_POST['rte_no'],
-			'd.coo_no_fk'	=> $_POST['coo_no']	
-			// 'c.emp_no_fk' => $this->session->userdata('emp_no')
-		);
+		if($_POST['coo_no'] == '' && $_POST['rte_no'] == '') {
+			$where = array(
+				'start_dt' 		=> date('Y-m-d'),
+				'shift_code_fk'	=> $_POST['shift_code'],
+			);
+		} else {
+			$where = array(
+				'start_dt' 		=> date('Y-m-d'),
+				'rte_no_fk'		=> $_POST['rte_no'],
+				'shift_code_fk'	=> $_POST['shift_code'],
+				'd.coo_no_fk'	=> $_POST['coo_no']	
+				// 'c.emp_no_fk' => $this->session->userdata('emp_no')
+			);
+		}
 
 		$results['sales_list'] = $this->SalesModel->sales_by_driver_list($select, $where);
 		$select = 'd.emp_no_fk, unit_no_fk, trips_ctr, rte_nam, amt_in, to_dt, to_time';
-		$where = array(
-			'start_dt' 		=> date('Y-m-d'),
-			'rte_no_fk'		=> $_POST['rte_no'],
-			'd.coo_no_fk'	=> $_POST['coo_no']	
-			// 'c.emp_no_fk' => $this->session->userdata('emp_no')
-		);
+		if($_POST['coo_no'] == '' && $_POST['rte_no'] == '') {
+			$where = array(
+				'start_dt' 		=> date('Y-m-d'),
+				'shift_code_fk'	=> $_POST['shift_code'],
+			);
+		} else {
+			$where = array(
+				'start_dt' 		=> date('Y-m-d'),
+				'rte_no_fk'		=> $_POST['rte_no'],
+				'shift_code_fk'	=> $_POST['shift_code'],
+				'd.coo_no_fk'	=> $_POST['coo_no']	
+				// 'c.emp_no_fk' => $this->session->userdata('emp_no')
+			);
+		}
+		
 		$results['sales_cash'] = $this->SalesModel->sales_by_driver_list($select, $where);
 
 		echo json_encode($results);
@@ -70,7 +87,6 @@ Class Sales extends MY_Controller {
 		header('Content-Type: application/json');
 		$select = 'rte_no, rte_nam';
 		$where	= array(
-			// 'rte_no'	=> $_POST['rte_no'],
 			'coo_no_fk' => $_POST['coo_no']
 		);
 		$results['route_list'] = $this->SalesModel->route_list($select, $where);
