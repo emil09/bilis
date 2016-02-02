@@ -6,6 +6,9 @@
   <li>
     <a href="payroll.php"><i class="fa fa-credit-card"></i><span>Payroll</span></a>
   </li>
+  <li>
+    <a href="payroll.php"><i class="fa fa-calendar"></i><span>Scheduling</span></a>
+  </li>
   <li class="treeview">
     <a href="#">
       <i class="fa fa-truck"></i> <span>Dispatch</span>
@@ -53,7 +56,7 @@
       <i class="fa fa-sign-in"></i> <span>Register</span>
       <i class="fa fa-angle-left pull-right"></i>
     </a>
-    <ul class="treeview-menu <?php echo $this->uri->segment(3) == 'employee'? 'menu_open': ''; ?>" >
+    <ul class="treeview-menu <?php echo $this->uri->segment(3) == 'employee' && $this->uri->segment(2) == 'register'? 'menu_open': ''; ?>" >
       <li class="treeview <?php echo $this->uri->segment(3) == 'employee'? 'active': ''; ?>">
         <a href="<?php echo base_url() ?>admin/register/employee">
           <i class="fa fa-users"></i> By Employee
@@ -66,14 +69,14 @@
       </li>
     </ul>
   </li>
-  <li class="treeview " >
+  <li class="treeview <?php echo $this->uri->segment(2) == 'update'? 'active': ''; ?>">
     <a href="#">
       <i class="fa fa-edit"></i> <span>Update</span>
       <i class="fa fa-angle-left pull-right"></i>
     </a>
-    <ul class="treeview-menu" style="display: none;">
-      <li>
-        <a href="update_by_employee.php">
+    <ul class="treeview-menu <?php echo $this->uri->segment(3) == 'employee' && $this->uri->segment(2) == 'update'? 'menu_open': ''; ?>" >
+      <li class="treeview <?php echo $this->uri->segment(3) == 'employee'? 'active': ''; ?>">
+        <a href="<?php echo base_url() ?>admin/update/employee">
           <i class="fa fa-users"></i> By Employee</a>
         </li>
       <li>

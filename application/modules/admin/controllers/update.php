@@ -44,7 +44,7 @@ Class Update extends MY_Controller {
 	public function get_form(){
 		if(isset($_POST['emp_no'])){
 			$this->db->limit(1);
-			$results = $this->UpdateModel->select_where(0, 'emp_pos', array('emp_no'=>$_POST['emp_no']));
+			$results = $this->UpdateModel->select_where(0, 'emp_pos, emp_fname, emp_mname, emp_lname', array('emp_no'=>$_POST['emp_no']));
 			$emp_pos = $results[0]->emp_pos;
 
 			echo ' <div class="col-sm-12">
@@ -57,7 +57,7 @@ Class Update extends MY_Controller {
     								<div class="input-group-addon">
                    						<i class="fa fa-user"></i>
     								</div>
-                  					<input type="text" data-formgroup="fg_fname" class="form-control reg-input" name="fname" placeholder="First Name">
+                  					<input type="text" data-formgroup="fg_fname" class="form-control reg-input" name="fname" value="'.$results[0]->emp_fname .'" placeholder="First Name">
     							</div>
 		    				</div>
 		    			</div>
@@ -71,7 +71,7 @@ Class Update extends MY_Controller {
 	  						    	<div class="input-group-addon">
 	  						      		<i class="fa fa-user"></i>
 		  						    </div>
-		  						    <input type="text" data-formgroup="fg_mname" class="form-control reg-input" name="mname" placeholder="Middle Name">
+		  						    <input type="text" data-formgroup="fg_mname" class="form-control reg-input" name="mname" value="'.$results[0]->emp_mname .'" placeholder="Middle Name">
 	  							</div>
 	  						</div>
 	  					</div>
@@ -84,7 +84,7 @@ Class Update extends MY_Controller {
 		  						    <div class="input-group-addon">
 										<i class="fa fa-user"></i>
 		  						    </div>
-		  						    <input type="text" data-formgroup="fg_lname" class="form-control reg-input" name="lname" placeholder="Last Name">
+		  						    <input type="text" data-formgroup="fg_lname" class="form-control reg-input" name="lname" value="'.$results[0]->emp_lname .'" placeholder="Last Name">
 								</div>
 	  						</div>
 	  					</div>

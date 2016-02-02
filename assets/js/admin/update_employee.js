@@ -1,5 +1,6 @@
 var base_url = window.location.origin;
 $(document).ready(function () {
+
     var oTable = $('#emp_table').DataTable({
         "processing": true,
         "serverSide": true,
@@ -19,6 +20,8 @@ $(document).ready(function () {
         "fnDrawCallback": function(oSettings, json) {
             $('.btn-edit').click(function(){
                 var emp_no = $(this).data('value');
+                
+                $('#editModalWindow').modal({'backdrop':'static'});
                 $('#editModalWindow').modal('show');
                 
                 openUpdateForm(emp_no);
