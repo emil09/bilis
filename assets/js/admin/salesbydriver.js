@@ -152,7 +152,9 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code, start_dt) {
 			$('#sales-by-driver').dataTable().fnDestroy();
 		    $('#sales-by-driver-tbody').html(table_data);
 			var tabler = $('#sales-by-driver').DataTable({
-				paging : false
+				paging : true,
+				lengthMenu: [[5, 25, 50, -1], [5, 25, 50, "All"]]
+				// scrollY: 300, 
 			});
 			var cells = tabler.cells();
 		    var sum = 0;
