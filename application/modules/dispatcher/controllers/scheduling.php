@@ -9,10 +9,6 @@ Class Scheduling extends MY_Controller {
 	}
 
 	public function index(){
-		redirect('dispatcher/scheduling/next');
- 	}
-
-	public function previous(){
 		$data['module'] = 'dispatcher';
 		$data['view_file'] = 'schedulinglast_view';
 		$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
@@ -25,7 +21,22 @@ Class Scheduling extends MY_Controller {
 		$data['cooperatives'] = $cooperatives;
 		
 		echo Modules::run('templates/bilis_noside', $data);
-	}
+ 	}
+
+	// public function previous(){
+	// 	$data['module'] = 'dispatcher';
+	// 	$data['view_file'] = 'schedulinglast_view';
+	// 	$data['sidebar'] = 'dispatcher/dispatcher_sidebar';
+
+	// 	$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, Select2CSS));
+	// 	$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, Select2JS, SchedulePrevJS));
+
+	// 	$where = array('emp_no' => $this->session->userdata('emp_no'));
+	// 	$cooperatives = $this->SchedulingModel->dispatcher_detail('emp_no, coo_no, coo_name, emp_lname', $where);
+	// 	$data['cooperatives'] = $cooperatives;
+		
+	// 	echo Modules::run('templates/bilis_noside', $data);
+	// }
 	public function next(){
 		$data['module'] = 'dispatcher';
 		$data['view_file'] = 'schedulingnext_view';

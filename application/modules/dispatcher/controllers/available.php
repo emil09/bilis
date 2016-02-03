@@ -22,7 +22,7 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
-		$_POST['coo_no'] = 6;
+		// $_POST['coo_no'] = 6;
 		header('Content-Type: application/json');
 
 		$data = array();

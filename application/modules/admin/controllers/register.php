@@ -30,7 +30,7 @@ Class Register extends MY_Controller {
 	public function save_employee(){
 
 		$this->form_validation->set_rules('fname', 'First Name', 'required|xss_clean');
-		$this->form_validation->set_rules('mname', 'Middle Name', 'required|xss_clean');
+		$this->form_validation->set_rules('mname', 'Middle Name', 'xss_clean');
 		$this->form_validation->set_rules('lname', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('position', 'Position', 'required|xss_clean');
 		$this->form_validation->set_rules('sapno', 'SAP No.', 'xss_clean');
@@ -44,6 +44,8 @@ Class Register extends MY_Controller {
       $this->add_dispatcher();
     }elseif(@$_POST['position'] == 'C'){
       $this->add_cashier();
+    }elseif(@$_POST['position'] == 'L'){
+      $this->add_terminal_mgr();
     }else{
       if ($this->form_validation->run() == FALSE){
         $msg = array('status'=>'error');
@@ -76,13 +78,14 @@ Class Register extends MY_Controller {
 	}
   public function add_driver(){
 
-      $this->form_validation->set_rules('unit', 'Unit Number', 'required|xss_clean');
       $this->form_validation->set_rules('cooperative', 'Cooperative', 'required|xss_clean');
       $this->form_validation->set_rules('emp_lic', 'License Number', 'required|xss_clean');
       $this->form_validation->set_rules('emp_ltp', 'License Type', 'required|xss_clean');
       $this->form_validation->set_rules('emp_lis', 'License Issue Date', 'required|xss_clean');
       $this->form_validation->set_rules('start_date', 'License Issue Date', 'xss_clean');
       $this->form_validation->set_rules('emp_lix', 'License Expiration Date', 'xss_clean');
+      $this->form_validation->set_rules('unit', 'Unit Number', 'xss_clean');
+      
       if ($this->form_validation->run() == FALSE){
         $msg = array('status'=>'error');
         $msg['errors'] = array(
@@ -288,6 +291,72 @@ Class Register extends MY_Controller {
       echo json_encode($msg);
   }
 
+  public function add_terminal_mgr(){
+    $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|integer');
+      $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|xss_clean|matches[password]');
+      $this->form_validation->set_rules('terminal', 'Terminal', 'required|xss_clean');
+
+      if ($this->form_validation->run() == FALSE){
+        $msg = array('status'=>'error');
+        $msg['errors'] = array(
+          array(
+            'err_msg' => form_error('fname', ' ', ' '),
+            'name' => 'fg_fname'
+          ),
+          array(
+            'err_msg' => form_error('mname', ' ', ' '),
+            'name' => 'fg_mname'
+          ),
+          array(
+            'err_msg' => form_error('lname', ' ', ' '),
+            'name' => 'fg_lname'
+          ),
+          array(
+            'err_msg' => form_error('password', ' ', ' '),
+            'name' => 'fg_pw'
+          ),
+          array(
+            'err_msg' => form_error('confirmpassword', ' ', ' '),
+            'name' => 'fg_conpw'
+          ),
+          array(
+            'err_msg' => form_error('position', ' ', ' '),
+            'name' => 'fg_pos'
+          ),
+          array(
+            'err_msg' => form_error('terminal', ' ', ' '),
+            'name' => 'fg_trm'
+          )
+        );
+      }
+      else
+      {
+        // success
+        $data = array(
+          'emp_fname'   => $_POST['fname'],
+          'emp_mname'   => $_POST['mname'],
+          'emp_lname'   => $_POST['lname'],
+          'emp_pwd'   => $_POST['password'],
+          'emp_pos' => $_POST['position'],
+          'emp_stat' => 1,
+          'emp_beg' => $_POST['start_date']
+        );
+        $this->RegisterModel->insert(0, $data);
+       
+        $emp_id = $this->db->insert_id();
+        $data2['emp_no_fk'] = $emp_id;
+        $data2['trm_no_fk'] = $_POST['terminal'];
+        $this->RegisterModel->insert(7, $data2);
+      
+        
+        $msg = array('status'=>'success', 'msg' => 'success', 'emp_id'=>$emp_id);
+        
+      }
+      header('Content-Type: application/json');
+      echo json_encode($msg);
+  
+  }
+
 	public function emp_no(){
 
     
@@ -330,6 +399,8 @@ Class Register extends MY_Controller {
     $this->db->distinct();
     $locs = $this->RegisterModel->select_where(5, 'loc_no, loc_name');
 
+    $terminals = $this->RegisterModel->select_where(6, 'trm_no, trm_name');
+
     if($_POST['position'] == 'P'){
       $data ='<div class="col-sm-12 col-md-6">
               <div class="form-group"id="fg_pw">
@@ -355,7 +426,7 @@ Class Register extends MY_Controller {
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-6">
             <div class="form-group"  id="fg_coop">
                 <span class="pull-right err-msg"></span>
               <label class="required">Cooperative</label>
@@ -488,6 +559,48 @@ Class Register extends MY_Controller {
                 <select class="form-control reg-input" name="location[]" id="location" multiple data-formgroup="fg_loc">';
                   foreach ($locs as $loc) {
                     $data .= '<option value="'.$loc->loc_no.'" id="nocooperative">'.$loc->loc_name.'</option>';
+                  }
+      $data .='</select>
+              <div>
+            </div>
+          </div>';
+    }
+    elseif($_POST['position'] == 'L'){
+      $data = '<div class="col-sm-12 col-md-6">
+              <div class="form-group"id="fg_pw">
+                <span class="pull-right err-msg"></span>
+                <label class="required" for="lname">Password</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                  <input type="password" class="form-control reg-input" name="password" placeholder="Password">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group" id="fg_conpw">
+                <span class="pull-right err-msg"></span>
+                <label class="required" for="lname">Confirm Password</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                  <input type="password" class="form-control reg-input" name="confirmpassword" placeholder="Confirm Password">
+                </div>
+              </div>
+            </div>
+            
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group" id="fg_trm">
+                  <span class="pull-right err-msg"></span>
+              <label class="required">Location</label>
+              
+               <div class="form-control no-padding">
+                <select class="form-control reg-input" name="terminal"  data-formgroup="fg_trm">
+                  <option value="" disabled selected>Select Terminal</option>';
+                  foreach ($terminals as $trm) {
+                    $data .= '<option value="'.$trm->trm_no.'">'.$trm->trm_name.'</option>';
                   }
       $data .='</select>
               <div>
