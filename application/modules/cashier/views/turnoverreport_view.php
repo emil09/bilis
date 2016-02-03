@@ -1,4 +1,3 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header clearfix">
@@ -90,4 +89,4 @@
       </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-</div><!-- /.content-wrapper -->
+</div><!-- /.content-wrapper

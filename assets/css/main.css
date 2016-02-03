@@ -260,6 +260,7 @@ span.select2-container { width: 190px }
    ||  CSS for Cashier  ||
    ========================== */
 .page-cashier .dashboard-wrapper { margin: 60px 100px 0 }
+.page-cashier .additional-functions-wrapper { margin-top: 35px }
 .page-cashier .modal-dialog { margin: 100px auto 0px }
 #cashturnover-button, #editturnover-button { width: 50%; margin: 0 auto; display: block }
 #editturnover-button { width: 70% }
@@ -270,6 +271,9 @@ span.select2-container { width: 190px }
 .page-cashier .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
 .page-cashier .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
 #datetimepicker6 { display: inline-flex }
+.page-cashier tbody td:first-child .open>a:before {
+    content: "\f0d7";
+}
 
 
 
@@ -345,4 +349,9 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
   width: 80%;
 }
 
-
+.page-admin #sales-by-driver_wrapper > .row > .col-sm-6:first-child, 
+.page-admin #sales-by-unit_wrapper > .row > .col-sm-6:first-child { display: block }
+.page-admin #sales-by-driver_wrapper > .row > .col-sm-6:first-child,
+.page-admin #sales-by-unit_wrapper > .row > .col-sm-6:first-child,
+.page-admin #sales-by-driver_length,
+.page-admin #sales-by-unit_length { float: right }

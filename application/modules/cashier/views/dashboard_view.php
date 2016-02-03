@@ -24,11 +24,18 @@
       </div>
       <div id="scheduling" class="dashcons by3 col-sm-4 col-xs-12">
         <img class="dashboard-logo" src="../assets/img/cashier/spreadsheet5.png" alt="">
-        <h4>Active Trips Report</h4>
+        <h4>Sales by Driver</h4>
         <p>List of current trips and cash transactions of drivers.</p>
         <a class="btn btn-primary btn-md" href="activetripsreport">DISPLAY</a>
       </div>
+      <div class="additional-functions-wrapper col-sm-12 clearfix">
+        <div class="header-con"><h3>Additional Function</h3></div>
+        <div class="functions-con">
+          <a href="activetripslist" class="btn btn-info">ACTIVE TRIPS REPORT</a>
+        </div>
+      </div>
     </div><!-- /.widget-user -->
+    
   </div>
 </section><!-- /.content -->
 </div><!-- /.content-wrapper -->

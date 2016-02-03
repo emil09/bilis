@@ -8,8 +8,8 @@
 
 }
 @media (max-width: 1280px) {
-  .login-logo img { width: 170px }
-  .login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 18px }
+	.login-logo img { width: 170px }
+	.login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 18px }
 	.login-box, .register-box { width: 500px; margin: 5% auto }
 	.login-page .keys button { height: 47.5px ; width: 32.2%; font-size: 20px }
 	.login-page .keys button.operator.proceed { font-size: 18px }
@@ -39,12 +39,20 @@
  	#availabledash, #activedash { margin-bottom: 15px }
  	#editModal.btn-warning, .end-day { width: 95% }
 }
+@media only screen and (max-width: 615px) {
+	.login-box, .register-box { margin: 2% auto }
+	.login-logo img { width: 70px }
+	.login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 14px }
+	#loginForm #emp_no, #loginForm #password { height: 35px; font-size: 14px }
+	.login-box .text-center { margin-bottom: 0 !important }
+}
 @media (max-width: 480px) { 
 	.modal-dialog { width: 90% }
 	.login-logo img { width: 110px }
-	.login-box, .register-box { width: 88%; min-width: 360px }
+	.login-box, .register-box { width: 88%; min-width: 320px; margin: 5% auto }
+	.login-box-msg, #errmsg, #employeename, #notyou, #loginForm .icheck, #signin-btn { font-size: 18px }
+	#loginForm #emp_no, #loginForm #password { height: 40px; font-size: 18px }
 	.login-page .keys button { width: 31.8% }
-	.login-box .text-center { margin-bottom: 0 !important }
 	.hide-form.slide-out { margin-top: -92% }
 	.login-box-msg { padding-bottom: 10px }
 }

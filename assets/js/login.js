@@ -1,5 +1,6 @@
 $(function(){
 	$("#errmsg").hide();
+	// alert($(window).width() + "x" + $(window).height());
 	var base_url = window.location.origin;
 	var emp_data = '';
 	var num = '';
@@ -63,7 +64,6 @@ $(function(){
 			type: 'post',
 			data: $('#loginForm').serialize(),
 			success: function(data, status) {
-				console.log(data);
 				if(data.status == 'success'){
 					window.location.href = data.url + '/dashboard';
 				}

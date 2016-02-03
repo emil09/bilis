@@ -23,7 +23,6 @@ Class ActiveTripsReport extends MY_Controller {
 	}
 
 	public function active_list(){
-
 		header('Content-Type: application/json');
 		$select = 'd.emp_no_fk, emp_lname, emp_fname, rte_nam, unt_lic, start_dt, start_time, d.coo_no_fk';
 		$where = array(
