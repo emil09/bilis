@@ -334,15 +334,10 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
     padding: 1px 10px;
     color: #fff;
 }
-span.unit-plate, .select2-results__option {
-  /*  background-image: url('../img/plate_number.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    text-align: center;
-    font-weight: 600;*/
+.page-admin span.unit-plate, .page-admin .select2-results__option {
     background: inherit;
 }
+.page-admin .select2-container--default .select2-results__option--highlighted[aria-selected] { background-image: none !important }
 .borderless td, .borderless th {
     border: none;
 }
