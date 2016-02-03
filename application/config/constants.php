@@ -70,11 +70,14 @@ define('DataTablesCSS', 'assets/libs/dataTables/css/dataTables.bootstrap.min.css
 define('DataTablesResCSS', 'assets/libs/dataTables/css/responsive.dataTables.min.css');
 define('DataTablesJSCSS', 'assets/libs/dataTables/css/jquery.dataTables.min.css');
 define('DataTableToolsCSS', 'assets/libs/dataTables/css/dataTables.tableTools.min.css');
+define('DataTablesButtonCSS', 'assets/libs/dataTables/css/buttons.dataTables.min.css');
 define('DataTablesFixedColumnCSS', 'assets/libs/dataTables/css/fixedColumns.dataTables.min.css');
 define('DataTablesJS', 'assets/libs/dataTables/js/jquery.dataTables.min.js');
 define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js');
 define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
 define('DataTableToolsJS', 'assets/libs/dataTables/js/dataTables.tableTools.min.js');
+define('DataTablesButtonJS', 'assets/libs/dataTables/js/dataTables.buttons.min.js');
+define('DataTablesHTML5ButtonJS', 'assets/libs/dataTables/js/buttons.html5.min.js');
 define('DataTablesFixedColumnJS', 'assets/libs/dataTables/js/dataTables.fixedColumns.min.js');
 
 // Select2

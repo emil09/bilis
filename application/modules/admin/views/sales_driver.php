@@ -84,7 +84,7 @@
                                 <label>Export to</label>
                                 <div class="no5-gutter">
                                     <div class="col-sm-12 col-md-3">
-                                        <button type="button" id="display-report" class="btn btn-block btn-info"><i class="fa fa-file-o"></i> CSV</button>
+                                        <button type="button" id="display-csv" class="btn btn-block btn-info"><i class="fa fa-file-o"></i> CSV</button>
                                     </div>
                                     <div class="col-sm-12 col-md-3">
                                         <button type="button" id="display-report" class="btn btn-block btn-success"><i class="fa fa-file-excel-o"></i> Excel</button>
@@ -108,7 +108,7 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<?php echo date('M j Y'); ?>)</h3>
+              <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<span id="date-header"></span>)</h3>
             </div>
             <div class="box-body">
             	<table id="sales-by-driver" class="table table-bordered dt-responsive nowrap">

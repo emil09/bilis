@@ -108,7 +108,7 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<?php echo date('M j Y'); ?>)</h3>
+              <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<span id="date-header"></span>)</h3>
             </div>
             <div class="box-body">
             	<table id="sales-by-unit" class="table table-bordered dt-responsive nowrap">
