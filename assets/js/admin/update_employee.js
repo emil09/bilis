@@ -39,6 +39,14 @@ function openUpdateForm(emp_no){
         success: function(data, status) {
             console.log(emp_no);
             $('#formdata').html(data);
+            $("#fields").html(data);
+
+            $("#location").select2({
+              placeholder: "Select a Location"
+            });
+            $("#cooperative").select2({
+              placeholder: "Select a Cooperative"
+            });
             if(data.status == 'success'){
                 
             }

@@ -348,6 +348,7 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
 .user-info-con{
   width: 80%;
 }
+
 .page-admin #sales-by-driver_wrapper > .row > .col-sm-6:first-child, 
 .page-admin #sales-by-unit_wrapper > .row > .col-sm-6:first-child { display: block }
 .page-admin #sales-by-driver_wrapper > .row > .col-sm-6:first-child,

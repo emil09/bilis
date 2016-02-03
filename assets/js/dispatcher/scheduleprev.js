@@ -1,30 +1,19 @@
 var dates = new Array();
 $(function(){
 
-	var d = 1;
+	var d = -7;
 
-	if(d == 1){
-		$('#next').attr('disabled',true);
-	}else{
-		$('#next').attr('disabled',false);
-	}
 	getdata(d);
 	$('#prev').click(function(){
 
-		d = d + 7;
+		d = d + 8;
 		getdata(d);
-		$('#next').attr('disabled',false);
 
 	});
 	$('#next').click(function(){
 		
-			d = d - 7;
+			d = d - 8;
 			getdata(d);
-			if(d == 1){
-				$('#next').attr('disabled',true);
-			}else{
-				$('#next').attr('disabled',false);
-			}
 
 	});
 
@@ -32,7 +21,7 @@ $(function(){
 
 function getdata(d){
 	$.ajax({
-		url: 'get_prev',
+		url: 'scheduling/get_prev',
 		type: 'post',
 		data: {d: d},
 		success: function(data, status) {
@@ -63,7 +52,7 @@ function getdata(d){
 
 function getDrivers(coo_no){
 	$.ajax({
-		url: 'get_prev_driver',
+		url: 'scheduling/get_prev_driver',
 		type: 'post',
 		data: {coo_no: coo_no, dates: dates},
 		success: function(data, status) {

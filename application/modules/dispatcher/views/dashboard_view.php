@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -23,12 +23,13 @@
       </div>
       <div id="scheduling" class="dashcons by3 col-sm-4 col-xs-12">
         <img class="dashboard-logo" src="../assets/img/dispatcher/schedule.png" alt="">
-        <h4>Scheduling</h4>
-        <p>Review and update work schedule for drivers and vehicles.</p>
-        <a class="btn btn-warning btn-md" href="scheduling/previous">PREVIOUS DAYS</a>
-        <a class="btn btn-primary btn-md" href="scheduling/next">NEXT 7 DAYS</a>
+        <h4>Driver's Schedule</h4>
+        <p>View work schedule for drivers and vehicles.</p>
+        <a class="btn btn-primary btn-md" href="scheduling">SELECT</a>
+        <!-- <a class="btn btn-warning btn-md" href="scheduling/previous">PREVIOUS DAYS</a>
+        <a class="btn btn-primary btn-md" href="scheduling/next">NEXT 7 DAYS</a> -->
       </div>
     </div><!-- /.widget-user -->
   </div>
 </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
+</div><!-- /.content-wrapper

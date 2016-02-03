@@ -8,7 +8,9 @@ Class RegisterModel extends CI_Model {
         '2' => 'dispatcher',
         '3' => 'cashier',
         '4' => 'cooperative',
-        '5' => 'location'
+        '5' => 'location',
+        '6' => 'terminal',
+        '7' => 'trm_mgr'
     );
 	
 	public function select_where($key = '', $select = '', $where = array()) {

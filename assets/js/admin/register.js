@@ -34,7 +34,7 @@ $(function(){
 
 					$('#closeModal').click(function(){
 						$('#user_info_modal').modal('hide');
-						// window.location.reload();
+						window.location.reload();
 					});
 					// swal({
 					// 	'title': 'Success!',   
@@ -90,7 +90,7 @@ $(function(){
 				  placeholder: "Select a Location"
 				});
 				$("#cooperative").select2({
-				  placeholder: "Select a Location"
+				  placeholder: "Select a Cooperative"
 				});
 				$('.select2-selection--multiple').addClass('select2-selection--custom');
 				$('.select2-container').addClass('select2-container-custom');

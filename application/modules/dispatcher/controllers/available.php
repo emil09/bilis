@@ -22,6 +22,7 @@ Class Available extends MY_Controller {
 	}
 
 	public function get_driver(){
+
 		header('Content-Type: application/json');
 
 		$data = array();
