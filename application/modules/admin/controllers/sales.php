@@ -16,8 +16,8 @@ Class Sales extends MY_Controller {
 	}
 
 	public function driver() {
-		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, DataTablesButtonCSS, Bootstrap3DateCSS, Sweetalert2CSS));
-    	$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, DataTablesButtonJS, DataTablesHTML5ButtonJS, Bootstrap3DateJS, Sweetalert2, SalesByDriverJS));
+		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, Bootstrap3DateCSS, Sweetalert2CSS));
+    	$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, Bootstrap3DateJS, Sweetalert2, SalesByDriverJS));
     
 		$data['module'] = 'admin';
 		$data['view_file'] = 'sales_driver';	
@@ -77,8 +77,7 @@ Class Sales extends MY_Controller {
 				'rte_no_fk'		=> $_POST['rte_no'],
 				'shift_code_fk'	=> $_POST['shift_code'],
 				'start_dt'	=> $_POST['start_dt'],
-				'd.coo_no_fk'	=> $_POST['coo_no']	
-				// 'c.emp_no_fk' => $this->session->userdata('emp_no')
+				'd.coo_no_fk'	=> $_POST['coo_no']
 			);
 		}
 		

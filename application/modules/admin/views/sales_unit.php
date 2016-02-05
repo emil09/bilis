@@ -79,25 +79,6 @@
                                 <button type="button" id="display-report" class="btn btn-block btn-primary">View Report</button>
                             </div>
                         </div>
-                        <div id="export-group" class="col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label>Export to</label>
-                                <div class="no5-gutter">
-                                    <div class="col-sm-12 col-md-3">
-                                        <button type="button" id="display-report" class="btn btn-block btn-info"><i class="fa fa-file-o"></i> CSV</button>
-                                    </div>
-                                    <div class="col-sm-12 col-md-3">
-                                        <button type="button" id="display-report" class="btn btn-block btn-success"><i class="fa fa-file-excel-o"></i> Excel</button>
-                                    </div>
-                                    <div class="col-sm-12 col-md-3">
-                                        <button type="button" id="display-report" class="btn btn-block btn-danger"><i class="fa fa-file-pdf-o"></i> PDF</button>
-                                    </div>
-                                    <div class="col-sm-12 col-md-3">
-                                        <button type="button" id="display-report" class="btn btn-block btn-warning"><i class="fa fa-print"></i> Print</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>

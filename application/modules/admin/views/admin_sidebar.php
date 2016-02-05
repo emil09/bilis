@@ -9,13 +9,17 @@
   <li>
     <a href="payroll.php"><i class="fa fa-calendar"></i><span>Scheduling</span></a>
   </li>
-  <li class="treeview">
+  <li class="treeview <?php echo $this->uri->segment(2) == 'dispatch'? 'active': ''; ?>">
     <a href="#">
       <i class="fa fa-truck"></i> <span>Dispatch</span>
       <i class="fa fa-angle-left pull-right"></i>
     </a>
-    <ul class="treeview-menu" style="display: none;">
-      <li><a href="dispatch_by_driver.php"><i class="fa fa-car"></i> Dispatch by Driver</a></li>
+    <ul class="treeview-menu <?php echo $this->uri->segment(3) == 'driver'? 'menu_open': ''; ?>">
+      <li class="treeview <?php echo $this->uri->segment(3) == 'driver'? 'active': ''; ?>">
+        <a href="<?php echo base_url() ?>admin/dispatch/driver">
+          <i class="fa fa-car"></i> Dispatch by Driver
+        </a>
+      </li>
       <li>
         <a href=""><i class="fa fa-clock-o"></i> Dispatch Time Period <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu" style="display: none;">

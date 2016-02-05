@@ -4,22 +4,6 @@ $(function(){
 	var date = new Date();
 	date = date.getFullYear() + '-' + parseInt(date.getMonth()+1) + '-' + date.getDate();
 	dateSel = date;
-	$('#display-csv').click(function(){
-		console.log("hello");
-		swal({   
-        	title: 'Are you sure to export this report into CSV?',
-        	type: 'warning',
-        	showCancelButton: true,
-        	confirmButtonColor: '#3085d6',
-        	cancelButtonColor: '#d33',
-        	confirmButtonText: 'Confirm',
-        	closeOnConfirm: false
-        }, function() {
-        	swal('Success', 'Report successfully exported into CSV .', 'success'); 
-			$('.buttons-csv').click();
-		});
-
-	});
 	$('#sales-date').datepicker({
     	format: 'yyyy-mm-dd',
     	endDate: '0d'
@@ -172,14 +156,7 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code, start_dt) {
 		    $('#sales-by-driver-tbody').html(table_data);
 			var tabler = $('#sales-by-driver').DataTable({
 				paging : true,
-				lengthMenu: [[5, 25, 50, -1], [5, 25, 50, "All"]],
-				dom: 'Bfrtip',
-				buttons: [
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdfHtml5'
-		        ]
+				lengthMenu: [[5, 25, 50, -1], [5, 25, 50, "All"]]
 			});
 			var cells = tabler.cells();
 		    var sum = 0;
