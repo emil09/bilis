@@ -46,7 +46,7 @@ Class Available extends MY_Controller {
 
 
 			// Getting the schedule of the driver, it is empty when the driver has no schedule
-			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name, sched_type, unit_no_fk';
+			$select2 = 'dsp_sched_no, sched_dt, sched_time, unt_lic, shift_name, sched_type, unit_no_fk, is_deleted';
 			$where2 = array('driver_no_fk' => $result->driver_no, 'sched_dt' => date('Y-m-d'));
 			$this->db->join('shift','shift_code = shift_code_fk', 'left');
 			$this->db->join('vehicle','unt_no = unit_no_fk', 'left');
@@ -79,7 +79,7 @@ Class Available extends MY_Controller {
 		header('Content-Type: application/json');
 		$data = '';
 		$where = array('driver_no_fk' => $_POST['dvr_no'], 
-			'sched_dt' =>date('Y-m-d'), 'sched_type' => 'A' );
+			'sched_dt' =>date('Y-m-d'), 'sched_type' => 'A' , 'is_deleted'=>0);
 		$this->db->limit(1);
 		$this->db->join('vehicle', 'unt_no = unit_no_fk', 'left');
 		$results = $this->AvailableModel->select_where(7,'driver_no_fk, unt_lic, unt_no, shift_code_fk, rte_no_fk', $where);
@@ -216,7 +216,8 @@ Class Available extends MY_Controller {
 				$where = array(
 					'driver_no_fk' => $_POST['driver_no'],
 					'sched_dt' => date('Y-m-d'), 
-					'sched_type' => 'A'
+					'sched_type' => 'A',
+					'is_deleted'=>0
 				);
 				$results = $this->AvailableModel->get_driver_avail($select, $where);
 
@@ -291,7 +292,7 @@ Class Available extends MY_Controller {
 	
 			}else{
 
-				$message = array('status'=>'error');
+				$message = array('status'=>'error', 'msg'=>'The unit is already dispatched.');
 			}
 			echo json_encode($message);
 		}
@@ -303,19 +304,18 @@ Class Available extends MY_Controller {
 		header('Content-Type: application/json');
 
 		$sched = array('dsp_sched_no'=>$_POST['sched_no']);
-		$this->AvailableModel->delete(7, $sched);
+		$this->AvailableModel->update(7, array('is_deleted' => 1), $sched);
 		$data = array('status'=>'success', 'msg'=>'success');
 		echo json_encode($data);
 	}
 
 	public function shift_avail(){
 		$select = 'shift_code_fk,sched_type';
-		$where = array('sched_dt' => date('Y-m-d'), 'unit_no_fk' =>$_POST['unit_no'], 'sched_type'=>'A');
+		$where = array('sched_dt' => date('Y-m-d'), 'unit_no_fk' =>$_POST['unit_no'], 'sched_type'=>'A', 'is_deleted'=>0);
 		$this->db->where('driver_no_fk !=', $_POST['driver_no']);
 		$data = $this->AvailableModel->select_where(7, $select, $where);
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
-
 
 }

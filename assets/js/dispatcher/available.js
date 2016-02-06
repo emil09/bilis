@@ -139,7 +139,7 @@ function getDriver(coo_no){
 					else if(data.driver[i].sched.length>0 && data.driver[i].sched[sched_arr]['sched_type']=='F'){
 
 					}
-					else if(data.driver[i].sched.length>0) {
+					else if(data.driver[i].sched.length>0 && data.driver[i].sched[sched_arr]['is_deleted']  == 0) {
 
 					
 						btn_dispatched = '<button id="dispatch-button" class="btn btn-warning col-xs-11" data-value="'+ data.driver[i].sched[sched_arr].dsp_sched_no+'" data-unit="'+ data.driver[i].sched[sched_arr].unit_no_fk+'">DISPATCH</button>';
@@ -329,7 +329,7 @@ function setSched(emp_no, dvr_no) {
 
 			});
 
-			if(data.sched_exist.length>0){
+			if(data.sched_exist.length>0 ){
 				$('#unit').append($("<option />").val(data.sched_exist[0].unt_no).text(data.sched_exist[0].unt_lic));
 				$("#unit").select2("val", data.sched_exist[0].unt_no);
 				$('#select2-unit-container').addClass('unit-plate');

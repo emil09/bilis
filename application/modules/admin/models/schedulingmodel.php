@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class AvailableModel extends CI_Model {
+Class SchedulingModel extends CI_Model {
 
 	protected $tables = array(
 		'0' => 'employee',
@@ -31,20 +31,8 @@ Class AvailableModel extends CI_Model {
     public function insert($key = '', $data = array()){
         $this->db->insert($this->tables[$key], $data); 
     }
-
-    public function get_driver($select = '', $where = array()){
-        $this->db->select($select);
-        $this->db->from($this->tables[0]);
-        $this->db->join($this->tables[1], 'emp_no_fk = emp_no', 'left');
-        $this->db->join($this->tables[3], 'coo_no = coo_no_fk', 'left');
-        // $this->db->join($this->tables[7], 'driver_no_fk = driver_no', 'left');
-        // $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
-        // $this->db->join($this->tables[6], 'shift_code = shift_code_fk', 'left');
-        // $this->db->join($this->tables[8], 'sched_no_fk = dsp_sched_no', 'left');
-        $this->db->where($where);
-        $this->db->order_by('emp_lname');
-        $query = $this->db->get();
-        return $query->result();
+    public function insert_batch($key = '', $data = array()){
+        $this->db->insert_batch($this->tables[$key], $data); 
     }
 
     public function dispatcher_detail($select = '', $where = array()){
@@ -57,9 +45,24 @@ Class AvailableModel extends CI_Model {
         return $query->result();
     }
 
+    public function get_driver($select = '', $where = array()){
+        $this->db->select($select);
+        $this->db->from($this->tables[0]);
+        $this->db->join($this->tables[1], 'emp_no_fk = emp_no', 'left');
+        $this->db->join($this->tables[3], 'coo_no = coo_no_fk', 'left');
+        $this->db->where($where);
+        $this->db->order_by('emp_lname');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function update($key = '', $data = array(), $id = array()){
         $this->db->where($id);
         $this->db->update($this->tables[$key], $data);
+    }
+    public function update_batch($key = '', $data = array(), $id = array()){
+        // $$this->db->where($id);
+        $this->db->update_batch($this->tables[$key], $data, $id);
     }
 
     public function delete($key = '', $data = array()){
@@ -69,21 +72,9 @@ Class AvailableModel extends CI_Model {
     public function unit_avail($select = ''){
         $this->db->select($select);
         $this->db->from($this->tables[7]);
-
-        $this->db->join($this->tables[8], 'sched_no_fk = dsp_sched_no', 'left');
         $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
-        $this->db->where(array('sched_dt'=>date('Y-m-d'), 'sched_type' => 'A', 'is_deleted'=>0));
-
-        $query = $this->db->get();
-        return $query->result();;
-    }
-
-
-    public function get_driver_avail($select = '', $where = array()) {
-        $this->db->select($select);
-        $this->db->from($this->tables[7]);
         $this->db->join($this->tables[8], 'dsp_sched_no = sched_no_fk', 'left');
-        $this->db->where($where);
+        $this->db->where('sched_type', 'A');
         $query = $this->db->get();
         return $query->result();;
     }

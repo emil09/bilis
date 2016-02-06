@@ -7,7 +7,7 @@
     <a href="payroll.php"><i class="fa fa-credit-card"></i><span>Payroll</span></a>
   </li>
   <li>
-    <a href="payroll.php"><i class="fa fa-calendar"></i><span>Scheduling</span></a>
+    <a href="<?php echo base_url() ?>admin/scheduling"><i class="fa fa-calendar"></i><span>Scheduling</span></a>
   </li>
   <li class="treeview">
     <a href="#">

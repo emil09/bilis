@@ -245,7 +245,7 @@ Class Update extends MY_Controller {
 	                      <select class="form-control reg-input" data-formgroup="fg_emp_ltp" name="emp_ltp">
 	                        <option value="" selected disabled>Select License Type</option>
 	                        <option value="R" id="1" '. (   $emp_info[0]->emp_ltp == 'R' ? 'selected' : ''  ) .'>Regular</option>
-	                        <option value="P" id="2" '. (   $emp_info[0]->emp_ltp == 'P' ? 'selected' : ''  ) .'>Professional</option>                        
+	                        <option value="P" id="2" '. (   $emp_info[0]->emp_ltp == 'P ' ? 'selected' : ''  ) .'>Professional</option>                        
 	                      </select>
 	                    </div>
 	                  </div>

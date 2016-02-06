@@ -129,7 +129,6 @@ define('App', 'assets/libs/theme/js/app.min.js');
 */
 define('AvailableJS', 'assets/js/dispatcher/available.js');
 define('ActiveTripsJS', 'assets/js/dispatcher/activetrips.js');
-define('ScheduleNextJS', 'assets/js/dispatcher/schedulenext.js');
 define('SchedulePrevJS', 'assets/js/dispatcher/scheduleprev.js');
 
 /*
@@ -159,4 +158,6 @@ define('RegisterJS', 'assets/js/admin/register.js');
 define('UpdateEmpJS', 'assets/js/admin/update_employee.js');
 define('SalesByDriverJS', 'assets/js/admin/salesbydriver.js');
 define('SalesByUnitJS', 'assets/js/admin/salesbyunit.js');
+define('SchedulingJS', 'assets/js/admin/scheduling.js');
+
 

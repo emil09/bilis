@@ -338,10 +338,10 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
     padding: 1px 10px;
     color: #fff;
 }
-.page-admin span.unit-plate, .page-admin .select2-results__option {
+.page-admin.content-register-employee span.unit-plate, .page-admin.content-register-employee .select2-results__option {
     background: inherit;
 }
-.page-admin .select2-container--default .select2-results__option--highlighted[aria-selected] { background-image: none !important }
+.page-admin.content-register-employee .select2-container--default .select2-results__option--highlighted[aria-selected] { background-image: none !important }
 .borderless td, .borderless th {
     border: none;
 }
