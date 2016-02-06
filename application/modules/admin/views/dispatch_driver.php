@@ -1,7 +1,7 @@
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
     <section class="content-header clearfix">
-      <h1 class="pull-left"><i class="fa fa-money"></i> Sales <small>Report of sales by driver per day</small></h1>
+      <h1 class="pull-left"><i class="fa fa-truck"></i> Dispatch <small>Summary of dispatch by day and route</small></h1>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -21,18 +21,7 @@
                     <div class="col-md-8 col-sm-12">
                     	<div class="col-sm-6 col-md-6">
                     		<div class="form-group">
-                    			<label>Date</label>
-                    			<div id="pickdate" class="input-group date">
-                    				<div class="input-group-addon">
-                    					<i class="fa fa-calendar"></i>
-                    				</div>
-                    				<input type="text" id="sales-date" class="form-control pull-right">
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="col-sm-6 col-md-6">
-                    		<div class="form-group">
-                    			<label>Dispatched Shift</label>
+                    			<label>Shift</label>
                     			<div class="input-group">
                     				<div class="input-group-addon">
                     					<i class="fa fa-cog"></i>
@@ -60,17 +49,6 @@
                                 </div>
                             </div>
                     	</div>
-                        <div class="col-sm-6 col-md-6">
-                            <div class="form-group">
-                                <label>Route</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-exchange"></i>
-                                    </div>
-                                    <select name="route" id="route" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 	<div class="col-md-4 col-sm-12">
                         <div class="col-sm-12 col-md-12">
@@ -85,20 +63,18 @@
           </div><!-- /.box-primary -->
         </div>
       </div>
-      <div id="sales-panel" class="row">
+      <div id="dispatch-panel" class="row">
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title"><span id="route-header"></span> Sales Report in <span id="shift-header"></span> (<span id="date-header"></span>)</h3>
+              <h3 class="box-title"><span id="route-header"></span> Dispatch Report in <span id="shift-header"></span></h3>
             </div>
             <div class="box-body">
-            	<table id="sales-by-driver" class="table table-bordered dt-responsive nowrap">
-            		<thead id="sales-by-driver-thead">
-            		</thead>
-                    <tfoot id="sales-by-driver-tfoot">
-                    </tfoot>
-            		<tbody id="sales-by-driver-tbody">
-            		</tbody>
+            	<table id="dispatch-by-driver" class="table table-bordered dt-responsive nowrap">
+            		<thead id="dispatch-by-driver-thead"></thead>
+                    <!-- <tfoot id="dispatch-by-driver-tfoot">
+                    </tfoot> -->
+            		<tbody id="dispatch-by-driver-tbody"></tbody>
             	</table>
             </div>
           </div><!-- /.box-primary -->

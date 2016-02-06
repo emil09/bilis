@@ -18,6 +18,7 @@ $(function(){
 	if(check == 0) {
 		$('#route-header').html('All Routes');
 		$('#shift-header').html($('#shift option:selected').text());
+		$('#date-header').html(formatDate(new Date($('#sales-date').val())));
 		get_sales_by_driver_list('', '', $('#shift').val(), $('#sales-date').val());
 	}
 	$('#display-report').click(function(e){
@@ -26,10 +27,12 @@ $(function(){
 		if($('#coo_select').val() != '' && $('#route').val() != '') {
 			$('#route-header').html($('#route option:selected').text());
 			$('#shift-header').html($('#shift option:selected').text());
+			$('#date-header').html(formatDate(new Date($('#sales-date').val())));
 			get_sales_by_driver_list($('#coo_select').val(), $('#route').val(), $('#shift').val(), $('#sales-date').val());
 		} else {
 			$('#route-header').html('All Routes');
 			$('#shift-header').html($('#shift option:selected').text());
+			$('#date-header').html(formatDate(new Date($('#sales-date').val())));
 			get_sales_by_driver_list('', '', $('#shift').val(), $('#sales-date').val());
 		}
 	});
@@ -84,7 +87,7 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code, start_dt) {
 					table_data += '<tr>'+
 										'<td><div class="dropdown"><a href="#" id="status-'+data.sales_list[i]['dsp_stat_fk']+'" class="dropdown-toggle fa fa-caret-right" data-toggle="dropdown"> '+data.sales_list[i]['emp_lname']+', '+data.sales_list[i]['emp_fname']+' ('+data.sales_list[i]['emp_no_fk']+')</a>'+
 										'<ul class="dropdown-menu"><li>'+
-											'<a><strong>Route:</strong> '+data.sales_list[i]['rte_nam']+'</a>'+
+											'<a><strong>&gt;Route:</strong> '+data.sales_list[i]['rte_nam']+'</a>'+
 											'<a><strong>Start Date:</strong> '+data.sales_list[i]['start_dt']+'</a>'+
 											'<a><strong>Start Time:</strong> '+data.sales_list[i]['start_time']+'</a>'+
 											'<a><strong>End Date:</strong> '+enddate+'</a>'+
@@ -154,7 +157,6 @@ function get_sales_by_driver_list(coo_no, rte_no, shift_code, start_dt) {
 			var tabler = $('#sales-by-driver').DataTable({
 				paging : true,
 				lengthMenu: [[5, 25, 50, -1], [5, 25, 50, "All"]]
-				// scrollY: 300, 
 			});
 			var cells = tabler.cells();
 		    var sum = 0;
@@ -190,4 +192,17 @@ function formatAMPM(date) {
 	minutes = minutes < 10 ? '0'+minutes : minutes;
 	var strTime = hours + ':' + minutes + ' ' + ampm;
 	return strTime;
+}
+
+function formatDate(date){
+	var monthNames = [
+	  "Jan", "Feb", "Mar",
+	  "Apr", "May", "Jun", "Jul",
+	  "Aug", "Sept", "Oct",
+	  "Nov", "Dec"
+	];
+	var day = date.getDate();
+	var monthIndex = date.getMonth();
+	var year = date.getFullYear();
+	return monthNames[monthIndex] + '. ' + day + ', '+ year;
 }

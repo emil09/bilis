@@ -18,6 +18,7 @@ $(function(){
 	if(check == 0) { 
 		$('#route-header').html('All Routes');
 		$('#shift-header').html($('#shift option:selected').text());
+		$('#date-header').html(formatDate(new Date($('#sales-date').val())));
 		get_sales_by_unit_list('', '', $('#shift').val(), $('#sales-date').val()); 
 	}
 	$('#display-report').click(function(e){
@@ -26,10 +27,12 @@ $(function(){
 		if($('#coo_select').val() != '' && $('#route').val() != '') {
 			$('#route-header').html($('#route option:selected').text());
 			$('#shift-header').html($('#shift option:selected').text());
+			$('#date-header').html(formatDate(new Date($('#sales-date').val())));
 			get_sales_by_unit_list($('#coo_select').val(), $('#route').val(), $('#shift').val(), $('#sales-date').val());
 		} else {
 			$('#route-header').html('All Routes');
 			$('#shift-header').html($('#shift option:selected').text());
+			$('#date-header').html(formatDate(new Date($('#sales-date').val())));
 			get_sales_by_unit_list('', '', $('#shift').val(), $('#sales-date').val());
 		}
 	});
@@ -189,4 +192,17 @@ function formatAMPM(date) {
 	minutes = minutes < 10 ? '0'+minutes : minutes;
 	var strTime = hours + ':' + minutes + ' ' + ampm;
 	return strTime;
+}
+
+function formatDate(date){
+	var monthNames = [
+	  "Jan", "Feb", "Mar",
+	  "Apr", "May", "Jun", "Jul",
+	  "Aug", "Sept", "Oct",
+	  "Nov", "Dec"
+	];
+	var day = date.getDate();
+	var monthIndex = date.getMonth();
+	var year = date.getFullYear();
+	return monthNames[monthIndex] + '. ' + day + ', '+ year;
 }
