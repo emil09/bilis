@@ -40,7 +40,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-sitemap"></i>
                                     </div>
-                                    <select class="form-control" id="coo_select">
+                                    <select class="form-control" id="coo_select" name="coop">
                                       <option value='' selected>All Cooperatives</option>
                                       <?php foreach ($cooperatives as $cooperative ): ?>
                                         <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
@@ -70,8 +70,8 @@
               <h3 class="box-title"><span id="route-header"></span> Dispatch Report in <span id="shift-header"></span></h3>
             </div>
             <div class="box-body">
-            	<table id="dispatch-by-driver" class="table table-bordered dt-responsive nowrap">
-            		<thead id="dispatch-by-driver-thead"></thead>
+            	<table id="dispatch-by-driver" class="table dt-responsive nowrap">
+            		<thead><tr id="dispatch-by-driver-thead"></tr></thead>
                     <!-- <tfoot id="dispatch-by-driver-tfoot">
                     </tfoot> -->
             		<tbody id="dispatch-by-driver-tbody"></tbody>

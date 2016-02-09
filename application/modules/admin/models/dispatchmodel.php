@@ -36,6 +36,14 @@ Class DispatchModel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function select_where($key = '', $select = '', $where = array()) {
+        $this->db->select($select, FALSE);
+        $this->db->from($this->tables[$key]);
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();;
+    }
 	
 }
 
