@@ -77,6 +77,10 @@ define('DataTablesBSJS', 'assets/libs/dataTables/js/dataTables.bootstrap.min.js'
 define('DataTablesResJS', 'assets/libs/dataTables/js/dataTables.responsive.min.js');
 define('DataTableToolsJS', 'assets/libs/dataTables/js/dataTables.tableTools.min.js');
 define('DataTablesButtonJS', 'assets/libs/dataTables/js/dataTables.buttons.min.js');
+define('PrintJS', 'assets/libs/dataTables/js/buttons.print.min.js');
+define('JSZip', 'assets/libs/dataTables/js/jszip.min.js');
+define('PDFMakeJS', 'assets/libs/dataTables/js/pdfmake.min.js');
+define('VFSFontsJS', 'assets/libs/dataTables/js/vfs_fonts.js');
 define('DataTablesHTML5ButtonJS', 'assets/libs/dataTables/js/buttons.html5.min.js');
 define('DataTablesFixedColumnJS', 'assets/libs/dataTables/js/dataTables.fixedColumns.min.js');
 
@@ -160,6 +164,7 @@ define('ActiveTripsListJS', 'assets/js/cashier/activetripslist.js');
 */
 define('RegisterJS', 'assets/js/admin/register.js');
 define('UpdateEmpJS', 'assets/js/admin/update_employee.js');
+define('PayrollJS', 'assets/js/admin/payroll.js');
 define('DispatchByDriverJS', 'assets/js/admin/dispatchbydriver.js');
 define('SalesByDriverJS', 'assets/js/admin/salesbydriver.js');
 define('SalesByUnitJS', 'assets/js/admin/salesbyunit.js');

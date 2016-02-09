@@ -3,8 +3,8 @@
   <li class="treeview <?php echo $this->uri->segment(2) == 'dashboard'? 'active': ''; ?>">
     <a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-home"></i><span>Home</span></a>
   </li>
-  <li>
-    <a href="payroll.php"><i class="fa fa-credit-card"></i><span>Payroll</span></a>
+  <li class="treeview <?php echo $this->uri->segment(2) == 'payroll'? 'active': ''; ?>">
+    <a href="<?php echo base_url() ?>admin/payroll"><i class="fa fa-credit-card"></i><span>Payroll</span></a>
   </li>
   <li>
     <a href="payroll.php"><i class="fa fa-calendar"></i><span>Scheduling</span></a>
