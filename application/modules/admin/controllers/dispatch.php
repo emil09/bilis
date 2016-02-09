@@ -29,19 +29,77 @@ Class Dispatch extends MY_Controller {
 	}
 
 	public function get_dispatch_list() {
-		$_POST['coo_no'] = 6;
-		$ctr = 0;
-		header('Content-Type: application/json');
+		
+		// $_POST['shift'] = 'D';
+		for ($c =0 , $i=-6; $i <= 0; $i++, $c++) { 
+			$results['date'][$c] =  date("Y-m-d", strtotime($i . ' days'));
+		}
+		if(!empty($_POST['coop'])){
+			$this->db->where('coo_no_fk', $_POST['coop']);
+		}
 		$select = 'rte_no, rte_nam';
 		$where = array(
 			'rte_sta'	=> 'A',
-			// 'coo_no_fk' => '$_POST['coo_no']'
-		);
-		$results['route_list_result'] = $this->DispatchModel->route_list($select, $where);
 
-		for ($i=0; $i < count($results['route_list_result']); $i++) {
-			$select2 = 'count(unt_no) as unit_no';
-			$where2 = array('rte_no' => $results['route_list_result'][$i]->rte_no);
+		);
+		$results['routes'] = $this->DispatchModel->route_list($select, $where);
+
+		for ($i=0; $i < count($results['routes']); $i++) {
+			for ($j=0; $j < count($results['date']) ; $j++) { 
+
+				if($_POST['shift'] == 'D'){
+					$day =  date('N',strtotime($results['date'][$j]));
+					$select = 'unt_lic, RIGHT(unt_lic,1) AS unit';
+					
+					switch ($day) {
+						case '1':
+							$c1 = 1; 
+							$c2 = 2;
+							break;
+						case '2':
+							$c1 = 3; 
+							$c2 = 4;
+							break;
+						case '3':
+							$c1 = 5; 
+							$c2 = 6;
+							break;
+						case '4':
+							$c1 = 7; 
+							$c2 = 8;
+							break;
+						case '5':
+							$c1 = 9; 
+							$c2 = 0;
+							break;
+						
+						default:
+							$c1 = ' '; 
+							$c2 = ' ';
+							break;
+					}
+
+					$where = array('rte_no' =>  $results['routes'][$i]->rte_no);
+			
+					$this->db->having('unit', $c2);
+					$this->db->or_having('unit', $c2);
+					
+					$unt_res = $this->DispatchModel->select_where(5, $select ,$where);
+					$coding_unt = count($unt_res);
+				}else{
+					$coding_unt = 0;
+				}
+
+				$where = array('start_dt'=>$results['date'][$j], 'rte_no_fk'=> $results['routes'][$i]->rte_no, 'shift_code_fk'=>$_POST['shift']);
+				$this->db->join('dispatch_sched', 'sched_no_fk = dsp_sched_no', 'left');
+				$dsp_total = $this->DispatchModel->select_where(8, 'dsp_unit_no', $where);
+				$results['routes'][$i]->dispatched[$j] = array('date' => $results['date'][$j], 'total'=>count($dsp_total));
+
+				$where = array('rte_no'=> $results['routes'][$i]->rte_no);
+				$tot_unit = $this->DispatchModel->select_where(5, 'unt_no', $where);
+				$udsp_total =  count($tot_unit) - count($dsp_total);
+				$results['routes'][$i]->not_dispatched[$j] = array('date' => $results['date'][$j], 'total'=> $udsp_total, 'coding_unt' => $coding_unt, 'available' =>  count($tot_unit) - $coding_unt);
+			}
 		}
 		// for($day = 6; $day >= 0; $day--) {
 		// 	$select = 'r.rte_no, rte_nam, count(dsp_unit_no) as dsp_unit, (select count(unt_no) from vehicle v where v.rte_no = r.rte_no) - count(dsp_unit_no) as udsp_unit, start_dt';
@@ -64,7 +122,9 @@ Class Dispatch extends MY_Controller {
 		// }
 		
 
-
+		
+		
+		header('Content-Type: application/json');
 		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 }
