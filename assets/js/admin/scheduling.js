@@ -93,31 +93,13 @@ function getDriver(coo_no){
 
 
 			// console.log(schednext_data);
-			$('#table-scheduling-next').dataTable().fnDestroy();
+			$('#table-scheduling').dataTable().fnDestroy();
 			$('#schednext_data').html(schednext_data);
 
-			var tabler = $('#table-scheduling-next').DataTable({
-				paging : false,
-				autoWidth : false,
-				scrollY: '45vh',
-    			scrollCollapse: true,
-				scrollX: 'true',
-				fixedHeader: false,
-				dom: 'T<"clear">lfrtip',
-				tableTools: {
-		            sRowSelect:   'multi',
-		            sRowSelector: 'td:first-child',
-		            aButtons:     [  ]
-		        }
+			var tabler = $('#table-scheduling').DataTable({
+				paging : true,
+				lengthMenu: [[5, 25, 50, -1], [5, 25, 50, "All"]]
 			});
-
-			$('#selectallrows').click(function(){
-		    	$('#table-available tbody tr').addClass('DTTT_selected selected');
-		    });
-			$('#deselectallrows').click(function(){
-		    	$('#table-available tbody tr').removeClass('DTTT_selected selected');
-		    });
-
 
 		},
 		error: function(xhr, desc, err) {

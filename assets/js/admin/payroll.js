@@ -71,7 +71,7 @@ function get_payroll_report() {
 				$('#payroll-tbody').html(payroll_data);
 				var tabler = $('#payroll-table').DataTable({
 					paging : false,
-					ordering: false,
+					order: [[ 0, "asc" ]],
 					dom: 'Bfrtip',
 			        buttons: [
 			            // {

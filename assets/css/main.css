@@ -355,10 +355,10 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
 .page-admin #sales-by-unit_wrapper > .row > .col-sm-6:first-child,
 .page-admin #sales-by-driver_length,
 .page-admin #sales-by-unit_length { float: right }
-.page-admin #export-group,
-.page-admin #payroll-panel,
-#alert-error-status,
-.page-admin #payroll-table_filter { display: none }
 .page-admin.content-payroll- .dataTable>thead>tr>th { background-color: #fff; color: #000 }
-.page-admin.content-payroll- table.dataTable thead .sorting_asc:after { display: none }
+.page-admin #payroll-table_filter, .page-admin #export-group,
+.page-admin #payroll-panel, #alert-error-status,
+.page-admin.content-payroll- table.dataTable thead .sorting_asc:after,
+.page-admin.content-payroll- table.dataTable thead .sorting:after,
 .page-admin #payroll-table_wrapper .dt-buttons { display: none }
+.page-admin #table-scheduling #editModal.btn-warning { width: 75% }
