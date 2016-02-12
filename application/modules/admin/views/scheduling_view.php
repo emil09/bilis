@@ -2,6 +2,14 @@
 <!-- Content Header (Page header) -->
     <section class="content-header clearfix">
       <h1 class="pull-left"><i class="fa fa-calendar-plus-o"></i> Scheduling <small>Schedule drivers 7 days ahead</small></h1>
+      <div class="pull-right" id="cooperativeselect" >   
+	      <p>Cooperative:</p> 
+	      <select class="form-control" id="coo_select">
+	        <?php foreach ($cooperatives as $cooperative ): ?>
+	          <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
+	        <?php endforeach ?>
+	      </select>
+	  </div>
     </section>
     <!-- Main content -->
     <section class="content-header clearfix">
@@ -19,15 +27,7 @@
 		        
 		      </div><!-- /.box-header -->
 		      <div class="box-body">
-		        <div class="pull-right" id="cooperativeselect" >   
-		          <p>Cooperative:</p> 
-		          <select class="form-control" id="coo_select">
-		            <?php foreach ($cooperatives as $cooperative ): ?>
-		              <option value="<?php echo $cooperative->coo_no; ?>"><?php echo $cooperative->coo_name; ?></option>
-		            <?php endforeach ?>
-		          </select>
-		        </div>
-		        <table id="table-<?php echo($this->uri->segment(2).'-'.$this->uri->segment(3)); ?>" class="table table-bordered">
+		        <table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered dt-responsive nowrap">
 		          <thead>
 		            <tr>
 		              <th>Driver</th>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class ActiveTripsModel extends CI_Model {
+Class SalesByDriverModel extends CI_Model {
 
     protected $tables = array(
         '0' => 'employee',

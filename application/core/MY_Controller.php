@@ -29,6 +29,17 @@ Class MY_Controller extends MX_Controller {
 		}
 	}
 
+	public function check_session_collector() {
+		if($this->session->userdata('is_logged_in') == TRUE ){
+			if ($this->session->userdata('position') != 'B') {
+				show_404();
+			}
+		}
+		else{
+			redirect('login');
+		}
+	}
+
 	public function check_session_driver() {
 		if($this->session->userdata('is_logged_in') == TRUE ){
 			if ($this->session->userdata('position') != 'D') {

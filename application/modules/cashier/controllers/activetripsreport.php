@@ -4,7 +4,7 @@ Class ActiveTripsReport extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->check_session_cashier();
-		$this->load->model('ActiveTripsModel','',TRUE);
+		$this->load->model('ActiveTripsReportModel','',TRUE);
 	}
 
 	public function index()
@@ -17,30 +17,22 @@ Class ActiveTripsReport extends MY_Controller {
 		
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$this->db->distinct();
-		$cooperatives = $this->ActiveTripsModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
+		$cooperatives = $this->ActiveTripsReportModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
 		echo Modules::run('templates/bilis_noside', $data);
 	}
 
-	public function active_list(){
+	public function active_trips_list(){
 		header('Content-Type: application/json');
-		$select = 'd.emp_no_fk, emp_lname, emp_fname, rte_nam, unt_lic, start_dt, start_time, d.coo_no_fk';
-		$where = array(
-			'dsp_stat_fk' => 'A',
-			'd.coo_no_fk'	=> $_POST['coo_no']	
-			// 'c.emp_no_fk' => $this->session->userdata('emp_no')
-		);
+		$select = 'sched_no_fk, shift_code_fk, driver.coo_no_fk, coo_name, 
+		unt_lic,emp_fname, emp_lname, employee.emp_no, trips_ctr, start_dt, start_time, shift_name, 
+		dsp_unit_no, dispatch_sched.rte_no_fk, route.rte_nam, driver_no, count(trp_id) as count_trp';
+		$where = array('dsp_stat_fk'=> 'A', 'driver.coo_no_fk' => $_POST['coo_no']);
 
-		$results['active_list'] = $this->ActiveTripsModel->active_list($select, $where);
-		$select = 'd.emp_no_fk, unit_no_fk, trips_ctr, rte_nam, amt_in, to_dt, to_time';
-		// $select = 'd.emp_no_fk, unit_no_fk, trips_ctr, t.loc_no, rte_nam, amt_in, to_dt, to_time';
-		$where = array(
-			'dsp_stat_fk' => 'A',
-			'd.coo_no_fk'	=> $_POST['coo_no']	
-			// 'c.emp_no_fk' => $this->session->userdata('emp_no')
-		);
-		$results['active_cash'] = $this->ActiveTripsModel->active_list($select, $where);
+		$this->db->group_by('driver_no');
 
+		$this->db->order_by('count_trp','desc');
+		$results = $this->ActiveTripsReportModel->get_active_trips_list($select, $where);
 		echo json_encode($results);
 	}
 }

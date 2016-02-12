@@ -5,6 +5,7 @@
    ||  GLOBAL CSS  ||
    ======================= */
 html, body { user-select: none; -webkit-user-select: none; -moz-user-select: none }
+a {  -webkit-user-drag: none; user-drag: none }
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
@@ -262,8 +263,7 @@ span.select2-container { width: 190px }
 .page-cashier .dashboard-wrapper { margin: 60px 100px 0 }
 .page-cashier .additional-functions-wrapper { margin-top: 35px }
 .page-cashier .modal-dialog { margin: 100px auto 0px }
-#cashturnover-button, #editturnover-button { width: 50%; margin: 0 auto; display: block }
-#editturnover-button { width: 70% }
+.page-cashier #cashturnover-button, #editturnover-button { width: 100%; margin: 0 auto; display: block }
 .left-col h4, .right-col h4 { font-weight: 600 }
 .selectedtrip td { text-align: right; color: #3C8DBC; font-weight: 600 }
 #table-turnoverreport #editturnover-button { width: 75%; margin: 0 auto; display: block }
@@ -355,10 +355,10 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
 .page-admin #sales-by-unit_wrapper > .row > .col-sm-6:first-child,
 .page-admin #sales-by-driver_length,
 .page-admin #sales-by-unit_length { float: right }
-.page-admin #export-group,
-.page-admin #payroll-panel,
-#alert-error-status,
-.page-admin #payroll-table_filter { display: none }
 .page-admin.content-payroll- .dataTable>thead>tr>th { background-color: #fff; color: #000 }
-.page-admin.content-payroll- table.dataTable thead .sorting_asc:after { display: none }
+.page-admin #payroll-table_filter, .page-admin #export-group,
+.page-admin #payroll-panel, #alert-error-status,
+.page-admin.content-payroll- table.dataTable thead .sorting_asc:after,
+.page-admin.content-payroll- table.dataTable thead .sorting:after,
 .page-admin #payroll-table_wrapper .dt-buttons { display: none }
+.page-admin #table-scheduling #editModal.btn-warning { width: 75% }

@@ -71,9 +71,7 @@
             </div>
             <div class="box-body">
             	<table id="dispatch-by-driver" class="table dt-responsive nowrap">
-            		<thead><tr id="dispatch-by-driver-thead"></tr></thead>
-                    <!-- <tfoot id="dispatch-by-driver-tfoot">
-                    </tfoot> -->
+            		<thead id="dispatch-by-driver-thead"></thead>
             		<tbody id="dispatch-by-driver-tbody"></tbody>
             	</table>
             </div>

@@ -77,6 +77,10 @@ Class Login extends MY_Controller {
 
 				$this->create_session($_POST['emp_no']);
 				switch ($this->session->userdata('position')) {
+					case "B":
+						$url = 'collector';
+						break;
+
 					case "C":
 						$url = 'cashier';
 						break;
