@@ -68,7 +68,6 @@ var trp_id = '';
 
 function get_turnovered_list(ct_date, coo_no){
 
-
 	$.ajax({
 		url: 'turnoverreport/turnovered_list',
 		type: 'post',

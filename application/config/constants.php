@@ -152,8 +152,15 @@ define('TurnoverJS', 'assets/js/driver/turnover.js');
 */
 define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
 define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');
+define('SalesbyDriverJS', 'assets/js/cashier/salesbydriver.js');
 define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');
-define('ActiveTripsListJS', 'assets/js/cashier/activetripslist.js');
+
+/*
+|--------------------------------------------------------------------------
+| Collector
+|--------------------------------------------------------------------------
+*/
+define('CashPickupJS', 'assets/js/collector/cashpickup.js');
 
 
 /*
