@@ -51,6 +51,17 @@ Class MY_Controller extends MX_Controller {
 		}
 	}
 
+	public function check_session_counter(){
+		if($this->session->userdata('is_logged_in') == TRUE ){
+			if ($this->session->userdata('position') != 'N') {
+				show_404();
+			}
+		}
+		else{
+			redirect('login');
+		}
+	}
+
 	public function add_css($file = array(), $str = ''){
 		foreach($file as $item){
             $str .= '<link rel="stylesheet" href="'.base_url($item).'" type="text/css" />'."\n";  

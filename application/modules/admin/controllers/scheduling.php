@@ -124,9 +124,9 @@ Class Scheduling extends MY_Controller {
 				
 			$date = date_create($_POST['date'][$i]);
 			$day =  date_format($date, 'N');
-			$select = 'unt_lic, unt_no';
+			$select = 'unt_lic, unt_no, RIGHT(unt_lic, 1) as unit';
 			
-			switch ($day) {
+			switch 	($day) {
 				case '1':
 					$c1 = 1; 
 					$c2 = 2;
@@ -167,8 +167,8 @@ Class Scheduling extends MY_Controller {
 		    }
 
 			if(($c1!=='') && ($c2!=='')){
-				$this->db->not_like('unt_lic', $c1, 'before');
-				$this->db->not_like('unt_lic', $c2, 'before');
+				$this->db->having('unit <>', $c1);
+				$this->db->having('unit <>', $c2);
 			}
 
 			if(!empty($unt_sched)){
@@ -267,7 +267,7 @@ Class Scheduling extends MY_Controller {
 					$this->SchedulingModel->update_batch(7, $update_data, 'dsp_sched_no');
 				}
 				$data['data1'] = $insert_data;
-				$data['data2'] = $_POST['unit'];
+				$data['data2'] = $_POST;
 		}
 		echo json_encode($data);
 	}

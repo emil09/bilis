@@ -46,6 +46,8 @@ Class Register extends MY_Controller {
       $this->add_cashier();
     }elseif(@$_POST['position'] == 'L'){
       $this->add_terminal_mgr();
+    }elseif(in_array(@$_POST['position'], array('B', 'M', 'N', 'S', 'T'))){
+      $this->other_pos_wpw();
     }else{
       if ($this->form_validation->run() == FALSE){
         $msg = array('status'=>'error');
@@ -67,9 +69,27 @@ Class Register extends MY_Controller {
             'name' => 'fg_pos'
           )
         );
+        // $msg = array('status'=>'error');
+        // $msg['errors'] = '';  
       }else{
-        $msg = array('status'=>'error');
-        $msg['errors'] = '';
+
+         // success
+        $data = array(
+          'emp_fname'   => $_POST['fname'],
+          'emp_mname'   => $_POST['mname'],
+          'emp_lname'   => $_POST['lname'],
+          'emp_pos' => $_POST['position'],
+          'emp_stat' =>1,
+          'emp_beg' => $_POST['start_date']
+        );
+        $this->RegisterModel->insert(0, $data);
+        
+        $emp_id = $this->db->insert_id();
+        // $msg['errors'] = '';
+
+        
+        $msg = array('status'=>'success', 'msg' => 'success', 'emp_id'=>$emp_id);
+       
       }
       header('Content-Type: application/json');
       echo json_encode($msg);
@@ -356,6 +376,62 @@ Class Register extends MY_Controller {
       echo json_encode($msg);
   
   }
+   public function other_pos_wpw(){
+            $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|integer');
+      $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|xss_clean|matches[password]');
+
+      if ($this->form_validation->run() == FALSE){
+        $msg = array('status'=>'error');
+        $msg['errors'] = array(
+          array(
+            'err_msg' => form_error('fname', ' ', ' '),
+            'name' => 'fg_fname'
+          ),
+          array(
+            'err_msg' => form_error('mname', ' ', ' '),
+            'name' => 'fg_mname'
+          ),
+          array(
+            'err_msg' => form_error('lname', ' ', ' '),
+            'name' => 'fg_lname'
+          ),
+          array(
+            'err_msg' => form_error('password', ' ', ' '),
+            'name' => 'fg_pw'
+          ),
+          array(
+            'err_msg' => form_error('confirmpassword', ' ', ' '),
+            'name' => 'fg_conpw'
+          ),
+          array(
+            'err_msg' => form_error('position', ' ', ' '),
+            'name' => 'fg_pos'
+          )
+        );
+      }
+      else
+      {
+        // success
+        $data = array(
+          'emp_fname'   => $_POST['fname'],
+          'emp_mname'   => $_POST['mname'],
+          'emp_lname'   => $_POST['lname'],
+          'emp_pwd'   => $_POST['password'],
+          'emp_pos' => $_POST['position'],
+          'emp_stat' =>1,
+          'emp_beg' => $_POST['start_date']
+        );
+        $this->RegisterModel->insert(0, $data);
+        $emp_id = $this->db->insert_id();
+        // $msg['errors'] = '';
+
+        
+        $msg = array('status'=>'success', 'msg' => 'success', 'emp_id'=>$emp_id);
+        
+      }
+      header('Content-Type: application/json');
+      echo json_encode($msg);
+  }
 
 	public function emp_no(){
 
@@ -607,13 +683,40 @@ Class Register extends MY_Controller {
             </div>
           </div>';
     }
+
+    elseif(in_array($_POST['position'], array('B', 'M', 'N', 'S', 'T'))){
+      $data = '<div class="col-sm-12 col-md-6">
+      <div class="form-group"id="fg_pw">
+                <span class="pull-right err-msg"></span>
+                <label class="required" for="lname">Password</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                  <input type="password" class="form-control reg-input" name="password" placeholder="Password">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group" id="fg_conpw">
+                <span class="pull-right err-msg"></span>
+                <label class="required" for="lname">Confirm Password</label>
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                  <input type="password" class="form-control reg-input" name="confirmpassword" placeholder="Confirm Password">
+                </div>
+              </div>';
+    }
     else{
-      $data = '<div class="col-sm-12">
-                    <div class="form-group">
-                      <h4>Ooops Sorry about that, its under maintenance . . . </h4>
-                    </div>
-                 </div>
-              ';
+      $data = '';
+      // $data = '<div class="col-sm-12">
+      //               <div class="form-group">
+      //                 <h4>Ooops Sorry about that, its under maintenance . . . </h4>
+      //               </div>
+      //            </div>
+      //         ';
     }
 
 

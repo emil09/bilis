@@ -6,7 +6,7 @@
   <li class="treeview <?php echo $this->uri->segment(2) == 'payroll'? 'active': ''; ?>">
     <a href="<?php echo base_url() ?>admin/payroll"><i class="fa fa-credit-card"></i><span>Payroll</span></a>
   </li>
-  <li>
+  <li class="<?php echo $this->uri->segment(2) == 'scheduling'? 'active': ''; ?>">
     <a href="<?php echo base_url() ?>admin/scheduling"><i class="fa fa-calendar"></i><span>Scheduling</span></a>
   </li>
   <li class="treeview <?php echo $this->uri->segment(2) == 'dispatch'? 'active': ''; ?>">
@@ -44,13 +44,30 @@
           <i class="fa fa-car"></i> Sales by Unit
         </a>
       </li>
-      <li>
-        <a href="sales_by_time_period.php">
+     <!--  <li class="active">
+        <a href="#">
           <i class="fa fa-clock-o"></i> Sales Time Period <i class="fa fa-angle-left pull-right"></i>
         </a>
-        <ul class="treeview-menu" style="display: none;">
-          <li><a href="sales_tp_by_driver.php"><i class="fa fa-users"></i> By Driver</a></li>
-          <li><a href="sales_tp_by_unit.php"><i class="fa fa-car"></i> By Unit</a></li>
+        <ul class="treeview-menu menu-open" style="display: none;">
+          <li class="treeview"><a href="<?php echo base_url() ?>admin/sales/tp_driver"><i class="fa fa-users"></i> By Driver</a></li>
+          <li class="trreeview active"><a href="<?php echo base_url() ?>admin/sales/tp_unit"><i class="fa fa-car"></i> By Unit</a></li>
+        </ul>
+      </li> -->
+       <li class="treeview <?php echo $this->uri->segment(3) == 'tp'? 'active': ''; ?>">
+        <a href="#">
+          <i class="fa fa-clock-o"></i> <span> Sales Time Period</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu <?php echo $this->uri->segment(3) == 'tp' ? 'menu_open': ''; ?>" >
+          <li class="treeview <?php echo $this->uri->segment(4) == 'driver'? 'active': ''; ?>">
+            <a href="<?php echo base_url() ?>admin/sales/tp/driver">
+              <i class="fa fa-users"></i> By Driver</a>
+          </li>
+          <li class="treeview <?php echo $this->uri->segment(4) == 'unit'? 'active': ''; ?>">
+            <a href="<?php echo base_url() ?>admin/sales/tp/unit">
+              <i class="fa fa-car"></i> By Unit
+            </a>
+          </li>
         </ul>
       </li>
     </ul>
@@ -82,7 +99,7 @@
       <li class="treeview <?php echo $this->uri->segment(3) == 'employee'? 'active': ''; ?>">
         <a href="<?php echo base_url() ?>admin/update/employee">
           <i class="fa fa-users"></i> By Employee</a>
-        </li>
+      </li>
       <li>
         <a href="update_by_unit.php">
           <i class="fa fa-car"></i> By Unit

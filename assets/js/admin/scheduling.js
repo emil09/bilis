@@ -151,7 +151,7 @@ function setSched(emp_no){
 				shift_option += '<option value="'+data.shift[c]['shift_code']+'">' + data.shift[c]['shift_name'] + '</option>';
 			}
 
-			for (var i = 0; i < dates.length; i++) {
+			for (var i = 0; i < dates.length; i++) {	
 			
 				set_sched_table += '<tr>'+
                     '<td>'+dates[i]+'</td>'+
@@ -168,6 +168,17 @@ function setSched(emp_no){
 			};
 			
             $('#set_sched_table').html(set_sched_table);
+
+            $('.clear').click(function(){
+				var i = $(this).data('value');
+
+				$('#unit'+i).append('<option value=""></option>');
+
+				$('#unit'+i).select2('val', '');
+				
+				$('#select2-unit'+i+ '-container').removeClass('unit-plate');
+			});
+
             $(".select2").select2({
 		        placeholder: "Select a vehicle"
 		    });
@@ -199,12 +210,7 @@ function setSched(emp_no){
 				$('#select2-unit'+$(this).data('value')+ '-container').addClass('unit-plate');
 		    });
 
-			$('.clear').click(function(){
-				var i = $(this).data('value');
-				$('#unit'+i).select2("val", "");
-				$('#select2-unit'+i+ '-container').removeClass('unit-plate');
-			});
-
+			
 			
 		},
 		error: function(xhr, desc, err) {

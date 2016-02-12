@@ -111,7 +111,7 @@ Class Available extends MY_Controller {
 	public function get_unit(){
 		header('Content-Type: application/json');
 		$day =  date('N');
-		$select = 'unt_lic, unt_no';
+		$select = 'unt_lic, unt_no, RIGHT(unt_lic, 1) as unit';
 		
 		switch ($day) {
 			case '1':
@@ -179,8 +179,8 @@ Class Available extends MY_Controller {
 
 
 		if(isset($c1, $c2) && $_POST['shift_sel']=='D'){
-			$this->db->not_like('unt_lic', $c1, 'before');
-			$this->db->not_like('unt_lic', $c2, 'before');
+			$this->db->having('unit <>', $c1);
+			$this->db->having('unit <>', $c2);
 		}
 		$results['unit'] = $this->AvailableModel->select_where(5, $select);
 		$results['shift']= $this->AvailableModel->select_where(6, 'shift_code, shift_name');

@@ -92,6 +92,9 @@ Class Login extends MY_Controller {
 					case "S":
 						$url = 'admin';
 						break;
+					case "N":
+						$url = 'counter';
+						break;
 					
 					default:
 						$url = '';

@@ -95,4 +95,42 @@ Class Sales extends MY_Controller {
 		$results['route_list'] = $this->SalesModel->route_list($select, $where);
 		echo json_encode($results);
 	}
+
+	public function tp($var = ''){
+		if($var == 'driver'){
+			$this->tp_driver();
+		}
+		elseif ($var == 'unit') {
+			$this->tp_unit();
+		}else{
+			show_404();
+		}
+		
+	}
+
+	private function tp_unit(){
+		$data['module'] = 'admin';
+    	$data['sidebar'] = 'admin/admin_sidebar';
+		$data['view_file'] = 'tp_unit_view';
+
+		echo Modules::run('templates/bilis_template', $data);
+	}
+	private function tp_driver(){
+		$data['module'] = 'admin';
+    	$data['sidebar'] = 'admin/admin_sidebar';
+		$data['view_file'] = 'tp_driver_view';
+		$allcooperatives = $this->SalesModel->all_coops('coo_no, coo_name');
+		$data['cooperatives'] = $allcooperatives;
+		$this->db->order_by('rte_nam');
+		$data['routes'] = $this->SalesModel->select_where(4, 'rte_no, rte_nam');
+		$data['css'] = $this->add_css(array(DataTablesJSCSS,DataTablesFixedColumnCSS));
+    	$data['js'] = $this->add_js(array(DataTablesJS, DataTablesFixedColumnJS, TPDriverJS));
+		echo Modules::run('templates/bilis_template', $data);
+	}
+
+	public function get_driver_tp(){
+		header('Content-Type: application/json');
+		echo json_encode($results);
+
+	}
 }
