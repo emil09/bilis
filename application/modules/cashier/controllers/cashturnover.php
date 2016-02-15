@@ -22,29 +22,31 @@ Class Cashturnover extends MY_Controller {
 		echo Modules::run('templates/bilis_noside', $data);
 	}
 
-	public function available_turnover(){
+//-------------------------------------------------- UNASSIGNED -----------------------------------------------
+
+	public function unassigned_bags(){
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
 
 		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T', 'driver.coo_no_fk'=>$_POST['coo_no'], 'to_dt'=>date('Y-m-d'));
 
-		$results['cash_turnover'] = $this->CashturnoverModel->available_turnover($select, $where);
+		$results['unassigned_list'] = $this->CashturnoverModel->unassigned_list($select, $where);
 
 		header('Content-Type: application/json');
 		echo json_encode($results, JSON_PRETTY_PRINT);
 	}
 
-	public function get_assigned_detail(){
+	public function get_unassigned_detail(){
 		header('Content-Type: application/json');
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
-		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk, dsp_unit_no, start_dt, start_time';
+		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, trips_ctr, driver.emp_no_fk, dsp_unit_no';
 		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no'], 'trp_stat'=>'T', 'to_dt'=>date('Y-m-d'));
 		
-		$results['driver'] = $this->CashturnoverModel->available_turnover($select, $where);
+		$results['driver'] = $this->CashturnoverModel->unassigned_list($select, $where);
 		if(count($results['driver'])>0){
 			$results['trip'] = $this->CashturnoverModel->select_where(
 				9, 
-				'trp_id, dsp_no_fk, trips_ctr, amt_in, trp_stat', 
+				'trp_id, dsp_no_fk, trips_ctr, amt_in, trp_stat, to_dt, to_time', 
 				array('dsp_no_fk'=>$results['driver'][0]->dsp_unit_no, 'trips_ctr' => $_POST['trip_ctr'])
 			);
 		}
@@ -93,6 +95,27 @@ Class Cashturnover extends MY_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($data);
 
+	}
+
+
+//-------------------------------------------------- ASSIGNED -----------------------------------------------
+
+	public function assigned_bags(){
+		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+		$select = 'trp_id, unt_lic, emp_fname, emp_lname, amt_in, ct_bag, ct_batch_fk, ct_date, ct_time, trips_ctr, driver.emp_no_fk';
+		$where = array(
+			'loc_no'=>$cashier[0]->loc_no_fk, 
+			'trp_stat'=>'C',
+			'ct_date' => date('Y-m-d'),
+			'driver.coo_no_fk'=> $_POST['coo_no']
+		);
+	
+		
+		$results['assigned_list'] = $this->CashturnoverModel->assigned_list($select, $where);
+		$results['datetoday'] = date('Y-m-d');
+
+		header('Content-Type: application/json');
+		echo json_encode($results);
 	}
 
 }

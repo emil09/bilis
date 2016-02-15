@@ -13,31 +13,61 @@
 </div>
 </section>
 <!-- Main content -->
-<section class="content clearfix">
-  <div class="col-md-12">
-    	<div class="col-sm-12 col-xs-12">
-    		<div class="box">
-	    		<div class="box-header"><h3 class="box-title">Available for turnover to <strong><?php echo $fname . ' ' . $lname; ?></strong></h3></div>
+<section class="content clearfix no-gutter">
+  <div class="col-md-12 no5-gutter">
+    	<div class="col-sm-6 col-xs-12">
+    		<div class="box box-danger">
+	    		<div class="box-header text-center text-uppercase"><h3 class="box-title"><strong>Unassigned Bags</strong></h3></div>
 	            <div class="box-body">
-	            	<table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
+	            	<table id="table-unassigned-bags" class="table table-bordered dt-responsive nowrap">
 			          <thead>
 			            <tr>
 			              <th>Trip</th>
 			              <th>Route</th>
 			              <th>Unit</th>
 			              <th>Driver</th>
-			              <th>Amount Reported</th>
-			              <th>End</th>
+			              <th>Amount</th>
+			              <th>Turnover Date</th>
 			            </tr>
 			          </thead>
-			          <tbody id="available_turnover"></tbody>
+			          <tbody id="unassigned_bags"></tbody>
+			        </table>
+				</div> <!-- .box-body -->
+			</div>
+    	</div>
+    	<div class="col-sm-6 col-xs-12">
+    		<div class="box box-success">
+	    		<div class="box-header text-center text-uppercase"><h3 class="box-title"><strong>Assigned Bags</strong></h3></div>
+	            <div class="box-body">
+	            	<table id="table-assigned-bags" class="table table-bordered dt-responsive nowrap">
+			          <thead>
+	                    <tr>
+	                      <th>Batch</th>
+	                      <th>Bag</th>
+	                      <th>Driver</th>
+	                      <th>Unit</th>
+	                      <th>Trip</th>
+	                      <th>Amount</th>
+	                      <th>Date Assigned</th>
+	                    </tr>
+	                  </thead>
+	                  <tbody id="driver_data">
+	                  </tbody>
+	                  <tfoot>
+	                    <tr>
+	                      <th colspan="1" style="text-align: right">TOTAL:</th>
+	                      <th colspan="1"><span id="totalbags">0</span> bags</th>
+	                      <th colspan="3"> </th>
+	                      <th colspan="2"><span id="totalvalue"></span></th>    
+	                    </tr>
+	                  </tfoot>
 			        </table>
 				</div> <!-- .box-body -->
 			</div>
     	</div>
   </div>
 </section><!-- /.content -->
-<div id="cashturnoverModal" class="modal fade" role="dialog">
+<div id="unassignedModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <form id="cashturnoverForm" autocomplete="off">
