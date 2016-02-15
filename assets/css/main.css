@@ -61,6 +61,9 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #clear-sched, #editModal.btn-primary, #editModal.btn-primary[disabled] { width: 49% }
 #editModal.btn-warning, .end-day { display: block; margin: 0 auto; width: 50% }
 #editModal.btn-primary[disabled] { margin: 0 auto; display: block }
+.additional-functions-wrapper { margin-top: 35px }
+.dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
+.dataTable tfoot tr th:last-child { border-right: 1px solid #000 !important }
 
 /* Loader */
 .loading-content { left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%) }
@@ -261,15 +264,14 @@ span.select2-container { width: 190px }
    ||  CSS for Cashier  ||
    ========================== */
 .page-cashier .dashboard-wrapper { margin: 60px 100px 0 }
-.page-cashier .additional-functions-wrapper { margin-top: 35px }
 .page-cashier .modal-dialog { margin: 100px auto 0px }
-.page-cashier #cashturnover-button, #editturnover-button { width: 100%; margin: 0 auto; display: block }
+.page-cashier #cashturnover-button, #editturnover-button,
+.page-cashier #driverturnover_btn { width: 100%; margin: 0 auto; display: block }
+.page-cashier #driverturnover_btn { width: 60% }
 .left-col h4, .right-col h4 { font-weight: 600 }
 .selectedtrip td { text-align: right; color: #3C8DBC; font-weight: 600 }
 #table-turnoverreport #editturnover-button { width: 75%; margin: 0 auto; display: block }
 .dataTables_scrollFootInner { padding-right: 0 !important }
-.page-cashier .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
-.page-cashier .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
 #datetimepicker6 { display: inline-flex }
 .page-cashier tbody td:first-child .open>a:before {
     content: "\f0d7";

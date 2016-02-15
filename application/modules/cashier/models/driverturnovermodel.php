@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class ActiveTripsReportModel extends CI_Model {
+Class DriverTurnoverModel extends CI_Model {
 
 	protected $tables = array(
 		'0' => 'employee',

@@ -31,7 +31,7 @@
       <div class="additional-functions-wrapper col-sm-12 clearfix">
         <div class="header-con"><h3>Additional Function</h3></div>
         <div class="functions-con">
-          <a href="activetripsreport" class="btn btn-info">ACTIVE TRIPS REPORT</a>
+          <a href="driverturnover" class="btn btn-info text-uppercase">Driver Turnover</a>
         </div>
       </div>
     </div><!-- /.widget-user -->

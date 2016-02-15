@@ -10,7 +10,8 @@
     <li class="<?php if($this->uri->segment(2)=='available'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/available">Available for Dispatch</a></li>
 
     <li class="<?php if($this->uri->segment(2)=='activetrips'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/activetrips">Active Trips</a></li>
-        <li class="<?php if($this->uri->segment(2)=='scheduling'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling">Driver's Schedule</a></li>
+    <li class="<?php if($this->uri->segment(2)=='scheduling'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/scheduling">Driver's Schedule</a></li>
+    <li class="<?php if($this->uri->segment(2)=='salesbydriver'){echo 'active';} ?>"><a href="<?php echo base_url() ?>dispatcher/salesbydriver">Sales by Driver</a></li>
 
     <!-- <li class="dropdown <?php if($this->uri->segment(2)=='scheduling'){echo 'active';} ?>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Scheduling <span class="caret"></span></a>

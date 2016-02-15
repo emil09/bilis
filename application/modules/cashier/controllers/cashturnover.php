@@ -28,7 +28,7 @@ Class Cashturnover extends MY_Controller {
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk';
 
-		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T', 'driver.coo_no_fk'=>$_POST['coo_no'], 'to_dt'=>date('Y-m-d'));
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'trp_stat'=>'T', 'driver.coo_no_fk'=>$_POST['coo_no']);
 
 		$results['unassigned_list'] = $this->CashturnoverModel->unassigned_list($select, $where);
 
@@ -57,6 +57,7 @@ Class Cashturnover extends MY_Controller {
 
 
 		$this->form_validation->set_rules('bag_no', 'Bag No.', 'required|is_natural_no_zero');
+		$this->form_validation->set_rules('sack', 'Sack', 'required');
 		$this->form_validation->set_rules('batch', 'Batch', 'required');
 		$this->form_validation->set_rules('trp_id', 'Trip ID', 'required');
 
@@ -68,7 +69,6 @@ Class Cashturnover extends MY_Controller {
 			$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 			$where = array(
 					'ct_bag' 		=> $_POST['bag_no'],
-					'ct_batch_fk'	=> $_POST['batch'],
 					'ct_date'		=>	date('Y-m-d'),
 					'ct_cashier_fk' =>	$cashier[0]->cashier_no
 				);
@@ -79,6 +79,7 @@ Class Cashturnover extends MY_Controller {
 				$insert_data = array(
 					'ct_cashier_fk' =>	$cashier[0]->cashier_no,
 					'ct_bag'		=>	$_POST['bag_no'],
+					'ct_sack'		=>	$_POST['sack'],
 					'ct_batch_fk'	=>	$_POST['batch'],
 					'ct_date'		=>	date('Y-m-d'),
 					'ct_time'		=>	date('H:i:s'),
@@ -102,20 +103,80 @@ Class Cashturnover extends MY_Controller {
 
 	public function assigned_bags(){
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
-		$select = 'trp_id, unt_lic, emp_fname, emp_lname, amt_in, ct_bag, ct_batch_fk, ct_date, ct_time, trips_ctr, driver.emp_no_fk';
+		$select = 'trp_id, unt_lic, dsp_no_fk, emp_fname, emp_lname, amt_in, ct_bag, ct_batch_fk, ct_sack, ct_date, ct_time, trips_ctr, driver.emp_no_fk';
 		$where = array(
 			'loc_no'=>$cashier[0]->loc_no_fk, 
 			'trp_stat'=>'C',
 			'ct_date' => date('Y-m-d'),
 			'driver.coo_no_fk'=> $_POST['coo_no']
 		);
-	
-		
+
 		$results['assigned_list'] = $this->CashturnoverModel->assigned_list($select, $where);
 		$results['datetoday'] = date('Y-m-d');
 
 		header('Content-Type: application/json');
 		echo json_encode($results);
+	}
+
+	public function get_reviewed_detail(){
+		header('Content-Type: application/json');
+		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, to_dt, to_time, trips_ctr, driver.emp_no_fk, dsp_unit_no, start_dt, start_time';
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'dsp_no_fk'=>$_POST['dsp_no']);
+		
+		$results['driver'] = $this->CashturnoverModel->assigned_list($select, $where);
+		if(count($results['driver'])>0){
+			$select2 = 'trp_id, dsp_no_fk, trips_ctr, amt_in, trp_stat, ct_date, ct_time';
+			$where2 = array(
+					'dsp_no_fk'=>$_POST['dsp_no'], 
+					'trips_ctr' => $_POST['trip_ctr']
+			);
+			$results['trip'] = $this->CashturnoverModel->selectedtrip_details($select2, $where2); 
+		}
+		$results['bagbatch'] = array(
+									'bag_no' => $_POST['bag_no'], 
+									'batch' => $_POST['batch_no'],
+									'sack2' => $_POST['sack2']
+								);
+		echo json_encode($results);
+	}
+
+	public function update_ct(){
+
+
+		$this->form_validation->set_rules('bag_no2', 'Bag No.', 'required|is_natural_no_zero');
+		$this->form_validation->set_rules('sack2', 'Sack', 'required');
+		$this->form_validation->set_rules('batch2', 'Batch', 'required');
+		$this->form_validation->set_rules('trp_id', 'Trip ID', 'required');
+
+		if ($this->form_validation->run($this) == FALSE){
+			$data = array('status' => 'error');
+
+		}else{
+			$cashier = $this->CashturnoverModel->select_where(10, 'cashier_no', array('emp_no_fk'=>$this->session->userdata('emp_no')));
+			$where = array(
+					'ct_bag' 		=> $_POST['bag_no2'],
+					'ct_date'		=>	date('Y-m-d'),
+					'ct_cashier_fk' =>	$cashier[0]->cashier_no
+				);
+			$bag = $this->CashturnoverModel->select(11, 'ct_bag, ct_batch_fk', $where);
+			if(count($bag)>0){
+				$data = array('status' => 'bag_error');
+			} else {
+				$update_data = array(
+					'ct_bag'		=>	$_POST['bag_no2'],
+					'ct_sack'		=>	$_POST['sack2'],
+					'ct_batch_fk'	=>	$_POST['batch2']
+				);
+				$this->CashturnoverModel->update(11, $update_data, array('trp_id_fk'=>$_POST['trp_id']));
+
+				$data = array('status' => 'success');
+			}
+		}
+
+		header('Content-Type: application/json');
+		echo json_encode($data);
+
 	}
 
 }

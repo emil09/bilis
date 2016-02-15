@@ -1,23 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class ActiveTripsReport extends MY_Controller {
+Class DriverTurnover extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->check_session_cashier();
-		$this->load->model('ActiveTripsReportModel','',TRUE);
+		$this->load->model('DriverTurnoverModel','',TRUE);
 	}
 
 	public function index()
 	{
 		$data['module'] = 'cashier';
-		$data['view_file'] = 'activetripsreport_view';
+		$data['view_file'] = 'driverturnover_view';
 		$data['sidebar'] = 'cashier/cashier_sidebar';
 		$data['css'] = $this->add_css(array(DataTablesCSS, DataTablesJSCSS, DataTableToolsCSS, DataTablesFixedColumnCSS));
-		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, DataTablesFixedColumnJS, ActiveTripsReportJS));
+		$data['js'] = $this->add_js(array(DataTablesJS, DataTablesBSJS, DataTableToolsJS, DataTablesFixedColumnJS, DriverTurnoverJS));
 		
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$this->db->distinct();
-		$cooperatives = $this->ActiveTripsReportModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
+		$cooperatives = $this->DriverTurnoverModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);
 		$data['cooperatives'] = $cooperatives;
 		echo Modules::run('templates/bilis_noside', $data);
 	}
@@ -32,7 +32,7 @@ Class ActiveTripsReport extends MY_Controller {
 		$this->db->group_by('driver_no');
 
 		$this->db->order_by('count_trp','desc');
-		$results = $this->ActiveTripsReportModel->get_active_trips_list($select, $where);
+		$results = $this->DriverTurnoverModel->get_active_trips_list($select, $where);
 		echo json_encode($results);
 	}
 }

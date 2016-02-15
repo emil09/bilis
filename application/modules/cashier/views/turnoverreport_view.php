@@ -12,8 +12,8 @@
   </div>
 </section>
 <!-- Main content -->
-<section class="content clearfix">
-  <div class="col-md-12">
+<section class="content clearfix no-gutter">
+  <div class="col-md-12 no-gutter">
     	<div class="col-sm-12 col-xs-12">
     		<div class="box">
 	    		<div class="box-header"><h3 class="box-title">Cash Turned over to <strong><?php echo $fname . ' ' . $lname; ?></strong></h3></div>
@@ -23,11 +23,13 @@
                     <tr>
                       <th>Batch</th>
                       <th>Bag</th>
+                      <th>Sack</th>
                       <th>Driver</th>
                       <th>Unit</th>
                       <th>Trip</th>
                       <th>Amount Received</th>
                       <th>Date & Time Received</th>
+                      <th>Encoded By</th>
                     </tr>
                   </thead>
                   <tbody id="driver_data">
@@ -36,7 +38,7 @@
                     <tr>
                       <th colspan="1" style="text-align: right">TOTAL:</th>
                       <th colspan="1"><span id="totalbags">0</span> bags</th>
-                      <th colspan="3"> </th>
+                      <th colspan="4"> </th>
                       <th colspan="2"><span id="totalvalue"></span></th>    
                     </tr>
                   </tfoot>

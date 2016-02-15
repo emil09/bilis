@@ -5,11 +5,13 @@ $(function(){
         $("#unassignedModal").modal({backdrop: 'static'});
     });
 
+    $('#table-assigned-bags tbody').on('click', 'button#editturnover-button', function () {
+        $("#assignedModal").modal({backdrop: 'static'});
+    });
+
     $('#cashturnoverForm').submit(function(e){
     	e.preventDefault();
-    	
-
-    	 $.ajax({
+    	$.ajax({
 			url: 'cashturnover/post_ct',
 			type: 'post',
 			data: $('#cashturnoverForm').serialize() + "&trp_id=" + trp_id,
@@ -28,7 +30,7 @@ $(function(){
 				}else if(data.status == 'bag_error'){
 					swal('Error', 'Bag already exists in the batch.', 'error');
 				}else{
-					swal('Error', 'Please set bag and batch.', 'error');
+					swal('Error', 'Please set bag, sack and batch.', 'error');
 				}
 			},
 			error: function(xhr, desc, err) {
@@ -37,6 +39,33 @@ $(function(){
 			}
 		});
     });
+
+    $('#updateturnoverForm').submit(function(e){
+    	e.preventDefault();
+    	$.ajax({
+			url: 'cashturnover/update_ct',
+			type: 'post',
+			data: $('#updateturnoverForm').serialize() + "&trp_id=" + trp_id,
+			success: function(data, status) {
+				if(data.status == 'success'){
+					swal('Success', 'Cash turnover updated.', 'success');
+					$('#assignedModal').modal('hide');
+					$('#coo_select').each(function(){
+						get_assigned_bags($(this).val());
+				    });
+				}else if(data.status == 'bag_error'){
+					swal('Error', 'Bag already exists in the batch.', 'error');
+				}else{
+					swal('Error', 'Cash turnover not updated.', 'error');
+				}
+			},
+			error: function(xhr, desc, err) {
+				console.log(xhr);
+				console.log("Details: " + desc + "\nError:" + err);
+			}
+		});
+    });
+
     $('#coo_select').each(function(){
 		get_unassigned_bags($(this).val());
 		get_assigned_bags($(this).val());
@@ -60,7 +89,6 @@ function get_unassigned_bags(coo_no){
 			var table_data = '';
 			var test = '';
 			if(data.unassigned_list.length > 0){
-				console.log(data);
 				for(var i = 0; i < data.unassigned_list.length; i++) {
 					table_data += '<tr>'+
 										'<td><button id="cashturnover-button" class="btn btn-primary" onclick="assignBag('+data["unassigned_list"][i]["emp_no_fk"]+', '+data["unassigned_list"][i]["trips_ctr"]+')">'+ data["unassigned_list"][i]["trips_ctr"] +'</button></td>'+
@@ -120,7 +148,7 @@ function get_assigned_bags(coo_no){
 										'<td>('+data['assigned_list'][i]['emp_no_fk']+') '+data['assigned_list'][i]['emp_lname']+', '+data['assigned_list'][i]['emp_fname']+'</td>'+
 										'<td>'+data['assigned_list'][i]['unt_lic']+'</td>';
 					if(data.assigned_list[0]['ct_date'] == data.datetoday) {
-						table_data += 	'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["assigned_list"][i]["emp_no_fk"]+', '+data["assigned_list"][i]["trips_ctr"]+', '+batch_no+', '+data["assigned_list"][i]["ct_bag"]+')">'+ data["assigned_list"][i]["trips_ctr"] +'</button></td>';
+						table_data += 	'<td><button id="editturnover-button" class="btn btn-primary" onclick="updateBag('+data["assigned_list"][i]["dsp_no_fk"]+', '+data["assigned_list"][i]["trips_ctr"]+', '+batch_no+', '+data["assigned_list"][i]["ct_bag"]+', \''+data["assigned_list"][i]["ct_sack"]+'\')">'+ data["assigned_list"][i]["trips_ctr"] +'</button></td>';
 					} else {
 						table_data += 	'<td><button id="editturnover-button" class="btn btn-primary" disabled>'+ data["assigned_list"][i]["trips_ctr"] +'</button></td>';
 					}
@@ -162,7 +190,6 @@ function assignBag(emp_no, trip_ctr) {
 			trp_id = data['trip'][0]['trp_id'];
 
 			if(data.driver.length > 0){
-				console.log(data);
 				for(var i = 0; i < data.driver.length; i++) {
 
 					var table_data = '<tr>'+
@@ -186,12 +213,68 @@ function assignBag(emp_no, trip_ctr) {
 										'<td>₱ '+data['trip'][0]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 					                '</tr>'+
 					                '<tr>'+
-										'<th>Arrival</th>'+
+										'<th>Turnover Date</th>'+
 										'<td>'+ formatDate(data['trip'][0]['to_dt']) +' ' + 
 										formatAMPM(data['trip'][0]['to_dt'] + ' ' + data['trip'][0]['to_time']) +'</td>'+
 					                '</tr>'; 
 				}
 				$('#selected_details').html(table_data);
+			}
+		},
+		error: function(xhr, desc, err) {
+			console.log(xhr);
+			console.log("Details: " + desc + "\nError:" + err);
+		}
+	});
+}
+
+var batch_bk = '';
+function updateBag(dsp_no, trip_ctr, batch_no, bag_no, sack2) {
+	$.ajax({
+		url: 'cashturnover/get_reviewed_detail',
+		type: 'post',
+		data: {dsp_no: dsp_no, trip_ctr: trip_ctr, bag_no: bag_no, batch_no: batch_no, sack2: sack2},
+		success: function(data, status) {
+			trp_id = data['trip'][0]['trp_id'];
+			if(data['bagbatch']['batch'] == '1'){
+				batch_bk = 'D';
+			} else {
+				batch_bk = 'N';
+			}
+			$('#bag_no2').val(data['bagbatch']['bag_no']);
+			$('#batch2').val(batch_bk);
+			$('#sack2').val(data['bagbatch']['sack2']);
+
+			if(data.driver.length > 0){
+				for(var i = 0; i < data.driver.length; i++) {
+
+					var table_data = '<tr>'+
+										'<th>Trip</th>'+
+										'<td>'+ data['trip'][0]['trips_ctr'] +'</td>'+
+					                '</tr>'+
+					                '<tr>'+
+										'<th>Route</th>'+
+										'<td>'+data['driver'][i]['rte_nam']+'</td>'+
+					                '</tr>'+
+					                '<tr>'+
+										'<th>Unit</th>'+
+										'<td>'+data['driver'][i]['unt_lic']+'</td>'+
+					                '</tr>'+
+					                '<tr>'+
+										'<th>Driver</th>'+
+										'<td>(' + data['driver'][i]['emp_no_fk'] + ') '+data['driver'][i]['emp_lname']+', '+data['driver'][i]['emp_fname']+'</td>'+
+					                '</tr>'+
+					                '<tr>'+
+										'<th>Amount Turnover</th>'+
+										'<td>₱ '+data['trip'][0]['amt_in']+'</td>'+
+					                '</tr>'+
+					                '<tr>'+
+										'<th>Arrival</th>'+
+										'<td>'+ formatDate(data['trip'][0]['ct_date']) +' ' + 
+										formatAMPM(data['trip'][0]['ct_date'] + ' ' + data['trip'][0]['ct_time']) +'</td>'+
+					                '</tr>'; 
+				}
+				$('#selected_details2').html(table_data);
 			}
 		},
 		error: function(xhr, desc, err) {

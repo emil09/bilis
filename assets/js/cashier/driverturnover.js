@@ -9,7 +9,7 @@ $(function(){
 
 function getActiveList(coo_no){
 	$.ajax({
-		url: 'activetripsreport/active_trips_list',
+		url: 'driverturnover/active_trips_list',
 		type: 'post',
 		data: {coo_no: coo_no},
 		success: function(data, status) {
@@ -21,7 +21,7 @@ function getActiveList(coo_no){
 				start_time = formatAMPM(new Date(data[i]['start_dt'] + ' '+data[i]['start_time']));
 
 				table_data += '<tr>'+
-					'<td>'+ (parseInt(data[i]['count_trp'])) +'</td>'+
+					'<td><button id="driverturnover_btn" class="btn btn-success">'+ (parseInt(data[i]['count_trp'])) +'</button></td>'+
 					'<td>'+ data[i]['rte_nam']+'</td>'+
 					'<td>'+data[i]['unt_lic']+'</td>'+
 					'<td>'+ data[i]['emp_lname'] + ', ' + data[i]['emp_fname'] +' ('+data[i]['emp_no']+')</td>'+
@@ -30,9 +30,9 @@ function getActiveList(coo_no){
 				'</tr>';
 			}
 
-			$('#table-activetripsreport').dataTable().fnDestroy();
+			$('#table-driverturnover').dataTable().fnDestroy();
 			$("#active_list_data").html(table_data);
-			var tabler = $('#table-activetripsreport').DataTable({ // height: 837px
+			var tabler = $('#table-driverturnover').DataTable({ // height: 837px
 				paging : false,
 				scrollY: '45vh',
     			scrollCollapse: true,
@@ -47,10 +47,10 @@ function getActiveList(coo_no){
 			});
 
 			$('#selectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').addClass('DTTT_selected selected');
+		    	$('#table-driverturnover tbody tr').addClass('DTTT_selected selected');
 		    });
 			$('#deselectallrows').click(function(){
-		    	$('#table-activetripsreport tbody tr').removeClass('DTTT_selected selected');
+		    	$('#table-driverturnover tbody tr').removeClass('DTTT_selected selected');
 		    });
 
 		},

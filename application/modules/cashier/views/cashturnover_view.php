@@ -84,6 +84,21 @@
 		          		<td><input type="number" id="bag_no" min="1" class="form-control" name="bag_no" placeholder="Bag #"></td>
 		          	</tr>
 		          	<tr>
+	                  <td><p>Sack</p></td>
+	                  <td>
+	                    <select name="sack" id="sack" class="form-control">
+	                      <option value="" disabled selected>Select sack</option>
+	                      <option value="A">A</option>
+	                      <option value="B">B</option>
+	                      <option value="C">C</option>
+	                      <option value="D">D</option>
+	                      <option value="E">E</option>
+	                      <option value="F">F</option>
+	                      <option value="G">G</option>
+	                    </select>
+	                  </td>
+	                </tr>
+		          	<tr>
 		          		<td><p>Batch</p></td>
 		          		<td>
 		          			<select name="batch" id="batch" class="form-control">
@@ -110,5 +125,63 @@
 	      </form> 
 	    </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="assignedModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form id="updateturnoverForm" autocomplete="off">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Cash turnovered to <strong><?php echo $fname . ' ' . $lname; ?></strong></h4>
+            <button type="button" class="btn btn-danger btn-xs pull-right" data-dismiss="modal" style="margin-left: 5px"><i class="fa fa-times"></i></button>
+          </div>
+          <div class="modal-body clearfix">
+            <div class="left-col col-sm-6">
+              <h4>Tag Collection</h4>
+              <table class="table">
+                <tr>
+                  <td><p>Bag</p></td>
+                  <td><input type="number" id="bag_no2" min="1" name="bag_no2" class="form-control" placeholder="Bag #"></td>
+                </tr>
+                <tr>
+                  <td><p>Sack</p></td>
+                  <td>
+                    <select name="sack2" id="sack2" class="form-control">
+                      <option value="" disabled selected>Select sack</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="G">G</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><p>Batch</p></td>
+                  <td>
+                    <select name="batch2" id="batch2" class="form-control">
+                      <option value="" disabled selected>Select batch</option>
+                      <option value="D">1</option>
+                      <option value="N">2</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td> </td>
+                  <td><button id="update-turnover" class="btn btn-primary pull-right">Update</button></td>
+                </tr>
+              </table>
+            </div>
+            <div class="right-col col-sm-6">
+              <h4>Selected Trip</h4>
+              <table class="selectedtrip table table-bordered">
+                <tbody id="selected_details2"></tbody>
+              </table>
+            </div>
+          </div>
+        </form> 
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div><!-- /.content-wrapper -->

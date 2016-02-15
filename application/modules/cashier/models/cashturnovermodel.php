@@ -76,6 +76,15 @@ Class CashturnoverModel extends CI_Model {
         return $query->result();
     }
 
+    public function selectedtrip_details($select = '', $where = array()) {
+        $this->db->select($select);
+        $this->db->from($this->tables[11]);
+        $this->db->join($this->tables[9], 'trp_id = trp_id_fk', 'left');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function insert($key = '', $data = array()){
         $this->db->insert($this->tables[$key], $data); 
     }
