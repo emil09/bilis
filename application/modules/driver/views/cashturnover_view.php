@@ -56,10 +56,7 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	              <table class="table table-bordered" id="act_table">
-	                <tbody>
-	              	</tbody>
-	            </table>
+	              <table class="table table-bordered" id="act_table"><tbody></tbody></table>
 	            </div>
 	            <!-- /.box-body -->
 	        </div>

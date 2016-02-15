@@ -5,6 +5,10 @@ $(function(){
 	$('#coo_select').on('change', function() {
 		getActiveList(this.value);
 	});
+
+	$('#table-driverturnover tbody').on('click', 'button#driverturnover_btn', function () {
+        $("#driverturnoverModal").modal({backdrop: 'static'});
+    });
 });
 
 function getActiveList(coo_no){
