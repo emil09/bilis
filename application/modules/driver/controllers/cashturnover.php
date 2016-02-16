@@ -76,7 +76,8 @@ Class Cashturnover extends MY_Controller {
 				'loc_no'	=>	$_POST['loc_select'],
 				'trp_stat'	=> 	'T',
 				'to_dt'		=>  date('Y-m-d'), 
-				'to_time'	=>	date('H:i:s')
+				'to_time'	=>	date('H:i:s'),
+				'encode_by' =>	$this->session->userdata('emp_no')
 			);
 
 			$this->CashturnoverModel->insert(9, $turnover_data);

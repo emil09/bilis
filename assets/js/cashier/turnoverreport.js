@@ -61,7 +61,7 @@ function get_turnovered_list(ct_date, coo_no){
 										'<td class="priority">'+data['turnover_report'][i]['amt_in'].toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",")+'</td>'+
 										'<td>'+ formatDate(data['turnover_report'][i]['ct_date']) +' ' + 
 										formatAMPM(data['turnover_report'][i]['ct_date'] + ' ' + data['turnover_report'][i]['ct_time']) +'</td>'+
-										'<td>Gerard</td>'
+										'<td>('+data['encoder_details'][i][0]['emp_no']+') '+data['encoder_details'][i][0]['emp_fname']+' '+data['encoder_details'][i][0]['emp_lname']+'</td>'
 									'</tr>';
 				}
 			}
@@ -70,12 +70,7 @@ function get_turnovered_list(ct_date, coo_no){
 		    $('#driver_data').html(table_data);
 		    var tabler = $('#table-turnoverreport').DataTable({
 				paging : false,
-				autoWidth: false,
-				scrollY: '45vh',
-				scrollCollapse: true,
-				scrollX: 'true',
-				fixedHeader: false,
-				order: [[ 6, "desc" ]]
+				order: [[ 3, "asc" ]]
 			});
 		    var cells = tabler.cells();
 		    var sum = 0;

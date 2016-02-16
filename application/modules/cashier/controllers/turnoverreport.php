@@ -23,7 +23,7 @@ Class TurnoverReport extends MY_Controller {
 
 	public function turnovered_list(){
 		$cashier = $this->TurnoverReportModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
-		$select = 'trp_id, unt_lic, emp_fname, emp_lname, amt_in, ct_bag, ct_batch_fk, ct_sack, ct_date, ct_time, trips_ctr, driver.emp_no_fk';
+		$select = 'trp_id, unt_lic, emp_fname, emp_lname, amt_in, ct_bag, ct_batch_fk, ct_sack, ct_date, ct_time, trips_ctr, driver.emp_no_fk, encode_by';
 		$where = array(
 			'loc_no'=>$cashier[0]->loc_no_fk, 
 			'trp_stat'=>'C',
@@ -33,6 +33,14 @@ Class TurnoverReport extends MY_Controller {
 	
 		
 		$results['turnover_report'] = $this->TurnoverReportModel->turnovered_list($select, $where);
+		// $results['encoder_details'] = $this->TurnoverReportModel->select_where(0, 'emp_no, emp_fname, emp_lname', array('emp_no'=> $results['turnover_report'][0]->encode_by));
+		$i=0;
+		$enc = array();
+		foreach ($results['turnover_report'] as $result ): 
+			$enc[$i] = $this->TurnoverReportModel->select_where(0, 'emp_no, emp_fname, emp_lname', array('emp_no'=> $result->encode_by));
+			$i++;
+		endforeach;
+		$results['encoder_details'] = $enc;
 		$results['datetoday'] = date('Y-m-d');
 		$where = array('emp_no' => $this->session->userdata('emp_no'));
 		$cooperatives = $this->TurnoverReportModel->cashier_detail('emp_no_fk, location.coo_no_fk, coo_name, emp_lname', $where);

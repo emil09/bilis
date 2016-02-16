@@ -49,7 +49,6 @@
 			</div>
     	</div>
     	<div class="col-sm-6 col-xs-12">
-			<!-- <h4><strong>Active Trips</strong></h4> -->
 			<div class="box" style="min-height: 380px;">
 	            <div class="box-header">
 	              <h3 class="box-title">Active Trips</h3>

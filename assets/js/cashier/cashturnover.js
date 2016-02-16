@@ -108,7 +108,7 @@ function get_unassigned_bags(coo_no){
 		    $('#unassigned_bags').html(table_data);
 		    var tabler = $('#table-unassigned-bags').DataTable({
 				paging : false,
-				order: [[ 0, "desc" ], [ 5, "desc" ]]
+				order: [[ 5, "desc" ]]
 			});
 			$('#selectallrows').click(function(){
 		    	$('#table-unassigned-bags tbody tr').addClass('DTTT_selected selected');

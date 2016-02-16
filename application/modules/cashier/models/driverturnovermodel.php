@@ -30,7 +30,7 @@ Class DriverTurnoverModel extends CI_Model {
         $this->db->join($this->tables[4], 'route.rte_no = dispatch_sched.rte_no_fk', 'left');
         $this->db->where($where);
         $query = $this->db->get();
-        return $query->result();;
+        return $query->result();
     }
     public function cashier_detail($select = '', $where = array()){
         $this->db->select($select);
@@ -41,6 +41,9 @@ Class DriverTurnoverModel extends CI_Model {
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result();
+    }
+    public function insert($key = '', $data = array()){
+        $this->db->insert($this->tables[$key], $data); 
     }
 }
 
