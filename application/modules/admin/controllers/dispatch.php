@@ -125,6 +125,6 @@ Class Dispatch extends MY_Controller {
 		
 		
 		header('Content-Type: application/json');
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 }

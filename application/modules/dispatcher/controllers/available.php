@@ -71,7 +71,7 @@ Class Available extends MY_Controller {
 
 			$i++;
 		}
-		echo json_encode($data, JSON_PRETTY_PRINT);
+		echo json_encode($data);
 	}
 
 	public function get_driver_detail(){

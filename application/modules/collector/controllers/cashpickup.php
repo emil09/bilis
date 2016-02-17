@@ -33,7 +33,7 @@ Class CashPickup extends MY_Controller {
 		
 		$results['sacks'] = $this->CashPickupModel->uncollected_list($select, $where);
 
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 }
