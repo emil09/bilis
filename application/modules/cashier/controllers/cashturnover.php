@@ -33,14 +33,14 @@ Class Cashturnover extends MY_Controller {
 		$results['unassigned_list'] = $this->CashturnoverModel->unassigned_list($select, $where);
 
 		header('Content-Type: application/json');
-		echo json_encode($results, JSON_PRETTY_PRINT);
+		echo json_encode($results);
 	}
 
 	public function get_unassigned_detail(){
 		header('Content-Type: application/json');
 		$cashier = $this->CashturnoverModel->select_where(10, 'loc_no_fk', array('emp_no_fk'=>$this->session->userdata('emp_no')));
 		$select = 'trp_id, rte_nam, unt_lic, emp_fname, emp_lname, amt_in, trips_ctr, driver.emp_no_fk, dsp_unit_no';
-		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no'], 'trp_stat'=>'T', 'to_dt'=>date('Y-m-d'));
+		$where = array('loc_no'=>$cashier[0]->loc_no_fk, 'driver.emp_no_fk'=>$_POST['emp_no'], 'trp_stat'=>'T');
 		
 		$results['driver'] = $this->CashturnoverModel->unassigned_list($select, $where);
 		if(count($results['driver'])>0){

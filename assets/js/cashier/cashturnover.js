@@ -187,6 +187,7 @@ function assignBag(emp_no, trip_ctr) {
 		type: 'post',
 		data: {emp_no: emp_no, trip_ctr: trip_ctr},
 		success: function(data, status) {
+			console.log(data);
 			trp_id = data['trip'][0]['trp_id'];
 
 			if(data.driver.length > 0){
