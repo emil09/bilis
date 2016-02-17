@@ -38,6 +38,7 @@
                     					<i class="fa fa-cog"></i>
                     				</div>
                     				<select name="shift" id="shift" class="form-control">
+                                        <option value="">All Shift</option>
                     					<option value="D">Day Shift</option>
                     					<option value="N">Night Shift</option>
                     				</select>

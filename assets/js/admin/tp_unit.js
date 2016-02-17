@@ -20,10 +20,6 @@ $(function(){
 	    $('#date-header').html(date);
 		get_driver_stp();
 	});
-
-	$('#coo_select').on('change', function(){
-		get_route_list($(this).val());
-	});
 	// get_driver_stp();
 	
 	});
@@ -35,7 +31,7 @@ function get_driver_stp(){
 		data: $('#filterForm').serialize(),
 		success: function(data, status){
 			console.log(data.test);
-			var t_header = '<th>Driver</th><th>Unit</th><th>Shift</th>';
+			var t_header = '<th>Unit</th><th>Driver</th><th>Shift</th>';
 			var t_detail = '';
 			var t_footer = '<td></td><td></td><td><div>DAY</div><div>NIGHT</div><div>TOTAL</div></td>';
 
@@ -49,7 +45,7 @@ function get_driver_stp(){
 			for(var i = 0; i< data.stp_driver.length; i++){
 				t_detail += '<tr><td>'+
 					'<div class="dropdown">'+
-						'<a href="#" id="status-A" class="dropdown-toggle fa fa-caret-right" data-toggle="dropdown" aria-expanded="true">'+data.stp_driver[i]['emp_name']+'</a>'+
+						'<a href="#" id="status-A" class="dropdown-toggle fa fa-caret-right" data-toggle="dropdown" aria-expanded="true">'+data.stp_driver[i]['unt_lic']+'</a>'+
 								'<ul class="dropdown-menu">'+
 									'<li>'+'<a><strong>Dispatch No.: </strong>' +data.stp_driver[i]['dsp_unit_no']+'</a></li>'+
 									'<li>'+'<a><strong>Start Date: </strong>'+data.stp_driver[i]['start_dt']+'</a></li>'+
@@ -58,7 +54,7 @@ function get_driver_stp(){
 									'<li>'+'<a><strong>End Time: </strong>'+data.stp_driver[i]['end_time']+'</a></li>'+
 									'<li>'+'<a><strong>Status: </strong>'+data.stp_driver[i]['dsp_stat_fk']+'</a>'+ '</li>'+
 								'</ul></div></td>'+
-					'<td>'+data.stp_driver[i]['unt_lic']+
+					'<td>'+data.stp_driver[i]['emp_name']+
 				'</td><td><div>'+data.stp_driver[i]['shift_name']+'</div></td>';
 				if (data.stp_driver[i]['shift_code_fk'] == 'D') {
 					for(var j = 0; j < data.tme_period.length; j++){
@@ -170,22 +166,4 @@ function formatDate(date){
 	var monthIndex = date.getMonth();
 	var year = date.getFullYear();
 	return monthNames[monthIndex] + '. ' + day + ', '+ year;
-}
-function get_route_list(coo_no) {
-	$.ajax({
-		url: base_url + "/admin/sales/my_route_list",
-		type: 'post',
-		data: {coo_no: coo_no},
-		success: function(data, status){
-			var route_data = '';
-			var table_data = '';
-			if(data.route_list.length == 0) { route_data += "<option value='A' selected>All Routes</option>"; }
-			if(data.route_list.length > 0) {
-				for (var i=0; i<data.route_list.length; i++) {
-					route_data += '<option value="'+data.route_list[i]['rte_no']+'">'+data.route_list[i]['rte_nam']+'</option>';
-				}
-			}
-			$('#route').html(route_data);
-		}
-	});
 }

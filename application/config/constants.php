@@ -176,6 +176,7 @@ define('SalesByDriverJS', 'assets/js/admin/salesbydriver.js');
 define('SalesByUnitJS', 'assets/js/admin/salesbyunit.js');
 define('SchedulingJS', 'assets/js/admin/scheduling.js');
 define('TPDriverJS', 'assets/js/admin/tp_driver.js');
+define('TPUnitJS', 'assets/js/admin/tp_unit.js');
 
 
 

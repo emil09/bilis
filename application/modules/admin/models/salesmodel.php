@@ -50,15 +50,52 @@ Class SalesModel extends CI_Model {
     }
 	
 	public function select_where($key = '', $select = '', $where = array()) {
-        $this->db->select($select);
+        $this->db->select($select, FALSE);
         $this->db->from($this->tables[$key]);
         $this->db->where($where);
         $query = $this->db->get();
-        return $query->result();;
+        return $query->result();
     }
 
     public function insert($key = '', $data = array()){
         $this->db->insert($this->tables[$key], $data); 
     }
+
+    public function get_driver_stp(){
+        $this->db->distinct();
+        $this->db->select('dsp_unit_no, unt_lic, start_dt, start_time, end_dt, end_time, sched_no_fk, driver_no_fk, shift_code_fk, CONCAT(emp_lname, ", ", emp_fname, " (", employee.emp_no,")") as emp_name, dsp_stat_fk, shift_name', FALSE);
+        $this->db->from($this->tables[9]);
+        $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk', 'left');
+        $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
+        $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
+        $this->db->join($this->tables[0], 'employee.emp_no = emp_no_fk', 'left');
+        $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
+        $this->db->join($this->tables[6], 'shift_code = shift_code_fk', 'left');
+        $query = $this->db->get();
+        return $query->result();;
+    }
+
+    public function get_stp_amt(){
+        $this->db->select('trp_id, dsp_no_fk, SUM(amt_in) as total_amt_in, CONCAT(to_dt, " ",to_time) as to_date, start_dt, start_time, end_dt, end_time, sched_no_fk, driver_no_fk, shift_code_fk,  dsp_stat_fk', FALSE);
+        $this->db->from($this->tables[9]);
+        $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk', 'left');
+        $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
+            
+        $query = $this->db->get();
+        return $query->result();;
+    }
+
+    public function total_to(){
+        $this->db->select('trp_id, dsp_no_fk, SUM(amt_in) as total_amt_in, CONCAT(to_dt, " ",to_time) as to_date, start_dt, start_time, end_dt, end_time, sched_no_fk, driver_no_fk, shift_code_fk,  dsp_stat_fk', FALSE);
+        $this->db->from($this->tables[9]);
+        $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk', 'left');
+        $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
+        $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
+            
+        $query = $this->db->get();
+        return $query->result();
+
+    }
+
 }
 

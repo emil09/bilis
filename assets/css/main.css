@@ -318,8 +318,9 @@ span.select2-container { width: 190px }
 .page-admin .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
 .page-admin .dataTable tfoot tr th, .page-cashier .dataTable tfoot tr th { padding: 10px 8px }
 .page-admin #totalvalue { color: rgb(9, 179, 23); font-weight: bold; }
-.page-admin #status-A { color: #00A65A }
+.page-admin #status-A{ color: #00A65A }
 .page-admin #status-F { color: #DD4B39 }
+.page-admin #status-C{ color: #0525F5; }
 .page-admin tbody td:first-child .open>a:before { content: "\f0d7" }
 #export-group button { padding: 6px 6px }
 
@@ -362,3 +363,15 @@ span.select2-container--default .select2-selection--multiple .select2-selection_
 .page-admin.content-payroll- table.dataTable thead .sorting:after,
 .page-admin #payroll-table_wrapper .dt-buttons { display: none }
 .page-admin #table-scheduling #editModal.btn-warning { width: 75% }
+.page-admin.content-sales-tp table.dataTable thead th, table.dataTable thead td,  .page-admin.content-sales-tp table.dataTable tfoot th, table.dataTable tfoot td{
+    padding: 10px 30px;
+}
+.page-admin.content-sales-tp .dataTable>tfoot>tr>td:first-child,
+.page-admin.content-sales-tp .dataTable>tfoot>tr>td:nth-child(2),
+.page-admin.content-sales-tp .dataTable>tfoot>tr>td:nth-child(3),
+.page-admin.content-sales-tp .dataTable>tfoot>tr>td:last-child,
+.page-admin.content-sales-tp .dataTable>tbody>tr>td:first-child,
+.page-admin.content-sales-tp .dataTable>tbody>tr>td:nth-child(2),
+.page-admin.content-sales-tp .dataTable>tbody>tr>td:nth-child(3),
+.page-admin.content-sales-tp .dataTable>tbody>tr>td:last-child { text-align: left }
+.page-admin.content-sales-tp .dataTable>tbody>tr>td, .page-admin.content-sales-tp .dataTable>tfoot>tr>td{text-align: center}
