@@ -32,6 +32,13 @@
 			            </tr>
 			          </thead>
 			          <tbody id="uncollected_sacks"></tbody>
+			          <tfoot>
+	                    <tr>
+	                      <th colspan="4" style="text-align: right">TOTAL:</th>
+	                      <th colspan="1"><span id="totalsacks">0</span> sacks</th>
+	                      <th colspan="1"><span id="totalbags">0</span> bags</th>    
+	                    </tr>
+	                  </tfoot>
 			        </table>
 				</div> <!-- .box-body -->
 			</div>

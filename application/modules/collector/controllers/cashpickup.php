@@ -24,9 +24,9 @@ Class CashPickup extends MY_Controller {
 
 		$select = 'ct_id, ct_date, loc_name, ct_batch_fk, ct_sack, count(DISTINCT ct_id) as "total_bags"';
 		if($_POST['loc_no'] == '') {
-			$where  = array();
+			$where = array();
 		} else {
-			$where  = array(
+			$where = array(
 				't.loc_no' => $_POST['loc_no']
 			);
 		}
