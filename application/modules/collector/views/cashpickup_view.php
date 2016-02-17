@@ -5,7 +5,8 @@
   <h1 class="pull-left"><i class="fa fa-truck"></i> Cash Pick-Up</h1>
 <div id="cooperativeselect" class="pull-right">
   <p>Location:</p> 
-  <select class="form-control" id="coo_select">
+  <select class="form-control" id="loc_select">
+  	<option value="" selected>All Locations</option>
     <?php foreach ($locations as $location ): ?>
       <option value="<?php echo $location->loc_no; ?>"><?php echo $location->loc_name; ?></option>
     <?php endforeach ?>
@@ -13,29 +14,52 @@
 </div>
 </section>
 <!-- Main content -->
-<section class="content clearfix">
-  <div class="col-md-12">
-    	<div class="col-sm-12 col-xs-12">
-    		<div class="box">
-	    		<div class="box-header"><h3 class="box-title">Available for pick-up by <strong><?php echo $fname . ' ' . $lname; ?></strong></h3></div>
+<section class="content clearfix no-gutter">
+  <div class="col-md-12 no5-gutter">
+    	<div class="col-sm-6 col-xs-12">
+    		<div class="box box-danger">
+	    		<div class="box-header text-center text-uppercase"><h3 class="box-title"><strong>Uncollected Sacks</strong></h3></div>
 	            <div class="box-body">
-	            	<table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
-	            		<thead>
-	            			<tr>
-	            				<th>Batch</th>
-	            				<th>Bag</th>
-	            			</tr>
-	            		</thead>
-	            		<tbody>
-	            			<tr>
-	            				<td>1</td>
-	            				<td>1958</td>
-	            			</tr>
-	            			<tr>
-	            				<td>2</td>
-	            				<td>1808</td>
-	            			</tr>
-	            		</tbody>
+	            	<table id="table-uncollected-sacks" class="table table-bordered dt-responsive nowrap">
+			          <thead>
+			            <tr>
+			              <th>Action</th>
+			              <th>Turnover Date</th>
+			              <th>Location</th>
+			              <th>Batch</th>
+			              <th>Sack</th>
+			              <th>Total Bags</th>
+			            </tr>
+			          </thead>
+			          <tbody id="uncollected_sacks"></tbody>
+			        </table>
+				</div> <!-- .box-body -->
+			</div>
+    	</div>
+    	<div class="col-sm-6 col-xs-12">
+    		<div class="box box-success">
+	    		<div class="box-header text-center text-uppercase"><h3 class="box-title"><strong>Collected Sacks</strong></h3></div>
+	            <div class="box-body">
+	            	<table id="table-collected-sacks" class="table table-bordered dt-responsive nowrap">
+			          <thead>
+			            <tr>
+			              <th>Turnover Date</th>
+			              <th>Location</th>
+			              <th>Batch</th>
+			              <th>Sack</th>
+			              <th>Total Bags</th>
+			            </tr>
+			          </thead>
+	                  <tbody id="collected_sacks">
+	                  </tbody>
+	                  <!-- <tfoot>
+	                    <tr>
+	                      <th colspan="1" style="text-align: right">TOTAL:</th>
+	                      <th colspan="1"><span id="totalbags">0</span> bags</th>
+	                      <th colspan="3"> </th>
+	                      <th colspan="2"><span id="totalvalue"></span></th>    
+	                    </tr>
+	                  </tfoot> -->
 			        </table>
 				</div> <!-- .box-body -->
 			</div>

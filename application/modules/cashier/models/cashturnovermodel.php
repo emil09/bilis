@@ -46,7 +46,7 @@ Class CashturnoverModel extends CI_Model {
         return $query->result();
     }
 
-    public function available_turnover($select = '', $where = array()) {
+    public function unassigned_list($select = '', $where = array()) {
         $this->db->select($select);
         $this->db->from($this->tables[9]);
         $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk', 'left');
@@ -59,6 +59,32 @@ Class CashturnoverModel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function assigned_list($select = '', $where = array()) {
+        $this->db->select($select);
+        $this->db->from($this->tables[11]);
+        $this->db->join($this->tables[9], 'trp_id = trp_id_fk', 'left');
+        $this->db->join($this->tables[8], 'dsp_unit_no = dsp_no_fk', 'left');
+        $this->db->join($this->tables[7], 'dsp_sched_no = sched_no_fk', 'left');
+        $this->db->join($this->tables[4], 'rte_no = rte_no_fk', 'left');
+        $this->db->join($this->tables[5], 'unt_no = unit_no_fk', 'left');
+        $this->db->join($this->tables[1], 'driver_no = driver_no_fk', 'left');
+        $this->db->join($this->tables[0], 'employee.emp_no = emp_no_fk', 'left');
+        $this->db->where($where);
+        $this->db->order_by("employee.emp_lname", "asc");
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function selectedtrip_details($select = '', $where = array()) {
+        $this->db->select($select);
+        $this->db->from($this->tables[11]);
+        $this->db->join($this->tables[9], 'trp_id = trp_id_fk', 'left');
+        $this->db->where($where);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function insert($key = '', $data = array()){
         $this->db->insert($this->tables[$key], $data); 
     }

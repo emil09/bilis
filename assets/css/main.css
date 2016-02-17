@@ -61,6 +61,9 @@ table.table-bordered.dataTable td:last-child { border-right-width: 1px !importan
 #clear-sched, #editModal.btn-primary, #editModal.btn-primary[disabled] { width: 49% }
 #editModal.btn-warning, .end-day { display: block; margin: 0 auto; width: 50% }
 #editModal.btn-primary[disabled] { margin: 0 auto; display: block }
+.additional-functions-wrapper { margin-top: 35px }
+.dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
+.dataTable tfoot tr th:last-child { border-right: 1px solid #000 !important }
 
 /* Loader */
 .loading-content { left: 50%; position: absolute; top: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%) }
@@ -192,7 +195,7 @@ span.select2-container { width: 190px }
 .page-driver #act_table { width: 75%; margin: 0 auto; margin-top: 10px }
 .page-driver #act_table tr th { padding-left: 20px; background-color: #3C8DBC; color: #fff; font-weight: 600; text-transform: uppercase }
 .page-driver #act_table tr td { text-align: right; padding-right: 20px }
-.page-driver #calculator {
+.page-driver #calculator, .page-cashier #calculator {
 	width: 325px;
     height: auto;
     padding: 20px 20px 9px;
@@ -202,9 +205,9 @@ span.select2-container { width: 190px }
     box-shadow: 0px 4px #3c8dbc, 0px 10px 15px rgba(0, 0, 0, 0.2);
 }
 
-.page-driver .top { margin-bottom: 10px }
-.page-driver .top button.clear { float: left }
-.page-driver .top .screen {
+.page-driver .top, .page-cashier .top { margin-bottom: 10px }
+.page-driver .top button.clear, .page-cashier .top button.clear { float: left }
+.page-driver .top .screen, .page-cashier .top .screen {
 	border: 2px;
 	height: 40px;
 	width: 100%;	
@@ -220,8 +223,10 @@ span.select2-container { width: 190px }
 	text-align: right;
 	letter-spacing: 1px;
 }
-.page-driver .keys, .login-page .keys, .page-driver .top { overflow: hidden }
-.page-driver .keys button, .login-page .keys button, .page-driver .top button.clear {
+.page-driver .keys, .login-page .keys, .page-driver .top,
+.page-cashier .keys, .page-cashier .top { overflow: hidden }
+.page-driver .keys button, .login-page .keys button, .page-driver .top button.clear,
+.page-cashier .keys button, .page-cashier .top button.clear {
 	float: left;
 	position: relative;
 	top: 0;	
@@ -238,18 +243,18 @@ span.select2-container { width: 190px }
 	user-select: none;	
 	transition: all 0.2s ease;
 }
-.page-driver .keys button, .login-page .keys button { width: 31.6%; border: 0; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none }
-.page-driver .keys button.operator, .login-page .keys button.operator { background-color: #FFF0F5; margin-right: 0 }
-.page-driver .keys button.eval { background-color: #f1ff92; box-shadow: 0px 4px #9da853; color: #888e5f }
-.page-driver .keys button.clear, .login-page .keys button.clear { background-color: #dd4b39; box-shadow: 0 4px #d73925; color: white }
+.page-driver .keys button, .login-page .keys button, .page-cashier .keys button { width: 31.6%; border: 0; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline: none }
+.page-driver .keys button.operator, .login-page .keys button.operator, .page-cashier .keys button.operator { background-color: #FFF0F5; margin-right: 0 }
+.page-driver .keys button.eval, .page-cashier .keys button.eval { background-color: #f1ff92; box-shadow: 0px 4px #9da853; color: #888e5f }
+.page-driver .keys button.clear, .login-page .keys button.clear, .page-cashier .keys button.clear { background-color: #dd4b39; box-shadow: 0 4px #d73925; color: white }
 .login-page .keys button:focus { outline: none }
-.page-driver .keys button.eval:hover { background-color: #abb850; box-shadow: 0px 4px #717a33; color: #ffffff }
-.page-driver .top button.clear:hover, .login-page .keys button.clear:hover { background-color: #dd4b39; box-shadow: 0px 4px #d73925; color: white }
-.page-driver .keys button:active, .login-page .keys button:active { box-shadow: 0px 0px #6b54d3; top: 4px }
-.page-driver .keys button.eval:active { box-shadow: 0px 0px #717a33; top: 4px }
-.page-driver .top button.clear:active, .login-page .keys button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
-.page-driver .turnoverbutton { color: #fff !important; background-color: #00a65a !important; margin-right: 0 !important; box-shadow: 0 4px #008d4c !important }
-.page-driver .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }
+.page-driver .keys button.eval:hover, .page-cashier .keys button.eval:hover { background-color: #abb850; box-shadow: 0px 4px #717a33; color: #ffffff }
+.page-driver .top button.clear:hover, .login-page .keys button.clear:hover, .page-cashier .top button.clear:hover { background-color: #dd4b39; box-shadow: 0px 4px #d73925; color: white }
+.page-driver .keys button:active, .login-page .keys button:active, .page-cashier .keys button:active { box-shadow: 0px 0px #6b54d3; top: 4px }
+.page-driver .keys button.eval:active, .page-cashier .keys button.eval:active { box-shadow: 0px 0px #717a33; top: 4px }
+.page-driver .top button.clear:active, .login-page .keys button.clear:active, .page-cashier .top button.clear:active { top: 4px; box-shadow: 0px 0px #d3545d }
+.page-driver .turnoverbutton, .page-cashier .turnoverbutton { color: #fff !important; background-color: #00a65a !important; margin-right: 0 !important; box-shadow: 0 4px #008d4c !important }
+.page-driver .turnoverbutton:active, .page-cashier .turnoverbutton:active { top: 4px !important; box-shadow: 0px 0px #008d4c !important }
 .login-page .keys button { box-shadow: 0 4px #828080 }
 .login-page .keys button, .login-page .keys button.operator { background-color: #A2A0A0; color: #000 }
 .login-page .keys button.operator.proceed { background-color: #8A8A8A; color: #fff; box-shadow: 0 4px #797979; text-transform: uppercase; font-size: 12px }
@@ -261,15 +266,14 @@ span.select2-container { width: 190px }
    ||  CSS for Cashier  ||
    ========================== */
 .page-cashier .dashboard-wrapper { margin: 60px 100px 0 }
-.page-cashier .additional-functions-wrapper { margin-top: 35px }
 .page-cashier .modal-dialog { margin: 100px auto 0px }
-.page-cashier #cashturnover-button, #editturnover-button { width: 100%; margin: 0 auto; display: block }
+.page-cashier #cashturnover-button, #editturnover-button,
+.page-cashier #driverturnover_btn, .page-collector #collect_button { width: 100%; margin: 0 auto; display: block }
+.page-cashier #driverturnover_btn { width: 60% }
 .left-col h4, .right-col h4 { font-weight: 600 }
 .selectedtrip td { text-align: right; color: #3C8DBC; font-weight: 600 }
 #table-turnoverreport #editturnover-button { width: 75%; margin: 0 auto; display: block }
 .dataTables_scrollFootInner { padding-right: 0 !important }
-.page-cashier .dataTable tfoot tr th:first-child { border-left: 1px solid #000 }
-.page-cashier .dataTable tfoot tr th:last-child { border-right: 1px solid #000 }
 #datetimepicker6 { display: inline-flex }
 .page-cashier tbody td:first-child .open>a:before {
     content: "\f0d7";

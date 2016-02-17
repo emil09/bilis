@@ -13,31 +13,61 @@
 </div>
 </section>
 <!-- Main content -->
-<section class="content clearfix">
-  <div class="col-md-12">
-    	<div class="col-sm-12 col-xs-12">
-    		<div class="box">
-	    		<div class="box-header"><h3 class="box-title">Available for turnover to <strong><?php echo $fname . ' ' . $lname; ?></strong></h3></div>
+<section class="content clearfix no-gutter">
+  <div class="col-md-12 no5-gutter">
+    	<div class="col-sm-6 col-xs-12">
+    		<div class="box box-danger">
+	    		<div class="box-header text-center text-uppercase"><h3 class="box-title"><strong>Unassigned Bags</strong></h3></div>
 	            <div class="box-body">
-	            	<table id="table-<?php echo($this->uri->segment(2)); ?>" class="table table-bordered">
+	            	<table id="table-unassigned-bags" class="table table-bordered dt-responsive nowrap">
 			          <thead>
 			            <tr>
 			              <th>Trip</th>
 			              <th>Route</th>
 			              <th>Unit</th>
 			              <th>Driver</th>
-			              <th>Amount Reported</th>
-			              <th>End</th>
+			              <th>Amount</th>
+			              <th>Turnover Date</th>
 			            </tr>
 			          </thead>
-			          <tbody id="available_turnover"></tbody>
+			          <tbody id="unassigned_bags"></tbody>
+			        </table>
+				</div> <!-- .box-body -->
+			</div>
+    	</div>
+    	<div class="col-sm-6 col-xs-12">
+    		<div class="box box-success">
+	    		<div class="box-header text-center text-uppercase"><h3 class="box-title"><strong>Assigned Bags</strong></h3></div>
+	            <div class="box-body">
+	            	<table id="table-assigned-bags" class="table table-bordered dt-responsive nowrap">
+			          <thead>
+	                    <tr>
+	                      <th>Batch</th>
+	                      <th>Bag</th>
+	                      <th>Driver</th>
+	                      <th>Unit</th>
+	                      <th>Trip</th>
+	                      <th>Amount</th>
+	                      <th>Date Assigned</th>
+	                    </tr>
+	                  </thead>
+	                  <tbody id="driver_data">
+	                  </tbody>
+	                  <tfoot>
+	                    <tr>
+	                      <th colspan="1" style="text-align: right">TOTAL:</th>
+	                      <th colspan="1"><span id="totalbags">0</span> bags</th>
+	                      <th colspan="3"> </th>
+	                      <th colspan="2"><span id="totalvalue"></span></th>    
+	                    </tr>
+	                  </tfoot>
 			        </table>
 				</div> <!-- .box-body -->
 			</div>
     	</div>
   </div>
 </section><!-- /.content -->
-<div id="cashturnoverModal" class="modal fade" role="dialog">
+<div id="unassignedModal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <form id="cashturnoverForm" autocomplete="off">
@@ -53,6 +83,21 @@
 		          		<td><p>Bag</p></td>
 		          		<td><input type="number" id="bag_no" min="1" class="form-control" name="bag_no" placeholder="Bag #"></td>
 		          	</tr>
+		          	<tr>
+	                  <td><p>Sack</p></td>
+	                  <td>
+	                    <select name="sack" id="sack" class="form-control">
+	                      <option value="" disabled selected>Select sack</option>
+	                      <option value="A">A</option>
+	                      <option value="B">B</option>
+	                      <option value="C">C</option>
+	                      <option value="D">D</option>
+	                      <option value="E">E</option>
+	                      <option value="F">F</option>
+	                      <option value="G">G</option>
+	                    </select>
+	                  </td>
+	                </tr>
 		          	<tr>
 		          		<td><p>Batch</p></td>
 		          		<td>
@@ -80,5 +125,63 @@
 	      </form> 
 	    </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="assignedModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <form id="updateturnoverForm" autocomplete="off">
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Cash turnovered to <strong><?php echo $fname . ' ' . $lname; ?></strong></h4>
+            <button type="button" class="btn btn-danger btn-xs pull-right" data-dismiss="modal" style="margin-left: 5px"><i class="fa fa-times"></i></button>
+          </div>
+          <div class="modal-body clearfix">
+            <div class="left-col col-sm-6">
+              <h4>Tag Collection</h4>
+              <table class="table">
+                <tr>
+                  <td><p>Bag</p></td>
+                  <td><input type="number" id="bag_no2" min="1" name="bag_no2" class="form-control" placeholder="Bag #"></td>
+                </tr>
+                <tr>
+                  <td><p>Sack</p></td>
+                  <td>
+                    <select name="sack2" id="sack2" class="form-control">
+                      <option value="" disabled selected>Select sack</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="G">G</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><p>Batch</p></td>
+                  <td>
+                    <select name="batch2" id="batch2" class="form-control">
+                      <option value="" disabled selected>Select batch</option>
+                      <option value="D">1</option>
+                      <option value="N">2</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td> </td>
+                  <td><button id="update-turnover" class="btn btn-primary pull-right">Update</button></td>
+                </tr>
+              </table>
+            </div>
+            <div class="right-col col-sm-6">
+              <h4>Selected Trip</h4>
+              <table class="selectedtrip table table-bordered">
+                <tbody id="selected_details2"></tbody>
+              </table>
+            </div>
+          </div>
+        </form> 
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div><!-- /.content-wrapper -->

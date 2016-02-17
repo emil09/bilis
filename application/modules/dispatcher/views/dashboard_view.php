@@ -25,8 +25,12 @@
         <h4>Driver's Schedule</h4>
         <p>View work schedule for drivers and vehicles.</p>
         <a class="btn btn-primary btn-md" href="scheduling">SELECT</a>
-        <!-- <a class="btn btn-warning btn-md" href="scheduling/previous">PREVIOUS DAYS</a>
-        <a class="btn btn-primary btn-md" href="scheduling/next">NEXT 7 DAYS</a> -->
+      </div>
+      <div class="additional-functions-wrapper col-sm-12 clearfix">
+        <div class="header-con"><h3>Additional Function</h3></div>
+        <div class="functions-con">
+          <a href="salesbydriver" class="btn btn-info text-uppercase">Sales By Driver</a>
+        </div>
       </div>
     </div><!-- /.widget-user -->
   </div>

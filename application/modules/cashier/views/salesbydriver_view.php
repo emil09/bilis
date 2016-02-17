@@ -14,8 +14,8 @@
 </section>
 
 <!-- Main content -->
-<section class="content clearfix">
-  <div class="col-md-12">
+<section class="content clearfix no-gutter">
+  <div class="col-md-12 no-gutter">
     	<div class="col-sm-12 col-xs-12">
     		<div class="box">
 	    		<div class="box-header"><h3 class="box-title">Sales by Driver Report (<?php echo date('M d, Y'); ?>)</h3></div>

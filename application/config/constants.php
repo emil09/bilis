@@ -153,7 +153,7 @@ define('TurnoverJS', 'assets/js/driver/turnover.js');
 define('CashTurnoverJS', 'assets/js/cashier/cashturnover.js');
 define('TurnoverReportJS', 'assets/js/cashier/turnoverreport.js');
 define('SalesbyDriverJS', 'assets/js/cashier/salesbydriver.js');
-define('ActiveTripsReportJS', 'assets/js/cashier/activetripsreport.js');
+define('DriverTurnoverJS', 'assets/js/cashier/driverturnover.js');
 
 /*
 |--------------------------------------------------------------------------
