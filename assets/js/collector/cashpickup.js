@@ -140,6 +140,33 @@ function collectSack(ct_id) {
 		});
     });
 }
+// function collectSack(ct_date, loc_no, ct_batch_fk, ct_sack) {
+// 	swal({   
+//         title: 'Are you sure you want to collect this sack?',
+//         text: 'Action will not be undone',
+//         type: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Confirm',
+//         closeOnConfirm: false
+//     }, function() { 
+//     	$.ajax({
+// 			url:"cashpickup/update_sacks",
+// 			type: 'post',
+// 			data: {ct_date: ct_date, loc_no: loc_no, ct_batch_fk: ct_batch_fk, ct_sack: ct_sack},
+// 			success: function(data, status){
+// 				console.log(data);
+// 	    		swal('Success', 'You collected the sack.', 'success');
+// 	    	},
+// 	    	error: function(xhr, desc, err) {
+// 				console.log(xhr);
+// 				console.log("Details: " + desc + "\nError:" + err);
+// 			}
+// 		});
+//     });
+// }
+
 
 function formatDate(date){
 
