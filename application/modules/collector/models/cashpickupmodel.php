@@ -41,13 +41,24 @@ Class CashPickupModel extends CI_Model {
         $this->db->join($this->tables[9]. ' AS t', 'trp_id_fk = trp_id');
         $this->db->join($this->tables[12]. ' AS l', 't.loc_no = l.loc_no');
         $this->db->where($where);
-        $this->db->group_by('ct_sack, loc_name, ct_batch_fk');
+        $this->db->group_by('ct_date, ct_sack, loc_name, ct_batch_fk');
         $query = $this->db->get();
         return $query->result();
     }
 
+    // public function uncollected_list2($select = '', $where = array()){
+    //     $this->db->select($select);
+    //     $this->db->from($this->tables[11]);
+    //     $this->db->join($this->tables[9]. ' AS t', 'trp_id_fk = trp_id');
+    //     $this->db->join($this->tables[12]. ' AS l', 't.loc_no = l.loc_no');
+    //     $this->db->where($where);
+    //     $this->db->group_by('ct_date, ct_bag, ct_sack, loc_name, ct_batch_fk');
+    //     $query = $this->db->get();
+    //     return $query->result();
+    // }
+
     public function insert($key = '', $data = array()){
-        $this->db->insert($this->tables[$key], $data); 
+        $this->db->insert($this->tables[$key], $data);
     }
     public function update($key = '', $data = array(), $where = array()){
         $this->db->update($this->tables[$key], $data, $where); 

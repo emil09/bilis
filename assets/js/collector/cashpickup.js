@@ -24,7 +24,7 @@ function get_uncollected_sacks(loc_no) {
 					else {
 						batch_no = '2';
 					}
-					sacks_data += '<tr><td><button type="button" id="collect_button" class="btn btn-success" onclick="collectSack('+data.sacks[i]['ct_id']+')">Collect</button></td>'+
+					sacks_data += '<tr><td><button type="button" id="collect_button" class="btn btn-success" onclick="collectSack(\''+data.sacks[i]['ct_date']+'\', '+data.sacks[i]['loc_no']+', \''+data.sacks[i]['ct_batch_fk']+'\', \''+data.sacks[i]['ct_sack']+'\')">Collect</button></td>'+
 										'<td>'+formatDate(data.sacks[i]['ct_date'])+'</td>'+
 										'<td>'+data.sacks[i]['loc_name']+'</td>'+
 										'<td>'+batch_no+'</td>'+
@@ -54,20 +54,32 @@ function get_uncollected_sacks(loc_no) {
 	});
 }
 
-function collectSack(ct_id) {
-	swal({   
-        title: 'Are you sure you want to collect this sack?',
-        text: 'Action will not be undone',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Confirm',
-        closeOnConfirm: false
-    }, function() { 
-    	swal('Success', 'You collected the sack.', 'success');
-    });
-}
+// function collectSack(ct_date, loc_no, ct_batch_fk, ct_sack) {
+// 	swal({   
+//         title: 'Are you sure you want to collect this sack?',
+//         text: 'Action will not be undone',
+//         type: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Confirm',
+//         closeOnConfirm: false
+//     }, function() { 
+//     	$.ajax({
+// 			url:"cashpickup/update_sacks",
+// 			type: 'post',
+// 			data: {ct_date: ct_date, loc_no: loc_no, ct_batch_fk: ct_batch_fk, ct_sack: ct_sack},
+// 			success: function(data, status){
+// 				console.log(data);
+// 	    		// swal('Success', 'You collected the sack.', 'success');
+// 	    	},
+// 	    	error: function(xhr, desc, err) {
+// 				console.log(xhr);
+// 				console.log("Details: " + desc + "\nError:" + err);
+// 			}
+// 		});
+//     });
+// }
 
 function formatDate(date){
 

@@ -22,7 +22,7 @@ Class CashPickup extends MY_Controller {
 	public function uncollected_sacks() {
 		header('Content-Type: application/json');
 
-		$select = 'ct_id, ct_date, loc_name, ct_batch_fk, ct_sack, count(DISTINCT ct_id) as "total_bags"';
+		$select = 'ct_id, ct_date, t.loc_no, loc_name, ct_batch_fk, ct_sack, count(DISTINCT ct_id) as "total_bags"';
 		if($_POST['loc_no'] == '') {
 			$where = array();
 		} else {
@@ -35,5 +35,21 @@ Class CashPickup extends MY_Controller {
 
 		echo json_encode($results);
 	}
+
+	// public function update_sacks() {
+	// 	header('Content-Type: application/json');
+
+	// 	$select = 'ct_id, ct_date, t.loc_no, loc_name, ct_batch_fk, ct_sack, ct_bag';
+	// 	$where = array(
+	// 		'ct_date'		=> $_POST['ct_date'],
+	// 		't.loc_no'		=> $_POST['loc_no'],
+	// 		'ct_batch_fk'	=> $_POST['ct_batch_fk'],
+	// 		'ct_sack'		=> $_POST['ct_sack']
+	// 	);
+		
+	// 	$results['sacks2'] = $this->CashPickupModel->uncollected_list2($select, $where);
+
+	// 	echo json_encode($results);
+	// }
 
 }
