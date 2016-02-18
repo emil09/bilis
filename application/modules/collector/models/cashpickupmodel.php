@@ -15,7 +15,8 @@ Class CashPickupModel extends CI_Model {
         '9' => 'trip',
         '10'=> 'cashier',
         '11'=> 'cash_turnover',
-        '12'=> 'location'
+        '12'=> 'location',
+        '13'=> 'collected_sacks'
     );
 
     public function all_locs($select = ''){
@@ -38,6 +39,18 @@ Class CashPickupModel extends CI_Model {
     public function uncollected_list($select = '', $where = array()){
         $this->db->select($select);
         $this->db->from($this->tables[11]);
+        $this->db->join($this->tables[9]. ' AS t', 'trp_id_fk = trp_id');
+        $this->db->join($this->tables[12]. ' AS l', 't.loc_no = l.loc_no');
+        $this->db->where($where);
+        $this->db->group_by('ct_date, ct_sack, loc_name, ct_batch_fk');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function collected_list($select = '', $where = array()){
+        $this->db->select($select);
+        $this->db->from($this->tables[13]);
+        $this->db->join($this->tables[11], 'ct_id = ct_fk');
         $this->db->join($this->tables[9]. ' AS t', 'trp_id_fk = trp_id');
         $this->db->join($this->tables[12]. ' AS l', 't.loc_no = l.loc_no');
         $this->db->where($where);

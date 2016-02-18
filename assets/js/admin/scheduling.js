@@ -97,7 +97,8 @@ function getDriver(coo_no){
 			$('#schednext_data').html(schednext_data);
 
 			var tabler = $('#table-scheduling').DataTable({
-				paging : true,
+				paging : false,
+				scrollX: true,
 				lengthMenu: [[5, 25, 50, -1], [5, 25, 50, "All"]]
 			});
 
