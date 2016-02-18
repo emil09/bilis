@@ -71,7 +71,7 @@ function get_uncollected_sacks(loc_no) {
 // 			data: {ct_date: ct_date, loc_no: loc_no, ct_batch_fk: ct_batch_fk, ct_sack: ct_sack},
 // 			success: function(data, status){
 // 				console.log(data);
-// 	    		// swal('Success', 'You collected the sack.', 'success');
+// 	    		swal('Success', 'You collected the sack.', 'success');
 // 	    	},
 // 	    	error: function(xhr, desc, err) {
 // 				console.log(xhr);
